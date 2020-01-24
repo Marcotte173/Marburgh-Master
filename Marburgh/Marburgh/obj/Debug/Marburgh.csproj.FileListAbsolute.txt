@@ -1,0 +1,6 @@
+C:\Marburgh0.10\Marburgh\Marburgh\bin\Debug\Marburgh.exe.config
+C:\Marburgh0.10\Marburgh\Marburgh\bin\Debug\Marburgh.exe
+C:\Marburgh0.10\Marburgh\Marburgh\bin\Debug\Marburgh.pdb
+C:\Marburgh0.10\Marburgh\Marburgh\obj\Debug\Marburgh.csprojAssemblyReference.cache
+C:\Marburgh0.10\Marburgh\Marburgh\obj\Debug\Marburgh.exe
+C:\Marburgh0.10\Marburgh\Marburgh\obj\Debug\Marburgh.pdb
