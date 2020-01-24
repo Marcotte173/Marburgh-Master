@@ -17,6 +17,7 @@ public class Magic : Weapon
     {
         new Magic(0,1),
         new Magic(1,1),
+        new Magic(1,1),
         new Magic(2,1),
         new Magic(3,1),
         new Magic(4,1),
