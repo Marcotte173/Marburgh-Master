@@ -9,6 +9,14 @@ public class Player : Creature
     protected Weapon offHand;
     protected Armor armor;
     protected string pClass;
+    protected int lvlHealth;
+    protected int lvlDamage;
+    protected int lvlEnergy;
+    protected int lvlMagic;
+    protected int lvlMitigation;
+    protected int lvlHit;
+    protected int lvlCrit;
+    protected int lvlDefence;
 
     public Player()
     : base()
@@ -16,13 +24,21 @@ public class Player : Creature
         xpNeeded = new int[] { 0, 25, 60, 100, 150, 220, 300, 390, 500, 650 };
         energy = maxEnergy = 3;
         level = 0;
-        gold = 100000;
+        gold = 1000;
         potionSize = maxPotionSize = 10;
         crit = 5;
         hit = 65;
         defence = 5;
         mitigation = 1;
         level = 1;
+        lvlHealth = 3;
+        lvlDamage = 1;
+        lvlEnergy = 2;
+        lvlMagic = 1;
+        lvlMitigation = 2;
+        lvlHit = 5;
+        lvlCrit = 2;
+        lvlDefence = 2;
     }
     internal void Equip(Armor a) { armor = a; }
     internal void Equip(Weapon w, Weapon hand)
@@ -73,7 +89,14 @@ public class Player : Creature
     {
         Console.WriteLine("You don't need healing!");
     }
-
+    public int LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
+    public int LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
+    public int LvlDefence { get { return lvlDefence; } set { lvlDefence = value; } }
+    public int LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
+    public int LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }
+    public int LvlHit { get { return lvlHit; } set { lvlHit = value; } }
+    public int LvlMagic { get { return lvlMagic; } set { lvlMagic = value; } }
+    public int LvlMitigation { get { return lvlMitigation; } set { lvlMitigation = value; } }
     public Armor Armor { get { return armor; } set { armor = value; } }
     public Weapon MainHand { get { return mainHand; } set { mainHand = value; } }
     public Weapon OffHand { get { return offHand; } set { offHand = value; } }

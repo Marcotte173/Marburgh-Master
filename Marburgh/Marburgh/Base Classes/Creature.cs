@@ -30,13 +30,13 @@ public class Creature
     protected int shield;
     protected int burnDam;
     protected int bleedDam;
-    protected bool defending;
+    protected bool defending;        
 
     public Creature() { }
 
     public string Name { get { return name; } set { name = value; } }
     public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
-    public int Health { get { return health; } set { health = value; } }
+    public int Health { get { return health; } set { health = value; } }    
     public int MaxEnergy { get { return maxEnergy; } set { maxEnergy = value; } }
     public int Energy { get { return energy; } set { energy = value; } }
     public int Gold { get { return gold; } set { gold = value; } }
