@@ -31,7 +31,7 @@ public class UI
         Write.Position(55,26);
         Write.EmbedColourText(Colour.DAMAGE, "[", "Q", "]uit");
         Write.Position(45, 16);
-        Write.EmbedColourText(Colour.GOLD, "", "Version 0.02 January 6, 2020, 12:27 P.M.", "");
+        Write.EmbedColourText(Colour.GOLD, "", "Version 0.05 January 26, 2020, 3:14 P.M.", "");
     }
 
     internal static bool ConfirmNEW(List<int> colourArray, List<string> descriptions)
