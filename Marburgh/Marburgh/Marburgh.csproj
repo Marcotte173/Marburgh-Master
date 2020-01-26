@@ -65,8 +65,11 @@
     <Compile Include="Prepare\Other\House.cs" />
     <Compile Include="Prepare\Other\Other.cs" />
     <Compile Include="Prepare\Service\Bank.cs" />
+    <Compile Include="Prepare\Service\Tavern\Gamble\BlackJackGame.cs" />
     <Compile Include="Prepare\Service\Level.cs" />
-    <Compile Include="Prepare\Service\Tavern.cs" />
+    <Compile Include="Prepare\Service\Tavern\Gamble\DiceGame.cs" />
+    <Compile Include="Prepare\Service\Tavern\Gamble\ThreeCardMonte.cs" />
+    <Compile Include="Prepare\Service\Tavern\Tavern.cs" />
     <Compile Include="Prepare\Shop\ArmorShop.cs" />
     <Compile Include="Prepare\Shop\MagicShop.cs" />
     <Compile Include="Prepare\Town.cs" />
@@ -79,6 +82,7 @@
     <Compile Include="Utilities\CharacterSheet.cs" />
     <Compile Include="Utilities\Colour.cs" />
     <Compile Include="Utilities\Return.cs" />
+    <Compile Include="Utilities\Time.cs" />
     <Compile Include="Utilities\UI.cs" />
     <Compile Include="Utilities\UIComponent.cs" />
     <Compile Include="Utilities\Utilities.cs" />

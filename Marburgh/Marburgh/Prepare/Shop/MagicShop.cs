@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 public class MagicShop : Shop
 {
+    static int[] upgrade = new int[] {1000,3000,10000,20000,35000};
+    static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
+    static int current = 0;
     Player p = Create.p;
     static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1], Magic.list[2] };
     static List<Weapon> list1 = new List<Weapon> { Magic.list[0], Magic.list[3] , Magic.list[4] };
@@ -22,13 +25,48 @@ public class MagicShop : Shop
             "",
             Colour.SPEAK,"", $"'Greetings, what can I do for you?'",""
         },
-        new List<string> { "uy", "ell", "otions" }, new List<string> { Colour.ITEM + "B" + Colour.RESET, Colour.ITEM + "S" + Colour.RESET, Colour.HEALTH + "P" + Colour.RESET });
+        new List<string> { "uy", "ell", "otion Upgrade" }, new List<string> { Colour.ITEM + "B" + Colour.RESET, Colour.ITEM + "S" + Colour.RESET, Colour.HEALTH + "P" + Colour.RESET });
         string choice = Return.Option();
         if (choice == "b") Buy(list, list1, "Marley");
         else if (choice == "c") CharacterSheet.Display();
         else if (choice == "r") Utilities.ToTown();
         else if (choice == "s") Sell("Marley");
+        else if (choice == "p") Potion();
         Menu();
+    }
+
+    private void Potion()
+    {
+        if (UI.Confirm(new List<int> { 2,0,0 }, new List<string> 
+            { 
+                Colour.HEALTH, Colour.GOLD,"Upgrading your ", "potion ", "will cost ", $"{upgrade[current]} ", "gold.",
+                "",
+                "Would you like to do this?"
+            }))
+        {
+            if (Return.HaveEnough(upgrade[current]))
+            {
+                UI.Keypress(new List<int> { 3,0,0,0,1,0,2 }, new List<string>
+                {
+                    Colour.NAME, Colour.GOLD, Colour.HEALTH,"", "Marley", " takes your ","money ","and your ","potion","",
+                    "",
+                    "He takes your potion to the back, and returns 5 minutes later",
+                    "",
+                    Colour.SPEAK,"","'Here you go! Your potion is now bigger!'","",
+                    "",
+                    Colour.HEALTH,Colour.HEALTH,"Your ","potion ","can now heal up to ",$"{healAdd[current]} ","more hp!"
+                });                
+                Create.p.Gold -= upgrade[current];
+                Create.p.MaxPotionSize += healAdd[current];
+                Create.p.PotionSize = Create.p.MaxPotionSize;
+                current++;
+            }
+            else 
+                UI.Keypress(new List<int> { 0 }, new List<string>
+                {
+                    "You don't have enough gold!",
+                });
+        }
     }
 
     public void Buy(List<Weapon> list, List<Weapon> list1, string name)
@@ -49,9 +87,9 @@ public class MagicShop : Shop
             if (p.Gold < listToUse[choice].Price)
             {
                 UI.Keypress(new List<int> { 0 }, new List<string>
-                    {
-                        "You don't have enough gold!",
-                    });
+                {
+                    "You don't have enough gold!",
+                });
             }
             else
             {

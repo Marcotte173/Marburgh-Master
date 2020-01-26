@@ -29,6 +29,8 @@ public class Town : Location
         else if (choice == "a") Location.now = Location.list[3];
         else if (choice == "l") Location.now = Location.list[4];
         else if (choice == "t") Location.now = Location.list[5];
+        else if (choice == "?") Location.now = Location.list[6];
+        else if (choice == "o") Location.now = Location.list[7];
         else if (choice == "x") p.XP += 5;
         Location.now.Go();
     }

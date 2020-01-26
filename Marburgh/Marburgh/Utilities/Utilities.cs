@@ -28,4 +28,10 @@ public class Utilities
             });
         Environment.Exit(0);
     }
+
+    internal static void Keypress()
+    {
+        Console.WriteLine("Press any key to continue");
+        Console.ReadKey(true);
+    }
 }

@@ -58,4 +58,9 @@ public class Return
     {
         return Console.WindowWidth - 1;
     }
+
+    internal static bool HaveEnough(int price)
+    {
+        return (Create.p.Gold >= price);
+    }
 }

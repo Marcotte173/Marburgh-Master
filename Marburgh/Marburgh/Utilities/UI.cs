@@ -34,6 +34,32 @@ public class UI
         Write.EmbedColourText(Colour.GOLD, "", "Version 0.02 January 6, 2020, 12:27 P.M.", "");
     }
 
+    internal static bool ConfirmNEW(List<int> colourArray, List<string> descriptions)
+    {
+        Console.Clear();
+        UIComponent.DisplayText(colourArray, descriptions);
+        Write.SetY(15);
+        UIComponent.BarBlank();
+        UIComponent.StandardMiddle(8);
+        UIComponent.BarBlank();
+        Write.Position(50, 22);
+        Console.WriteLine("[" + Colour.HEALTH + "Y" + Colour.RESET + "]es         [" + Colour.BOSS + "N" + Colour.RESET + "]o");
+        return (Return.Option() == "y") ? true : false;
+    }
+
+    public static void KeypressNEW(List<int> colourArray, List<string> descriptions)
+    {
+        Console.Clear();
+        UIComponent.DisplayText(colourArray, descriptions);
+        Write.SetY(15);
+        UIComponent.BarBlank();
+        UIComponent.StandardMiddle(8);
+        UIComponent.BarBlank();
+        Write.Position(47, 22);
+        Write.ColourText(Colour.ENERGY, "Press any key to continue");
+        Console.ReadKey(true);
+    }
+
     internal static Weapon Hand(Weapon w)
     {
         if (w.Type == "Shield") return Create.p.OffHand;
@@ -57,7 +83,9 @@ public class UI
             Colour.NAME, "What is your family " ,"name" , "?"
         });
         Write.SetY(15);
-        StandardBoxBlank();
+        UIComponent.BarBlank();
+        UIComponent.StandardMiddle(8);
+        UIComponent.BarBlank();
         Write.Position(55, 20);
         Console.Write(Colour.NAME);
         string choice = Return.String();
@@ -80,9 +108,8 @@ public class UI
         {
             Console.Write("-");
         }
-        Console.SetCursorPosition(0, 25);
-        UIComponent.BarBlank();
-        Write.CenterText("What would you like to do?");
+        Console.SetCursorPosition(0, 26);
+        UIComponent.BottomBar();
         for (int i = 0; i < adventure.Count; i++)
         {
             if (adventure[i] != "")
@@ -116,7 +143,7 @@ public class UI
             }
         }
         Console.SetCursorPosition(0, Return.Height(33));
-        for (int i = 0; i < 5; i++)
+        for (int i = 0; i < 6; i++)
         {
             Console.Write("|");
             Console.SetCursorPosition(Return.Width(25), Console.CursorTop);
@@ -268,7 +295,7 @@ public class UI
     {
         UIComponent.BarBlank();
         UIComponent.StandardMiddle(8);
-        UIComponent.BarBlank();
+        UIComponent.BottomBar();
     }
 
     internal static void StandardBox()
@@ -279,7 +306,7 @@ public class UI
             Console.Write("-");
         }
         UIComponent.StandardMiddle(8);
-        UIComponent.BarBlank();
+        UIComponent.BottomBar();
     }
 
     internal static bool Confirm(List<int> colourArray, List<string> descriptions)
@@ -302,5 +329,26 @@ public class UI
         Write.Position(47, 22);
         Write.ColourText(Colour.ENERGY, "Press any key to continue");
         Console.ReadKey(true);
+    }
+    public static int HowMuch(List<int> colourArray, List<string> descriptions)
+    {
+        Console.Clear();
+        UIComponent.DisplayText(colourArray, descriptions);
+        Write.SetY(15);
+        StandardBoxBlank();
+        Write.Position(47, 22);
+        Console.Write(Colour.GOLD);
+        int number = Return.Integer();
+        Console.Write(Colour.RESET);
+        return number;
+    }
+    public static void DotDotDot(List<string> options, List<string> optionButton)
+    {
+        Console.Clear();
+        Write.SetY(15);
+        StandardBoxBlank();
+        UIComponent.OptionsText(options, optionButton);
+        Console.SetCursorPosition(Console.WindowWidth / 2 - 1, 8);
+        Write.DotDotDot();
     }
 }

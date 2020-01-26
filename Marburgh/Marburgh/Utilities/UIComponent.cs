@@ -67,13 +67,13 @@ public class UIComponent
         }
         else
         {
-            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height-2);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
-            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height-2);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
-            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height + 3);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height + 1);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
-            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height + 3);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height + 1);
             if (optionButton[3] != "") Console.WriteLine($"[{ optionButton[3]}]{ options[3]}");
         }
     }
@@ -171,5 +171,26 @@ public class UIComponent
             Console.SetCursorPosition(Return.MaxWidth(), Console.CursorTop);
             Console.Write("|\n");
         }
+    }
+    public static void TimeDisplay()
+    {
+        Console.SetCursorPosition(35, 27);
+        Write.EmbedColourText(Colour.TIME, Colour.TIME, Colour.TIME, Colour.TIME, "It is day ", $"{Time.day}", ", the ", $"{Time.weeks[Time.week]}", " week of ", $"{Time.months[Time.month]}", ", ", $"{Time.year}", "");
+    }
+
+    internal static void BottomBar()
+    {
+        for (int i = 0; i < Console.WindowWidth; i++)
+        {
+            Console.Write("-");
+        }
+        Console.Write("|");
+        Console.SetCursorPosition(Return.MaxWidth(), Console.CursorTop);
+        Console.Write("|\n");
+        for (int i = 0; i < Console.WindowWidth; i++)
+        {
+            Console.Write("-");
+        }
+        TimeDisplay();
     }
 }

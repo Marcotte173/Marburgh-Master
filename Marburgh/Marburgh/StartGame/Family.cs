@@ -8,7 +8,14 @@ public class Family
 {
     internal static List<string> alive = new List<string> { };
     internal static List<string> dead = new List<string> { };
+    internal static List<string> cause = new List<string> { };
     internal static string lastName = "";
+    public static int[,] timeOfDeath = new int[3, 4]
+    {
+        {0, 0, 0, 0 },
+        {0, 0, 0, 0 },
+        {0, 0, 0, 0 }
+    };
     internal static void Create()
     {
         FamilyName();
@@ -20,7 +27,7 @@ public class Family
     {
         Console.Clear();
         lastName = UI.CreationBox();
-        if (!UI.Confirm(new List<int> { 1 }, new List<string> { Colour.NAME, "Is ", $"{lastName}", " correct?" })) FamilyName();
+        if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.NAME, "Is ", $"{lastName}", " correct?" })) FamilyName();
     }
 
     private static void GenerateSiblings()

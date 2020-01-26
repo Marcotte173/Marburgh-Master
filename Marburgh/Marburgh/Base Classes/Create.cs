@@ -10,7 +10,7 @@ public class Create
     internal static void Name()
     {
         Console.Clear();
-        if (Family.alive.Count == 3) UI.Keypress(new List<int> { 1, 1, 0, 0, 0, 2 }, new List<string>
+        if (Family.alive.Count == 3) UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 2 }, new List<string>
             {
                Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", "was an adventurer.",
@@ -19,7 +19,7 @@ public class Create
                "You are the eldest child.",
                Colour.NAME, Colour.NAME, "Your siblings,", $" {Family.alive[1]}", " and", $" {Family.alive[2]}", " look up to you now to take care of them."
             });
-        else if (Family.alive.Count == 2) UI.Keypress(new List<int> { 1, 1, 0, 0, 0, 1 }, new List<string>
+        else if (Family.alive.Count == 2) UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 1 }, new List<string>
             {
                 Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
                 Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", "was an adventurer.",
@@ -28,7 +28,7 @@ public class Create
                 "You are the eldest surviving child.",
                 Colour.NAME, "Your sibling,", $" {Family.alive[1]}", " looks up to you now to put food on the table the only way you know how - Adventuring."
             });
-        else UI.Keypress(new List<int> { 1, 1, 0, 0, 1 }, new List<string>
+        else UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 1 }, new List<string>
             {
                 Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
                 Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", "was an adventurer.",
@@ -43,7 +43,9 @@ public class Create
     {
         Console.Clear();
         Write.SetY(15);
-        UI.StandardBoxBlank();
+        UIComponent.BarBlank();
+        UIComponent.StandardMiddle(8);
+        UIComponent.BarBlank();
         Console.SetCursorPosition(Return.Width(15), Return.Height(10));
         Write.EmbedColourText(Colour.CLASS, "", "[W]", "arrior");
         Console.SetCursorPosition(Return.Width(15), Return.Height(12));
@@ -62,9 +64,9 @@ public class Create
         if (choice != "w" & choice != "r" && choice != "m") ChooseClass();
         else
         {
-            if (choice == "w") if (!UI.Confirm(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Warrior", ", correct?" })) ChooseClass(); else p = new Warrior();
-            else if (choice == "r") if (!UI.Confirm(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Rogue", ", correct?" })) ChooseClass(); else p = new Rogue();
-            else if (!UI.Confirm(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Mage", ", correct?" })) ChooseClass(); else p = new Mage();
+            if (choice == "w") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Warrior", ", correct?" })) ChooseClass(); else p = new Warrior();
+            else if (choice == "r") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Rogue", ", correct?" })) ChooseClass(); else p = new Rogue();
+            else if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Mage", ", correct?" })) ChooseClass(); else p = new Mage();
             p.Name = Family.alive[0];
             Story();
         }
@@ -73,7 +75,9 @@ public class Create
     {
         Console.Clear();
         Write.SetY(15);
-        UI.StandardBoxBlank();
+        UIComponent.BarBlank();
+        UIComponent.StandardMiddle(8);
+        UIComponent.BarBlank();
         Write.Position(47, 22);
         Write.ColourText(Colour.ENERGY, "Press any key to continue");
         UIComponent.DisplayTextWait(new List<int> { 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0 }, new List<string>

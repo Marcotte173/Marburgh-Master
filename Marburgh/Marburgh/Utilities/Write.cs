@@ -61,6 +61,29 @@ public class Write
             "{2," + ((Console.WindowWidth / 4) + (text3.Length / 2) - (text2.Length / 2) + (colour3.Length)) + "}", colour + text, colour2 + text2, colour3 + text3));
     }
 
+    public static void DotDotDot()
+    {
+        Thread.Sleep(300);
+        Console.Write(".");
+        Thread.Sleep(300);
+        Console.Write(".");
+        Thread.Sleep(300);
+        Console.Write(".\n");
+        Thread.Sleep(300);
+    }
+
+    //Dot dot dot same line
+    public static void DotDotDotSL()
+    {
+        Thread.Sleep(300);
+        Console.Write(".");
+        Thread.Sleep(300);
+        Console.Write(".");
+        Thread.Sleep(300);
+        Console.Write(".");
+        Thread.Sleep(300);
+    }
+
     public static void EmbedColourText(string colour, string text1, string text2, string text3)
     {
         Console.Write(

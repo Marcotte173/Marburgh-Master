@@ -126,7 +126,7 @@ public class Tavern:Location
     private static void Wager(Creature p)
     {
         Console.Clear();
-        UI.HowMuch(new List<int> { 1, 0, 0, 0, 0 }, new List<string>
+        wager = UI.HowMuch(new List<int> { 1, 0, 0, 0, 0 }, new List<string>
                 {
                     Colour.GOLD, "You have ", $"{p.Gold}", " gold",
                     "",
@@ -134,13 +134,6 @@ public class Tavern:Location
                     "",
                     "[0] Return"
                 });
-        Console.SetCursorPosition(Console.WindowWidth / 2 - 2, 21);
-        Console.Write(Colour.GOLD);
-        do
-        {
-
-        } while (!int.TryParse(Console.ReadLine(), out wager));
-        Console.WriteLine(Colour.RESET);
         if (wager == 0) Location.list[5].Menu();
         else if (wager > 150 * p.Level)
         {
@@ -152,12 +145,10 @@ public class Tavern:Location
         }
         else if (p.Gold >= wager)
         {
-            UI.Confirm(new List<int> { 1 }, new List<string>
+            if (UI.Confirm(new List<int> { 1 }, new List<string>
             {
                 Colour.GOLD, "You want to wager ", $"{wager}", " gold?"
-            });
-            string wagerConfirm = Console.ReadKey(true).KeyChar.ToString().ToLower();
-            if (wagerConfirm != "y") Wager(p);
+            }) == false) Wager(p);
             else p.Gold -= wager;
         }
     }

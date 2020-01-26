@@ -12,6 +12,6 @@ public class Buttons
     public static List<string> shopList = new List<string> { "agic Shop", "eapon Shop", "rmor Shop" };
     public static List<string> serviceButton = new List<string> { Colour.TIME + "T" + Colour.RESET, Colour.TIME + "L" + Colour.RESET, Colour.TIME + "B" + Colour.RESET };
     public static List<string> serviceList = new List<string> { "avern", "evel Master","ank" };
-    public static List<string> otherButton = new List<string> { Colour.XP + "Y" + Colour.RESET, Colour.XP + "O" + Colour.RESET, "", "",Colour.XP + "?" + Colour.RESET };
-    public static List<string> otherList = new List<string> { "our House", "ther Places", "","", "Help" };
+    public static List<string> otherButton = new List<string> { Colour.XP + "Y" + Colour.RESET, Colour.XP + "O" + Colour.RESET, "","", "",Colour.XP + "?" + Colour.RESET };
+    public static List<string> otherList = new List<string> { "our House", "ther Places", "","","", "Help" };
 }
