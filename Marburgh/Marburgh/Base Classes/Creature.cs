@@ -72,8 +72,7 @@ public class Creature
     {
         health -= damage;
         health = (health < 0) ? 0 : health;
-        if (health == 0) ;
-        Death();
+        if (health == 0) Death();
     }
 
     public virtual void AddHealth(int heal)
@@ -96,30 +95,35 @@ public class Creature
 
     public virtual void Attack1(Creature target)
     {
-
+        
     }
-    public virtual void Attack2()
+    public virtual void Attack2(Creature target)
     {
 
     }
-    public virtual void Attack3()
+    public virtual void Attack3(Creature target)
+    {
+        energy--;
+    }
+    public virtual void Attack4(Creature target)
     {
 
     }
-    public virtual void Attack4()
+    public virtual void Attack5(Creature target)
     {
 
     }
-    public virtual void Attack5()
-    {
-
-    }
-    public virtual void Attack6()
+    public virtual void Attack6(Creature target)
     {
 
     }
     public virtual void Miss(Creature target)
     {
         Console.WriteLine("You miss the " + target + " !"); ;
+    }
+
+    public virtual bool AttemptToHit(Creature target, int bonus)
+    {
+        return (Return.RandomInt(1, 101)< hit + bonus - target.defence);
     }
 }

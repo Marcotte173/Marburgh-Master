@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 public class Orc : Monster
 {
     public Orc()
-   : base()
+    : base()
     {
 
+    }
+    public override void Attack3()
+    {
+        base.Attack3();
     }
 }

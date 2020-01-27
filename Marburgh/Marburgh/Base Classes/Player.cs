@@ -25,7 +25,6 @@ public class Player : Creature
     {
         xpNeeded = new int[] { 0, 25, 60, 100, 150, 220, 300, 390, 500, 650 };
         energy = maxEnergy = 3;
-        level = 0;
         gold = 1000;
         potionSize = maxPotionSize = 10;
         crit = 5;
@@ -99,6 +98,7 @@ public class Player : Creature
     {
         Console.WriteLine("You don't need healing!");
     }
+
     public int LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
     public int LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }

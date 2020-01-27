@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 public class Kobald : Monster
 {
     public Kobald()
-   : base()
+    : base()
     {
 
+    }
+    public override void Attack3()
+    {
+        base.Attack3();
     }
 }

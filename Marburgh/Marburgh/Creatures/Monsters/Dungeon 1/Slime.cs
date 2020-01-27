@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 public class Slime : Monster
 {
     public Slime()
-   : base()
+    : base()
     {
 
+    }
+    public override void Attack3()
+    {
+        base.Attack3();
     }
 }
