@@ -14,7 +14,7 @@ public class Utilities
 
     internal static void Quit()
     {
-        UI.Keypress(new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new List<string>
+        UI.KeypressNEW(new List<int> { 0, 0, 0, 0, 0, 0, 0, 0, 0 }, new List<string>
             {
                 "Well, you tried",
                 "",

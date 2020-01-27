@@ -96,7 +96,7 @@ public class MagicShop : Shop
                 if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{listToUse[choice].Name}", "?" }))
                 {
 
-                    if (listToUse[choice].Name != "None") SellOld(listToUse, choice, name, UI.Hand(listToUse[choice]));
+                    if (p.MainHand.Name != "None") SellOld(listToUse, choice, name, UI.Hand(listToUse[choice]));
                     else
                     {
                         p.Gold -= listToUse[choice].Price;

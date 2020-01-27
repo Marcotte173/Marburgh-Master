@@ -17,6 +17,8 @@ public class Player : Creature
     protected int lvlHit;
     protected int lvlCrit;
     protected int lvlDefence;
+    protected bool canExplore;
+    protected bool canCraft;
 
     public Player()
     : base()
@@ -39,6 +41,7 @@ public class Player : Creature
         lvlHit = 5;
         lvlCrit = 2;
         lvlDefence = 2;
+        canExplore = true;
     }
     internal void Equip(Armor a) { armor = a; }
     internal void Equip(Weapon w, Weapon hand)
@@ -73,6 +76,13 @@ public class Player : Creature
         }
         else DontNeedHeal();
     }
+    public virtual void Refresh()
+    {
+        health = maxHealth;
+        energy = maxEnergy;
+        potionSize = maxPotionSize;
+        canExplore = true;
+    }
 
     public override void Attack1(Creature target)
     {
@@ -91,6 +101,8 @@ public class Player : Creature
     }
     public int LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
     public int LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
+    public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
+    public bool CanCraft { get { return canCraft; } set { canCraft = value; } }
     public int LvlDefence { get { return lvlDefence; } set { lvlDefence = value; } }
     public int LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
     public int LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }

@@ -61,7 +61,7 @@ public class ArmorShop : Shop
         {
             if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{listToUse[choice].Name}", "?" }))
             {
-                if (listToUse[choice].Name != "None") SellOld(listToUse, choice, name);
+                if (p.Armor.Name != "None") SellOld(listToUse, choice, name);
                 else
                 {
                     p.Gold -= listToUse[choice].Price;

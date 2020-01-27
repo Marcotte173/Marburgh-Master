@@ -13,6 +13,30 @@ public class Time
     public static string[] weeks = new string[] { "none", "first", "second" };
     public static string[] months = new string[] { "none", "Janbruarch", "ApmaJune", "Jaugtempber", "Octvemdec" };
 
+    public static List<TimeEvent> Events = new List<TimeEvent>
+    {
+        new TimeEvent(1,2,1,345, false, true, true, new List<int> { 1 ,1 },
+            new List<string>
+            {
+                Colour.BOSS, "","Time has run out.","",
+                Colour.BOSS, "","The Savage orc's forces have overrun your town.",""
+            })
+    };
+
+    public static void DayChange(int amount)
+    {
+        day += amount;
+        Create.p.Refresh();
+        Bank.bankRate = Bank.RateCalculate();
+        if (Bank.term == 0 && Bank.investment > 0) Bank.InvestPay();
+        else if(Bank.term > 0)
+        {
+            Bank.InvestmentCalculate();
+            Bank.term--;
+        }         
+        PassingOfTime();
+    }
+
     public static void PassingOfTime()
     {
         int addweek = 0;
@@ -36,5 +60,26 @@ public class Time
             addyear++;
         }
         year += addyear;
-    }    
+        DayCheck();
+    }
+    private static void DayCheck()
+    {
+        for (int i = 0; i < Events.Count; i++)
+        {
+            Events[i].trigger = false;
+        }
+        for (int i = 0; i < Events.Count; i++)
+        {
+            if (Events[i].day == day && Events[i].week == week && Events[i].month == month && Events[i].year == year)
+            {
+                Events[i].trigger = true;
+                if (Events[i].active && Events[i].trigger)
+                {
+                    Console.Clear();
+                    UI.KeypressNEW(Events[i].colourArray, Events[i].descriptions);
+                    if (Events[i].gameOver) Utilities.Quit();
+                }
+            }
+        }
+    }
 }

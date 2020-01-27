@@ -34,6 +34,45 @@ public class UI
         Write.EmbedColourText(Colour.GOLD, "", "Version 0.05 January 26, 2020, 3:14 P.M.", "");
     }
 
+    internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
+    {
+        Console.Clear();
+        UIComponent.DisplayText(colourArray, descriptions);
+        Console.SetCursorPosition(0, 15);        
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+        Console.WriteLine("|                       |                       |                       |                       |                      |");
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxx  Gold In Bank  xxxx|                                                                      |xxx   Investments   xxx|");
+        Console.WriteLine("|xxxxx             xxxxx|                                                                      |xxxxx             xxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");        
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+        Console.WriteLine("|                                                                                                                      |");
+        Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+        Console.SetCursorPosition(Return.Width(10) - Create.p.Name.Length / 2, 16);
+        Console.WriteLine(Colour.NAME + $"{Create.p.Name}" + Colour.RESET);
+        Console.SetCursorPosition(Return.Width(28), 16);
+        Console.WriteLine("Level:" + Colour.XP + $"{Create.p.Level}" + Colour.RESET);
+        Console.SetCursorPosition(Return.Width(47), 16);
+        Console.WriteLine("Gold:" + Colour.GOLD + $"{Create.p.Gold}" + Colour.RESET);
+        Console.SetCursorPosition(Return.Width(67), 16);
+        Console.WriteLine("[" + Colour.CLASS + "C" + Colour.RESET + "]haracter");
+        Console.SetCursorPosition(Return.Width(88), 16);
+        Console.WriteLine("[" + Colour.MITIGATION + "R" + Colour.RESET + "]eturn");
+        UIComponent.OptionsText(options, optionButton);
+        Console.SetCursorPosition(12 - Bank.bankGold.ToString().Length, 22);
+        Write.ColourText(Colour.GOLD, $"{Bank.bankGold}");
+        Console.SetCursorPosition(108 - Bank.investment.ToString().Length, 22);
+        Write.ColourText(Colour.GOLD, $"{Bank.investment}");
+        Console.SetCursorPosition(0, 13);
+        Write.CenterColourText(Colour.GOLD, "The current investment rate is ", $"{Bank.bankRate}", "%");
+        UIComponent.TimeDisplay();
+    }
+
     internal static bool ConfirmNEW(List<int> colourArray, List<string> descriptions)
     {
         Console.Clear();

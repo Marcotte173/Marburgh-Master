@@ -83,6 +83,7 @@
     <Compile Include="Utilities\Colour.cs" />
     <Compile Include="Utilities\Return.cs" />
     <Compile Include="Utilities\Time.cs" />
+    <Compile Include="Utilities\TimeEvent.cs" />
     <Compile Include="Utilities\UI.cs" />
     <Compile Include="Utilities\UIComponent.cs" />
     <Compile Include="Utilities\Utilities.cs" />
