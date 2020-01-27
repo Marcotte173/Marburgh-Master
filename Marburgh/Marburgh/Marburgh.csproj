@@ -51,9 +51,14 @@
     <Compile Include="Base Classes\Player.cs" />
     <Compile Include="Base Classes\Shop.cs" />
     <Compile Include="Base Classes\Weapon.cs" />
+    <Compile Include="Creatures\Monsters\Bosses\SavageOrc.cs" />
+    <Compile Include="Creatures\Monsters\Dungeon 1\Kobald.cs" />
+    <Compile Include="Creatures\Monsters\Normal\Orc.cs" />
+    <Compile Include="Creatures\Monsters\Dungeon 1\Slime.cs" />
     <Compile Include="Creatures\Player\Mage.cs" />
     <Compile Include="Creatures\Player\Rogue.cs" />
     <Compile Include="Creatures\Player\Warrior.cs" />
+    <Compile Include="Creatures\Monsters\Dungeon 1\Goblin.cs" />
     <Compile Include="Items\Armor\Armor.cs" />
     <Compile Include="Items\Drops\Drop.cs" />
     <Compile Include="Items\Weapons\Blunt.cs" />
@@ -94,7 +99,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Adventure\" />
-    <Folder Include="Creatures\Monsters\" />
+    <Folder Include="Creatures\Monsters\Mini Bosses\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

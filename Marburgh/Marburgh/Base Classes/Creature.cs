@@ -30,7 +30,11 @@ public class Creature
     protected int shield;
     protected int burnDam;
     protected int bleedDam;
-    protected bool defending;        
+    protected bool defending;
+    protected bool attack3;
+    protected bool attack4;
+    protected bool attack5;
+    protected bool attack6;
 
     public Creature() { }
 
@@ -59,6 +63,10 @@ public class Creature
     public int PotionSize { get { return potionSize; } set { potionSize = value; } }
     public int MaxPotionSize { get { return maxPotionSize; } set { maxPotionSize = value; } }
     public bool Defending { get { return defending; } set { defending = value; } }
+    public bool CanAttack3 { get { return attack3; } set { attack3 = value; } }
+    public bool CanAttack4 { get { return attack4; } set { attack4 = value; } }
+    public bool CanAttack5 { get { return attack5; } set { attack5 = value; } }
+    public bool CanAttack6 { get { return attack6; } set { attack6 = value; } }
 
     public virtual void TakeDamage(int damage)
     {

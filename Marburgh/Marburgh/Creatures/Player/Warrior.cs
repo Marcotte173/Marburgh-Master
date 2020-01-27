@@ -16,4 +16,20 @@ public class Warrior : Player
         armor = Armor.list[1];
         pClass = "Warrior";
     }
+    public override void Attack3()
+    {
+        base.Attack3();
+    }
+    public override void Attack4()
+    {
+        base.Attack4();
+    }
+    public override void Attack5()
+    {
+        base.Attack5();
+    }
+    public override void Attack6()
+    {
+        base.Attack6();
+    }
 }
