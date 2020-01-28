@@ -15,7 +15,7 @@ public class Goblin:Monster
         defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 16;
+        health = maxHealth = 6;
         damage = 3;
         xp = 6;
         gold = 13;
@@ -27,11 +27,12 @@ public class Goblin:Monster
             Console.WriteLine($"The goblin rakes you for {Damage - 1} damage, causing bleeding");
             Create.p.Bleed = 2;
             Create.p.BleedDam = 2;
+            Create.p.TakeDamage(Damage - 1);
         } 
         else Miss(target);
     }
 
-    public override void Declare3()
+    public override void Declare2()
     {
         intention = "Raking";
     }

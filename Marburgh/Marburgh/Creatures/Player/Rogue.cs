@@ -16,20 +16,20 @@ public class Rogue : Player
         armor = Armor.list[1];
         pClass = "Rogue";
     }
-    public override void Attack3()
+    public override void Attack3(Creature target)
     {
-        base.Attack3();
+        base.Attack3(target);
     }
-    public override void Attack4()
+    public override void Attack4(Creature target)
     {
-        base.Attack4();
+        base.Attack4(target);
     }
-    public override void Attack5()
+    public override void Attack5(Creature target)
     {
-        base.Attack5();
+        base.Attack5(target);
     }
-    public override void Attack6()
+    public override void Attack6(Creature target)
     {
-        base.Attack6();
+        base.Attack6(target);
     }
 }

@@ -82,11 +82,30 @@ public class Player : Creature
         potionSize = maxPotionSize;
         canExplore = true;
     }
-
-    public override void Attack1(Creature target)
+    public virtual void Attack1(Creature target)
     {
         Console.WriteLine($"You attack the {target.Name} for {Damage} damage");
         target.TakeDamage(Damage);
+    }
+    public virtual void Attack2(Creature target)
+    {
+
+    }
+    public virtual void Attack3(Creature target)
+    {
+        energy--;
+    }
+    public virtual void Attack4(Creature target)
+    {
+
+    }
+    public virtual void Attack5(Creature target)
+    {
+
+    }
+    public virtual void Attack6(Creature target)
+    {
+
     }
 
     public override void HealStatement(int heal)

@@ -92,31 +92,7 @@ public class Creature
     public virtual void DontNeedHeal() { }
     public virtual void HealStatement(int heal) { }
     public virtual void Death() { }
-
-    public virtual void Attack1(Creature target)
-    {
-        
-    }
-    public virtual void Attack2(Creature target)
-    {
-
-    }
-    public virtual void Attack3(Creature target)
-    {
-        energy--;
-    }
-    public virtual void Attack4(Creature target)
-    {
-
-    }
-    public virtual void Attack5(Creature target)
-    {
-
-    }
-    public virtual void Attack6(Creature target)
-    {
-
-    }
+    
     public virtual void Miss(Creature target)
     {
         Console.WriteLine("You miss the " + target + " !"); ;

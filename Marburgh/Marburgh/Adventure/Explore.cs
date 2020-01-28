@@ -4,15 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Orc : Monster
+public class Explore : Location
 {
-    public Orc()
+    public Explore()
     : base()
     {
 
-    }
-    public override void Attack2(Creature target)
-    {
-        base.Attack2(target);
-    }
+    }    
 }
