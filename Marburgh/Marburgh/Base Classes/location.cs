@@ -4,7 +4,20 @@ using System.Text;
 
 public class Location
 {
-    internal static Location[] list = new Location[] { new Town(), new MagicShop(), new WeaponShop(), new ArmorShop(), new  Level(), new Tavern(), new Help(), new OtherPlaces(), new House(), new Bank(), new Combat()};
+    internal static Location[] list = new Location[] { 
+        new Town(),     
+        new MagicShop(),    //1 
+        new WeaponShop(),   //2
+        new ArmorShop(),    //3
+        new Level(),        //4
+        new Tavern(),       //5
+        new Help(),         //6
+        new OtherPlaces(),  //7 
+        new House(),        //8
+        new Bank(),         //9
+        new Dungeon1(),     //10
+        new Combat()        //11
+    };
     internal static Location now = new Location();
 
     public Location()

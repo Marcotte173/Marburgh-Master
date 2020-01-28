@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Explore : Location
+namespace Marburgh.Adventure.Explore
 {
-    public Explore()
-    : base()
+    class Events
     {
-
-    }    
+    }
 }
