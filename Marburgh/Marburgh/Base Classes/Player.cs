@@ -34,9 +34,13 @@ public class Player : Creature
                     target = CombatUI.Target();
                 }
                 CombatUI.Box();
+                Write.Position(47, 22);
+                Write.ColourText(Colour.ENERGY, "Press any key to continue");
+                Write.Position(0,6);
                 if (choice == 1) Attack1(target);
                 else if (choice == 2) Attack2(target);
                 else if (choice == 3 && CanAttack3) Attack3(target);
+                Console.WriteLine("");
             }
             else AttackChoice();
         }

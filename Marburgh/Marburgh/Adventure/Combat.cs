@@ -24,6 +24,7 @@ public class Combat : Location
             foreach (Monster m in monsters) m.Declare();            
             p.AttackChoice();
             foreach (Monster m in monsters) m.MakeAttack();
+            Console.ReadKey(true);
         }
         UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string> {"You have defeated your enemies","",$"You find {goldReward} gold","",$"You gain {xpReward} experience"  });
         Create.p.Gold += goldReward;

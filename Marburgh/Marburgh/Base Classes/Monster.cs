@@ -63,6 +63,11 @@ public class Monster : Creature
         Combat.goldReward += gold;
         Combat.xpReward += xp;
     }
+
+    public override void Miss(Creature target)
+    {
+        Console.WriteLine($"The {Name} misses you!");
+    }
     public string Intention { get { return intention; } set { intention = value; } }
     public int Action { get { return action; } set { action = value; } }
 }
