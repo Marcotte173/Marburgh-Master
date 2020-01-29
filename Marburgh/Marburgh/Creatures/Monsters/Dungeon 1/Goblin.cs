@@ -20,7 +20,7 @@ public class Goblin:Monster
         xp = 6;
         gold = 13;
     }
-    public override void Attack3(Creature target)
+    public override void Attack2(Creature target)
     {
         if (AttemptToHit(target, 0))
         {

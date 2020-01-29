@@ -13,7 +13,7 @@ public class Shell
     public bool current;
     public Room room;
 
-    public Shell(int North, int South, int East, int West,  bool current, bool visited, bool encountered, Room room)
+    public Shell(int North, int South, int East, int West,  bool current, Room room)
     {
         this.North = North;
         this.South = South;

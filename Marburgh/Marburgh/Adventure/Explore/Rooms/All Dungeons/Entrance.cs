@@ -10,5 +10,7 @@ public class Entrance:Room
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You are at the entrance to the dungeon" };
+        name = $"Entrance";
+        visited = true;
     }    
 }

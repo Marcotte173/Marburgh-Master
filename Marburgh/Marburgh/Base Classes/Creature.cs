@@ -24,6 +24,7 @@ public class Creature
     protected int[] xpNeeded = new int[] { };
     protected bool canAct;
     protected int bleed;
+    protected int stun;
     protected int confused;
     protected int casting;
     protected int burning;
@@ -51,6 +52,7 @@ public class Creature
     public virtual int Mitigation { get { return mitigation; } set { mitigation = value; } }
     public int Level { get { return level; } set { level = value; } }
     public int XP { get { return xp; } set { xp = value; } }
+    public int Stun { get { return stun; } set { stun = value; } }
     public int[] XPNeeded { get { return xpNeeded; } set { xpNeeded = value; } }
     public bool CanAct { get { return canAct; } set { canAct = value; } }
     public int Bleed { get { return bleed; } set { bleed = value; } }

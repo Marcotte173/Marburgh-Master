@@ -220,5 +220,5 @@ public class UIComponent
             Console.Write("-");
         }
         TimeDisplay();
-    }
+    }    
 }

@@ -9,28 +9,25 @@ public class UI
     internal static void GameMenu(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
     {
         UIComponent.DisplayText(colourArray, descriptions);
-        Write.Position(0, 12);
+        Write.Position(0, 15);
         Console.WriteLine("+-----------------------------+----------------------------------------------------------------------------------------+");
         Console.WriteLine("|" + Colour.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx     xxxxxxxxxxxxx     xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx     xxxxxxxxxxxxx     xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  x   xxxxxxxxxxx   x  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  x   xxxxxxxxxxx   x  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xx   xxxxxxxxx   xx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xx   xxxxxxxxx   xx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxx   xxxxxxx   xxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxx   xxxxxxx   xxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxx   xxxxx   xxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxx   xxxxx   xxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxx   xxx   xxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxx   xxx   xxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxx   xx   xxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxx   xx   xxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxxx      xxxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxxx      xxxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxxxxx  xxxxxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxxxxx  xxxxxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxx  xxxxxxxxxxxxxxxxxxx  xxx" + Colour.RESET + "|"); 
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx   xxxxxxxxxx    xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx   xxxxxxxxxx    xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx    xxxxxxxxx    xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx    xxxxxxxxx    xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  x  xxxxxxx  x  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  x  xxxxxxx  x  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xx  xxxxx  xx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xx  xxxxx  xx  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxx  xxx  xxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxx  xxx  xxx  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxx  x  xxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxx  x  xxxx  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxx   xxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxx   xxxxx  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|");        
         Console.WriteLine("|" + Colour.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|");
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
         UIComponent.OptionsText(options, optionButton);
         Write.Position(55,26);
         Write.EmbedColourText(Colour.DAMAGE, "[", "Q", "]uit");
-        Write.Position(45, 16);
+        Write.Position(42, 14);
         Write.EmbedColourText(Colour.GOLD, "", "Version 0.05 January 26, 2020, 3:14 P.M.", "");
     }
 
@@ -40,16 +37,16 @@ public class UI
         UIComponent.DisplayText(colourArray, descriptions);
         Console.SetCursorPosition(0, 15);        
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
-        Console.WriteLine("|                       |                       |                       |                       |                      |");
+        Console.WriteLine("|                       |                       |                       |                      |                       |");
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxx  Gold In Bank  xxxx|                                                                      |xxx   Investments   xxx|");
-        Console.WriteLine("|xxxxx             xxxxx|                                                                      |xxxxx             xxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxx|                                                                      |xxxxxxxxxxxxxxxxxxxxxxx|");        
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|x  Gold In Bank x|                                                                                  |xx Investments xx|");
+        Console.WriteLine("|xx             xx|                                                                                  |xxx           xxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");        
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("|                                                                                                                      |");
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
@@ -64,9 +61,9 @@ public class UI
         Console.SetCursorPosition(Return.Width(88), 16);
         Console.WriteLine("[" + Colour.MITIGATION + "R" + Colour.RESET + "]eturn");
         UIComponent.OptionsText(options, optionButton);
-        Console.SetCursorPosition(12 - Bank.bankGold.ToString().Length, 22);
+        Console.SetCursorPosition(10 - Bank.bankGold.ToString().Length, 22);
         Write.ColourText(Colour.GOLD, $"{Bank.bankGold}");
-        Console.SetCursorPosition(108 - Bank.investment.ToString().Length, 22);
+        Console.SetCursorPosition(111 - Bank.investment.ToString().Length, 22);
         Write.ColourText(Colour.GOLD, $"{Bank.investment}");
         Console.SetCursorPosition(0, 13);
         Write.CenterColourText(Colour.GOLD, "The current investment rate is ", $"{Bank.bankRate}", "%");
