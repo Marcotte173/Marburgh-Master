@@ -71,6 +71,7 @@ public class Room
             else if (summon == 3) global::Summon.Orc();
         }
         ActionWait(colourArray, summonList, "You have been discovered by", null);
+        Location.list[11].Go();
     }
 
     public static void ActionWait(List<int> colourArray, List<string> descriptions, string text, string a)
@@ -97,7 +98,7 @@ public class Room
     public virtual List<string> Flavor { 
         get 
         {
-            if (visited== false) return new List<string> { $"You have explored this room" }; 
+            if (visited ) return new List<string> { $"You have explored this room" }; 
             else return flavor; 
         } 
         set { flavor = value; } 

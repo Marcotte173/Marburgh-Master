@@ -56,6 +56,13 @@ public class Monster : Creature
         if (action == 0) Attack2(Create.p);
         else Attack1(Create.p);
     }
+    public override void Death()
+    {
+        Console.WriteLine($"You have killed the {name}!");
+        Combat.monsters.Remove(this);
+        Combat.goldReward += gold;
+        Combat.xpReward += xp;
+    }
     public string Intention { get { return intention; } set { intention = value; } }
     public int Action { get { return action; } set { action = value; } }
 }

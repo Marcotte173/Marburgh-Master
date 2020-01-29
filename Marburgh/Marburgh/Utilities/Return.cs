@@ -25,6 +25,16 @@ public class Return
         return rand.Next(min, max - 1);
     }
 
+    internal static int Int()
+    {        
+        int sellChoice;
+        do
+        {
+
+        } while (!int.TryParse(Console.ReadKey(true).KeyChar.ToString().ToLower(), out sellChoice));
+        return sellChoice;
+    }
+
     internal static string Option()
     {
         return Console.ReadKey(true).KeyChar.ToString().ToLower();

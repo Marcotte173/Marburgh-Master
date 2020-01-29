@@ -20,6 +20,28 @@ public class Player : Creature
     protected bool canExplore;
     protected bool canCraft;
 
+    internal void AttackChoice()
+    {
+        if (canAct)
+        {
+            CombatUI.Declare();
+            int choice = Return.Int();
+            if (choice > 0 && choice <= CombatUI.button.Count)
+            {
+                Monster target = null;
+                while ( target == null)
+                {
+                    target = CombatUI.Target();
+                }
+                CombatUI.Box();
+                if (choice == 1) Attack1(target);
+                else if (choice == 2) Attack2(target);
+                else if (choice == 3 && CanAttack3) Attack3(target);
+            }
+            else AttackChoice();
+        }
+    }
+
     public Player()
     : base()
     {
@@ -41,6 +63,7 @@ public class Player : Creature
         lvlCrit = 2;
         lvlDefence = 2;
         canExplore = true;
+        canAct = true;
     }
     internal void Equip(Armor a) { armor = a; }
     internal void Equip(Weapon w, Weapon hand)
