@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 public class Room
 {
@@ -34,20 +34,89 @@ public class Room
         if (size == 0 && Return.RandomInt(1, 100) < 60) Summon(Return.RandomInt(1, 3));
         else if (size == 1 && Return.RandomInt(1, 100) < 65) Summon(Return.RandomInt(1, 3));
         else if (size == 2 && Return.RandomInt(1, 100) < 70) Summon(Return.RandomInt(1, 3));
+        else Alone();
+    }
+
+    private void Alone()
+    {
         UI.Choice(new List<int> { 0 }, new List<string>
-        {
-            "You appear to be alone... for now",
-        },
-        new List<string> { "earch the room", "ove on" }, new List<string> { "S", "M" });
+            {
+                "You appear to be alone... for now",
+            },
+            new List<string> { "earch the room", "ove on" }, new List<string> { "S", "M" }
+            );
         string choice = Return.Option();
         if (choice == "m") visited = true;
         else if (choice == "s") RoomSearch();
-        else Explore();
+        else Alone();
     }
 
     private void RoomSearch()
     {
-        
+        //Tell us what we won!
+        string a = (tier == 2) ? $"gold, a potion and a book" : (tier == 1) ? $"gold and a potion" : (tier == 0) ? $"gold" : "Nothing!";
+        List<string> findList = new List<string> { "" };
+        List<int> findColourArray = new List<int> { 0 };
+        for (int i = 0; i < tier + 2; i++)
+        {
+            if (i == 1)
+            {
+                Create.p.Gold +=120;
+                findColourArray.Add(1);
+                findList.Add(Colour.GOLD);
+                findList.Add("You find ");
+                findList.Add($"120");
+                findList.Add(" gold");
+                findColourArray.Add(0);
+                findList.Add("");
+            }
+            if (i == 2)
+            {
+                if (Create.p.PotionSize == Create.p.MaxPotionSize)
+                {
+                    findColourArray.Add(1);
+                    findList.Add(Colour.HEALTH);
+                    findList.Add("Somebody already drank the ");
+                    findList.Add($"potion");
+                    findList.Add("");
+                    findColourArray.Add(0);
+                    findList.Add("It's just an empty bottle!");
+                    findColourArray.Add(0);
+                    findList.Add("Oh well...");
+                    findColourArray.Add(0);
+                    findList.Add("");
+                }
+                else
+                {
+                    Create.p.PotionSize = Create.p.MaxPotionSize;
+                    findColourArray.Add(1);
+                    findList.Add(Colour.HEALTH);
+                    findList.Add("You refill your ");
+                    findList.Add("potion");
+                    findList.Add("");
+                    findColourArray.Add(0);
+                    findList.Add("");
+                }
+            }
+            if (i == 3)
+            {
+                Create.p.XP += 10;
+                findColourArray.Add(1);
+                findList.Add(Colour.XP);
+                findList.Add("You find a ");
+                findList.Add("book");
+                findList.Add(" providing insight into the dungeon and its inhabitants");
+                findColourArray.Add(1);
+                findList.Add(Colour.XP);
+                findList.Add("You gain ");
+                findList.Add($"10 ");
+                findList.Add("experience");
+                findColourArray.Add(0);
+                findList.Add("");
+            }
+        }
+        ActionWait(findColourArray, findList, "You find", a);    
+        visited = true;
     }
 
     public virtual void Summon(int amount)
@@ -72,6 +141,7 @@ public class Room
         }
         ActionWait(colourArray, summonList, "You have been discovered by", null);
         Location.list[11].Go();
+        visited = true;
     }
 
     public static void ActionWait(List<int> colourArray, List<string> descriptions, string text, string a)
@@ -79,6 +149,7 @@ public class Room
         Console.Clear();
         Write.SetY(15);
         UIComponent.TopBar();
+        Write.SetY(18);
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
         Console.SetCursorPosition(Console.WindowWidth / 2 - 12, 21);
