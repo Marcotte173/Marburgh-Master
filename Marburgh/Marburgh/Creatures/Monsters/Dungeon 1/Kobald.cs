@@ -19,6 +19,7 @@ public class Kobald : Monster
         damage = 3;
         xp = 6;
         gold = 13;
+        dropRate = 30;
     }
     public override void Attack2(Creature target)
     {

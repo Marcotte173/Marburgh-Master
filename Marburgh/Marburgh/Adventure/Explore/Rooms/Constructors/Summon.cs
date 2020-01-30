@@ -10,6 +10,7 @@ public class Summon
     static Slime  slime = new Slime();
     static Kobald kobald = new Kobald();
     static Orc orc = new Orc();
+    static SavageOrc savageOrc = new SavageOrc();
     public static void Goblin()
     {
         Combat.monsters.Add(goblin.MonsterCopy());
@@ -25,6 +26,10 @@ public class Summon
     public static void Orc()
     {
         Combat.monsters.Add(orc.MonsterCopy());
+    }
+    public static void SavageOrc()
+    {
+        Combat.monsters.Add(savageOrc.MonsterCopy());
     }
 
 }

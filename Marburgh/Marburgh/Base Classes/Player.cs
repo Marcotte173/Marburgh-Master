@@ -19,6 +19,8 @@ public class Player : Creature
     protected int lvlDefence;
     protected bool canExplore;
     protected bool canCraft;
+    protected bool rescue;
+    protected List<Drop> drops = new List<Drop> { };
 
     internal void AttackChoice()
     {
@@ -149,12 +151,14 @@ public class Player : Creature
     public int LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
     public bool CanCraft { get { return canCraft; } set { canCraft = value; } }
+    public bool Rescue { get { return rescue; } set { rescue = value; } }
     public int LvlDefence { get { return lvlDefence; } set { lvlDefence = value; } }
     public int LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
     public int LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }
     public int LvlHit { get { return lvlHit; } set { lvlHit = value; } }
     public int LvlMagic { get { return lvlMagic; } set { lvlMagic = value; } }
     public int LvlMitigation { get { return lvlMitigation; } set { lvlMitigation = value; } }
+    public List<Drop> Drops { get { return drops; } set { drops = value; } }
     public Armor Armor { get { return armor; } set { armor = value; } }
     public Weapon MainHand { get { return mainHand; } set { mainHand = value; } }
     public Weapon OffHand { get { return offHand; } set { offHand = value; } }

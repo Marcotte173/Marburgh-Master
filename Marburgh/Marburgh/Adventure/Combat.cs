@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 public class Combat : Location
 {
     Player p = Create.p;
+    public static bool desecrated;
     public static int xpReward;
     public static int goldReward;
     

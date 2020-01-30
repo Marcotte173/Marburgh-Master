@@ -8,6 +8,10 @@ public class Monster : Creature
 {
     protected string intention;
     protected int action;
+    protected Drop drop;
+    protected int dropRate;
+    protected Drop monsterEye = new Drop("Monster Eye", 1, false);
+    protected Drop monsterTooth = new Drop("Monster Tooth", 1, false);
     public virtual void Attack1(Creature target)
     {
         if (AttemptToHit(target, 0) == false) Miss(target);
@@ -69,5 +73,19 @@ public class Monster : Creature
         Console.WriteLine($"The {Name} misses you!");
     }
     public string Intention { get { return intention; } set { intention = value; } }
+    public virtual void Drop() 
+    { 
+        if (dropRate <= Return.RandomInt(1, 101))
+        {
+            Create.p.Drops.Add(ChooseDrop());
+        }        
+    }
+
+    public virtual Drop ChooseDrop()
+    {
+        if (Return.RandomInt(0, 2) == 0) return monsterEye;
+        else return monsterTooth;
+    }
+
     public int Action { get { return action; } set { action = value; } }
 }

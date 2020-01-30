@@ -27,17 +27,15 @@ public class Room
         name = $"{a} room";
     }
 
-    internal void Explore()
+    internal virtual void Explore()
     {
-        Write.SetY(15);
-        UI.StandardBoxBlank();
         if (size == 0 && Return.RandomInt(1, 100) < 60) Summon(Return.RandomInt(1, 3));
         else if (size == 1 && Return.RandomInt(1, 100) < 65) Summon(Return.RandomInt(1, 3));
         else if (size == 2 && Return.RandomInt(1, 100) < 70) Summon(Return.RandomInt(1, 3));
         else Alone();
     }
 
-    private void Alone()
+    public void Alone()
     {
         UI.Choice(new List<int> { 0 }, new List<string>
             {
@@ -51,7 +49,7 @@ public class Room
         else Alone();
     }
 
-    private void RoomSearch()
+    public virtual void RoomSearch()
     {
         //Tell us what we won!
         string a = (tier == 2) ? $"gold, a potion and a book" : (tier == 1) ? $"gold and a potion" : (tier == 0) ? $"gold" : "Nothing!";

@@ -59,7 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventure\Dungeon 1\Dungeon1.cs" />
-    <Compile Include="Adventure\Explore\Rooms\All Dungeons\Chest Room.cs" />
+    <Compile Include="Adventure\Explore\Rooms\All Dungeons\ChestRoom.cs" />
     <Compile Include="Adventure\Explore\Rooms\All Dungeons\ShrineRoom.cs" />
     <Compile Include="Adventure\Dungeon 1\Specific Rooms\VillagersRoom.cs" />
     <Compile Include="Adventure\Explore\Events\Events.cs" />
@@ -89,7 +89,7 @@
     <Compile Include="Creatures\Player\Warrior.cs" />
     <Compile Include="Creatures\Monsters\Dungeon 1\Goblin.cs" />
     <Compile Include="Items\Armor\Armor.cs" />
-    <Compile Include="Items\Drops\Drop.cs" />
+    <Compile Include="Items\Upgrade\Drops\Drop.cs" />
     <Compile Include="Items\Weapons\Blunt.cs" />
     <Compile Include="Items\Weapons\Magic.cs" />
     <Compile Include="Items\Weapons\Sharp.cs" />

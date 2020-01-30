@@ -12,5 +12,6 @@ public class Entrance:Room
         flavor = new List<string> { "You are at the entrance to the dungeon" };
         name = $"Entrance";
         visited = true;
-    }    
+    }
+    public override List<string> Flavor { get { return flavor; } } 
 }
