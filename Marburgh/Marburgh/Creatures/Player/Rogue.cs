@@ -4,6 +4,7 @@ using System.Text;
 
 public class Rogue : Player
 {
+    
     public Rogue()
     : base()
     {
@@ -15,10 +16,25 @@ public class Rogue : Player
         mainHand = Sharp.list[1];
         armor = Armor.list[1];
         pClass = "Rogue";
+        option3 = "Stun";
+        option4 = "Backstab";
     }
     public override void Attack3(Creature target)
     {
-        base.Attack3(target);
+        int stunDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
+        if (Return.HaveEnergy(1))
+        {            
+            Console.WriteLine($"You deliver a sturdy blow! The {target.Name} takes {stunDamage} damage and is stunned!");
+            target.TakeDamage(stunDamage);
+            target.Stun = 2;
+        }
+        else
+        {
+            Console.WriteLine("You don't have enough Energy!");
+            Console.ReadKey(true);
+            AttackChoice();
+        }
+
     }
     public override void Attack4(Creature target)
     {

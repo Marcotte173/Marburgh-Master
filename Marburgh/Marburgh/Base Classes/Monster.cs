@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public class Monster : Creature
 {
+    protected List<string> status = new List<string> { };
     protected string intention;
     protected int action;
     protected Drop drop;
@@ -43,6 +44,8 @@ public class Monster : Creature
     {
         action = Return.RandomInt(0, 4);
         if (action != 0) intention = "Ready";
+        if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add("Bleeding");
+        if (stun > 0 && !Status.Contains("Stunned")) Status.Add("Stunned");
         else Declare2();
     }
 
@@ -88,4 +91,5 @@ public class Monster : Creature
     }
 
     public int Action { get { return action; } set { action = value; } }
+    public List<string> Status { get { return status; } set { status = value; } }
 }

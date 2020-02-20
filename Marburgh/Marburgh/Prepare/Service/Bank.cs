@@ -26,7 +26,7 @@ public class Bank:Location
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "d")
         {
-            if (Return.HaveEnough(1))
+            if (Return.HaveGold(1))
             {
                 int deposit = UI.HowMuch(new List<int> { 1, 0, 0 }, new List<string>
                 {
@@ -35,7 +35,7 @@ public class Bank:Location
                     "[0] Return"
                 });
                 if (deposit == 0) Menu();
-                else if (Return.HaveEnough(deposit))
+                else if (Return.HaveGold(deposit))
                 {
                     p.Gold -= deposit;
                     bankGold += deposit;
@@ -89,7 +89,7 @@ public class Bank:Location
         else if (choice == "c") CharacterSheet.Display();
         else if (choice == "i" && investment < 1)
         {
-            if (Return.HaveEnough(1))
+            if (Return.HaveGold(1))
             {
                 int invest = UI.HowMuch(new List<int> { 1, 0, 0 }, new List<string>
                 {

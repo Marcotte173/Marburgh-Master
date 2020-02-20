@@ -4,8 +4,8 @@ using System.Text;
 
 internal class CombatUI
 {
-    public static List<string> option = new List<string> {"Attack" , "Defend"};
-    public static List<string> button = new List<string> {Colour.ABILITY +  "1"     + Colour.RESET, Colour.ABILITY + "2"      + Colour.RESET };
+    public static List<string> option = new List<string> { Colour.DAMAGE + "Attack" + Colour.RESET, Colour.DEFENCE + "Defend" + Colour.RESET };
+    public static List<string> button = new List<string> { "1" , "2" };
     public static List<string> targetOption = new List<string> {  };
     public static List<string> targetButton = new List<string> {  };
 
@@ -26,6 +26,11 @@ internal class CombatUI
         Console.WriteLine(Colour.HEALTH + a.Health + Colour.RESET);
         Write.Position(x - a.Name.Length / 2, 1);
         Console.WriteLine(Colour.ABILITY + a.Intention + Colour.RESET);
+        for (int i = 0; i < a.Status.Count; i++)
+        {
+            Write.Position(x - a.Name.Length / 2, 3+i);
+            Console.WriteLine( a.Status[i]);
+        }
         targetOption.Add(Combat.monsters[0].Name);
         targetButton.Add("1");
     }
@@ -39,8 +44,11 @@ internal class CombatUI
         Console.WriteLine(Colour.HEALTH + b.Health + Colour.RESET);
         Write.Position(90 - b.Name.Length / 2, 1);
         Console.WriteLine(Colour.ABILITY + b.Intention + Colour.RESET);
-        Write.Position(90 - b.Name.Length / 2, 4);
-        Console.WriteLine(Colour.ABILITY + b.Intention + Colour.RESET);
+        for (int i = 0; i < b.Status.Count; i++)
+        {
+            Write.Position(90 - b.Name.Length / 2, 3 + i);
+            Console.WriteLine(b.Status[i]);
+        }
         targetOption.Add(Combat.monsters[1].Name);
         targetButton.Add("2");
     }
@@ -54,6 +62,11 @@ internal class CombatUI
         Console.WriteLine(Colour.HEALTH + b.Health + Colour.RESET);
         Write.Position(35 - b.Name.Length / 2, 1);
         Console.WriteLine(Colour.ABILITY + b.Intention + Colour.RESET);
+        for (int i = 0; i < b.Status.Count; i++)
+        {
+            Write.Position(35 - b.Name.Length / 2, 3 + i);
+            Console.WriteLine(b.Status[i]);
+        }
         targetOption.Add(Combat.monsters[2].Name);
         targetButton.Add("3");
     }

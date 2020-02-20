@@ -58,27 +58,26 @@ public class Level:Location
         p.Mitigation += p.LvlMitigation;
         p.Hit += p.LvlHit;
         p.Crit += p.LvlCrit;
-        p.Defence += p.LvlDefence;
-        if (p.Spellpower > 0) p.Spellpower += 2;
+        p.Defence += p.LvlDefence;        
         if (p.Spellpower > 0)
         {
+            p.Spellpower += 2;
             UI.Keypress(new List<int> { 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1 }, new List<string>
-                {
-                    Colour.XP, "Congrats! You are level ", $"{p.Level}", "!",
-                    "",
-                    Colour.HEALTH, "Max health increased by ", $"{p.LvlHealth}", "!",
-                    Colour.ENERGY, "Max energy increased by ", $"{p.LvlEnergy}", "!",
-                    "",
-                    Colour.DAMAGE, "Damage increased by ", $"{p.LvlDamage}", "!",
-                    Colour.HIT, "Hit increased by ", $"{p.LvlHit}", "!",
-                    Colour.CRIT, "Crit increased by ", $"{p.LvlCrit}", "!",
-                    "",
-                    Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation}", "!",
-                    Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence}", "!",
-                    "",
-                    Colour.ABILITY, "Spellpower increased by ", $"{p.LvlMagic}", "!"
-                });
-            Utilities.ToTown();
+            {
+                Colour.XP, "Congrats! You are level ", $"{p.Level}", "!",
+                "",
+                Colour.HEALTH, "Max health increased by ", $"{p.LvlHealth}", "!",
+                Colour.ENERGY, "Max energy increased by ", $"{p.LvlEnergy}", "!",
+                "",
+                Colour.DAMAGE, "Damage increased by ", $"{p.LvlDamage}", "!",
+                Colour.HIT, "Hit increased by ", $"{p.LvlHit}", "!",
+                Colour.CRIT, "Crit increased by ", $"{p.LvlCrit}", "!",
+                "",
+                Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation}", "!",
+                Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence}", "!",
+                "",
+                Colour.ABILITY, "Spellpower increased by ", $"{p.LvlMagic}", "!"
+            });            
         }
         else
         {
@@ -96,7 +95,27 @@ public class Level:Location
                     Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation}", "!",
                     Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence}", "!"
                 });
-            Utilities.ToTown();
         }
+        if (p.Level == 2)
+        {
+            p.CanAttack3 = true;
+            CombatUI.option.Add(Colour.ABILITY + p.Option3 + Colour.RESET);
+            CombatUI.button.Add("3");
+            UI.Keypress(new List<int> { 1}, new List<string>
+                {
+                    Colour.ABILITY, "You have learned ", $"{p.Option3}", "!",
+                });
+        }
+        if (p.Level == 4)
+        {
+            p.CanAttack4 = true;
+            CombatUI.option.Add(Colour.ABILITY + p.Option4 + Colour.RESET);
+            CombatUI.button.Add("4");
+            UI.Keypress(new List<int> { 1 }, new List<string>
+                {
+                    Colour.ABILITY, "You have learned ", $"{p.Option4}", "!",
+                });
+        }
+        Utilities.ToTown();
     }
 }

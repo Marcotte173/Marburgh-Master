@@ -58,11 +58,11 @@ public class UIComponent
         }
         else if (options.Count == 3)
         {
-            Console.SetCursorPosition(Return.Width(25) - (options[0].Length + 3) / 2, height);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height-2);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
-            Console.SetCursorPosition(Return.Width(50) - (options[1].Length + 3) / 2, height);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height-2);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
-            Console.SetCursorPosition(Return.Width(75) - (options[2].Length + 3) / 2, height);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
         }
         else if (options.Count == 4)
@@ -71,37 +71,37 @@ public class UIComponent
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
             Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height-2);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
-            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
-            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height);
             if (optionButton[3] != "") Console.WriteLine($"[{ optionButton[3]}]{ options[3]}");
         }
         else if (options.Count == 5)
         {
-            Console.SetCursorPosition(Return.Width(25) - (options[0].Length + 3) / 2, height - 2);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height -3);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
-            Console.SetCursorPosition(Return.Width(50) - (options[1].Length + 3) / 2, height - 2);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 3);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
-            Console.SetCursorPosition(Return.Width(75) - (options[2].Length + 3) / 2, height - 2);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height - 1);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
-            Console.SetCursorPosition(Return.Width(33) - (options[3].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 1);
             if (optionButton[3] != "") Console.WriteLine($"[{ optionButton[3]}]{ options[3]}");
-            Console.SetCursorPosition(Return.Width(66) - (options[4].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height + 1);
             if (optionButton[4] != "") Console.WriteLine($"[{ optionButton[4]}]{ options[4]}");
         }
         else
         {
-            Console.SetCursorPosition(Return.Width(25) - (options[0].Length + 3) / 2, height - 2);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height - 3);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
-            Console.SetCursorPosition(Return.Width(50) - (options[1].Length + 3) / 2, height - 2);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 3);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
-            Console.SetCursorPosition(Return.Width(75) - (options[2].Length + 3) / 2, height - 2);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height - 1);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
-            Console.SetCursorPosition(Return.Width(25) - (options[3].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 1);
             if (optionButton[3] != "") Console.WriteLine($"[{ optionButton[3]}]{ options[3]}");
-            Console.SetCursorPosition(Return.Width(50) - (options[4].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height + 1);
             if (optionButton[4] != "") Console.WriteLine($"[{ optionButton[4]}]{ options[4]}");
-            Console.SetCursorPosition(Return.Width(75) - (options[5].Length + 3) / 2, height + 1);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height + 1);
             if (optionButton[5] != "") Console.WriteLine($"[{ optionButton[5]}]{ options[5]}");
         }
     }

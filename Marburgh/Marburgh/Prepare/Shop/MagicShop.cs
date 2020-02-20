@@ -44,7 +44,7 @@ public class MagicShop : Shop
                 "Would you like to do this?"
             }))
         {
-            if (Return.HaveEnough(upgrade[current]))
+            if (Return.HaveGold(upgrade[current]))
             {
                 UI.Keypress(new List<int> { 3,0,0,0,1,0,2 }, new List<string>
                 {

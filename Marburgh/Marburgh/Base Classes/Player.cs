@@ -20,6 +20,8 @@ public class Player : Creature
     protected bool canExplore;
     protected bool canCraft;
     protected bool rescue;
+    protected string option3;
+    protected string option4;
     protected List<Drop> drops = new List<Drop> { };
 
     internal void AttackChoice()
@@ -42,6 +44,9 @@ public class Player : Creature
                 if (choice == 1) Attack1(target);
                 else if (choice == 2) Attack2(target);
                 else if (choice == 3 && CanAttack3) Attack3(target);
+                else if (choice == 4 && CanAttack4) Attack4(target);
+                else if (choice == 5 && CanAttack5) Attack5(target);
+                else if (choice == 6 && CanAttack6) Attack6(target);
                 Console.WriteLine("");
             }
             else AttackChoice();
@@ -148,6 +153,8 @@ public class Player : Creature
     }
 
     public int LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
+    public string Option3 { get { return option3; } set { option3 = value; } }
+    public string Option4 { get { return option4; } set { option4 = value; } }
     public int LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
     public bool CanCraft { get { return canCraft; } set { canCraft = value; } }

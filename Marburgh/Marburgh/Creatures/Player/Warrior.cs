@@ -4,6 +4,7 @@ using System.Text;
 
 public class Warrior : Player
 {
+    
     public Warrior()
     : base()
     {
@@ -15,10 +16,25 @@ public class Warrior : Player
         mainHand = Blunt.list[1];
         armor = Armor.list[1];
         pClass = "Warrior";
+        option3 = "Rend";
+        option4 = "Scream";
     }
     public override void Attack3(Creature target)
     {
-        base.Attack3(target);
+        int rendDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
+        if (Return.HaveEnergy(1))
+        {
+            Console.WriteLine($"You deliver a savage blow! The {target.Name} takes {rendDamage} damage and is stunned!");
+            target.TakeDamage(rendDamage);
+            target.Bleed = 2;
+            target.BleedDam = 2;
+        }
+        else
+        {
+            Console.WriteLine("You don't have enough Energy!");
+            Console.ReadKey(true);
+            AttackChoice();
+        }
     }
     public override void Attack4(Creature target)
     {
