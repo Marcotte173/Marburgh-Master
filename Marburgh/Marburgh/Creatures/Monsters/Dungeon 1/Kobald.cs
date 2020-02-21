@@ -26,9 +26,10 @@ public class Kobald : Monster
         if (AttemptToHit(target, 0))
         {
             Console.WriteLine($"The kobald throws a candle at you, causing 1 damage, and igniting you!");
-            Create.p.Burning += 2;
-            Create.p.BurnDam = 3;
-            Create.p.TakeDamage(1);
+            if (target.Burning > 0) target.Burning += 1;
+            else target.BurnDam = 1;
+            target.Burning = 3;
+            target.TakeDamage(1);
         }
         else Miss(target);
     }

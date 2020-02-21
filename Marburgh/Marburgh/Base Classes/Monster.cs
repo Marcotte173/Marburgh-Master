@@ -5,14 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Monster : Creature
-{
-    protected List<string> status = new List<string> { };
+{    
     protected string intention;
     protected int action;
     protected Drop drop;
     protected int dropRate;
-    protected Drop monsterEye = new Drop("Monster Eye", 1, false);
-    protected Drop monsterTooth = new Drop("Monster Tooth", 1, false);
+    protected Drop monsterEye = new Drop("Monster Eye", 1, 0);
+    protected Drop monsterTooth = new Drop("Monster Tooth", 1, 0);
     public virtual void Attack1(Creature target)
     {
         if (AttemptToHit(target, 0) == false) Miss(target);
@@ -76,7 +75,9 @@ public class Monster : Creature
         }
         if(stun > 0)
         {
-
+            canAct = false;
+            stun--;
+            if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
         }
         if (action == 0) Attack2(Create.p);
         else Attack1(Create.p);
@@ -87,6 +88,7 @@ public class Monster : Creature
         Combat.monsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
+        Drop();
     }
 
     public override void Miss(Creature target)
@@ -96,9 +98,9 @@ public class Monster : Creature
     public string Intention { get { return intention; } set { intention = value; } }
     public virtual void Drop() 
     { 
-        if (dropRate <= Return.RandomInt(1, 101))
+        if (Return.RandomInt(1, 101) <= 100 )
         {
-            Create.p.Drops.Add(ChooseDrop());
+            Combat.dropList.Add(ChooseDrop());
         }        
     }
 
@@ -108,6 +110,5 @@ public class Monster : Creature
         else return monsterTooth;
     }
 
-    public int Action { get { return action; } set { action = value; } }
-    public List<string> Status { get { return status; } set { status = value; } }
+    public int Action { get { return action; } set { action = value; } }    
 }

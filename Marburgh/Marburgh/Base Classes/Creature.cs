@@ -5,6 +5,7 @@ using System.Text;
 public class Creature
 {
     public static Random rand = new Random();
+    protected List<string> status = new List<string> { };
 
     protected int potionSize;
     protected int maxPotionSize;
@@ -39,6 +40,7 @@ public class Creature
 
     public Creature() { }
 
+    public List<string> Status { get { return status; } set { status = value; } }
     public string Name { get { return name; } set { name = value; } }
     public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
     public int Health { get { return health; } set { health = value; } }    

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class SavageOrc : Monster
 {
-    Drop savageOrcClaw = new Drop("Savage Orc Claw", 1, true);
+    Drop savageOrcClaw = new Drop("Savage Orc Claw", 1, 1);
     public SavageOrc()
     : base()
     {
@@ -27,8 +27,8 @@ public class SavageOrc : Monster
         if (AttemptToHit(target, 0))
         {
             Console.WriteLine($"The orc charges at you, stunning and doing {damage*2} damage!");
-            Create.p.Stun = 2;
-            Create.p.TakeDamage(damage);
+            target.Stun = 2;
+            target.TakeDamage(damage);
         }
         else Miss(target);
     }

@@ -47,7 +47,7 @@ public class CharacterSheet
         Console.SetCursorPosition(36, 22);
         Write.EmbedColourText(Colour.ABILITY, "Spellpower: ", $"{p.Spellpower}", "");
         Console.SetCursorPosition(36, 24);
-        Write.EmbedColourText(Colour.HEALTH, "Potion Size: ", $"{p.MaxPotionSize}", "");
+        Write.EmbedColourText(Colour.HEALTH, Colour.HEALTH,"Potion Size: ", $"{p.PotionSize}","/",$"{p.MaxPotionSize}", "");
 
         Console.SetCursorPosition(7, 18);
         Write.EmbedColourText(Colour.ITEM, "", "EQUIPMENT", "");
@@ -81,6 +81,11 @@ public class CharacterSheet
 
         Console.SetCursorPosition(99, 18);
         Write.EmbedColourText(Colour.RAREDROP, "", "DROPS", "");
+        for (int i = 0; i < Create.p.Drops.Count; i++)
+        {
+            Console.SetCursorPosition(99, 20+i);
+            Write.EmbedColourText(Colour.dropColour[Create.p.Drops[i].rare], $"{Create.p.Drops[i].amount} ", Create.p.Drops[i].name, "");
+        }
 
         Console.ReadKey(true);
     }

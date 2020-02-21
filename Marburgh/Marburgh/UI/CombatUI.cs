@@ -15,6 +15,13 @@ internal class CombatUI
         Box();
         AttackOptions();        
     }
+    internal static void Stunned()
+    {
+        Box();
+        Write.Position(45, 20);
+        Console.WriteLine("You are stunned");
+        Console.ReadKey(true);
+    }
 
     private static void Monster1()
     {
@@ -131,7 +138,7 @@ internal class CombatUI
         Console.SetCursorPosition(Return.Width(28), 16);
         Console.WriteLine("Level:" + Colour.XP + $"{Create.p.Level}" + Colour.RESET);
         Console.SetCursorPosition(Return.Width(47), 16);
-        Console.WriteLine("Gold:" + Colour.GOLD + $"{Create.p.Gold}" + Colour.RESET);
+        Console.WriteLine("["+Colour.HEALTH + "H" + Colour.RESET+"]eal");
         Console.SetCursorPosition(Return.Width(67), 16);
         Console.WriteLine("[" + Colour.CLASS + "C" + Colour.RESET + "]haracter");
         Console.SetCursorPosition(Return.Width(88), 16);

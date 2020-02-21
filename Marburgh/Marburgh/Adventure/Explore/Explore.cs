@@ -16,8 +16,7 @@ public class Explore : Location
     }
 
     public override void Menu()
-    {
-        currentShell = shell[1];
+    {        
         Navigate();
         while (true)
         {        

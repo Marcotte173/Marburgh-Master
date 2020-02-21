@@ -18,6 +18,7 @@ public class Warrior : Player
         pClass = "Warrior";
         option3 = "Rend";
         option4 = "Scream";
+        run = 45;
     }
     public override void Attack3(Creature target)
     {

@@ -18,6 +18,7 @@ public class Rogue : Player
         pClass = "Rogue";
         option3 = "Stun";
         option4 = "Backstab";
+        run = 66;
     }
     public override void Attack3(Creature target)
     {

@@ -21,6 +21,7 @@ public class Mage : Player
         CombatUI.option[1] = "Shield" ;
         option3 =  "Fire Blast";
         option4 =  "Magic Missiles";
+        run = 60;
     }
 
     public override void Attack2(Creature target)

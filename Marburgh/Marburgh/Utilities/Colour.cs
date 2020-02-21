@@ -3,6 +3,8 @@ using System.Runtime.InteropServices;
 
 public class Colour
 {
+    public static string[] dropColour = new string[] { DROP, RAREDROP };
+
     //ESCAPE CODES FOR COLOUR
     public const string BOLD = "\u001B[1m";
     public const string NAME = "\u001b[38;5;14m";

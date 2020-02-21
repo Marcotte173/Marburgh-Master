@@ -7,8 +7,8 @@ public class Drop
     //Variables, self explanatory
     public string name;
     public int amount;
-    public bool rare;
-    public Drop(string name, int amount, bool rare)
+    public int rare;
+    public Drop(string name, int amount, int rare)
     {
         this.rare = rare;
         this.name = name;

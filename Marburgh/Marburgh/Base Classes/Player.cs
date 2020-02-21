@@ -22,13 +22,24 @@ public class Player : Creature
     protected bool rescue;
     protected string option3;
     protected string option4;
+    protected int run;
     protected List<Drop> drops = new List<Drop> { };
 
     internal void AttackChoice()
     {
+        if (stun > 0)
+        {
+            CombatUI.Stunned();
+            canAct = false;
+            stun--;
+            if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
+            Console.WriteLine(Colour.NAME + "You " + Colour.RESET + "are " + Colour.STUNNED + "stunned" + Colour.RESET + "!");
+        }
         if (canAct)
         {
             CombatUI.Declare();
+            if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
+            if (burning > 0 && !Status.Contains("Burning")) Status.Add(Colour.BLOOD + "Burning" + Colour.RESET);
             string choice = Return.Option();
             Monster target = null;
             while ( target == null)
@@ -39,6 +50,20 @@ public class Player : Creature
             Write.Position(47, 22);
             Write.ColourText(Colour.ENERGY, "Press any key to continue");
             Write.Position(0,6);
+            if (bleed > 0)
+            {
+                Console.WriteLine(Colour.NAME + "You " + Colour.BLOOD + "bleed " + Colour.RESET + "for " + Colour.DAMAGE + bleedDam + Colour.RESET + " damage!");
+                TakeDamage(bleedDam);
+                bleed--;
+                if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
+            }
+            if (burning > 0)
+            {
+                Console.WriteLine(Colour.NAME + "You " + Colour.BURNING + " burn " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
+                TakeDamage(burnDam);
+                burning--;
+                if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
+            }            
             if (choice == "1") Attack1(target);
             else if (choice == "2") Attack2(target);
             else if (choice == "3" && CanAttack3) Attack3(target);
@@ -48,12 +73,23 @@ public class Player : Creature
             else if (choice == "h")
             {
                 DrinkPotion();
+                Console.ReadKey(true);
                 AttackChoice();
             }
             else if(choice == "c")
             {
                 CharacterSheet.Display();
                 AttackChoice();
+            }
+            else if (choice == "r")
+            {
+                if (Return.RandomInt(1, 101) <= run)
+                {
+                    Console.WriteLine("You have succesfully run away.... Coward");
+                    Console.ReadKey(true);
+                    Location.list[10].Go();
+                }
+                else Console.WriteLine("You try to get away but can't!");
             }
         }
     }
@@ -110,7 +146,7 @@ public class Player : Creature
         if (MaxHealth == Health) DontNeedHeal();
         else
         {
-            if (PotionSize == 0) Console.WriteLine("Your potion is empty!");
+            if (PotionSize == 0) Console.WriteLine("Your " + Colour.HEALTH+ "potion"+Colour.RESET+" is empty!");
             else if ((MaxHealth - Health) > PotionSize)
             {
                 AddHealth(PotionSize);
@@ -133,7 +169,7 @@ public class Player : Creature
     }
     public virtual void Attack1(Creature target)
     {
-        Console.WriteLine($"You attack the {target.Name} for {Damage} damage");
+        Console.WriteLine($"You attack the " + Colour.MONSTER + target.Name + Colour.RESET+ " for "+ Colour.DAMAGE + Damage+Colour.RESET+" damage");
         target.TakeDamage(Damage);
     }
     public virtual void Attack2(Creature target)
@@ -159,12 +195,12 @@ public class Player : Creature
 
     public override void HealStatement(int heal)
     {
-        Console.WriteLine("You heal yourself for " + heal + " hit points");
+        Console.WriteLine("You " + Colour.HEALTH + "heal " + Colour.RESET + "yourself for " + Colour.HEALTH+ heal + Colour.RESET +" hit points");
     }
 
     public override void DontNeedHeal()
     {
-        Console.WriteLine("You don't need healing!");
+        Console.WriteLine("You don't need " + Colour.HEALTH + "healing" + Colour.RESET + "!");
     }
 
     public int LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }

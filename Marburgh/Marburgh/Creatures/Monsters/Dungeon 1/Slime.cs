@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Slime : Monster
 {
-    Drop slime = new Drop("Slime", 1, true);
+    Drop slime = new Drop("Slime", 1, 1);
     public Slime()
      : base()
     {

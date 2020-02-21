@@ -26,9 +26,9 @@ public class Goblin:Monster
         if (AttemptToHit(target, 0))
         {
             Console.WriteLine($"The goblin rakes you for {Damage - 1} damage, causing bleeding");
-            Create.p.Bleed = 2;
-            Create.p.BleedDam = 2;
-            Create.p.TakeDamage(Damage - 1);
+            target.Bleed = 2;
+            target.BleedDam = 2;
+            target.TakeDamage(Damage - 1);
         } 
         else Miss(target);
     }
