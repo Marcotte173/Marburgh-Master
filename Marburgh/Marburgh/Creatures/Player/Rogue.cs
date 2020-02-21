@@ -24,7 +24,7 @@ public class Rogue : Player
         int stunDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
         if (Return.HaveEnergy(1))
         {            
-            Console.WriteLine($"You deliver a sturdy blow! The {target.Name} takes {stunDamage} damage and is stunned!");
+            Console.WriteLine($"You deliver a sturdy blow! The "+Colour.MONSTER+target.Name +Colour.RESET+" takes "+Colour.DAMAGE + stunDamage + Colour.RESET +" damage and is "+Colour.STUNNED + "stunned"+Colour.RESET+"!");
             target.TakeDamage(stunDamage);
             target.Stun = 2;
         }

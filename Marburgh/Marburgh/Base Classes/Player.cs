@@ -29,27 +29,32 @@ public class Player : Creature
         if (canAct)
         {
             CombatUI.Declare();
-            int choice = Return.Int();
-            if (choice > 0 && choice <= CombatUI.button.Count)
+            string choice = Return.Option();
+            Monster target = null;
+            while ( target == null)
             {
-                Monster target = null;
-                while ( target == null)
-                {
-                    target = CombatUI.Target();
-                }
-                CombatUI.Box();
-                Write.Position(47, 22);
-                Write.ColourText(Colour.ENERGY, "Press any key to continue");
-                Write.Position(0,6);
-                if (choice == 1) Attack1(target);
-                else if (choice == 2) Attack2(target);
-                else if (choice == 3 && CanAttack3) Attack3(target);
-                else if (choice == 4 && CanAttack4) Attack4(target);
-                else if (choice == 5 && CanAttack5) Attack5(target);
-                else if (choice == 6 && CanAttack6) Attack6(target);
-                Console.WriteLine("");
+                target = CombatUI.Target();
             }
-            else AttackChoice();
+            CombatUI.Box();
+            Write.Position(47, 22);
+            Write.ColourText(Colour.ENERGY, "Press any key to continue");
+            Write.Position(0,6);
+            if (choice == "1") Attack1(target);
+            else if (choice == "2") Attack2(target);
+            else if (choice == "3" && CanAttack3) Attack3(target);
+            else if (choice == "4" && CanAttack4) Attack4(target);
+            else if (choice == "5" && CanAttack5) Attack5(target);
+            else if (choice == "6" && CanAttack6) Attack6(target);
+            else if (choice == "h")
+            {
+                DrinkPotion();
+                AttackChoice();
+            }
+            else if(choice == "c")
+            {
+                CharacterSheet.Display();
+                AttackChoice();
+            }
         }
     }
 
@@ -102,13 +107,23 @@ public class Player : Creature
 
     internal void DrinkPotion()
     {
-        if (MaxHealth > Health)
+        if (MaxHealth == Health) DontNeedHeal();
+        else
         {
-            AddHealth(MaxHealth - Health);
-            PotionSize -= (MaxHealth - Health);
+            if (PotionSize == 0) Console.WriteLine("Your potion is empty!");
+            else if ((MaxHealth - Health) > PotionSize)
+            {
+                AddHealth(PotionSize);
+                PotionSize = 0;
+            }
+            else
+            {
+                PotionSize -= (MaxHealth - Health);
+                AddHealth(MaxHealth - Health);
+            }
         }
-        else DontNeedHeal();
     }
+
     public virtual void Refresh()
     {
         health = maxHealth;
@@ -127,7 +142,7 @@ public class Player : Creature
     }
     public virtual void Attack3(Creature target)
     {
-        energy--;
+        
     }
     public virtual void Attack4(Creature target)
     {

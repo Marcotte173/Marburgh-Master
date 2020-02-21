@@ -24,7 +24,7 @@ public class Warrior : Player
         int rendDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
         if (Return.HaveEnergy(1))
         {
-            Console.WriteLine($"You deliver a savage blow! The {target.Name} takes {rendDamage} damage starts to bleed!");
+            Console.WriteLine($"You deliver a sturdy blow! The "+Colour.MONSTER+target.Name +Colour.RESET+" takes "+Colour.DAMAGE + rendDamage + Colour.RESET +" damage and starts to "+Colour.BLOOD + "bleed"+Colour.RESET+"!");
             target.TakeDamage(rendDamage);
             target.Bleed = 2;
             target.BleedDam = 3;

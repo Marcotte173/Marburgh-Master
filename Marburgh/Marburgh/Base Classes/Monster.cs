@@ -62,14 +62,14 @@ public class Monster : Creature
     {
         if (bleed > 0)
         {
-            Console.WriteLine($"The {Name} bleeds for {bleedDam} damage!");
+            Console.WriteLine($"The "+Colour.MONSTER+Name+Colour.BLOOD+" bleeds " +Colour.RESET +"for " + Colour.DAMAGE + bleedDam + Colour.RESET+" damage!");
             TakeDamage(bleedDam);
             bleed--;
             if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
         }
         if (burning > 0)
         {
-            Console.WriteLine($"The {Name} burns for {BurnDam} damage!");
+            Console.WriteLine($"The " + Colour.MONSTER + Name + Colour.BURNING + " burns " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
             TakeDamage(burnDam);
             burning--;
             if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
@@ -83,7 +83,7 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        Console.WriteLine($"You have killed the {name}!");
+        Console.WriteLine($"\nYou have killed the {name}!");
         Combat.monsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
