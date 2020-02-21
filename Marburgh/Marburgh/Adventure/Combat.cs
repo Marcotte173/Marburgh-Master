@@ -22,9 +22,9 @@ public class Combat : Location
     {
         while (monsters.Count > 0)
         {
-            foreach (Monster m in monsters) m.Declare();            
+            foreach (Monster m in monsters.ToList()) m.Declare();            
             p.AttackChoice();
-            foreach (Monster m in monsters) m.MakeAttack();
+            foreach (Monster m in monsters.ToList()) m.MakeAttack();
             Console.ReadKey(true);
         }
         UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string> {"You have defeated your enemies","",$"You find {goldReward} gold","",$"You gain {xpReward} experience"  });

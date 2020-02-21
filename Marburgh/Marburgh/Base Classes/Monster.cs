@@ -44,8 +44,8 @@ public class Monster : Creature
     {
         action = Return.RandomInt(0, 4);
         if (action != 0) intention = "Ready";
-        if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add("Bleeding");
-        if (stun > 0 && !Status.Contains("Stunned")) Status.Add("Stunned");
+        if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add(Colour.BLOOD+"Bleeding"+Colour.RESET);
+        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Colour.STUNNED+"Stunned"+ Colour.RESET);
         else Declare2();
     }
 
@@ -60,6 +60,24 @@ public class Monster : Creature
 
     public virtual void MakeAttack()
     {
+        if (bleed > 0)
+        {
+            Console.WriteLine($"The {Name} bleeds for {bleedDam} damage!");
+            TakeDamage(bleedDam);
+            bleed--;
+            if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
+        }
+        if (burning > 0)
+        {
+            Console.WriteLine($"The {Name} burns for {BurnDam} damage!");
+            TakeDamage(burnDam);
+            burning--;
+            if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
+        }
+        if(stun > 0)
+        {
+
+        }
         if (action == 0) Attack2(Create.p);
         else Attack1(Create.p);
     }

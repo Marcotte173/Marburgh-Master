@@ -35,8 +35,9 @@ public class Mage : Player
         {
             Console.WriteLine(Colour.BURNING + "Flames " + Colour.RESET + "burst out of your hands, burning the " + Colour.MONSTER + target.Name + Colour.RESET +" for " + Colour.DAMAGE + flameDamage + Colour.RESET +" damage and " + Colour.BURNING + "igniting " + Colour.RESET + "him!");
             target.TakeDamage(flameDamage);
-            target.BurnDam = 2;
-            target.Burning = 2;
+            if (target.Burning > 0) target.BurnDam += 1;
+            else target.BurnDam = 1;
+            target.Burning = 3;
             energy--; 
         } 
         else
