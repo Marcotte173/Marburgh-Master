@@ -35,8 +35,30 @@ public class Town : Location
         else if (choice == "b") Location.now = Location.list[9];
         else if (choice == "d")
         {
-            Explore.currentShell = Explore.shell[1];
-            Location.now = Location.list[10];
+            //If no, go home
+            if (p.CanExplore == false)
+            {
+                UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+                {
+                    "You are exhausted",
+                    "",
+                    "You should go to bed"
+                });
+                Menu();
+            }
+            //Warning so you don't use it then leave right away
+            if(UI.Confirm(new List<int> { 0, 0, 0 }, new List<string>
+            {
+                "You may only go exploring once a day",
+                "",
+                "Would you like to go now?"
+            }))
+            {
+                //Disallow going back later, send to dungeon
+                p.CanExplore = false;
+                Explore.currentShell = Explore.shell[1];
+                Location.now = Location.list[10];
+            }            
         }
         else if (choice == "x") p.XP += 5;
         else if (choice == "k") Time.DayChange(1);

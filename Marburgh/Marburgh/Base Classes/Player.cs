@@ -139,6 +139,44 @@ public class Player : Creature
             offHand = Sharp.list[0];
         }
     }
+    public void TakeDamage(int damage, Monster hitMe)
+    {
+        health -= damage;
+        health = (health < 0) ? 0 : health;
+        if (health == 0) Death(hitMe);
+    }
+
+    public void Death(Monster hitMe)
+    {
+        Family.dead.Add(Family.alive[0]);
+        Family.alive.RemoveAt(0);
+        Family.cause.Add(hitMe.Name);
+        Family.timeOfDeath[0, 0] = Time.day;
+        Family.timeOfDeath[0, 1] = Time.week;
+        Family.timeOfDeath[0, 2] = Time.month;
+        Family.timeOfDeath[0, 3] = Time.year;
+        if (Family.alive.Count == 0)
+        {
+            UI.Keypress(new List<int> { 1,0,0 }, new List<string>
+            {
+                Colour.NAME, "You are the last of the ", Family.lastName,"s",
+                "",
+                "Your bloodline ends here"
+            });
+            Utilities.Quit();
+        }
+        else
+        {
+            UI.Keypress(new List<int> { 0,0,0 }, new List<string>
+            {
+                 "YOU DIED!",
+                 "",
+                 "Hopefully one of your family members can carry on for you"
+            });
+            Time.DayChange(1);
+            Create.Name();
+        }
+    }
 
 
     internal void DrinkPotion()

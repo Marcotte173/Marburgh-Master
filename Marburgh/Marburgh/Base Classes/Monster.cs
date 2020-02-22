@@ -41,10 +41,10 @@ public class Monster : Creature
 
     public virtual void Declare()
     {
-        action = Return.RandomInt(0, 4);
-        if (action != 0) intention = "Ready";
+        action = Return.RandomInt(0, 4);        
         if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add(Colour.BLOOD+"Bleeding"+Colour.RESET);
         if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Colour.STUNNED+"Stunned"+ Colour.RESET);
+        if (action != 0) intention = "Ready";
         else Declare2();
     }
 
@@ -98,7 +98,7 @@ public class Monster : Creature
     public string Intention { get { return intention; } set { intention = value; } }
     public virtual void Drop() 
     { 
-        if (Return.RandomInt(1, 101) <= 100 )
+        if (Return.RandomInt(1, 101) <= dropRate )
         {
             Combat.dropList.Add(ChooseDrop());
         }        
