@@ -27,7 +27,7 @@ public class MagicShop : Shop
         },
         new List<string> { "uy", "ell", "otion Upgrade" }, new List<string> { Colour.ITEM + "B" + Colour.RESET, Colour.ITEM + "S" + Colour.RESET, Colour.HEALTH + "P" + Colour.RESET });
         string choice = Return.Option();
-        if (choice == "b") Buy(list, list1, "Marley");
+        if (choice == "b") Buy(list, "Marley");
         else if (choice == "c") CharacterSheet.Display();
         else if (choice == "r") Utilities.ToTown();
         else if (choice == "s") Sell("Marley");
@@ -69,7 +69,7 @@ public class MagicShop : Shop
         }
     }
 
-    public void Buy(List<Weapon> list, List<Weapon> list1, string name)
+    public void Buy(List<Weapon> list,  string name)
     {
         UI.Store(new List<int> { 0, 0, 0 }, new List<string>
         {
@@ -77,14 +77,11 @@ public class MagicShop : Shop
             "",
             "[0] Return"
         },
-        list, list1);
+        list);
         int choice = Return.Integer();
-        if (choice > 0 && choice < list.Count + list1.Count)
+        if (choice > 0 && choice < list.Count)
         {
-            List<Weapon> listToUse = list;
-            listToUse = (choice > list.Count - 1) ? list1 : list;
-            choice = (choice > list.Count - 1) ? choice -= list.Count - 1 : choice;
-            if (p.Gold < listToUse[choice].Price)
+            if (p.Gold < list[choice].Price)
             {
                 UI.Keypress(new List<int> { 0 }, new List<string>
                 {
@@ -93,19 +90,19 @@ public class MagicShop : Shop
             }
             else
             {
-                if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{listToUse[choice].Name}", "?" }))
+                if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{list[choice].Name}", "?" }))
                 {
 
-                    if (p.MainHand.Name != "None") SellOld(listToUse, choice, name, UI.Hand(listToUse[choice]));
+                    if (p.MainHand.Name != "None") SellOld(list, choice, name, UI.Hand(list[choice]));
                     else
                     {
-                        p.Gold -= listToUse[choice].Price;
+                        p.Gold -= list[choice].Price;
                         Console.Clear();
                         UI.Keypress(new List<int> { 2 }, new List<string>
                         {
-                            Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{listToUse[choice].Name}","",
+                            Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{list[choice].Name}","",
                         });
-                        p.Equip(listToUse[choice], UI.Hand(listToUse[choice]));
+                        p.Equip(list[choice], UI.Hand(list[choice]));
                     }
                 }
             }
@@ -133,7 +130,7 @@ public class MagicShop : Shop
                 "What would you like to Sell?",
                 "",
                 "[0] Return"
-            }, EquipmentList, null);
+            }, EquipmentList);
             Console.SetCursorPosition(58, 14);
             int sellChoice;
             do

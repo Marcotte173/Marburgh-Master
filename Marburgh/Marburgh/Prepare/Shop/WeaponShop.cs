@@ -8,7 +8,9 @@ public class WeaponShop : Shop
 {
     Player p = Create.p;
     static List<Weapon> bluntList = new List<Weapon> { Blunt.list[0], Blunt.list[1], Blunt.list[2], Blunt.list[3] };
-    static List<Weapon> sharpList = new List<Weapon> { Sharp.list[0], Sharp.list[1], Sharp.list[2], Sharp.list[3] };
+    static List<Weapon> swordList = new List<Weapon> { Sword.list[0], Sword.list[1], Sword.list[2], Sword.list[3] };
+    static List<Weapon> daggerList = new List<Weapon> { Dagger.list[0], Dagger.list[1], Dagger.list[2], Dagger.list[3] };
+    static List<Weapon> shieldList = new List<Weapon> { Shield.list[0], Shield.list[1], Shield.list[2], Shield.list[3] };
     public WeaponShop()
     : base() { }
 
@@ -24,14 +26,27 @@ public class WeaponShop : Shop
         },
         new List<string> { "uy", "ell" }, new List<string> { Colour.ITEM + "B" + Colour.RESET, Colour.ITEM + "S" + Colour.RESET });
         string choice = Return.Option();
-        if (choice == "b") Buy(bluntList, sharpList, "Oscar");
+        if (choice == "b")
+        {
+            UI.Choice(new List<int> { 0, 2, 0, 1 }, new List<string>
+            {
+                $"And what can I interest you in?",
+            },
+            new List<string> { "Swords", "Daggers","Hammers", "Shields" }, new List<string> { Colour.ITEM + "1" + Colour.RESET, Colour.ITEM + "2" + Colour.RESET, Colour.ITEM + "3" + Colour.RESET, Colour.ITEM + "4" + Colour.RESET });
+            string choice2 = Return.Option();
+            if (choice2 == "1") Buy(swordList,  "Oscar");
+            else if (choice2 == "2") Buy(daggerList, "Oscar");
+            else if (choice2 == "3") Buy(bluntList, "Oscar");
+            else if (choice2 == "4") Buy(shieldList, "Oscar");
+            else Menu();
+        }
         else if (choice == "c") CharacterSheet.Display();
         else if (choice == "r") Utilities.ToTown();
         else if (choice == "s") Sell("Oscar");
         Menu();
     }
 
-    public void Buy(List<Weapon> list, List<Weapon> list1, string name)
+    public void Buy(List<Weapon> list, string name)
     {
         UI.Store(new List<int> { 0, 0, 0 }, new List<string>
         {
@@ -39,14 +54,11 @@ public class WeaponShop : Shop
             "",
             "[0] Return"
         },
-        list, list1);
-        int choice = Return.Integer();
-        if (choice > 0 && choice < list.Count + list1.Count)
+        list);
+        int choice = Return.Int();
+        if (choice > 0 && choice < list.Count )
         {
-            List<Weapon> listToUse = list;
-            listToUse = (choice > list.Count - 1) ? list1 : list;
-            choice = (choice > list.Count - 1) ? choice -= list.Count - 1 : choice;
-            if (p.Gold < listToUse[choice].Price)
+            if (p.Gold < list[choice].Price)
             {
                 UI.Keypress(new List<int> { 0 }, new List<string>
                     {
@@ -55,19 +67,19 @@ public class WeaponShop : Shop
             }
             else
             {
-                if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{listToUse[choice].Name}", "?" }))
+                if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{list[choice].Name}", "?" }))
                 {
 
-                    if (p.MainHand.Name != "None") SellOld(listToUse, choice, name, UI.Hand(listToUse[choice]));
+                    if (p.MainHand.Name != "None") SellOld(list, choice, name, UI.Hand(list[choice]));
                     else
                     {
-                        p.Gold -= listToUse[choice].Price;
+                        p.Gold -= list[choice].Price;
                         Console.Clear();
                         UI.Keypress(new List<int> { 2 }, new List<string>
                         {
-                            Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{listToUse[choice].Name}","",
+                            Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{list[choice].Name}","",
                         });
-                        p.Equip(listToUse[choice], UI.Hand(listToUse[choice]));
+                        p.Equip(list[choice], UI.Hand(list[choice]));
                     }
                 }
             }
@@ -95,7 +107,7 @@ public class WeaponShop : Shop
                 "What would you like to Sell?",
                 "",
                 "[0] Return"
-            }, EquipmentList, null);
+            }, EquipmentList);
             Console.SetCursorPosition(58, 14);
             int sellChoice;
             do

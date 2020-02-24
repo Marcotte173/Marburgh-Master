@@ -139,7 +139,7 @@ public class Player : Creature
                 Colour.ITEM, "You equip the ",w.Name,""
             });
             mainHand = w;
-            offHand = Sharp.list[0];
+            offHand = Sword.list[0];
         }
     }
     public void TakeDamage(int damage, Monster hitMe)
