@@ -20,7 +20,7 @@ public class Utilities
                 "",
                 "You tried but you failed",
                 "",
-                "And in the end, if that not the real victory?",
+                "And in the end, is that not the real victory?",
                 "",
                 "The answer is no...",
                 "",

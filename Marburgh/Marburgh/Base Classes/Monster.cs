@@ -12,13 +12,13 @@ public class Monster : Creature
     protected int dropRate;
     protected Drop monsterEye = new Drop("Monster Eye", 1, 0);
     protected Drop monsterTooth = new Drop("Monster Tooth", 1, 0);
-    public virtual void Attack1(Creature target)
+    public virtual void Attack1(Player target)
     {
         if (AttemptToHit(target, 0) == false) Miss(target);
         else Console.WriteLine($"The {Name} hits you for {Damage} damage");
-        target.TakeDamage(Damage);
+        target.TakeDamage(Damage,this);
     }
-    public virtual void Attack2(Creature target)
+    public virtual void Attack2(Player target)
     {
 
     }

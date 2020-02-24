@@ -3,20 +3,30 @@ using System.Collections.Generic;
 using System.Text;
 
 public class Player : Creature
-{
+{    
     protected int spellpower;
     protected Weapon mainHand;
     protected Weapon offHand;
     protected Armor armor;
     protected string pClass;
-    protected int lvlHealth;
-    protected int lvlDamage;
-    protected int lvlEnergy;
-    protected int lvlMagic;
-    protected int lvlMitigation;
-    protected int lvlHit;
-    protected int lvlCrit;
-    protected int lvlDefence;
+    protected int[] lvlSpellpower;
+    protected int[] lvlHealth;
+    protected int[] lvlDamage;
+    protected int[] lvlEnergy;
+    protected int[] lvlMitigation;
+    protected int[] lvlHit;
+    protected int[] lvlCrit;
+    protected int[] lvlPlayerDefence;
+    protected int playerSpellpower;
+    protected int playerDefence; 
+    protected int playerHealth; 
+    protected int playerDamage; 
+    protected int playerEnergy; 
+    protected int playerMitigation;  
+    protected int playerHit;  
+    protected int playerCrit;
+    protected int playerMaxHealth;
+    protected int playerMaxEnergy;
     protected bool canExplore;
     protected bool canCraft;
     protected bool rescue;
@@ -59,7 +69,7 @@ public class Player : Creature
             }
             if (burning > 0)
             {
-                Console.WriteLine(Colour.NAME + "You " + Colour.BURNING + " burn " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
+                Console.WriteLine(Colour.NAME + "You " + Colour.BURNING + "burn " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
                 TakeDamage(burnDam);
                 burning--;
                 if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
@@ -98,22 +108,15 @@ public class Player : Creature
     : base()
     {
         xpNeeded = new int[] { 0, 25, 60, 100, 150, 220, 300, 390, 500, 650 };
-        energy = maxEnergy = 3;
+        playerEnergy = playerMaxEnergy = 1;
         gold = 1000;
         potionSize = maxPotionSize = 10;
-        crit = 5;
-        hit = 65;
-        defence = 5;
-        mitigation = 1;
+        playerCrit = 5;
+        playerHit = 65;
+        playerDefence = 5;
+        playerMitigation = 1;
         level = 1;
-        lvlHealth = 3;
-        lvlDamage = 1;
-        lvlEnergy = 2;
-        lvlMagic = 1;
-        lvlMitigation = 2;
-        lvlHit = 5;
-        lvlCrit = 2;
-        lvlDefence = 2;
+        playerDamage = 3;
         canExplore = true;
         canAct = true;
     }
@@ -143,7 +146,12 @@ public class Player : Creature
     {
         health -= damage;
         health = (health < 0) ? 0 : health;
-        if (health == 0) Death(hitMe);
+        if (health == 0)
+        {
+            Death(hitMe);
+            Console.WriteLine("You have been " + Colour.BOSS + "killed" + Colour.RESET + " by the " + Colour.MONSTER + hitMe.Name + Colour.RESET + "!\n");
+            Utilities.Keypress();
+        }
     }
 
     public void Death(Monster hitMe)
@@ -241,28 +249,39 @@ public class Player : Creature
         Console.WriteLine("You don't need " + Colour.HEALTH + "healing" + Colour.RESET + "!");
     }
 
-    public int LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
+    public int[] LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
     public string Option3 { get { return option3; } set { option3 = value; } }
     public string Option4 { get { return option4; } set { option4 = value; } }
-    public int LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
+    public int[] LvlSpellpower { get { return lvlSpellpower; } set { lvlSpellpower = value; } }
+    public int[] LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
     public bool CanCraft { get { return canCraft; } set { canCraft = value; } }
     public bool Rescue { get { return rescue; } set { rescue = value; } }
-    public int LvlDefence { get { return lvlDefence; } set { lvlDefence = value; } }
-    public int LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
-    public int LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }
-    public int LvlHit { get { return lvlHit; } set { lvlHit = value; } }
-    public int LvlMagic { get { return lvlMagic; } set { lvlMagic = value; } }
-    public int LvlMitigation { get { return lvlMitigation; } set { lvlMitigation = value; } }
+    public int[] LvlDefence { get { return lvlPlayerDefence; } set { lvlPlayerDefence = value; } }
+    public int[] LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
+    public int[] LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }
+    public int[] LvlHit { get { return lvlHit; } set { lvlHit = value; } }
+    public int[] LvlMitigation { get { return lvlMitigation; } set { lvlMitigation = value; } }
     public List<Drop> Drops { get { return drops; } set { drops = value; } }
     public Armor Armor { get { return armor; } set { armor = value; } }
     public Weapon MainHand { get { return mainHand; } set { mainHand = value; } }
     public Weapon OffHand { get { return offHand; } set { offHand = value; } }
     public string PClass { get { return pClass; } set { pClass = value; } }
-    public override int Damage { get { return damage + MainHand.Damage + OffHand.Damage; } set { damage = value; } }
-    public override int Hit { get { return hit + MainHand.Hit + OffHand.Hit; } set { hit = value; } }
-    public override int Crit { get { return crit + MainHand.Crit + OffHand.Crit; } set { crit = value; } }
-    public override int Defence { get { return defence + Armor.Defence; } set { defence = value; } }
-    public override int Mitigation { get { return mitigation + Armor.Mitigation; } set { mitigation = value; } }
-    public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower; } set { spellpower = value; } }
+    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage + Armor.Damage; } set { damage = value; } }
+    public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } set { hit = value; } }
+    public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; } set { crit = value; } }
+    public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }
+    public int PlayerHealth { get { return playerHealth; } set { playerHealth = value; } }
+    public int PlayerDamage { get { return playerDamage; } set { playerDamage = value; } }
+    public int PlayerEnergy { get { return playerEnergy; } set { playerEnergy = value; } }
+    public int PlayerMitigation { get { return playerMitigation; } set { playerMitigation = value; } }
+    public int PlayerHit { get { return playerHit; } set { playerHit = value; } }
+    public int PlayerCrit { get { return playerCrit; } set { playerCrit = value; } }
+    public int PlayerSpellpower { get { return playerSpellpower; } set { playerSpellpower = value; } }
+    public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence; } }
+    public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation; } set { mitigation = value; } }
+    public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } set { spellpower = value; } }
+    public override int MaxHealth { get { return playerMaxHealth; } set { maxHealth = value; } }
+    public override int Health { get { return playerHealth; } set { health = value; } }
+    public override int MaxEnergy { get { return playerMaxEnergy; } set { maxEnergy = value; } }
 }

@@ -42,9 +42,9 @@ public class Creature
 
     public List<string> Status { get { return status; } set { status = value; } }
     public string Name { get { return name; } set { name = value; } }
-    public int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
-    public int Health { get { return health; } set { health = value; } }    
-    public int MaxEnergy { get { return maxEnergy; } set { maxEnergy = value; } }
+    public virtual int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
+    public virtual int Health { get { return health; } set { health = value; } }    
+    public virtual int MaxEnergy { get { return maxEnergy; } set { maxEnergy = value; } }
     public int Energy { get { return energy; } set { energy = value; } }
     public int Gold { get { return gold; } set { gold = value; } }
     public virtual int Hit { get { return hit; } set { hit = value; } }

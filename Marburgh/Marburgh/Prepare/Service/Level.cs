@@ -48,35 +48,35 @@ public class Level:Location
     private void LevelUp(Player p)
     {
         Console.Clear();
+        p.MaxEnergy += p.LvlEnergy[p.Level];
+        p.MaxHealth += p.LvlHealth[p.Level];
+        p.PlayerHealth = p.MaxHealth;
+        p.PlayerEnergy = p.MaxEnergy;
+        p.PlayerDamage += p.LvlDamage[p.Level];
+        p.PlayerMitigation += p.LvlMitigation[p.Level];
+        p.PlayerHit += p.LvlHit[p.Level];
+        p.PlayerCrit += p.LvlCrit[p.Level];
+        p.PlayerDefence += p.LvlDefence[p.Level];
         p.XP -= p.XPNeeded[p.Level];
-        p.Level += 1;
-        p.MaxEnergy += p.LvlEnergy;
-        p.MaxHealth += p.LvlHealth;
-        p.Health = p.MaxHealth;
-        p.Energy = p.MaxEnergy;
-        p.Damage += p.LvlDamage;
-        p.Mitigation += p.LvlMitigation;
-        p.Hit += p.LvlHit;
-        p.Crit += p.LvlCrit;
-        p.Defence += p.LvlDefence;        
-        if (p.Spellpower > 0)
+        p.Level += 1;             
+        if (p.PlayerSpellpower > 0)
         {
-            p.Spellpower += 2;
+            p.PlayerSpellpower += p.LvlSpellpower[p.Level];
             UI.Keypress(new List<int> { 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1 }, new List<string>
             {
                 Colour.XP, "Congrats! You are level ", $"{p.Level}", "!",
                 "",
-                Colour.HEALTH, "Max health increased by ", $"{p.LvlHealth}", "!",
-                Colour.ENERGY, "Max energy increased by ", $"{p.LvlEnergy}", "!",
+                Colour.HEALTH, "Max health increased by ", $"{p.LvlHealth[p.Level-1]}", "!",
+                Colour.ENERGY, "Max energy increased by ", $"{p.LvlEnergy[p.Level-1]}", "!",
                 "",
-                Colour.DAMAGE, "Damage increased by ", $"{p.LvlDamage}", "!",
-                Colour.HIT, "Hit increased by ", $"{p.LvlHit}", "!",
-                Colour.CRIT, "Crit increased by ", $"{p.LvlCrit}", "!",
+                Colour.DAMAGE, "Damage increased by ", $"{p.LvlDamage[p.Level-1]}", "!",
+                Colour.HIT, "Hit increased by ", $"{p.LvlHit[p.Level-1]}", "!",
+                Colour.CRIT, "Crit increased by ", $"{p.LvlCrit[p.Level-1]}", "!",
                 "",
-                Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation}", "!",
-                Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence}", "!",
+                Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation[p.Level-1]}", "!",
+                Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence[p.Level-1]}", "!",
                 "",
-                Colour.ABILITY, "Spellpower increased by ", $"{p.LvlMagic}", "!"
+                Colour.ABILITY, "Spellpower increased by ", $"{p.LvlSpellpower[p.Level-1]}", "!"
             });            
         }
         else
@@ -85,15 +85,15 @@ public class Level:Location
                 {
                     Colour.XP, "Congrats! You are level ", $"{p.Level}", "!",
                     "",
-                    Colour.HEALTH, "Max health increased by ", $"{p.LvlHealth}", "!",
-                    Colour.ENERGY, "Max energy increased by ", $"{p.LvlEnergy}", "!",
+                    Colour.HEALTH, "Max health increased by ", $"{p.LvlHealth[p.Level-1]}", "!",
+                    Colour.ENERGY, "Max energy increased by ", $"{p.LvlEnergy[p.Level-1]}", "!",
                     "",
-                    Colour.DAMAGE, "Damage increased by ", $"{p.LvlDamage}", "!",
-                    Colour.HIT, "Hit increased by ", $"{p.LvlHit}", "!",
-                    Colour.CRIT, "Crit increased by ", $"{p.LvlCrit}", "!",
+                    Colour.DAMAGE, "Damage increased by ", $"{p.LvlDamage[p.Level-1]}", "!",
+                    Colour.HIT, "Hit increased by ", $"{p.LvlHit[p.Level-1]}", "!",
+                    Colour.CRIT, "Crit increased by ", $"{p.LvlCrit[p.Level-1]}", "!",
                     "",
-                    Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation}", "!",
-                    Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence}", "!"
+                    Colour.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation[p.Level-1]}", "!",
+                    Colour.DEFENCE, "Defence increased by ", $"{p.LvlDefence[p.Level-1]}", "!"
                 });
         }
         if (p.Level == 2)

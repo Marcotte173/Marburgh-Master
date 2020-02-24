@@ -15,13 +15,13 @@ public class Kobald : Monster
         defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 7;
-        damage = 3;
+        health = maxHealth = 8;
+        damage = 6;
         xp = 6;
         gold = 13;
         dropRate = 30;
     }
-    public override void Attack2(Creature target)
+    public override void Attack2(Player target)
     {
         if (AttemptToHit(target, 0))
         {

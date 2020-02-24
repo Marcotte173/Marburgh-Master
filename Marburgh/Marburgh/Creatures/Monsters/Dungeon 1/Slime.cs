@@ -16,13 +16,13 @@ public class Slime : Monster
         defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 7;
-        damage = 3;
+        health = maxHealth = 14;
+        damage = 5;
         xp = 6;
         gold = 13;
         dropRate = 25;
     }
-    public override void Attack2(Creature target)
+    public override void Attack2(Player target)
     {
         Console.WriteLine($"The slime splits in two! Now there are TWO slimes!");
         //Add slime to list

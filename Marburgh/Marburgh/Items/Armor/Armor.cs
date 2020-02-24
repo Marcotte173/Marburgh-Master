@@ -35,7 +35,7 @@ public class Armor : Equipment
         coefficient = (tier == 1) ? 1 : (tier == 2) ? 1.5 : 2;
         basePrice = (level == 0) ? 0 : (level == 1) ? 500 : (level == 2) ? 1500 : (level == 3) ? 2200 : 3000;
         price = Convert.ToInt32(BasePrice * Coefficient);
-        defence = 10 - Level * 3;
-        mitigation = level * 3 - 1;
+        defence = 10 - Level * 2;
+        mitigation = (level * 3 - 1 <0)?0: level * 3 - 1;        
     }
 }

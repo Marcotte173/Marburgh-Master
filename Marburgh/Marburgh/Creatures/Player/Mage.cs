@@ -4,14 +4,12 @@ using System.Text;
 
 public class Mage : Player
 {
-    
-
     public Mage()
     : base()
     {
-        health = maxHealth = 16;
-        damage = 3;
-        spellpower = 3;
+        playerHealth = playerMaxHealth = 16;
+        playerSpellpower = 1;
+        playerEnergy = playerMaxEnergy = 3;
         potionSize = maxPotionSize += 5;
         offHand = Magic.list[0];
         mainHand = Magic.list[1];
@@ -21,7 +19,16 @@ public class Mage : Player
         CombatUI.option[1] = "Shield" ;
         option3 =  "Fire Blast";
         option4 =  "Magic Missiles";
-        run = 60;
+        run = 60;                           //5          //10
+        lvlSpellpower = new int[] { 0, 1, 2,      1, 3, 1, 2, 2, 3, 4, 4, 5, 10 };
+
+        lvlHealth = new int[]     { 0, 3, 3,      3, 5, 4, 4, 4, 5, 7, 5, 5, 10 };
+        lvlDamage = new int[]     { 0, 1, 2,      2, 3, 2, 2, 2, 3, 4, 3, 3, 5 };
+        lvlEnergy = new int[]     { 0, 2, 2,      2, 4, 3, 3, 3, 3, 5, 4, 4, 4 };
+        lvlMitigation = new int[] { 0, 0, 1,      0, 2, 0, 0, 2, 0, 2, 0, 1, 2 };
+        lvlHit = new int[]        { 0, 3, 3,      3, 5, 4, 4, 4, 4, 5, 4, 4, 4 };
+        lvlCrit = new int[]       { 0, 1, 0,      1, 2, 0, 1, 0, 1, 2, 0, 1, 0 };
+        lvlPlayerDefence = new int[]    { 0, 3, 3,      3, 5, 4, 4, 4, 4, 5, 5, 5, 5 };
     }
 
     public override void Attack2(Creature target)
@@ -59,5 +66,5 @@ public class Mage : Player
     public override void Attack6(Creature target)
     {
         base.Attack6(target);
-    }
+    }    
 }

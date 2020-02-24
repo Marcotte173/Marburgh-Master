@@ -8,10 +8,9 @@ public class Warrior : Player
     public Warrior()
     : base()
     {
-        health = maxHealth = 24;
-        damage = 3;
-        defence += 3;
-        hit += 5;
+        playerHealth = playerMaxHealth = 24;
+        playerDefence += 3;
+        playerHit += 5;
         offHand = Shield.list[1];
         mainHand = Blunt.list[1];
         armor = Armor.list[1];
@@ -19,6 +18,14 @@ public class Warrior : Player
         option3 = "Rend";
         option4 = "Scream";
         run = 45;
+
+        lvlHealth = new int[]     { 0, 5, 5,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
+        lvlDamage = new int[]     { 0, 1, 2,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
+        lvlEnergy = new int[]     { 0, 1, 2,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
+        lvlMitigation = new int[] { 0, 1, 1,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
+        lvlHit = new int[]        { 0, 4, 4,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
+        lvlCrit = new int[]       { 0, 1, 1,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
+        lvlPlayerDefence = new int[]    { 0, 5, 5,          3,   4,   5, 6, 7, 8,   9,   10, 11, 12 };
     }
     public override void Attack3(Creature target)
     {

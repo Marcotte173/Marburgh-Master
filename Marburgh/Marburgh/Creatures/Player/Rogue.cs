@@ -9,9 +9,9 @@ public class Rogue : Player
     : base()
     {
         health = maxHealth = 20;
-        damage = 4;
-        crit += 3;
-        hit += 10;
+        playerDamage += 1;
+        playerCrit += 3;
+        playerHit += 10;
         offHand = Sharp.list[0];
         mainHand = Sharp.list[1];
         armor = Armor.list[1];
@@ -19,6 +19,14 @@ public class Rogue : Player
         option3 = "Stun";
         option4 = "Backstab";
         run = 66;
+
+        lvlHealth = new int[]     { 0, 4, 4,                   4,   5,   4, 4, 4, 5,   5,  5, 5, 10 };
+        lvlDamage = new int[]     { 0, 2, 2,                   2,   4,   3, 3, 3, 5,   5,  5, 5, 10 };
+        lvlEnergy = new int[]     { 0, 1, 1,                   1,   2,   1, 2, 1, 2,   3,  1, 2, 1 };
+        lvlMitigation = new int[] { 0, 1, 0,                   2,   2,   0, 1, 0, 1,   2,  0, 1, 2 };
+        lvlHit = new int[]        { 0, 5, 5,                   3,   5,   4, 4, 4, 4,   5,  4, 4, 4 };
+        lvlCrit = new int[]       { 0, 2, 2,                   1,   2,   0, 1, 0, 1,   2,  0, 1, 0 };
+        lvlPlayerDefence = new int[]    { 0, 3, 4,                   3,   5,   4, 4, 4, 4,   5,  5, 5, 5 };
     }
     public override void Attack3(Creature target)
     {

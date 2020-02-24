@@ -16,13 +16,13 @@ public class SavageOrc : Monster
         defence = 8;
         mitigation = 2;
         level = 2;
-        health = maxHealth = 20;
-        damage = 5;
+        health = maxHealth = 35;
+        damage = 12;
         xp = 15;
         gold = 30;
         dropRate = 100;
     }
-    public override void Attack2(Creature target)
+    public override void Attack2(Player target)
     {
         if (AttemptToHit(target, 0))
         {

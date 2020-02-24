@@ -13,7 +13,7 @@ public class Create
         if (Family.alive.Count == 3) UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 2 }, new List<string>
             {
                Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
-               Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", "was an adventurer.",
+               Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
                "She was recently killed by an Orc. You never knew your father.",
                "",
                "You are the eldest child.",
@@ -22,7 +22,7 @@ public class Create
         else if (Family.alive.Count == 2) UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 1 }, new List<string>
             {
                 Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
-                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", "was an adventurer.",
+                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
                 "She was recently killed by an Orc. You never knew your father.",
                 "",
                 "You are the eldest surviving child.",
@@ -31,7 +31,7 @@ public class Create
         else UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 1 }, new List<string>
             {
                 Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
-                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", "was an adventurer.",
+                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
                 "She was recently killed by an Orc. You never knew your father.",
                 "",
                 Colour.NAME, "You are the only survivng", $" {Family.lastName}", ".It is all up to you now."

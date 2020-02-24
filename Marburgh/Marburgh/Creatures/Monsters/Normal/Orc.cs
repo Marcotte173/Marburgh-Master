@@ -15,12 +15,12 @@ public class Orc : Monster
         defence = 7;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 12;
-        damage = 5;
+        health = maxHealth = 16;
+        damage = 9;
         xp = 9;
         gold = 19;
     }
-    public override void Attack2(Creature target)
+    public override void Attack2(Player target)
     {
         if (AttemptToHit(target, 0))
         {
