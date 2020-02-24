@@ -28,7 +28,7 @@ public class UI
         Write.Position(55,26);
         Write.EmbedColourText(Colour.DAMAGE, "[", "Q", "]uit");
         Write.Position(42, 14);
-        Write.EmbedColourText(Colour.GOLD, "", "Version 0.05 January 26, 2020, 3:14 P.M.", "");
+        Write.EmbedColourText(Colour.GOLD, "", "Version 0.1 February 24, 2020, 1:06 A.M.", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
