@@ -4,13 +4,18 @@ using System.Text;
 
 public class Blunt : Weapon
 {
+    int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] priceArray =  new int[] { 0, 1, 2, 3, 4, 5 };
     internal static string[] names = new string[]
     {
         "None",
         "Club",
         "Hammer",
-        "Mace",
-        "Morning Star"
+        "Flail",
+        "Morning Star",
+        "War Hammer"
     };
 
     internal static Blunt[] list = new Blunt[]
@@ -20,26 +25,25 @@ public class Blunt : Weapon
         new Blunt(2,1),
         new Blunt(3,1),
         new Blunt(4,1),
+        new Blunt(5,1),
     };
 
     public Blunt(int level, int tier)
     : base()
-    {
+    {        
         oneHand = true;
         this.level = level;
         this.tier = tier;
-        if (tier < 3)
-        {
-            string a = (tier == 1) ? "" : "Weighted ";
-            Name = $"{a}{names[level]}";
-        }
+        Name = $"{modifier}{names[level]}";
+
         spellPower = 0;
-        damage = level * 2 + Return.RandomInt((level + 1) * -1, level + 1) * level;
-        damage = (damage <= 0) ? level * 2 : damage;
-        coefficient = (damage <= Level * 2) ? 1 : (damage < Level * 4) ? 1.5 : 2;
-        basePrice = (level == 0) ? 0 : (level == 1) ? 500 : (level == 2) ? 1500 : (level == 3) ? 2200 : 3000;
-        price = Convert.ToInt32(BasePrice * Coefficient);
-        hit = 5 * level;
+        damage = damageArray[level];
+        hit = hitArray[level];
+        crit = critArray[level];
+
+        price = priceArray[level];
+
+        if (level != 5) oneHand = true;
         type = "Blunt";
     }
 }

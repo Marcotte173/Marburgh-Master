@@ -10,8 +10,7 @@ public class MagicShop : Shop
     static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
     static int current = 0;
     Player p = Create.p;
-    static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1], Magic.list[2] };
-    static List<Weapon> list1 = new List<Weapon> { Magic.list[0], Magic.list[3] , Magic.list[4] };
+    new static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1], Magic.list[2], Magic.list[3], Magic.list[4] ,Magic.list[5]};
     public MagicShop()
     : base() { }
 

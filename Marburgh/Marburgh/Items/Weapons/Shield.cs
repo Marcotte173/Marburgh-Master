@@ -4,10 +4,14 @@ using System.Text;
 
 public class Shield : Weapon
 {
+    int[] mitigationArray = new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] defenceArray =    new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] priceArray =      new int[] { 0, 1, 2, 3, 4, 5 };
     internal static string[] names = new string[]
     {
         "None",
         "Buckler",
+        "Round Shield",
         "Heater shield",
         "Kite Shield",
         "Teardrop Shield"
@@ -20,6 +24,7 @@ public class Shield : Weapon
         new Shield(2,1),
         new Shield(3,1),
         new Shield(4,1),
+        new Shield(5,1),
     };
 
     public Shield(int level, int tier)
@@ -27,16 +32,13 @@ public class Shield : Weapon
     {
         this.level = level;
         this.tier = tier;
-        if (tier < 3)
-        {
-            string a = (tier == 1) ? "" : "Sturdy ";
-            Name = $"{a}{names[level]}";
-        }
-        defence = level * 10;
-        mitigation = level * 2 - 2;
-        coefficient = (tier == 1) ? 1 : (tier == 2) ? 1.5 : 2;
-        basePrice = (level == 0) ? 0 : (level == 1) ? 500 : (level == 2) ? 1500 : (level == 3) ? 2200 : 3000;
-        price = Convert.ToInt32(BasePrice * Coefficient);
+        Name = $"{modifier}{names[level]}";
+
+        mitigation = mitigationArray[level];
+        defence = defenceArray[level];
+
+        price = priceArray[level];
+
         type = "Shield";
     }
 }

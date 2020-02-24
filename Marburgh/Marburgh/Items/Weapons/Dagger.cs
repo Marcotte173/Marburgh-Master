@@ -4,6 +4,10 @@ using System.Text;
 
 public class Dagger : Weapon
 {
+    int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] priceArray =  new int[] { 0, 1, 2, 3, 4, 5 };
     internal static string[] names = new string[]
    {
         "None",
@@ -29,18 +33,15 @@ public class Dagger : Weapon
     {
         this.level = level;
         this.tier = tier;
-        if (tier < 3)
-        {
-            string a = (tier == 1) ? "" : "Deadly ";
-            Name = $"{a}{names[level]}";
-        }
+        Name = $"{modifier}{names[level]}";
+
         spellPower = 0;
-        damage = level * 2 + Return.RandomInt((level + 1) * -1, level + 1) * level;
-        damage = (damage <= 0) ? level * 2 : damage;
-        coefficient = (damage <= Level * 2) ? 1 : (damage < Level * 4) ? 1.5 : 2;
-        basePrice = (level == 0) ? 0 : (level == 1) ? 500 : (level == 2) ? 1500 : (level == 3) ? 2200 : 3000;
-        price = Convert.ToInt32(BasePrice * Coefficient);
-        hit = 5 * level;
+        damage = damageArray[level];
+        hit = hitArray[level];
+        crit = critArray[level];
+
+        price = priceArray[level];
+
         type = "Dagger";
         oneHand = true;
     }

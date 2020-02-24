@@ -15,16 +15,14 @@ public class Equipment
     protected int price;
     protected int tier;
     protected int level;
-    protected double basePrice;
-    protected double coefficient;
+    protected string modifier;
     public Equipment() { }
 
     public string Name { get { return name; } set { name = value; } }
+    public string Modifier { get { return modifier; } set { modifier = value; } }
     public int Price { get { return price; } set { price = value; } }
     public int Tier { get { return tier; } set { tier = value; } }
     public int Level { get { return level; } set { level = value; } }
-    public double Coefficient { get { return coefficient; } set { coefficient = value; } }
-    public double BasePrice { get { return basePrice; } set { basePrice = value; } }
     public int Defence { get { return defence; } set { defence = value; } }
     public int Mitigation { get { return mitigation; } set { mitigation = value; } }
     public int SpellPower { get { return spellPower; } set { spellPower = value; } }

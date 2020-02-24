@@ -4,13 +4,18 @@ using System.Text;
 
 public class Magic : Weapon
 {
+    int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] priceArray =  new int[] { 0, 1, 2, 3, 4, 5 };
     internal static string[] names = new string[]
     {
         "None",
         "Walking stick",
         "Orb",
         "Wand",
-        "Staff"
+        "Staff",
+        "Ring"
     };
 
     internal static Magic[] list = new Magic[]
@@ -21,6 +26,7 @@ public class Magic : Weapon
         new Magic(2,1),
         new Magic(3,1),
         new Magic(4,1),
+        new Magic(5,1),
     };
 
     public Magic(int level, int tier)
@@ -28,17 +34,17 @@ public class Magic : Weapon
     {
         this.level = level;
         this.tier = tier;
-        if (tier < 3)
-        {
-            string a = (tier == 1) ? "" : "Arcane ";
-            Name = $"{a}{names[level]}";
-        }
-        damage = 0;
+        Name = $"{modifier}{names[level]}";
+
+        damage = damageArray[level];
+        hit = hitArray[level];
+        crit = critArray[level];
+
         spellPower = level * 2 + Return.RandomInt((level + 1) * -1, level + 1) * level;
         spellPower = (spellPower <= 0) ? level * 2 : spellPower;
-        coefficient = (spellPower <= Level * 2) ? 1 : (spellPower < Level * 4) ? 1.5 : 2;
-        basePrice = (level == 0) ? 0 : (level == 1) ? 500 : (level == 2) ? 1500 : (level == 3) ? 2200 : 3000;
-        price = Convert.ToInt32(BasePrice * Coefficient);
+
+        price = priceArray[level];
+
         type = "Magic";
     }
 }

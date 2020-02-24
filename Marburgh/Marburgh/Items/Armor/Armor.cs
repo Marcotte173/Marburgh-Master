@@ -4,12 +4,17 @@ using System.Text;
 
 public class Armor : Equipment
 {
+    int[] mitigationArray = new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] defenceArray =    new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] priceArray =      new int[] { 0, 1, 2, 3, 4, 5 };
+
     internal static string[] names = new string[]
     {
         "None",
         "Cloth",
         "Leather",
         "Mail",
+        "Coat of Plates",
         "Plate"
     };
 
@@ -20,6 +25,7 @@ public class Armor : Equipment
         new Armor(2,1),
         new Armor(3,1),
         new Armor(4,1),
+        new Armor(5,1),
     };
 
     public Armor(int level, int tier)
@@ -27,15 +33,9 @@ public class Armor : Equipment
     {
         this.level = level;
         this.tier = tier;
-        if (tier < 3)
-        {
-            string a = (tier == 1) ? "" : "Black ";
-            Name = $"{a}{names[level]}";
-        }
-        coefficient = (tier == 1) ? 1 : (tier == 2) ? 1.5 : 2;
-        basePrice = (level == 0) ? 0 : (level == 1) ? 500 : (level == 2) ? 1500 : (level == 3) ? 2200 : 3000;
-        price = Convert.ToInt32(BasePrice * Coefficient);
-        defence = 10 - Level * 2;
-        mitigation = (level * 3 - 1 <0)?0: level * 3 - 1;        
+        Name = $"{modifier}{names[level]}";
+        price = priceArray[level];
+        defence = defenceArray[level];
+        mitigation = mitigationArray[level];
     }
 }
