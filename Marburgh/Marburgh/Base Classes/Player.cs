@@ -19,9 +19,7 @@ public class Player : Creature
     protected int[] lvlPlayerDefence;
     protected int playerSpellpower;
     protected int playerDefence; 
-    protected int playerHealth; 
-    protected int playerDamage; 
-    protected int playerEnergy; 
+    protected int playerDamage;  
     protected int playerMitigation;  
     protected int playerHit;  
     protected int playerCrit;
@@ -48,8 +46,8 @@ public class Player : Creature
         if (canAct)
         {
             CombatUI.Declare();
-            if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
-            if (burning > 0 && !Status.Contains("Burning")) Status.Add(Colour.BLOOD + "Burning" + Colour.RESET);
+            if (bleed > 0 && !Status.Contains(Colour.BLOOD + "Bleeding" + Colour.RESET)) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
+            if (burning > 0 && !Status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) Status.Add(Colour.BLOOD + "Burning" + Colour.RESET);
             string choice = Return.Option();
             Monster target = null;
             while ( target == null)
@@ -65,14 +63,14 @@ public class Player : Creature
                 Console.WriteLine(Colour.NAME + "You " + Colour.BLOOD + "bleed " + Colour.RESET + "for " + Colour.DAMAGE + bleedDam + Colour.RESET + " damage!");
                 TakeDamage(bleedDam);
                 bleed--;
-                if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
+                if (bleed <= 0 && status.Contains(Colour.BLOOD + "Bleeding" + Colour.RESET)) status.Remove(Colour.BLOOD + "Bleeding" + Colour.RESET);
             }
             if (burning > 0)
             {
                 Console.WriteLine(Colour.NAME + "You " + Colour.BURNING + "burn " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
                 TakeDamage(burnDam);
                 burning--;
-                if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
+                if (burning <= 0 && status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) status.Remove(Colour.BLOOD + "Burning" + Colour.RESET);
             }            
             if (choice == "1") Attack1(target);
             else if (choice == "2") Attack2(target);
@@ -274,9 +272,7 @@ public class Player : Creature
     public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } set { hit = value; } }
     public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; } set { crit = value; } }
     public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }
-    public int PlayerHealth { get { return playerHealth; } set { playerHealth = value; } }
     public int PlayerDamage { get { return playerDamage; } set { playerDamage = value; } }
-    public int PlayerEnergy { get { return playerEnergy; } set { playerEnergy = value; } }
     public int PlayerMitigation { get { return playerMitigation; } set { playerMitigation = value; } }
     public int PlayerHit { get { return playerHit; } set { playerHit = value; } }
     public int PlayerCrit { get { return playerCrit; } set { playerCrit = value; } }
