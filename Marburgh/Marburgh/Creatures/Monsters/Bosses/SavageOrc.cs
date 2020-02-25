@@ -28,7 +28,7 @@ public class SavageOrc : Monster
         {
             Console.WriteLine($"The orc charges at you, stunning and doing {damage*2} damage!");
             target.Stun = 2;
-            target.TakeDamage(damage);
+            target.TakeDamage(damage,this);
         }
         else Miss(target);
     }

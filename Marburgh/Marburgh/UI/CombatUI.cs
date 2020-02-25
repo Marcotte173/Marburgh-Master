@@ -143,5 +143,7 @@ internal class CombatUI
         Console.WriteLine("[" + Colour.CLASS + "C" + Colour.RESET + "]haracter");
         Console.SetCursorPosition(Return.Width(88), 16);
         Console.WriteLine("[" + Colour.MITIGATION + "R" + Colour.RESET + "]un");
+        Console.SetCursorPosition(20, 27);
+        foreach (string s in Create.p.Status) Console.Write(s);
     }
 }

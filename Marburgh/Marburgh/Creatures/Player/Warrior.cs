@@ -8,7 +8,7 @@ public class Warrior : Player
     public Warrior()
     : base()
     {
-        playerHealth = playerMaxHealth = 24;
+        Health = playerMaxHealth = 24;
         playerDefence += 3;
         playerHit += 5;
         offHand = Shield.list[1];

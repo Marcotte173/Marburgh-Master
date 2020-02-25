@@ -26,7 +26,7 @@ public class Orc : Monster
         {
             Console.WriteLine($"The orc charges at you, stunning and doing {damage} damage!");
             Create.p.Stun = 2;
-            Create.p.TakeDamage(damage);
+            Create.p.TakeDamage(damage,this);
         }
         else Miss(target);
     }

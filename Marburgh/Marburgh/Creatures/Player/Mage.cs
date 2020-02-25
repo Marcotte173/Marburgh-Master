@@ -4,12 +4,13 @@ using System.Text;
 
 public class Mage : Player
 {
+    bool shielded;
     public Mage()
     : base()
     {
-        playerHealth = playerMaxHealth = 16;
+        Health = playerMaxHealth = 16;
         playerSpellpower = 1;
-        playerEnergy = playerMaxEnergy = 3;
+        Energy = playerMaxEnergy = 3;
         potionSize = maxPotionSize += 5;
         offHand = Magic.list[0];
         mainHand = Magic.list[1];
@@ -33,7 +34,9 @@ public class Mage : Player
 
     public override void Attack2(Creature target)
     {
-        base.Attack2(target);
+        if (energy > 0 && shielded == false) shielded = true;
+        if (shielded) shielded = false;
+        AttackChoice();
     }
 
     public override void Attack3(Creature target)
@@ -66,5 +69,24 @@ public class Mage : Player
     public override void Attack6(Creature target)
     {
         base.Attack6(target);
-    }    
+    }
+
+    public override void TakeDamage(int damage, Monster hitMe)
+    {
+        if (shielded == false)
+        {
+            base.TakeDamage(damage,hitMe);
+        }
+        else
+        {
+            Console.WriteLine($"Your shield absorbs {energy} damage!");
+            if (energy >= damage) energy -= damage;
+            else
+            {
+                damage -= energy;
+                energy = 0;
+                base.TakeDamage(damage, hitMe);
+            }
+        }
+    }
 }

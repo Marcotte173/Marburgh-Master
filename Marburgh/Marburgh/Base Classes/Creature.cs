@@ -45,7 +45,7 @@ public class Creature
     public virtual int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
     public virtual int Health { get { return health; } set { health = value; } }    
     public virtual int MaxEnergy { get { return maxEnergy; } set { maxEnergy = value; } }
-    public int Energy { get { return energy; } set { energy = value; } }
+    public virtual int Energy { get { return energy; } set { energy = value; } }
     public int Gold { get { return gold; } set { gold = value; } }
     public virtual int Hit { get { return hit; } set { hit = value; } }
     public virtual int Damage { get { return damage; } set { damage = value; } }

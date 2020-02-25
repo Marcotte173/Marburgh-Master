@@ -8,7 +8,7 @@ public class Rogue : Player
     public Rogue()
     : base()
     {
-        health = maxHealth = 20;
+        Health = maxHealth = 20;
         playerDamage += 1;
         playerCrit += 3;
         playerHit += 10;

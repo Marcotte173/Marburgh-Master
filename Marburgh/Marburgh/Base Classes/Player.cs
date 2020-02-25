@@ -108,7 +108,7 @@ public class Player : Creature
     : base()
     {
         xpNeeded = new int[] { 0, 25, 60, 100, 150, 220, 300, 390, 500, 650 };
-        playerEnergy = playerMaxEnergy = 1;
+        Energy = playerMaxEnergy = 1;
         gold = 1000;
         potionSize = maxPotionSize = 10;
         playerCrit = 5;
@@ -142,20 +142,22 @@ public class Player : Creature
             offHand = Sword.list[0];
         }
     }
-    public void TakeDamage(int damage, Monster hitMe)
+    public virtual void TakeDamage(int damage, Monster hitMe)
     {
         health -= damage;
         health = (health < 0) ? 0 : health;
         if (health == 0)
-        {
-            Death(hitMe);
+        {            
             Console.WriteLine("You have been " + Colour.BOSS + "killed" + Colour.RESET + " by the " + Colour.MONSTER + hitMe.Name + Colour.RESET + "!\n");
             Utilities.Keypress();
+            Death(hitMe);
         }
     }
 
     public void Death(Monster hitMe)
     {
+        Combat.dropList.Clear();
+        Combat.monsters.Clear();
         Family.dead.Add(Family.alive[0]);
         Family.alive.RemoveAt(0);
         Family.cause.Add(hitMe.Name);
@@ -182,6 +184,7 @@ public class Player : Creature
                  "Hopefully one of your family members can carry on for you"
             });
             Time.DayChange(1);
+            Create.p = new Player();
             Create.Name();
         }
     }
@@ -208,8 +211,8 @@ public class Player : Creature
 
     public virtual void Refresh()
     {
-        health = maxHealth;
-        energy = maxEnergy;
+        health = MaxHealth;
+        energy = MaxEnergy;
         potionSize = maxPotionSize;
         canExplore = true;
     }
@@ -282,6 +285,7 @@ public class Player : Creature
     public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation; } set { mitigation = value; } }
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } set { spellpower = value; } }
     public override int MaxHealth { get { return playerMaxHealth; } set { maxHealth = value; } }
-    public override int Health { get { return playerHealth; } set { health = value; } }
+    public override int Health { get { return health; } set { health = value; } }
     public override int MaxEnergy { get { return playerMaxEnergy; } set { maxEnergy = value; } }
+    public override int Energy { get { return energy; } set { energy = value; } }
 }

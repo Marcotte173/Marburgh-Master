@@ -50,8 +50,8 @@ public class Level:Location
         Console.Clear();
         p.MaxEnergy += p.LvlEnergy[p.Level];
         p.MaxHealth += p.LvlHealth[p.Level];
-        p.PlayerHealth = p.MaxHealth;
-        p.PlayerEnergy = p.MaxEnergy;
+        p.Health = p.MaxHealth;
+        p.Energy = p.MaxEnergy;
         p.PlayerDamage += p.LvlDamage[p.Level];
         p.PlayerMitigation += p.LvlMitigation[p.Level];
         p.PlayerHit += p.LvlHit[p.Level];

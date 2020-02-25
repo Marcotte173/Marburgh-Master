@@ -29,7 +29,7 @@ public class Kobald : Monster
             if (target.Burning > 0) target.Burning += 1;
             else target.BurnDam = 1;
             target.Burning = 3;
-            target.TakeDamage(1);
+            target.TakeDamage(1,this);
         }
         else Miss(target);
     }
