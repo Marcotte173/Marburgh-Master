@@ -223,13 +223,19 @@ public class UI
         }        
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
+        Console.SetCursorPosition(Return.Width(16), 19);
+        Console.Write("-----------------------------------------------------------------------------------");
+        Console.SetCursorPosition(Return.Width(16), 18);
+        if (list[1].Type == "Shield") Console.WriteLine(string.Format("{0,-24 }{1,-24 }{2,-19}{3,-10}", "Item", "Defence", "Mitigation", "Price"));
+        else Console.WriteLine(string.Format("{0,-25 }{1,-10 }{2,-10 }{3,-10}{4,-15}{5,-10}", "Item","Hit", "Crit", "Damage","Spellpower", "Price"));
         for (int i = 1; i < list.Count; i++)
         {
             if (list[i].Name == "") Console.WriteLine("");
             else
             {
-                Console.SetCursorPosition(Return.Width(16), 17 + i);
-                Console.WriteLine(string.Format("{0,-40 }{1,-30 }{2,-15 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.DAMAGE + $"{list[i].Damage}" + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
+                Console.SetCursorPosition(Return.Width(16), 19 + i);
+                if (list[i].Type == "Shield") Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-35 }{3,-31 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.DEFENCE + list[i].Defence + Colour.RESET, Colour.MITIGATION + list[i].Mitigation + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
+                else Console.WriteLine(string.Format("{0,-44 }{1,-31 }{2,-31 }{3,-31 }{4,-30 }{5,-10 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.HIT + list[i].Hit + Colour.RESET, Colour.CRIT + list[i].Crit + Colour.RESET, Colour.DAMAGE + list[i].Damage + Colour.RESET, Colour.SPECIAL + list[i].SpellPower + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
             }
         }
     }
@@ -244,13 +250,17 @@ public class UI
         }
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
+        Console.SetCursorPosition(Return.Width(16), 19);
+        Console.Write("-----------------------------------------------------------------------------------");
+        Console.SetCursorPosition(Return.Width(16), 18);
+        Console.WriteLine(string.Format("{0,-24 }{1,-24 }{2,-19}{3,-10}", "Item", "Defence", "Mitigation", "Price"));
         for (int i = 1; i < list.Count; i++)
         {
             if (list[i].Name == "") Console.WriteLine("");
             else
             {
-                Console.SetCursorPosition(Return.Width(16), 17 + i);
-                Console.WriteLine(string.Format("{0,-40 }{1,-30 }{2,-15 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.DAMAGE + $"{list[i].Damage}" + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
+                Console.SetCursorPosition(Return.Width(16), 19  + i);
+                Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-35 }{3,-31 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.DEFENCE + list[i].Defence + Colour.RESET, Colour.MITIGATION + list[i].Mitigation + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
             }
         }
     }

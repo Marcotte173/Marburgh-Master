@@ -4,6 +4,7 @@ using System.Text;
 
 public class Magic : Weapon
 {
+    int[] spellPowerArray = new int[] { 0, 1, 2, 3, 4, 5 };
     int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
     int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
     int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
@@ -40,8 +41,7 @@ public class Magic : Weapon
         hit = hitArray[level];
         crit = critArray[level];
 
-        spellPower = level * 2 + Return.RandomInt((level + 1) * -1, level + 1) * level;
-        spellPower = (spellPower <= 0) ? level * 2 : spellPower;
+        spellPower = spellPowerArray[level];
 
         price = priceArray[level];
 
