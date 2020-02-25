@@ -6,7 +6,7 @@ public class Shield : Weapon
 {
     int[] mitigationArray = new int[] { 0, 1, 2, 3, 4, 5 };
     int[] defenceArray =    new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] priceArray =      new int[] { 0, 1, 2, 3, 4, 5 };
+
     internal static string[] names = new string[]
     {
         "None",

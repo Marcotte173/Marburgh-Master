@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 public class ArmorShop : Shop
 {
     Player p = Create.p;
-    new static List<Armor> list = new List<Armor> { Armor.list[0], Armor.list[1], Armor.list[2], Armor.list[3], Armor.list[4], Armor.list[5] };
+    new static List<Armor> list = new List<Armor> { Armor.list[0], Armor.list[1], Armor.list[2], Armor.list[3]};
     public ArmorShop()
     : base() { }
 
@@ -23,14 +23,14 @@ public class ArmorShop : Shop
         },
         new List<string> { "uy", "ell" }, new List<string> { Colour.ITEM + "B" + Colour.RESET, Colour.ITEM + "S" + Colour.RESET });
         string choice = Return.Option();
-        if (choice == "b") Buy(list, null, "Lela");
+        if (choice == "b") Buy(list, "Lela");
         else if (choice == "c") CharacterSheet.Display();
         else if (choice == "r") Utilities.ToTown();
         else if (choice == "s") Sell("Lela");
         Menu();
     }
 
-    public void Buy(List<Armor> list, List<Armor> list1, string name)
+    public void Buy(List<Armor> list, string name)
     {
         UI.Store(new List<int> { 0, 0, 0 }, new List<string>
         {
@@ -38,43 +38,38 @@ public class ArmorShop : Shop
             "",
             "[0] Return"
         },
-        list, list1);
-        int choice = Return.Integer();
-        if (list1 == null & choice > 0 && choice < list.Count) Continue(list, list1, name, choice);
-        else if (choice > 0 && (choice < list.Count + list1.Count)) Continue(list, list1, name, choice);
-        Menu();
-    }
-
-    private void Continue(List<Armor> list, List<Armor> list1, string name, int choice)
-    {
-        List<Armor> listToUse = list;
-        listToUse = (choice > list.Count - 1) ? list1 : list;
-        choice = (choice > list.Count - 1) ? choice -= list.Count - 1 : choice;
-        if (p.Gold < listToUse[choice].Price)
+        list);
+        int choice = Return.Int();
+        if (choice > 0 && (choice < list.Count))
         {
-            UI.Keypress(new List<int> { 0 }, new List<string>
+            if (p.Gold < list[choice].Price)
+            {
+                UI.Keypress(new List<int> { 0 }, new List<string>
                 {
                     "You don't have enough gold!",
                 });
-        }
-        else
-        {
-            if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{listToUse[choice].Name}", "?" }))
+            }
+            else
             {
-                if (p.Armor.Name != "None") SellOld(listToUse, choice, name);
-                else
+                if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{list[choice].Name}", "?" }))
                 {
-                    p.Gold -= listToUse[choice].Price;
-                    Console.Clear();
-                    UI.Keypress(new List<int> { 2 }, new List<string>
+                    if (p.Armor.Name != "None") SellOld(list, choice, name);
+                    else
                     {
-                        Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{listToUse[choice].Name}","",
-                    });
-                    p.Equip(listToUse[choice]);
+                        p.Gold -= list[choice].Price;
+                        Console.Clear();
+                        UI.Keypress(new List<int> { 2 }, new List<string>
+                        {
+                            Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{list[choice].Name}","",
+                        });
+                        p.Equip(list[choice]);
+                    }
                 }
             }
         }
+        Menu();
     }
+
     public void Sell(string name)
     {
         if (p.Armor.Name == "None")
@@ -94,7 +89,7 @@ public class ArmorShop : Shop
                 "What would you like to Sell?",
                 "",
                 "[0] Return"
-            }, EquipmentList, null);
+            }, EquipmentList);
             Console.SetCursorPosition(58, 14);
             int sellChoice;
             do

@@ -7,6 +7,7 @@ public class Weapon : Equipment
     protected bool splash;
     protected bool oneHand;
     protected string type;
+    protected int[] priceArray = new int[] { 0, 500, 1500, 3000, 5000, 7500 };
 
     public Weapon()
     : base()

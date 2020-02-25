@@ -7,7 +7,7 @@ public class Magic : Weapon
     int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
     int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
     int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] priceArray =  new int[] { 0, 1, 2, 3, 4, 5 };
+
     internal static string[] names = new string[]
     {
         "None",

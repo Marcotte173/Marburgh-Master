@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 public class WeaponShop : Shop
 {
     Player p = Create.p;
-    static List<Weapon> bluntList = new List<Weapon> { Blunt.list[0], Blunt.list[1], Blunt.list[2], Blunt.list[3], Blunt.list[4], Blunt.list[5] };
-    static List<Weapon> swordList = new List<Weapon> { Sword.list[0], Sword.list[1], Sword.list[2], Sword.list[3], Sword.list[4], Sword.list[5] };
-    static List<Weapon> daggerList = new List<Weapon> { Dagger.list[0], Dagger.list[1], Dagger.list[2], Dagger.list[3], Dagger.list[4], Dagger.list[5] };
-    static List<Weapon> shieldList = new List<Weapon> { Shield.list[0], Shield.list[1], Shield.list[2], Shield.list[3], Shield.list[4], Shield.list[5] };
+    static List<Weapon> bluntList = new List<Weapon>  { Blunt.list[0],  Blunt.list[1],  Blunt.list[2],  Blunt.list[3], };
+    static List<Weapon> swordList = new List<Weapon>  { Sword.list[0],  Sword.list[1],  Sword.list[2],  Sword.list[3], };
+    static List<Weapon> daggerList = new List<Weapon> { Dagger.list[0], Dagger.list[1], Dagger.list[2], Dagger.list[3] };
+    static List<Weapon> shieldList = new List<Weapon> { Shield.list[0], Shield.list[1], Shield.list[2], Shield.list[3] };
     public WeaponShop()
     : base() { }
 
