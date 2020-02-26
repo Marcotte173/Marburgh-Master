@@ -4,8 +4,8 @@ using System.Text;
 
 public class Shield : Weapon
 {
-    int[] mitigationArray = new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] defenceArray =    new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] mitigationArray = new int[] { 0, 0, 1, 3, 5, 7 };
+    int[] defenceArray =    new int[] { 0, 10, 12, 14, 16, 20 };
 
     internal static string[] names = new string[]
     {

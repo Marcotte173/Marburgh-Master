@@ -5,7 +5,6 @@ public class Bank:Location
 {
     public Bank()
     : base() { }
-    Player p = Create.p;
     internal static int bankGold;
     internal static int investment;
     internal static int term;
@@ -37,7 +36,7 @@ public class Bank:Location
                 if (deposit == 0) Menu();
                 else if (Return.HaveGold(deposit))
                 {
-                    p.Gold -= deposit;
+                    Create.p.Gold -= deposit;
                     bankGold += deposit;
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
@@ -68,7 +67,7 @@ public class Bank:Location
                 if (withdraw == 0) Menu();
                 else if (bankGold >= withdraw)
                 {
-                    p.Gold += withdraw;
+                    Create.p.Gold += withdraw;
                     bankGold -= withdraw;
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
@@ -98,10 +97,10 @@ public class Bank:Location
                     "[0] Return"
                 });
                 if (invest == 0) Menu();
-                else if (p.Gold >= invest)
+                else if (Create.p.Gold >= invest)
                 {
                     investment = invest;
-                    p.Gold -= invest;
+                    Create.p.Gold -= invest;
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
                         Colour.GOLD,"You invest ", $"{invest} ","gold."

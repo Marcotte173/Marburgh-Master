@@ -9,8 +9,7 @@ public class MagicShop : Shop
     static int[] upgrade = new int[] {1000,3000,10000,20000,35000};
     static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
     static int current = 0;
-    Player p = Create.p;
-    new static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1], Magic.list[2], Magic.list[3]};
+    new static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1], Magic.list[2]};
     public MagicShop()
     : base() { }
 
@@ -77,10 +76,10 @@ public class MagicShop : Shop
             "[0] Return"
         },
         list);
-        int choice = Return.Integer();
+        int choice = Return.Int();
         if (choice > 0 && choice < list.Count)
         {
-            if (p.Gold < list[choice].Price)
+            if (Create.p.Gold < list[choice].Price)
             {
                 UI.Keypress(new List<int> { 0 }, new List<string>
                 {
@@ -92,16 +91,16 @@ public class MagicShop : Shop
                 if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{list[choice].Name}", "?" }))
                 {
 
-                    if (p.MainHand.Name != "None") SellOld(list, choice, name, UI.Hand(list[choice]));
+                    if (Create.p.MainHand.Name != "None") SellOld(list, choice, name, UI.Hand(list[choice]));
                     else
                     {
-                        p.Gold -= list[choice].Price;
+                        Create.p.Gold -= list[choice].Price;
                         Console.Clear();
                         UI.Keypress(new List<int> { 2 }, new List<string>
                         {
                             Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{list[choice].Name}","",
                         });
-                        p.Equip(list[choice], UI.Hand(list[choice]));
+                        Create.p.Equip(list[choice], UI.Hand(list[choice]));
                     }
                 }
             }
@@ -111,7 +110,7 @@ public class MagicShop : Shop
 
     public void Sell(string name)
     {
-        if (p.MainHand.Name == "None" && p.OffHand.Name == "None")
+        if (Create.p.MainHand.Name == "None" && Create.p.OffHand.Name == "None")
         {
             UI.Keypress(new List<int> { 0 }, new List<string>
             {
@@ -122,8 +121,8 @@ public class MagicShop : Shop
         {
             Console.Clear();
             List<Weapon> EquipmentList = new List<Weapon> { new Blunt(0, 1) };
-            if (p.MainHand.Name != "None") { EquipmentList.Add(p.MainHand); }
-            if (p.OffHand.Name != "None") { EquipmentList.Add(p.OffHand); }
+            if (Create.p.MainHand.Name != "None") { EquipmentList.Add(Create.p.MainHand); }
+            if (Create.p.OffHand.Name != "None") { EquipmentList.Add(Create.p.OffHand); }
             UI.Store(new List<int> { 0, 0, 0 }, new List<string>
             {
                 "What would you like to Sell?",
@@ -140,9 +139,9 @@ public class MagicShop : Shop
             {
                 if (UI.Confirm(new List<int> { 2 }, new List<string> { Colour.ITEM, Colour.GOLD, "Would you Like to sell your ", $"{EquipmentList[sellChoice].Name} ", "? I'll give you ", $"{EquipmentList[sellChoice].Price / 2} ", "for it" }))
                 {
-                    p.Gold += EquipmentList[sellChoice].Price / 2;
-                    if (p.OffHand == EquipmentList[sellChoice]) p.OffHand = Blunt.list[0];
-                    else if (p.MainHand == EquipmentList[sellChoice]) p.MainHand = Blunt.list[0];
+                    Create.p.Gold += EquipmentList[sellChoice].Price / 2;
+                    if (Create.p.OffHand == EquipmentList[sellChoice]) Create.p.OffHand = Blunt.list[0];
+                    else if (Create.p.MainHand == EquipmentList[sellChoice]) Create.p.MainHand = Blunt.list[0];
                     UI.Keypress(new List<int> { 3 }, new List<string>
                     {
                         Colour.NAME,Colour.ITEM, Colour.GOLD, "Great!",$"{ name} ","takes your ",$"{EquipmentList[sellChoice].Name} ", "and gives you ",$"{EquipmentList[sellChoice].Price / 2} ", "gold",

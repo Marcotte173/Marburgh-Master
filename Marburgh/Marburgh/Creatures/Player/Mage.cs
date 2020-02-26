@@ -8,15 +8,14 @@ public class Mage : Player
     public Mage()
     : base()
     {
-        Health = playerMaxHealth = 16;
+        Health = MaxHealth = 16;
         playerSpellpower = 1;
-        Energy = playerMaxEnergy = 3;
+        Energy = MaxEnergy = 3;
         potionSize = maxPotionSize += 5;
         offHand = Magic.list[0];
         mainHand = Magic.list[1];
         armor = Armor.list[0];
         pClass = "Mage";
-        CanAttack3 = true;
         CombatUI.option[1] = "Shield" ;
         option3 =  "Fire Blast";
         option4 =  "Magic Missiles";

@@ -4,10 +4,10 @@ using System.Text;
 
 public class Magic : Weapon
 {
-    int[] spellPowerArray = new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] spellPowerArray = new int[] { 0, 2, 5, 7, 10, 15 };
+    int[] damageArray = new int[] { 0, 2, 4, 6, 8, 10 };
     int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] critArray =   new int[] { 0, 0, 0, 0, 0, 0 };
 
     internal static string[] names = new string[]
     {
@@ -22,7 +22,6 @@ public class Magic : Weapon
     internal static Magic[] list = new Magic[]
     {
         new Magic(0,1),
-        new Magic(1,1),
         new Magic(1,1),
         new Magic(2,1),
         new Magic(3,1),

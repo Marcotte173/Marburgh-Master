@@ -23,8 +23,6 @@ public class Player : Creature
     protected int playerMitigation;  
     protected int playerHit;  
     protected int playerCrit;
-    protected int playerMaxHealth;
-    protected int playerMaxEnergy;
     protected bool canExplore;
     protected bool canCraft;
     protected bool rescue;
@@ -71,7 +69,7 @@ public class Player : Creature
                 TakeDamage(burnDam);
                 burning--;
                 if (burning <= 0 && status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) status.Remove(Colour.BLOOD + "Burning" + Colour.RESET);
-            }            
+            }
             if (choice == "1") Attack1(target);
             else if (choice == "2") Attack2(target);
             else if (choice == "3" && CanAttack3) Attack3(target);
@@ -84,7 +82,7 @@ public class Player : Creature
                 Console.ReadKey(true);
                 AttackChoice();
             }
-            else if(choice == "c")
+            else if (choice == "c")
             {
                 CharacterSheet.Display();
                 AttackChoice();
@@ -99,6 +97,7 @@ public class Player : Creature
                 }
                 else Console.WriteLine("You try to get away but can't!");
             }
+            else AttackChoice();
         }
     }
 
@@ -106,7 +105,7 @@ public class Player : Creature
     : base()
     {
         xpNeeded = new int[] { 0, 25, 60, 100, 150, 220, 300, 390, 500, 650 };
-        Energy = playerMaxEnergy = 1;
+        Energy = MaxEnergy = 1;
         gold = 1000;
         potionSize = maxPotionSize = 10;
         playerCrit = 5;
@@ -117,6 +116,11 @@ public class Player : Creature
         playerDamage = 3;
         canExplore = true;
         canAct = true;
+        xp = 0;
+        attack3 = false;
+        attack4 = false;
+        attack5 = false;
+        attack6 = false;        
     }
     internal void Equip(Armor a) { armor = a; }
     internal void Equip(Weapon w, Weapon hand)
@@ -154,6 +158,8 @@ public class Player : Creature
 
     public void Death(Monster hitMe)
     {
+        CombatUI.button = CombatUI.buttonBasic;
+        CombatUI.option = CombatUI.optionBasic;
         Combat.dropList.Clear();
         Combat.monsters.Clear();
         Family.dead.Add(Family.alive[0]);
@@ -182,11 +188,9 @@ public class Player : Creature
                  "Hopefully one of your family members can carry on for you"
             });
             Time.DayChange(1);
-            Create.p = new Player();
             Create.Name();
         }
     }
-
 
     internal void DrinkPotion()
     {
@@ -280,8 +284,6 @@ public class Player : Creature
     public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence; } }
     public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation; } set { mitigation = value; } }
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } set { spellpower = value; } }
-    public override int MaxHealth { get { return playerMaxHealth; } set { maxHealth = value; } }
     public override int Health { get { return health; } set { health = value; } }
-    public override int MaxEnergy { get { return playerMaxEnergy; } set { maxEnergy = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }
 }

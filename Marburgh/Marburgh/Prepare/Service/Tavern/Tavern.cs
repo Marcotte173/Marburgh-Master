@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 public class Tavern:Location
 {    
-    Player p = Create.p;
     public static int wager;
     public Tavern()
     : base() { }
@@ -35,7 +34,7 @@ public class Tavern:Location
            tavernOptionList, tavernOptionButton);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "g")
-            Gamble(p);
+            Gamble(Create.p);
         else if (choice == "l")
             Gossip();
         else if (choice == "t")

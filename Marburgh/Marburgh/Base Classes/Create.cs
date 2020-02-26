@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Create
 {
-    internal static Player p = new Player();
+    internal static Player p;
     internal static void Name()
     {
         Console.Clear();

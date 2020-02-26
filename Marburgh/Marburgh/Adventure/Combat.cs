@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 public class Combat : Location
 {
-    Player p = Create.p;
     public static bool desecrated;
     public static int xpReward;
     public static int goldReward;
@@ -23,8 +22,8 @@ public class Combat : Location
     {
         while (monsters.Count > 0)
         {
-            foreach (Monster m in monsters.ToList()) m.Declare();            
-            p.AttackChoice();
+            foreach (Monster m in monsters.ToList()) m.Declare();
+            Create.p.AttackChoice();
             foreach (Monster m in monsters.ToList())
             {
                 if (m.Stun > 0) m.CanAct = false;
@@ -56,9 +55,9 @@ public class Combat : Location
         text.Add("You gain ");
         text.Add($"{ xp} ");
         text.Add("experience");
-        p.Gold += gold;
-        p.XP += xp;
-        if (p.XP >= p.XPNeeded[p.Level])
+        Create.p.Gold += gold;
+        Create.p.XP += xp;
+        if (Create.p.XP >= Create.p.XPNeeded[Create.p.Level])
         {
             colours.Add(0);
             text.Add("");
@@ -80,21 +79,21 @@ public class Combat : Location
             text.Add($"{dropList[i].name}");
             text.Add("");
             bool exists = false;
-            for (int x = 0; x < p.Drops.Count; x++)
+            for (int x = 0; x < Create.p.Drops.Count; x++)
             {
-                if (p.Drops[x] == dropList[i])
+                if (Create.p.Drops[x] == dropList[i])
                 {
-                    p.Drops[x].amount++;
+                    Create.p.Drops[x].amount++;
                     exists = true;
                     break;
                 }
             }
-            if (exists == false) p.Drops.Add(dropList[i]);
+            if (exists == false) Create.p.Drops.Add(dropList[i]);
         }
         UI.Keypress(colours, text);
         dropList.Clear();
-        p.Burning = 0;
-        p.Bleed = 0;
-        p.Stun = 0;
+        Create.p.Burning = 0;
+        Create.p.Bleed = 0;
+        Create.p.Stun = 0;
     }
 }

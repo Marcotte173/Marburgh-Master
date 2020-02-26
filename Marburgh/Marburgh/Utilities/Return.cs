@@ -22,7 +22,7 @@ public class Return
 
     internal static int RandomInt(int min, int max)
     {
-        return rand.Next(min, max - 1);
+        return rand.Next(min, max);
     }
 
     internal static int Int()

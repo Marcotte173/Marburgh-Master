@@ -4,7 +4,6 @@ using System.Text;
 
 public class Town : Location
 {
-    Player p = Create.p;
     public Town()
     : base() { }
 
@@ -33,10 +32,11 @@ public class Town : Location
         else if (choice == "o") Location.now = Location.list[7];
         else if (choice == "y") Location.now = Location.list[8];
         else if (choice == "b") Location.now = Location.list[9];
+        else if (choice == "z") Create.p.TakeDamage(100, new Goblin()) ;
         else if (choice == "d")
         {
             //If no, go home
-            if (p.CanExplore == false)
+            if (Create.p.CanExplore == false)
             {
                 UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
                 {
@@ -47,7 +47,7 @@ public class Town : Location
                 Menu();
             }
             //Warning so you don't use it then leave right away
-            if(UI.Confirm(new List<int> { 0, 0, 0 }, new List<string>
+            if (UI.Confirm(new List<int> { 0, 0, 0 }, new List<string>
             {
                 "You may only go exploring once a day",
                 "",
@@ -55,12 +55,12 @@ public class Town : Location
             }))
             {
                 //Disallow going back later, send to dungeon
-                p.CanExplore = false;
+                Create.p.CanExplore = false;
                 Explore.currentShell = Explore.shell[1];
                 Location.now = Location.list[10];
-            }            
+            }
         }
-        else if (choice == "x") p.XP += 5;
+        else if (choice == "x") Create.p.XP += 5;
         else if (choice == "k") Time.DayChange(1);
         Location.now.Go();
     }

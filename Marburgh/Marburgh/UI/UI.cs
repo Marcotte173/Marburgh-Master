@@ -42,7 +42,7 @@ public class UI
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|x  Gold In Bank x|                                                                                  |xx Investments xx|");
+        Console.WriteLine("|x               x|                                                                                  |xx             xx|");
         Console.WriteLine("|xx             xx|                                                                                  |xxx           xxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
@@ -61,8 +61,12 @@ public class UI
         Console.SetCursorPosition(Return.Width(88), 16);
         Console.WriteLine("[" + Colour.MITIGATION + "R" + Colour.RESET + "]eturn");
         UIComponent.OptionsText(options, optionButton);
+        Console.SetCursorPosition(4, 21);
+        Console.Write(Colour.SPEAK + "Gold In Bank" + Colour.RESET);
         Console.SetCursorPosition(10 - Bank.bankGold.ToString().Length, 22);
         Write.ColourText(Colour.GOLD, $"{Bank.bankGold}");
+        Console.SetCursorPosition(105, 21);
+        Console.Write(Colour.SPEAK + "Investments" + Colour.RESET);
         Console.SetCursorPosition(111 - Bank.investment.ToString().Length, 22);
         Write.ColourText(Colour.GOLD, $"{Bank.investment}");
         Console.SetCursorPosition(0, 13);

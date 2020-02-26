@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading;
 public class ChestRoom : Room
 {
-    Player p = Create.p;
     bool key = false;
     public ChestRoom(int size, int tier)
     : base(size, tier)
@@ -16,9 +15,9 @@ public class ChestRoom : Room
     }
     internal override void Explore()
     {
-        for (int i = 0; i < p.Drops.Count; i++)
+        for (int i = 0; i < Create.p.Drops.Count; i++)
         {
-            if (p.Drops[i].name == "Chest Key" && p.Drops[i].amount > 0) key = true;
+            if (Create.p.Drops[i].name == "Chest Key" && Create.p.Drops[i].amount > 0) key = true;
         }
         UI.Choice(new List<int> { 0, 0, 0, 0, 1, 1, 1 }, new List<string>
             {
@@ -120,7 +119,7 @@ public class ChestRoom : Room
         }
         else if (choice == "x")
         {
-            p.Drops.Add(new Drop("Chest Key", 1, 1));
+            Create.p.Drops.Add(new Drop("Chest Key", 1, 1));
             Explore();
         }
         else Explore();

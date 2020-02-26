@@ -6,8 +6,7 @@ using System.Threading.Tasks;
 
 public class ArmorShop : Shop
 {
-    Player p = Create.p;
-    new static List<Armor> list = new List<Armor> { Armor.list[0], Armor.list[1], Armor.list[2], Armor.list[3]};
+    new static List<Armor> list = new List<Armor> { Armor.list[0], Armor.list[1], Armor.list[2]};
     public ArmorShop()
     : base() { }
 
@@ -42,7 +41,7 @@ public class ArmorShop : Shop
         int choice = Return.Int();
         if (choice > 0 && (choice < list.Count))
         {
-            if (p.Gold < list[choice].Price)
+            if (Create.p.Gold < list[choice].Price)
             {
                 UI.Keypress(new List<int> { 0 }, new List<string>
                 {
@@ -53,16 +52,16 @@ public class ArmorShop : Shop
             {
                 if (UI.Confirm(new List<int> { 1 }, new List<string> { Colour.ITEM, "Would you like to buy the ", $"{list[choice].Name}", "?" }))
                 {
-                    if (p.Armor.Name != "None") SellOld(list, choice, name);
+                    if (Create.p.Armor.Name != "None") SellOld(list, choice, name);
                     else
                     {
-                        p.Gold -= list[choice].Price;
+                        Create.p.Gold -= list[choice].Price;
                         Console.Clear();
                         UI.Keypress(new List<int> { 2 }, new List<string>
                         {
                             Colour.NAME, Colour.ITEM,"Smiling, ",$"{name} ","takes your money and gives you your ",$"{list[choice].Name}","",
                         });
-                        p.Equip(list[choice]);
+                        Create.p.Equip(list[choice]);
                     }
                 }
             }
@@ -72,7 +71,7 @@ public class ArmorShop : Shop
 
     public void Sell(string name)
     {
-        if (p.Armor.Name == "None")
+        if (Create.p.Armor.Name == "None")
         {
             UI.Keypress(new List<int> { 0 }, new List<string>
             {
@@ -83,7 +82,7 @@ public class ArmorShop : Shop
         {
             Console.Clear();
             List<Armor> EquipmentList = new List<Armor> { new Armor(0, 1) };
-            if (p.Armor.Name != "None") { EquipmentList.Add(p.Armor); }
+            if (Create.p.Armor.Name != "None") { EquipmentList.Add(Create.p.Armor); }
             UI.Store(new List<int> { 0, 0, 0 }, new List<string>
             {
                 "What would you like to Sell?",
@@ -100,8 +99,8 @@ public class ArmorShop : Shop
             {
                 if (UI.Confirm(new List<int> { 2 }, new List<string> { Colour.ITEM, Colour.GOLD, "Would you Like to sell your ", $"{EquipmentList[sellChoice].Name} ", "? I'll give you ", $"{EquipmentList[sellChoice].Price / 2} ", "for it" }))
                 {
-                    p.Gold += EquipmentList[sellChoice].Price / 2;
-                    p.Armor = Armor.list[0];
+                    Create.p.Gold += EquipmentList[sellChoice].Price / 2;
+                    Create.p.Armor = Armor.list[0];
                     UI.Keypress(new List<int> { 3 }, new List<string>
                     {
                         Colour.NAME,Colour.ITEM, Colour.GOLD, "Great!",$"{ name} ","takes your ",$"{EquipmentList[sellChoice].Name} ", "and gives you ",$"{EquipmentList[sellChoice].Price / 2} ", "gold",

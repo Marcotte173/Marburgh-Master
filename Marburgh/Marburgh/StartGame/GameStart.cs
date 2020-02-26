@@ -22,15 +22,6 @@ namespace MedievalRPG
             new List<string> { "ew Game" }, new List<string> { Colour.HEALTH + "N" + Colour.RESET });
             string choice = Return.Option();
             if (choice == "n") Family.Create();
-            else if (choice == "x")
-            {
-                Console.Clear();
-                Player m = new Mage();
-                Player r = new Rogue();
-                Console.WriteLine(m.Hit);
-                Console.WriteLine(r.Hit);
-                Console.ReadKey();
-            }
             else if (choice == "q") Environment.Exit(0);
             else Menu();
         }

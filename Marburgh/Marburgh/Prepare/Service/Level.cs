@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 
 public class Level:Location
 {
-    Player p = Create.p;
     public static int[] xpRequired = new int[] { 0, 30, 75, 125, 185, 255, 315, 385, 475, 575, 700, 830, 1000 };
     public Level()
     : base() { }
@@ -21,7 +20,7 @@ public class Level:Location
                     Colour.SPEAK, "",  "'Are you here to level up?'", ""
                 }))
             {
-                if (p.XP < p.XPNeeded[p.Level])
+                if (Create.p.XP < Create.p.XPNeeded[Create.p.Level])
                 {
                     UI.Keypress(new List<int> { 0, 1, 1 }, new List<string>
                         {
@@ -31,7 +30,7 @@ public class Level:Location
                         });
                     Utilities.ToTown();
                 }                    
-                else LevelUp(p);
+                else LevelUp(Create.p);
             }
             else
             {

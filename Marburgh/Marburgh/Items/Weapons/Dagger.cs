@@ -4,9 +4,9 @@ using System.Text;
 
 public class Dagger : Weapon
 {
-    int[] damageArray = new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] critArray =   new int[] { 0, 1, 2, 3, 4, 5 };
+    int[] damageArray = new int[] { 0, 2, 5, 8, 12, 15 };
+    int[] hitArray = new int[] { 0, 3, 5, 7, 10, 15 };
+    int[] critArray = new int[] { 0, 3, 5, 7, 10, 12 };
 
     internal static string[] names = new string[]
    {

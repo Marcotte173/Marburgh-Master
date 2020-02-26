@@ -29,9 +29,7 @@ public class Room
 
     internal virtual void Explore()
     {
-        if (size <2 && Return.RandomInt(1, 100) < 60) Summon(Return.RandomInt(1, 3));
-        else if (size < 2 && Return.RandomInt(1, 100) > 65) Summon(Return.RandomInt(1, 3));
-        else if (size == 2 && Return.RandomInt(1, 100) < 70) Summon(Return.RandomInt(1, 3));
+        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(Size + 1);
         else Alone();
     }
 
