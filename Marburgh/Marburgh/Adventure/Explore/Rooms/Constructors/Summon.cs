@@ -13,23 +13,23 @@ public class Summon
     static SavageOrc savageOrc = new SavageOrc();
     public static void Goblin()
     {
-        Combat.monsters.Add(goblin.MonsterCopy());
+        Create.p.combatMonsters.Add(goblin.MonsterCopy());
     }
     public static void Slime()
     {
-        Combat.monsters.Add(slime.MonsterCopy());
+        Create.p.combatMonsters.Add(slime.MonsterCopy());
     }
     public static void Kobald()
     {
-        Combat.monsters.Add(kobald.MonsterCopy());
+        Create.p.combatMonsters.Add(kobald.MonsterCopy());
     }
     public static void Orc()
     {
-        Combat.monsters.Add(orc.MonsterCopy());
+        Create.p.combatMonsters.Add(orc.MonsterCopy());
     }
     public static void SavageOrc()
     {
-        Combat.monsters.Add(savageOrc.MonsterCopy());
+        Create.p.combatMonsters.Add(savageOrc.MonsterCopy());
     }
 
 }

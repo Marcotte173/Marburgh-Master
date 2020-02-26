@@ -9,9 +9,8 @@ public class Combat : Location
     public static bool desecrated;
     public static int xpReward;
     public static int goldReward;
-    public static List<Drop> dropList = new List<Drop> { };
     
-    internal static List<Monster> monsters = new List<Monster> {};
+    
     public Combat()
     : base()
     {
@@ -20,11 +19,11 @@ public class Combat : Location
 
     public override void Menu()
     {
-        while (monsters.Count > 0)
+        while (Create.p.combatMonsters.Count > 0)
         {
-            foreach (Monster m in monsters.ToList()) m.Declare();
+            foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
             Create.p.AttackChoice();
-            foreach (Monster m in monsters.ToList())
+            foreach (Monster m in Create.p.combatMonsters.ToList())
             {
                 if (m.Stun > 0) m.CanAct = false;
                 else m.CanAct = true;
@@ -68,30 +67,30 @@ public class Combat : Location
             text.Add("");
         }
         //Get the drops on the drop list
-        for (int i = 0; i < dropList.Count; i++)
+        for (int i = 0; i < Create.p.combatDropList.Count; i++)
         {
             //If you already have it, increase the amount. Otherwise, add it to the list
             colours.Add(0);
             text.Add("");
             colours.Add(1);
-            text.Add(Colour.dropColour[dropList[i].rare]);
+            text.Add(Colour.dropColour[Create.p.combatDropList[i].rare]);
             text.Add("You find a ");
-            text.Add($"{dropList[i].name}");
+            text.Add($"{Create.p.combatDropList[i].name}");
             text.Add("");
             bool exists = false;
             for (int x = 0; x < Create.p.Drops.Count; x++)
             {
-                if (Create.p.Drops[x] == dropList[i])
+                if (Create.p.Drops[x] == Create.p.combatDropList[i])
                 {
                     Create.p.Drops[x].amount++;
                     exists = true;
                     break;
                 }
             }
-            if (exists == false) Create.p.Drops.Add(dropList[i]);
+            if (exists == false) Create.p.Drops.Add(Create.p.combatDropList[i]);
         }
         UI.Keypress(colours, text);
-        dropList.Clear();
+        Create.p.combatDropList.Clear();
         Create.p.Burning = 0;
         Create.p.Bleed = 0;
         Create.p.Stun = 0;

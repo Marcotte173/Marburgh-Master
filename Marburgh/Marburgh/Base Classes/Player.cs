@@ -3,7 +3,10 @@ using System.Collections.Generic;
 using System.Text;
 
 public class Player : Creature
-{    
+{
+    protected bool alive;
+    public List<Drop> combatDropList = new List<Drop> { };
+    public List<Monster> combatMonsters = new List<Monster> { };
     protected int spellpower;
     protected Weapon mainHand;
     protected Weapon offHand;
@@ -39,6 +42,7 @@ public class Player : Creature
             canAct = false;
             stun--;
             if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
+            Write.Position(0, 6);
             Console.WriteLine(Colour.NAME + "You " + Colour.RESET + "are " + Colour.STUNNED + "stunned" + Colour.RESET + "!");
         }
         if (canAct)
@@ -104,6 +108,7 @@ public class Player : Creature
     public Player()
     : base()
     {
+        alive = true;
         xpNeeded = new int[] { 0, 25, 60, 100, 150, 220, 300, 390, 500, 650 };
         Energy = MaxEnergy = 1;
         gold = 1000;
@@ -120,8 +125,11 @@ public class Player : Creature
         attack3 = false;
         attack4 = false;
         attack5 = false;
-        attack6 = false;        
-    }
+        attack6 = false;
+        combatDropList = new List<Drop> { };
+        combatMonsters = new List<Monster> { };
+    }    
+
     internal void Equip(Armor a) { armor = a; }
     internal void Equip(Weapon w, Weapon hand)
     {
@@ -158,12 +166,10 @@ public class Player : Creature
 
     public void Death(Monster hitMe)
     {
+        alive = false;
         CombatUI.button = CombatUI.buttonBasic;
         CombatUI.option = CombatUI.optionBasic;
-        Combat.dropList.Clear();
-        Combat.monsters.Clear();
         Family.dead.Add(Family.alive[0]);
-        Family.alive.RemoveAt(0);
         Family.cause.Add(hitMe.Name);
         Family.timeOfDeath[0, 0] = Time.day;
         Family.timeOfDeath[0, 1] = Time.week;
@@ -188,7 +194,7 @@ public class Player : Creature
                  "Hopefully one of your family members can carry on for you"
             });
             Time.DayChange(1);
-            Create.Name();
+            Create.ChooseSibling();
         }
     }
 
@@ -255,6 +261,7 @@ public class Player : Creature
     }
 
     public int[] LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
+    public bool Alive { get { return alive; } set { alive = value; } }
     public string Option3 { get { return option3; } set { option3 = value; } }
     public string Option4 { get { return option4; } set { option4 = value; } }
     public int[] LvlSpellpower { get { return lvlSpellpower; } set { lvlSpellpower = value; } }

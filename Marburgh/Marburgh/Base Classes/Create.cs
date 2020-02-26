@@ -6,71 +6,11 @@ using System.Threading.Tasks;
 
 public class Create
 {
+    internal static Warrior w = new Warrior();
+    internal static Mage m = new Mage();
+    internal static Rogue r = new Rogue();
     internal static Player p;
-    internal static void Name()
-    {
-        Console.Clear();
-        if (Family.alive.Count == 3) UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 2 }, new List<string>
-            {
-               Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
-               Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
-               "She was recently killed by an Orc. You never knew your father.",
-               "",
-               "You are the eldest child.",
-               Colour.NAME, Colour.NAME, "Your siblings,", $" {Family.alive[1]}", " and", $" {Family.alive[2]}", " look up to you now to take care of them."
-            });
-        else if (Family.alive.Count == 2) UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 1 }, new List<string>
-            {
-                Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
-                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
-                "She was recently killed by an Orc. You never knew your father.",
-                "",
-                "You are the eldest surviving child.",
-                Colour.NAME, "Your sibling,", $" {Family.alive[1]}", " looks up to you now to put food on the table the only way you know how - Adventuring."
-            });
-        else UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 1 }, new List<string>
-            {
-                Colour.NAME,  "Your name is", $" {Family.alive[0]}","",
-                Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
-                "She was recently killed by an Orc. You never knew your father.",
-                "",
-                Colour.NAME, "You are the only survivng", $" {Family.lastName}", ".It is all up to you now."
-            });
-        ChooseClass();
-    }
 
-    private static void ChooseClass()
-    {
-        Console.Clear();
-        Write.SetY(15);
-        UIComponent.BarBlank();
-        UIComponent.StandardMiddle(8);
-        UIComponent.BarBlank();
-        Console.SetCursorPosition(Return.Width(15), Return.Height(7));
-        Write.EmbedColourText(Colour.CLASS, "", "[W]", "arrior");
-        Console.SetCursorPosition(Return.Width(15), Return.Height(12));
-        Write.EmbedColourText(Colour.CLASS, "", "[R]", "ogue");
-        Console.SetCursorPosition(Return.Width(15), Return.Height(16));
-        Write.EmbedColourText(Colour.CLASS, "", "[M]", "age");
-        Console.SetCursorPosition(Return.Width(35), Return.Height(7));
-        Write.EmbedColourText(Colour.CLASS, "", "Practiced in combat, durable and menacing.", "");
-        Console.SetCursorPosition(Return.Width(35), Return.Height(12));
-        Write.EmbedColourText(Colour.CLASS, "", "High Damage, Good Evasion.", "");
-        Console.SetCursorPosition(Return.Width(35), Return.Height(16));
-        Write.EmbedColourText(Colour.CLASS, "", "Spells learned through intricate rituals, strong and versatile.", "");
-        Write.Position(47, 22);
-        Console.WriteLine("Please select a class");
-        string choice = Return.Option();
-        if (choice != "w" & choice != "r" && choice != "m") ChooseClass();
-        else
-        {
-            if (choice == "w") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Warrior", ", correct?" })) ChooseClass(); else p = new Warrior();
-            else if (choice == "r") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Rogue", ", correct?" })) ChooseClass(); else p = new Rogue();
-            else if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.CLASS, "You have chosen ", "Mage", ", correct?" })) ChooseClass(); else p = new Mage();
-            p.Name = Family.alive[0];
-            Story();
-        }
-    }
     public static void Story()
     {
         Console.Clear();
@@ -80,7 +20,7 @@ public class Create
         UIComponent.BarBlank();
         Write.Position(47, 22);
         Write.ColourText(Colour.ENERGY, "Press any key to continue");
-        UIComponent.DisplayTextWait(new List<int> { 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0 }, new List<string>
+        UIComponent.DisplayText(new List<int> { 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0 }, new List<string>
             {
                Colour.CLASS,"You come from a long line of ","adventurers","",
                "",
@@ -97,6 +37,72 @@ public class Create
                "Are you a bad enough dude to save them?",
             });
         Console.ReadKey(true);
+        ChooseSibling();
+    }
+
+    public static void ChooseSibling()
+    {
+        Console.Clear();
+        Write.SetY(15);
+        UIComponent.BarBlank();
+        UIComponent.StandardMiddle(8);
+        UIComponent.BarBlank();
+        Console.SetCursorPosition(Return.Width(0), Return.Height(7));
+        if (w.Alive) Write.EmbedColourText(Colour.NAME, "[1]", Family.alive[0], ". The eldest child was expected and eager to take up the family business.");
+        Console.SetCursorPosition(Return.Width(0), Return.Height(12));
+        if (r.Alive) Write.EmbedColourText(Colour.NAME,  "[2]", Family.alive[1], ". The middle child yearned for freedom from responsibility and fell in with the wrong crowd...");
+        Console.SetCursorPosition(Return.Width(0), Return.Height(16));
+        if (m.Alive) Write.EmbedColourText(Colour.NAME, "[3]", Family.alive[2],". The youngest child, largely ignored, took a different path, focusing on the magical arts.");
+        Write.Position(47, 22);
+        Console.WriteLine("Please select a sibling");
+        string choice = Return.Option();
+        p = new Player();
+        if (choice != "1" & choice != "2" && choice != "3") ChooseSibling();
+        else
+        {
+            if (choice == "1") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.NAME, "You have chosen ", Family.alive[0], ", correct?" })) ChooseSibling();
+            else
+            {
+                p = w;
+                p.Name = Family.alive[0];
+                Name(0);
+            }
+            else if (choice == "2") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.NAME, "You have chosen ", Family.alive[1], ", correct?" })) ChooseSibling();
+            else
+            {
+                p = r;
+                p.Name = Family.alive[1];
+                Name(1);
+            }
+            else if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.NAME, "You have chosen ", Family.alive[2], ", correct?" })) ChooseSibling();
+            else
+            {
+                p = m;
+                p.Name = Family.alive[2];
+                Name(2);
+            }            
+        }
+    }
+
+    internal static void Name(int birthOrder)
+    {
+        string a = (birthOrder == 0)?"You have the weight of the world on your shoulders. It's all up to you now":(birthOrder ==1)?"It's time to come back into the fold and use the skills you learned on the streets":"You're not much of a fighter, but maybe brute strength isn't what's required";
+        string b = (birthOrder == 0) ? "You were by her side as she fell, and swore revenge." : (birthOrder == 1) ? "You have returned to Marburgh to pay your respects... and get revenge" : "You were never close, but you love Marburgh, and know that the Orcs mean the destruction of everything you known";
+        string[] order = new string[] { "eldest", "middle", "youngest" };
+        Console.Clear();
+        UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0 ,0,0}, new List<string>
+            {
+               Colour.NAME,  "Your name is ", p.Name ,"",
+               Colour.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
+               $"She was recently killed by an Orc. {b}.",
+               "",
+               $"You are the {order[birthOrder]} child.",
+               "",
+               a
+            });
         Utilities.ToTown();
     }
+
+    
+    
 }

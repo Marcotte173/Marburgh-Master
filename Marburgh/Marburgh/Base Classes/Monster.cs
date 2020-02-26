@@ -85,7 +85,7 @@ public class Monster : Creature
     public override void Death()
     {
         Console.WriteLine($"\nYou have killed the {name}!");
-        Combat.monsters.Remove(this);
+        Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
         Drop();
@@ -100,7 +100,7 @@ public class Monster : Creature
     { 
         if (Return.RandomInt(1, 101) <= dropRate )
         {
-            Combat.dropList.Add(ChooseDrop());
+            Create.p.combatDropList.Add(ChooseDrop());
         }        
     }
 

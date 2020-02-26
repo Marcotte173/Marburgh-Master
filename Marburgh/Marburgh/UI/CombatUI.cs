@@ -27,8 +27,8 @@ internal class CombatUI
 
     private static void Monster1()
     {
-        int x = (Combat.monsters.Count == 2) ? 35 : 60; 
-        Monster a = Combat.monsters[0];
+        int x = (Create.p.combatMonsters.Count == 2) ? 35 : 60; 
+        Monster a = Create.p.combatMonsters[0];
         Write.SetX(x - a.Name.Length/2);
         Console.WriteLine(Colour.MONSTER + a.Name + Colour.RESET);
         Write.Position(x-1, 2);
@@ -44,7 +44,7 @@ internal class CombatUI
 
     private static void Monster2()
     {
-        Monster b = Combat.monsters[1];
+        Monster b = Create.p.combatMonsters[1];
         Write.Position(90 - b.Name.Length / 2, 0);
         Console.WriteLine(Colour.MONSTER + b.Name + Colour.RESET);
         Write.Position(89, 2);
@@ -60,7 +60,7 @@ internal class CombatUI
 
     private static void Monster3()
     {
-        Monster b = Combat.monsters[2];
+        Monster b = Create.p.combatMonsters[2];
         Write.Position(35 - b.Name.Length / 2, 0);
         Console.WriteLine(Colour.MONSTER + b.Name + Colour.RESET);
         Write.Position(34, 2);
@@ -83,15 +83,15 @@ internal class CombatUI
     {
         targetButton.Clear();
         targetOption.Clear();
-        if (Combat.monsters.Count != 1)
+        if (Create.p.combatMonsters.Count != 1)
         {
-            targetOption.Add(Combat.monsters[0].Name);
+            targetOption.Add(Create.p.combatMonsters[0].Name);
             targetButton.Add("1");
-            targetOption.Add(Combat.monsters[1].Name);
+            targetOption.Add(Create.p.combatMonsters[1].Name);
             targetButton.Add("2");
-            if (Combat.monsters.Count == 3)
+            if (Create.p.combatMonsters.Count == 3)
             {
-                targetOption.Add(Combat.monsters[2].Name);
+                targetOption.Add(Create.p.combatMonsters[2].Name);
                 targetButton.Add("3");
             }
             Box();
@@ -101,22 +101,22 @@ internal class CombatUI
             int choice = Return.Int();
             if (choice > 0 && choice < 4)
             {                
-                if (choice == 1) return Combat.monsters[0];
-                else if (choice == 2 && Combat.monsters.Count > 1) return Combat.monsters[1];
-                else if (choice == 3 && Combat.monsters.Count == 3) return Combat.monsters[2];
+                if (choice == 1) return Create.p.combatMonsters[0];
+                else if (choice == 2 && Create.p.combatMonsters.Count > 1) return Create.p.combatMonsters[1];
+                else if (choice == 3 && Create.p.combatMonsters.Count == 3) return Create.p.combatMonsters[2];
                 else return null;
             }
             else return null;
         }
-        else return Combat.monsters[0];
+        else return Create.p.combatMonsters[0];
     }
 
     internal static void Box()
     {
         Console.Clear();
         Monster1();
-        if (Combat.monsters.Count > 1) Monster2();
-        if (Combat.monsters.Count > 2) Monster3();
+        if (Create.p.combatMonsters.Count > 1) Monster2();
+        if (Create.p.combatMonsters.Count > 2) Monster3();
         Write.SetY(5);
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Console.SetCursorPosition(0, 15);

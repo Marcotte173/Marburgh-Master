@@ -16,11 +16,11 @@ public class Family
         {0, 0, 0, 0 },
         {0, 0, 0, 0 }
     };
-    internal static void Create()
+    internal static void Make()
     {
         FamilyName();
         GenerateSiblings();
-        global::Create.Name();
+        Create.Story();
     }
 
     private static void FamilyName()

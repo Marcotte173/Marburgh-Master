@@ -29,7 +29,7 @@ public class Room
 
     internal virtual void Explore()
     {
-        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(Size + 1);
+        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(2);
         else Alone();
     }
 
