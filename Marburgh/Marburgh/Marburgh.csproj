@@ -59,6 +59,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventure\Dungeon 1\Dungeon1.cs" />
+    <Compile Include="Adventure\Dungeon2\Dungeon2.cs" />
+    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2BossRoom.cs" />
     <Compile Include="Adventure\Explore\Rooms\All Dungeons\ChestRoom.cs" />
     <Compile Include="Adventure\Explore\Rooms\All Dungeons\ShrineRoom.cs" />
     <Compile Include="Adventure\Dungeon 1\Specific Rooms\VillagersRoom.cs" />

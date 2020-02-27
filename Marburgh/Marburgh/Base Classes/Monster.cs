@@ -15,8 +15,11 @@ public class Monster : Creature
     public virtual void Attack1(Player target)
     {
         if (AttemptToHit(target, 0) == false) Miss(target);
-        else Console.WriteLine($"The {Name} hits you for {Damage} damage");
-        target.TakeDamage(Damage,this);
+        else
+        {
+            Console.WriteLine($"The {Name} hits you for {Damage} damage");
+            target.TakeDamage(Damage, this);
+        }
     }
     public virtual void Attack2(Player target)
     {

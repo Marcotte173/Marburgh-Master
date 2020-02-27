@@ -50,12 +50,7 @@ public class Player : Creature
             CombatUI.Declare();
             if (bleed > 0 && !Status.Contains(Colour.BLOOD + "Bleeding" + Colour.RESET)) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
             if (burning > 0 && !Status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) Status.Add(Colour.BLOOD + "Burning" + Colour.RESET);
-            string choice = Return.Option();
-            Monster target = null;
-            while ( target == null)
-            {
-                target = CombatUI.Target();
-            }
+            string choice = Return.Option();            
             CombatUI.Box();
             Write.Position(47, 22);
             Write.ColourText(Colour.ENERGY, "Press any key to continue");
@@ -74,12 +69,12 @@ public class Player : Creature
                 burning--;
                 if (burning <= 0 && status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) status.Remove(Colour.BLOOD + "Burning" + Colour.RESET);
             }
-            if (choice == "1") Attack1(target);
-            else if (choice == "2") Attack2(target);
-            else if (choice == "3" && CanAttack3) Attack3(target);
-            else if (choice == "4" && CanAttack4) Attack4(target);
-            else if (choice == "5" && CanAttack5) Attack5(target);
-            else if (choice == "6" && CanAttack6) Attack6(target);
+            if (choice == "1") Attack1(GetTarget());
+            else if (choice == "2") Attack2(null);
+            else if (choice == "3" && CanAttack3) Attack3(GetTarget());
+            else if (choice == "4" && CanAttack4) Attack4(GetTarget());
+            else if (choice == "5" && CanAttack5) Attack5(GetTarget());
+            else if (choice == "6" && CanAttack6) Attack6(GetTarget());
             else if (choice == "h")
             {
                 DrinkPotion();
@@ -103,6 +98,17 @@ public class Player : Creature
             }
             else AttackChoice();
         }
+    }
+
+    Creature GetTarget()
+    {
+        Monster target = null;
+        while (target == null)
+        {
+            target = CombatUI.Target();
+        }
+        Write.Position(0, 6);
+        return target;        
     }
 
     public Player()

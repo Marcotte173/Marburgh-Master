@@ -9,7 +9,7 @@ public class MagicShop : Shop
     static int[] upgrade = new int[] {1000,3000,10000,20000,35000};
     static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
     static int current = 0;
-    new static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1], Magic.list[2]};
+    new static List<Weapon> list = new List<Weapon> { Magic.list[0], Magic.list[1]};
     public MagicShop()
     : base() { }
 

@@ -32,7 +32,7 @@ public class Create
                "",
                Colour.BOSS, "Worse yet, the ","Savage Orc ","that leads them is getting stronger and building an army",
                "",
-               Colour.TIME, "In ","five days",", your town will be overrun",
+               Colour.TIME, "In ","ten days",", your town will be overrun",
                "",
                "Are you a bad enough dude to save them?",
             });

@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 public class WeaponShop : Shop
 {
-    static List<Weapon> bluntList = new List<Weapon>   { Blunt.list[0],  Blunt.list[1],  Blunt.list[2] };
-    static List<Weapon> swordList = new List<Weapon>   { Sword.list[0],  Sword.list[1],  Sword.list[2] };
-    static List<Weapon> daggerList = new List<Weapon> { Dagger.list[0], Dagger.list[1], Dagger.list[2] };
-    static List<Weapon> shieldList = new List<Weapon> { Shield.list[0], Shield.list[1], Shield.list[2] };
+    static List<Weapon> bluntList = new List<Weapon>   { Blunt.list[0],  Blunt.list[1],  };
+    static List<Weapon> swordList = new List<Weapon>   { Sword.list[0],  Sword.list[1],  };
+    static List<Weapon> daggerList = new List<Weapon> { Dagger.list[0], Dagger.list[1],  };
+    static List<Weapon> shieldList = new List<Weapon> { Shield.list[0], Shield.list[1],  };
     public WeaponShop()
     : base() { }
 

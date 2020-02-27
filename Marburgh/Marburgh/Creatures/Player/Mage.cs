@@ -33,8 +33,16 @@ public class Mage : Player
 
     public override void Attack2(Creature target)
     {
-        if (energy > 0 && shielded == false) shielded = true;
-        if (shielded) shielded = false;
+        if (energy > 0 && shielded == false)
+        {
+            shielded = true;
+            Status.Add(Colour.SHIELD + "Shielded" + Colour.RESET);
+        }
+        else if (shielded)
+        {
+            shielded = false;
+            Status.Remove(Colour.SHIELD + "Shielded" + Colour.RESET);
+        }
         AttackChoice();
     }
 
@@ -84,6 +92,8 @@ public class Mage : Player
             {
                 damage -= energy;
                 energy = 0;
+                shielded = false;
+                Status.Remove(Colour.SHIELD + "Shielded" + Colour.RESET);
                 base.TakeDamage(damage, hitMe);
             }
         }

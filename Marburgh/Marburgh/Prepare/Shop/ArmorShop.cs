@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class ArmorShop : Shop
 {
-    new static List<Armor> list = new List<Armor> { Armor.list[0], Armor.list[1], Armor.list[2]};
+    new static List<Armor> list = new List<Armor> { Armor.list[0], Armor.list[1]};
     public ArmorShop()
     : base() { }
 
