@@ -134,6 +134,7 @@ public class Player : Creature
         attack6 = false;
         combatDropList = new List<Drop> { };
         combatMonsters = new List<Monster> { };
+        rescue = false;
     }    
 
     internal void Equip(Armor a) { armor = a; }

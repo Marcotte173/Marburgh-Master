@@ -23,12 +23,6 @@ public class Dungeon1BossRoom : Room
         });
         global::Summon.SavageOrc();
         Location.list[11].Go();
-        UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
-        {
-            "You have beaten the first dungeon and for now, the game",
-            "",
-            "Check back soon! As you read this I'm hard at work adding more dungeons, monsters and Items.",
-        });
-        Environment.Exit(0);
+        
     }
 }

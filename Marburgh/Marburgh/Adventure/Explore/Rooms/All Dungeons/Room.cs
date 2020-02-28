@@ -121,8 +121,8 @@ public class Room
         List<int> colourArray = new List<int> { };        
         for (int i = 0; i < amount; i++)
         {
-            int summon = Return.RandomInt(0, 4);
-            string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : (summon == 2) ? " goblin" : "n orc";
+            int summon = Return.RandomInt(0, 3);
+            string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : " goblin";
             colourArray.Add(1);
             summonList.Add(Colour.MONSTER);
             summonList.Add("A");
@@ -133,7 +133,6 @@ public class Room
             if (summon == 0) global::Summon.Slime();
             else if (summon == 1) global::Summon.Kobald();
             else if (summon == 2) global::Summon.Goblin();
-            else if (summon == 3) global::Summon.Orc();
         }
         ActionWait(colourArray, summonList, "You have been discovered by", null);
         Location.list[11].Go();

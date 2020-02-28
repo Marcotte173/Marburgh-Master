@@ -71,6 +71,7 @@
     <Compile Include="Adventure\Explore\Rooms\Constructors\Shell.cs" />
     <Compile Include="Adventure\Explore\Rooms\Constructors\Summon.cs" />
     <Compile Include="Adventure\Dungeon 1\Specific Rooms\Dungeon1BossRoom.cs" />
+    <Compile Include="GameState.cs" />
     <Compile Include="Items\Weapons\Dagger.cs" />
     <Compile Include="UI\CombatUI.cs" />
     <Compile Include="Adventure\Explore\Explore.cs" />
