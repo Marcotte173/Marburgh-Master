@@ -10,7 +10,7 @@ public class Dungeon1BossRoom : Room
     : base(size, tier)
     {
         flavorColourArray = new List<int> { 0 };
-        flavor = new List<string> { "You have found the Savage Orc's Lair!" };
+        flavor = new List<string> { "You have found a secret Lair!" };
     }
 
     internal override void Explore()
@@ -23,6 +23,12 @@ public class Dungeon1BossRoom : Room
         });
         global::Summon.SavageOrc();
         Location.list[11].Go();
-        
+        GameState.CanCraft = true;
+        UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
+        {
+            "The Savage Orc bellows at you as he brandishes his weapon",
+            "",
+            "There's no turning back now!",
+        });
     }
 }

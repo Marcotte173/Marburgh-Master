@@ -10,4 +10,5 @@ public class GameState
     public static bool Villagers2;
     public static bool Lieutenant;
     public static bool SavageOrc;
+    public static bool CanCraft;
 }
