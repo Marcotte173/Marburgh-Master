@@ -11,4 +11,7 @@ public class GameState
     public static bool Lieutenant;
     public static bool SavageOrc;
     public static bool CanCraft;
+    public static bool Dungeon2Key;
+
+    public static bool Captain { get; internal set; }
 }

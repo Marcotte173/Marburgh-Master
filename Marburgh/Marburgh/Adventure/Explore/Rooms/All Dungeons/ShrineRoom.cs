@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 public class ShrineRoom : Room
 {
     public ShrineRoom(int size, int tier)
-    : base(size, tier)
+    : base()
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You find a shrine!" };
@@ -76,7 +76,7 @@ public class ShrineRoom : Room
             }
             ActionWait(studyColourArray, studyList, Colour.ENERGY + "Studying" + Colour.RESET, null);
             visited = true;
-            Location.list[10].Go();
+            Location.list[11].Go();
         }
         if (choice == "d")
         {
@@ -125,7 +125,7 @@ public class ShrineRoom : Room
             }
             ActionWait(desecrateColourArray, desecrateList, Colour.ENERGY + "Desecrating" + Colour.RESET, null);
             visited = true;
-            Location.list[10].Go();
+            Location.list[11].Go();
         }
         if (choice == "w")
         {

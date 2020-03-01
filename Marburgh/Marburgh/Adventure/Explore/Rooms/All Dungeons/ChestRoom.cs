@@ -6,8 +6,8 @@ using System.Threading;
 public class ChestRoom : Room
 {
     bool key = false;
-    public ChestRoom(int size, int tier)
-    : base(size, tier)
+    public ChestRoom()
+    : base()
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a chest!" };
@@ -124,6 +124,6 @@ public class ChestRoom : Room
         }
         else Explore();
         visited = true;
-        Location.list[10].Go();
+        Location.list[11].Go();
     }     
 }

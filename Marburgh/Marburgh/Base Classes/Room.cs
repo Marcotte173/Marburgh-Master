@@ -16,15 +16,8 @@ public class Room
     public bool visited;
 
     //Constructor
-    public Room(int size, int tier)
+    public Room()
     {
-        this.size = size;
-        this.tier = tier;
-        string a = (size == 0) ? "tiny" : (size == 1) ? "small" : (size == 2) ? "medium sized" : "large";
-        string b = (tier == 0) ? "squalid" : (tier == 1) ? "nondescript" : (tier == 2) ? "nice" : "splendid";
-        flavorColourArray = new List<int> { 0 };
-        flavor = new List<string> { $"You enter a {a} {b} room" };
-        name = $"{a} room";
     }
 
     internal virtual void Explore()

@@ -9,8 +9,8 @@ public class VillagersRoom : Room
 
 
     //Constructor
-    public VillagersRoom(int size, int tier)
-    : base(size, tier)
+    public VillagersRoom()
+    : base()
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a prison cell!" };
@@ -26,7 +26,7 @@ public class VillagersRoom : Room
                 "He pulls out his weapon and charges!",
             });
         global::Summon.Orc();
-        Location.list[11].Go();
+        Location.list[10].Go();
         UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
             {
                 "You see several townsfolk huddling for warmth, obviously scared.",

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 public class Dungeon2BossRoom : Room
 {
     ///Constructor
-    public Dungeon2BossRoom(int size, int tier)
-    : base(size, tier)
+    public Dungeon2BossRoom()
+    : base()
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the Savage Orc's Lair!" };
@@ -15,15 +15,15 @@ public class Dungeon2BossRoom : Room
 
     internal override void Explore()
     {
-        UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
         {
             "The Savage Orc bellows at you as he brandishes his weapon",
             "",
             "There's no turning back now!",
         });
         global::Summon.SavageOrc();
-        Location.list[11].Go();
-        UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
+        Location.list[10].Go();
+        UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
         {
             "You have beaten the first dungeon and for now, the game",
             "",

@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 public class Dungeon1BossRoom : Room
 {
     ///Constructor
-    public Dungeon1BossRoom(int size, int tier)
-    : base(size, tier)
+    public Dungeon1BossRoom()
+    : base()
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a secret Lair!" };
@@ -15,20 +15,29 @@ public class Dungeon1BossRoom : Room
 
     internal override void Explore()
     {
-        UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 0, 0, 1, 0 , 1, 0, 0 }, new List<string>
         {
-            "The Savage Orc bellows at you as he brandishes his weapon",
+            "Entering the lair you find a large Orc, but not the one you expecte to find",
             "",
-            "There's no turning back now!",
+            Colour.SPEAK, "","Heh, you thought you found da boss, eh?","",
+            "",
+            Colour.SPEAK, "","He's further inside not that it matters to you. Now you gonna die"," ",
+            "",
+            "The Orc charges "
         });
-        global::Summon.SavageOrc();
-        Location.list[11].Go();
+        global::Summon.Orc();
+        Location.list[10].Go();
         GameState.CanCraft = true;
-        UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
+        Buttons.adventureButton.Add(Colour.MONSTER + "2" + Colour.RESET);
+        Buttons.adventureList.Add("Dungeon 2");
+        UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
         {
-            "The Savage Orc bellows at you as he brandishes his weapon",
+            "You emerge vitorious!",
             "",
-            "There's no turning back now!",
-        });
+            "Searching the room you find a strange looking machine",
+            "",
+            "Curious, you bring the machine with you"
+        }) ;
+        Utilities.ToTown();
     }
 }

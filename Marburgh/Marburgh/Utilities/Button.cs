@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 public class Buttons
 {
-    public static List<string> adventureButton = new List<string> { Colour.MONSTER + "D" + Colour.RESET };
-    public static List<string> adventureList = new List<string> { "ungeon" };
+    public static List<string> adventureButton = new List<string> { Colour.MONSTER + "1" + Colour.RESET };
+    public static List<string> adventureList = new List<string> { "Dungeon 1" };
     public static List<string> shopButton = new List<string> { Colour.ITEM + "M" + Colour.RESET, Colour.ITEM + "W" + Colour.RESET, Colour.ITEM + "A" + Colour.RESET };
     public static List<string> shopList = new List<string> { "agic Shop", "eapon Shop", "rmor Shop" };
     public static List<string> serviceButton = new List<string> { Colour.TIME + "T" + Colour.RESET, Colour.TIME + "L" + Colour.RESET, Colour.TIME + "B" + Colour.RESET };

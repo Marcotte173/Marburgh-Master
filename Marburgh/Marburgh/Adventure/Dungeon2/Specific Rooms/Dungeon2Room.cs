@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Dungeon1Room:Room
+public class Dungeon2Room : Room
 {
-    public Dungeon1Room(int size, int tier)
+    public Dungeon2Room(int size, int tier)
     : base()
     {
         this.size = size;
@@ -23,8 +23,8 @@ public class Dungeon1Room:Room
         List<int> colourArray = new List<int> { };
         for (int i = 0; i < amount; i++)
         {
-            int summon = Return.RandomInt(0, 3);
-            string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : " goblin";
+            int summon = Return.RandomInt(0, 4);
+            string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : (summon == 2 )?" goblin": "n Orc";
             colourArray.Add(1);
             summonList.Add(Colour.MONSTER);
             summonList.Add("A");

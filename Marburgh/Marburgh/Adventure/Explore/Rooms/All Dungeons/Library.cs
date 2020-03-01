@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 public class Library : Room
 {
     public Library(int size, int tier)
-    : base(size, tier)
+    : base()
     {
         this.size = size;
         this.tier = tier;
