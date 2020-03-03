@@ -15,14 +15,14 @@ public class ShrineRoom : Room
     internal override void Explore()
     {
         UI.Choice(new List<int> { 0, 1, 0, 1, 1, 1 }, new List<string>
-            {
-                "You approach the altar and find a rune, placed with great care and reverance. ",
-                Colour.MONSTER,"You recognize it as belonging to one of the ","Orc ","gods, who they belive bring them strength and victory.",
-                "They would be angry indeed if anything were to happen to it.",
-                Colour.ENERGY, "You could ", "study ", "the runes, trying to learn the secrets of the Orc gods",
-                Colour.DAMAGE, "You could ", "desecrate ", "the runes, angering the orcs but possibly interrupting their power source",
-                Colour.MITIGATION, "You could ", "walk away, ", "moving on to the next room"
-            }, new List<string> { "tudy", "esecrate", "alk away" }, new List<string> { Colour.ENERGY + "S" + Colour.RESET, Colour.DAMAGE + "D" + Colour.RESET, Colour.MITIGATION + "W" + Colour.RESET });
+        {
+            "You approach the altar and find a rune, placed with great care and reverance. ",
+            Colour.MONSTER,"You recognize it as belonging to one of the ","Orc ","gods, who they belive bring them strength and victory.",
+            "They would be angry indeed if anything were to happen to it.",
+            Colour.ENERGY, "You could ", "study ", "the runes, trying to learn the secrets of the Orc gods",
+            Colour.DAMAGE, "You could ", "desecrate ", "the runes, angering the orcs but possibly interrupting their power source",
+            Colour.MITIGATION, "You could ", "walk away, ", "moving on to the next room"
+        }, new List<string> { "tudy", "esecrate", "alk away" }, new List<string> { Colour.ENERGY + "S" + Colour.RESET, Colour.DAMAGE + "D" + Colour.RESET, Colour.MITIGATION + "W" + Colour.RESET });
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "s")
         {
@@ -75,10 +75,8 @@ public class ShrineRoom : Room
                 Create.p.Health = 1;
             }
             ActionWait(studyColourArray, studyList, Colour.ENERGY + "Studying" + Colour.RESET, null);
-            visited = true;
-            Location.list[11].Go();
         }
-        if (choice == "d")
+        else if (choice == "d")
         {
             Console.Clear();
             List<int> desecrateColourArray = new List<int> { };
@@ -124,13 +122,9 @@ public class ShrineRoom : Room
                 desecrateList.Add("!");
             }
             ActionWait(desecrateColourArray, desecrateList, Colour.ENERGY + "Desecrating" + Colour.RESET, null);
-            visited = true;
-            Location.list[11].Go();
         }
-        if (choice == "w")
-        {
-            visited = true;
-        }
+        else if (choice == "w") { }
         else Explore();
+        visited = true;
     }
 }

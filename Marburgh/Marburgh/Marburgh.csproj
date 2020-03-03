@@ -78,7 +78,7 @@
     <Compile Include="GameState.cs" />
     <Compile Include="Items\Weapons\Dagger.cs" />
     <Compile Include="UI\CombatUI.cs" />
-    <Compile Include="Adventure\Explore\Explore.cs" />
+    <Compile Include="Base Classes\Explore.cs" />
     <Compile Include="Base Classes\Create.cs" />
     <Compile Include="Base Classes\Creature.cs" />
     <Compile Include="Base Classes\Equipment.cs" />
@@ -87,7 +87,7 @@
     <Compile Include="Base Classes\Player.cs" />
     <Compile Include="Base Classes\Shop.cs" />
     <Compile Include="Base Classes\Weapon.cs" />
-    <Compile Include="Adventure\Combat.cs" />
+    <Compile Include="Base Classes\Combat.cs" />
     <Compile Include="Creatures\Monsters\Bosses\SavageOrc.cs" />
     <Compile Include="Creatures\Monsters\Dungeon 1\Kobald.cs" />
     <Compile Include="Creatures\Monsters\Normal\Orc.cs" />

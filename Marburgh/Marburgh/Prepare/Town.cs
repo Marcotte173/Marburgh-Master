@@ -4,6 +4,8 @@ using System.Text;
 
 public class Town : Location
 {
+    Explore dungeon1 = new Dungeon1();
+    Explore dungeon2 = new Dungeon2();
     public Town()
     : base() { }
 
@@ -33,7 +35,7 @@ public class Town : Location
         else if (choice == "y") Location.now = Location.list[8];
         else if (choice == "b") Location.now = Location.list[9];
         else if (choice == "z") Create.p.TakeDamage(100, new Goblin()) ;
-        else if (choice == "1" || (choice == "2"))
+        else if (choice == "1")
         {
             //If no, go home
             if (Create.p.CanExplore == false)
@@ -54,13 +56,35 @@ public class Town : Location
                 "Would you like to go now?"
             }))
             {
-                if (choice == "1") Location.list[11] = new Dungeon1();
-                if (choice == "2") Location.list[11] = new Dungeon2();
-
-                //Disallow going back later, send to dungeon
                 Create.p.CanExplore = false;
                 Explore.currentShell = Explore.shell[1];
-                Location.list[11].Go();
+                dungeon1.Go();
+            }
+        }
+        else if (choice == "2")
+        {
+            //If no, go home
+            if (Create.p.CanExplore == false)
+            {
+                UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+                {
+                    "You are exhausted",
+                    "",
+                    "You should go to bed"
+                });
+                Menu();
+            }
+            //Warning so you don't use it then leave right away
+            if (UI.Confirm(new List<int> { 0, 0, 0 }, new List<string>
+            {
+                "You may only go exploring once a day",
+                "",
+                "Would you like to go now?"
+            }))
+            {
+                Create.p.CanExplore = false;
+                Explore.currentShell = Explore.shell[1];
+                dungeon2.Go();
             }
         }
         else if (choice == "x") Create.p.XP += 5;

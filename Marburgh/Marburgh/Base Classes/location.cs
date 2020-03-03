@@ -4,9 +4,6 @@ using System.Text;
 
 public class Location
 {
-    public static Dungeon1 dungeon1 = new Dungeon1();
-    public static Dungeon2 dungeon2 = new Dungeon2();
-    public static Explore Dungeon = dungeon1;
     internal static List<Location> list = new List<Location>
     {
         new Town(),
@@ -19,9 +16,9 @@ public class Location
         new OtherPlaces(),  //7 
         new House(),        //8
         new Bank(),         //9
-        new Combat(),        //10
-        new Dungeon1()
+        new Combat(),        //10 
     };
+
     internal static Location now = new Location();
 
     public Location()

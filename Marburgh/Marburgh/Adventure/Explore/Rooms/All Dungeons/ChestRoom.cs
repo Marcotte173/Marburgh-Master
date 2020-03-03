@@ -122,8 +122,7 @@ public class ChestRoom : Room
             Create.p.Drops.Add(new Drop("Chest Key", 1, 1));
             Explore();
         }
-        else Explore();
+        else Explore(); 
         visited = true;
-        Location.list[11].Go();
     }     
 }
