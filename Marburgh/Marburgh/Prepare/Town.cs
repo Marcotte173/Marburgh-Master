@@ -4,8 +4,8 @@ using System.Text;
 
 public class Town : Location
 {
-    Explore dungeon1 = new Dungeon1();
-    Explore dungeon2 = new Dungeon2();
+    Dungeon1 dungeon1 = new Dungeon1();
+    Dungeon2 dungeon2 = new Dungeon2();
     public Town()
     : base() { }
 
@@ -35,7 +35,7 @@ public class Town : Location
         else if (choice == "y") Location.now = Location.list[8];
         else if (choice == "b") Location.now = Location.list[9];
         else if (choice == "z") Create.p.TakeDamage(100, new Goblin()) ;
-        else if (choice == "1")
+        else if (choice == "1" || (choice == "2" && GameState.CanCraft))
         {
             //If no, go home
             if (Create.p.CanExplore == false)
@@ -55,36 +55,23 @@ public class Town : Location
                 "",
                 "Would you like to go now?"
             }))
+            //Explore!
             {
                 Create.p.CanExplore = false;
-                Explore.currentShell = Explore.shell[1];
-                dungeon1.Go();
-            }
-        }
-        else if (choice == "2")
-        {
-            //If no, go home
-            if (Create.p.CanExplore == false)
-            {
-                UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+                if (choice == "1")
                 {
-                    "You are exhausted",
-                    "",
-                    "You should go to bed"
-                });
-                Menu();
-            }
-            //Warning so you don't use it then leave right away
-            if (UI.Confirm(new List<int> { 0, 0, 0 }, new List<string>
-            {
-                "You may only go exploring once a day",
-                "",
-                "Would you like to go now?"
-            }))
-            {
-                Create.p.CanExplore = false;
-                Explore.currentShell = Explore.shell[1];
-                dungeon2.Go();
+                    Explore.shell = Dungeon1.shell;
+                    Explore.currentShell = Dungeon1.shell[1];
+                    dungeon1.Reset();
+                }
+                else if (choice == "2")
+                {
+
+                    Explore.shell = Dungeon2.shell;
+                    Explore.currentShell = Dungeon2.shell[1];
+                    dungeon2.Reset();
+                }
+                Location.list[11].Go();
             }
         }
         else if (choice == "x") Create.p.XP += 5;

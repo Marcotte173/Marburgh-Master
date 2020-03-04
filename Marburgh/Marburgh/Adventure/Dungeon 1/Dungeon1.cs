@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Dungeon1:Explore
+public class Dungeon1
 {
+    public static List<Shell> shell = new List<Shell> { };
     public Dungeon1()
-    : base()
     {
         shell = new List<Shell> 
         { 
@@ -24,5 +24,15 @@ public class Dungeon1:Explore
             new Shell(0, 0, 5, 9 ,false, new Dungeon1BossRoom())                                         //10
         };
         if (Return.RandomInt(0, 2) == 0) shell[6].room = new ShrineRoom(0, 0);
+    }
+
+    public void Reset()
+    {
+        shell[2].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
+        shell[3].room = new Library(2, Return.RandomInt(0, 2));
+        shell[4].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
+        shell[5].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
+        shell[7].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
+        shell[8].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
     }
 }

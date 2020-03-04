@@ -91,7 +91,8 @@ public class Player : Creature
                 {
                     Console.WriteLine("You have succesfully run away.... Coward");
                     Console.ReadKey(true);
-                    Location.list[11].Go();
+                    combatMonsters.Clear();
+                    Utilities.ToTown();
                 }
                 else Console.WriteLine("You try to get away but can't!");
             }

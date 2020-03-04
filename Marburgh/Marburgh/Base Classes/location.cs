@@ -17,6 +17,7 @@ public class Location
         new House(),        //8
         new Bank(),         //9
         new Combat(),        //10 
+        new Explore()          //11
     };
 
     internal static Location now = new Location();
