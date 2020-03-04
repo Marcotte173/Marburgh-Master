@@ -20,29 +20,32 @@ public class Dagger : Weapon
 
     internal static Dagger[] list = new Dagger[]
     {
-        new Dagger(0,1),
-        new Dagger(1,1),
-        new Dagger(2,1),
-        new Dagger(3,1),
-        new Dagger(4,1),
-        new Dagger(5,1),
+        new Dagger(0),
+        new Dagger(1),
+        new Dagger(2),
+        new Dagger(3),
+        new Dagger(4),
+        new Dagger(5),
     };
 
-    public Dagger(int level, int tier)
+    public Dagger(int level)
     : base()
     {
         this.level = level;
-        this.tier = tier;
-        Name = $"{modifier}{names[level]}";
-
+        Name = names[level];
         spellPower = 0;
         damage = damageArray[level];
         hit = hitArray[level];
         crit = critArray[level];
-
         price = priceArray[level];
-
         type = "Dagger";
         oneHand = true;
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        damage += DamageBoost[level];
+        crit += EffectBoost[level];
+        Name = $"Deadly {names[level]}";
     }
 }

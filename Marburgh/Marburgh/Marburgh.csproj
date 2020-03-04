@@ -77,6 +77,7 @@
     <Compile Include="Adventure\Dungeon 1\Specific Rooms\Dungeon1BossRoom.cs" />
     <Compile Include="GameState.cs" />
     <Compile Include="Items\Weapons\Dagger.cs" />
+    <Compile Include="Prepare\Other\Craft.cs" />
     <Compile Include="UI\CombatUI.cs" />
     <Compile Include="Base Classes\Explore.cs" />
     <Compile Include="Base Classes\Create.cs" />

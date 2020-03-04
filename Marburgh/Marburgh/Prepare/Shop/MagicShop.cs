@@ -120,7 +120,7 @@ public class MagicShop : Shop
         else
         {
             Console.Clear();
-            List<Weapon> EquipmentList = new List<Weapon> { new Blunt(0, 1) };
+            List<Weapon> EquipmentList = new List<Weapon> { new Blunt(0) };
             if (Create.p.MainHand.Name != "None") { EquipmentList.Add(Create.p.MainHand); }
             if (Create.p.OffHand.Name != "None") { EquipmentList.Add(Create.p.OffHand); }
             UI.Store(new List<int> { 0, 0, 0 }, new List<string>

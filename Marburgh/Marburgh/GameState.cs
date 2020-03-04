@@ -14,4 +14,5 @@ public class GameState
     public static bool Dungeon2Key;
 
     public static bool Captain { get; internal set; }
+    public static bool BossWeapon { get; internal set; }
 }

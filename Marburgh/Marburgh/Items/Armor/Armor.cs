@@ -20,22 +20,28 @@ public class Armor : Equipment
 
     internal static Armor[] list = new Armor[]
     {
-        new Armor(0,1),
-        new Armor(1,1),
-        new Armor(2,1),
-        new Armor(3,1),
-        new Armor(4,1),
-        new Armor(5,1),
+        new Armor(0),
+        new Armor(1),
+        new Armor(2),
+        new Armor(3),
+        new Armor(4),
+        new Armor(5),
     };
 
-    public Armor(int level, int tier)
+    public Armor(int level)
     : base()
     {
         this.level = level;
-        this.tier = tier;
-        Name = $"{modifier}{names[level]}";
+        Name = names[level];
         price = priceArray[level];
         defence = defenceArray[level];
         mitigation = mitigationArray[level];
+    }
+
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        mitigation += EffectBoost[level];
+        Name = $"Reinforced {names[level]}";
     }
 }

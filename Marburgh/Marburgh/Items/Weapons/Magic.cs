@@ -21,29 +21,30 @@ public class Magic : Weapon
 
     internal static Magic[] list = new Magic[]
     {
-        new Magic(0,1),
-        new Magic(1,1),
-        new Magic(2,1),
-        new Magic(3,1),
-        new Magic(4,1),
-        new Magic(5,1),
+        new Magic(0),
+        new Magic(1),
+        new Magic(2),
+        new Magic(3),
+        new Magic(4),
+        new Magic(5),
     };
 
-    public Magic(int level, int tier)
+    public Magic(int level)
     : base()
     {
         this.level = level;
-        this.tier = tier;
-        Name = $"{modifier}{names[level]}";
-
+        Name = names[level];
         damage = damageArray[level];
         hit = hitArray[level];
         crit = critArray[level];
-
         spellPower = spellPowerArray[level];
-
         price = priceArray[level];
-
         type = "Magic";
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        spellPower += DamageBoost[level];
+        Name = $"Arcane {names[level]}";
     }
 }

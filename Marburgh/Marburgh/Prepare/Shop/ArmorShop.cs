@@ -81,7 +81,7 @@ public class ArmorShop : Shop
         else
         {
             Console.Clear();
-            List<Armor> EquipmentList = new List<Armor> { new Armor(0, 1) };
+            List<Armor> EquipmentList = new List<Armor> { new Armor(0) };
             if (Create.p.Armor.Name != "None") { EquipmentList.Add(Create.p.Armor); }
             UI.Store(new List<int> { 0, 0, 0 }, new List<string>
             {

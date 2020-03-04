@@ -20,29 +20,32 @@ public class Sword : Weapon
 
     internal static Sword[] list = new Sword[]
     {
-        new Sword(0,1),
-        new Sword(1,1),
-        new Sword(2,1),
-        new Sword(3,1),
-        new Sword(4,1),
-        new Sword(5,1),
+        new Sword(0),
+        new Sword(1),
+        new Sword(2),
+        new Sword(3),
+        new Sword(4),
+        new Sword(5),
     };
 
-    public Sword(int level, int tier)
+    public Sword(int level)
     : base()
     {
         this.level = level;
-        this.tier = tier;
-        Name = $"{modifier}{names[level]}";
-
+        Name = names[level];
         spellPower = 0;
         damage = damageArray[level];
         hit = hitArray[level];
         crit = critArray[level];
-
         price = priceArray[level];
-
         if (level != 5) oneHand = true;
         type = "Sword";
+    }
+    public override void Upgrade()
+    {
+        base.Upgrade();
+        damage += DamageBoost[level];
+        hit += EffectBoost[level];
+        Name = $"Honed {names[level]}";
     }
 }
