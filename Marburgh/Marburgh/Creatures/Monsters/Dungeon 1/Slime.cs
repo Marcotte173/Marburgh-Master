@@ -25,7 +25,10 @@ public class Slime : Monster
     public override void Attack2(Player target)
     {
         Console.WriteLine($"The slime splits in two! Now there are TWO slimes!");
-        //Add slime to list
+        MaxHealth = Health;
+        Slime s = new Slime();
+        s.Health = s.MaxHealth = MaxHealth;
+        Create.p.combatMonsters.Add(s);
     }
 
     public override void Declare2()
@@ -36,5 +39,21 @@ public class Slime : Monster
     {
         if (Return.RandomInt(0, 4) == 0) return slime;
         else return monsterEye;
+    }
+
+    public override void Declare()
+    {
+        if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
+        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Colour.STUNNED + "Stunned" + Colour.RESET);
+        if (health < maxHealth/2 && Create.p.combatMonsters.Count<3)
+        {
+            action = 0;
+            Declare2();
+        }
+        else
+        {
+            action = 1;
+            intention = "Ready";            
+        }
     }
 }

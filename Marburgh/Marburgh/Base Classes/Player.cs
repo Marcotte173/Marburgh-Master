@@ -27,7 +27,6 @@ public class Player : Creature
     protected int playerHit;  
     protected int playerCrit;
     protected bool canExplore;
-    protected bool rescue;
     protected string option3;
     protected string option4;
     protected int run;
@@ -134,7 +133,6 @@ public class Player : Creature
         attack6 = false;
         combatDropList = new List<Drop> { };
         combatMonsters = new List<Monster> { };
-        rescue = false;
     }    
 
     internal void Equip(Armor a) { armor = a; }
@@ -274,7 +272,6 @@ public class Player : Creature
     public int[] LvlSpellpower { get { return lvlSpellpower; } set { lvlSpellpower = value; } }
     public int[] LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
-    public bool Rescue { get { return rescue; } set { rescue = value; } }
     public int[] LvlDefence { get { return lvlPlayerDefence; } set { lvlPlayerDefence = value; } }
     public int[] LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
     public int[] LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }

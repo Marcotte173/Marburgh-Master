@@ -35,7 +35,7 @@ public class Town : Location
         else if (choice == "y") Location.now = Location.list[8];
         else if (choice == "b") Location.now = Location.list[9];
         else if (choice == "z") Create.p.TakeDamage(100, new Goblin()) ;
-        else if (choice == "1" || (choice == "2" && GameState.CanCraft))
+        else if (choice == "1" || (choice == "2" && GameState.Dungeon2Available))
         {
             //If no, go home
             if (Create.p.CanExplore == false)

@@ -41,39 +41,71 @@ public class Tavern:Location
             Bartender();
         else if (choice == "r")
             Utilities.ToTown();
-        //else if (choice == "s" && tavernOptionList[3] == "peak to townsfolk" && Marburgh.Program.tutorial == false)
-        //{
-        //    Console.Clear();
-        //    if (Dungeon.DungeonInfo[0].boss.IsAlive)
-        //    {
-        //        if (p.family.FirstName == RandomEvent.RescueName)
-        //            UI.Keypress(new List<int> { 0, 0, 3, 1, 1 }, new List<string>
-        //            {
-        //                "One of the townsfolk approaches, while the others regard you, gratitude in their eyes.",
-        //                "",
-        //                Colour.SPEAK, Colour.NAME, Colour.SPEAK, "", "'Thank you so much ","", $"{p.family.FirstName} ","","for rescuing us!","",
-        //                Colour.SPEAK, "",$"We were sure we were going to die in there","",
-        //                Colour.SPEAK, "","If only that horrible Orc was dead we would be able to start rebuilding our village'","",
-        //            });
-        //        else
-        //            UI.Keypress(new List<int> { 0, 0, 3, 3, 1 }, new List<string>
-        //            {
-        //                "One of the townsfolk approaches, while the others regard you, gratitude in their eyes.",
-        //                "",
-        //                Colour.SPEAK, Colour.NAME, Colour.SPEAK, "", "'We are so sorry for your loss, ","", $"{p.family.FirstName} ","",".","",
-        //                Colour.SPEAK, Colour.NAME, Colour.SPEAK,"", "We know ","", $"{RandomEvent.RescueName} ","","was family, and saving us from that Orc is a debt we'll never be able to repay.","",
-        //                Colour.SPEAK, "","We'll certainly try tho, once that Orc and his army are gone and we can rebuild'",""
-        //            });
-        //    }
-        //    else
-        //    {
-        //        Console.WriteLine("The townspeople thank you, one by one, relief on all of their faces.\nThe last person to thank you, the mayor of the town pulls you aside a moment");
-        //        if (p.family.FirstName == RandomEvent.RescueName) Utilities.ColourText(Colour.SPEAK, $"\n'Thank the gods you were able to save us all.\nWe will start rebuilding immediately.\nIn time, our town will be as strong and prosperous as it ever was.\nI am worried tho. I believe that this was only the beginning\nThere are monsters and terrors out there eager to stake a claim on our land'");
-        //        else Utilities.ColourText(Colour.SPEAK, $"\n'Thank you so much for saving us all. We owe everything to you and your family, especially {RandomEvent.RescueName}\nWe will start rebuilding immediately.\nIn time, our town will be as strong and prosperous as it ever was.\nI am worried tho. I believe that this was only the beginning\nThere are monsters and terrors out there eager to stake a claim on our land'");
-        //        Utilities.Keypress();
-        //        Console.Clear();                
-        //    }
-        //}
+        else if (choice == "s" && tavernOptionList[3] == "peak to townsfolk" && GameState.Villagers != "")
+        {
+            Console.Clear();
+            if (GameState.CanCraft)
+            {
+                UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+                {
+                    "The townspeople thank you, one by one, relief on all of their faces",
+                    "",
+                    "The last person to thank you, the mayor of the town pulls you aside a moment",
+                });
+                if (Create.p.Name == GameState.Villagers)
+                {
+                    UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
+                    {
+                         Colour.SPEAK,"","'Thank the gods you were able to save us all'","",
+                        "",
+                        Colour.SPEAK, "", "'We will start rebuilding immediately'","",
+                        
+                    });                    
+                }
+                else
+                {
+                    UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
+                    {
+                         Colour.SPEAK,"",$"'Thank you so much for saving us all. We owe everything to you and your family, especially {GameState.Villagers}","",
+                        "",
+                        Colour.SPEAK, "", "'We will start rebuilding immediately'","",
+
+                    });
+                }
+                UI.Keypress(new List<int> { 1, 0, 1, 0, 1 }, new List<string>
+                {
+                    Colour.SPEAK, "",$"'I am worried, however'","",
+                    "",
+                        Colour.SPEAK,"","'The Savage Orc is still out there, raising and army'","",
+                    "",
+                    Colour.SPEAK, "", "'Take this, we found it when we were prisoner. It may lead you to his real location''","",
+                });
+                Buttons.adventureButton.Add(Colour.MONSTER + "2" + Colour.RESET);
+                Buttons.adventureList.Add("Savage Orc's Lair");
+                GameState.Dungeon2Available = true;
+            }
+            else
+            {
+                if (Create.p.Name == GameState.Villagers)
+                    UI.Keypress(new List<int> { 0, 0, 3, 1, 1 }, new List<string>
+                    {
+                        "One of the townsfolk approaches, while the others regard you, gratitude in their eyes.",
+                        "",
+                        Colour.SPEAK, Colour.NAME, Colour.SPEAK, "", "'Thank you so much ","", $"{Create.p.Name} ","","for rescuing us!","",
+                        Colour.SPEAK, "",$"We were sure we were going to die in there","",
+                        Colour.SPEAK, "","If only that horrible Orc was dead we would be able to start rebuilding our village'","",
+                    });
+                else
+                    UI.Keypress(new List<int> { 0, 0, 3, 3, 1 }, new List<string>
+                    {
+                        "One of the townsfolk approaches, while the others regard you, gratitude in their eyes.",
+                        "",
+                        Colour.SPEAK, Colour.NAME, Colour.SPEAK, "", "'We are so sorry for your loss, ","", $"{Create.p.Name} ","",".","",
+                        Colour.SPEAK, Colour.NAME, Colour.SPEAK,"", "We know ","", $"{GameState.Villagers} ","","was family, and saving us from that Orc is a debt we'll never be able to repay.","",
+                        Colour.SPEAK, "","We'll certainly try tho, once that Orc and his army are gone and we can rebuild'",""
+                    });
+            }
+        }
         Menu();
     }
 

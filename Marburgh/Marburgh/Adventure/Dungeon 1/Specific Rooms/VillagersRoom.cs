@@ -42,7 +42,7 @@ public class VillagersRoom : Room
             });
         Tavern.tavernOptionButton[3] = Colour.NAME + "S" + Colour.RESET;
         Tavern.tavernOptionList[3] = "peak to townsfolk";
-        Create.p.Rescue = true;
+        GameState.Villagers = Create.p.Name;
         visited = true;
     }
     public override List<string> Flavor

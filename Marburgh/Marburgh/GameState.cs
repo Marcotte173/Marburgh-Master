@@ -6,13 +6,10 @@ using System.Threading.Tasks;
 
 public class GameState
 {
-    public static bool Villagers1;
-    public static bool Villagers2;
-    public static bool Lieutenant;
-    public static bool SavageOrc;
+    public static string Villagers = "";    
     public static bool CanCraft;
     public static bool Dungeon2Key;
-
-    public static bool Captain { get; internal set; }
-    public static bool BossWeapon { get; internal set; }
+    public static bool SavageOrc;
+    public static bool BossWeapon;
+    public static bool Dungeon2Available;
 }

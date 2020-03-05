@@ -59,11 +59,7 @@ public class House:Location
             else Location.list[8].Menu();
         }
         //If you hit c and it's available, you get to choose how to craft
-        if (choice == "e")
-            UI.Keypress(new List<int> { 0}, new List<string>
-                    {
-                        "Not Yet Implemented"
-                    });
+        if (choice == "e" && GameState.CanCraft) Location.list[12].Go();
         Location.list[8].Menu();
     }    
 }

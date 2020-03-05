@@ -26,6 +26,12 @@ public class Craft:Location
         else if (choice == "b" && GameState.BossWeapon) BossWeapon();
         else if (choice == "r") Utilities.ToTown();
         else if (choice == "c") CharacterSheet.Display();
+        else if (choice == "x")
+        {
+            Create.p.Drops.Add(new Drop("Monster Tooth", 1, 0));
+            Create.p.Drops.Add(new Drop("Monster Eye", 1, 0));
+            Menu();
+        }
         else Menu();
     }
 
@@ -41,17 +47,17 @@ public class Craft:Location
         if (Create.p.MainHand.Upgraded == false)
         {
             upgradeList.Add(Create.p.MainHand.Name);
-            upgradeButton.Add(Colour.ITEM + upgradeList.Count + Colour.RESET);
+            upgradeButton.Add(Colour.ITEM + "1" + Colour.RESET);
         }
         if (Create.p.OffHand.Upgraded == false)
         {
             upgradeList.Add(Create.p.OffHand.Name);
-            upgradeButton.Add(Colour.ITEM + upgradeList.Count + Colour.RESET);
+            upgradeButton.Add(Colour.ITEM + "2" + Colour.RESET);
         }
         if (Create.p.Armor.Upgraded == false)
         {
             upgradeList.Add(Create.p.Armor.Name);
-            upgradeButton.Add(Colour.ITEM + upgradeList.Count + Colour.RESET);       
+            upgradeButton.Add(Colour.ITEM + "3" + Colour.RESET);       
         }
         if (upgradeList.Count == 0)
         {
@@ -68,6 +74,100 @@ public class Craft:Location
             },
             upgradeList, upgradeButton);
             string choice = Return.Option();
+            if (choice == "1" && Create.p.MainHand.Upgraded == false)
+            {
+                if (Check(Create.p.MainHand)) Success(Create.p.MainHand.Name);
+                else NoMats();
+            }
+            else if (choice == "2" && Create.p.OffHand.Upgraded == false)
+            {
+                if (Check(Create.p.OffHand)) Success(Create.p.OffHand.Name);
+                else NoMats();
+            }
+            else if (choice == "3" && Create.p.Armor.Upgraded == false) if (Check(Create.p.Armor))
+            {
+                if (Check(Create.p.Armor)) Success(Create.p.Armor.Name);
+                    else NoMats();
+            }
+            else if (choice == "r") Location.list[8].Go();
+            else if (choice == "c") CharacterSheet.Display();
+            else Menu();
         }
+    }
+
+    private void Success(string name)
+    {
+        UI.Keypress(new List<int> { 0,0,0 }, new List<string>
+        {
+            "Success!",
+            "",
+            $"You have upgraded your {name}"
+        });
+    }
+
+    void NoMats()
+    {
+        UI.Keypress(new List<int> { 0 }, new List<string>
+        {
+            "You don't have the materials!"
+        });
+    }
+
+    private bool Check(Armor armor)
+    {
+        bool haveTeeth = false;
+        bool haveEyes = false;
+        for (int i = 0; i < Create.p.Drops.Count; i++)
+        {
+            if (Create.p.Drops[i].name == "Monster Eye" && Create.p.Drops[i].amount == armor.MonsterEye[armor.Level]) haveEyes = true;
+            if (Create.p.Drops[i].name == "Monster Tooth" && Create.p.Drops[i].amount == armor.MonsterTooth[armor.Level]) haveTeeth = true;
+        }
+        if (haveTeeth && haveEyes)
+        {
+            for (int i = 0; i < Create.p.Drops.Count; i++)
+            {
+                if (Create.p.Drops[i].name == "Monster Eye")
+                {
+                    Create.p.Drops[i].amount -= armor.MonsterEye[armor.Level];
+                    if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
+                }
+               if (Create.p.Drops[i].name == "Monster Tooth")
+                {
+                    Create.p.Drops[i].amount -= armor.MonsterTooth[armor.Level];
+                    if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
+                }
+            }
+            return true;
+        }
+        else return false;
+    }
+
+    private bool Check(Weapon weapon)
+    {
+        bool haveTeeth = false;
+        bool haveEyes = false;
+        for (int i = 0; i < Create.p.Drops.Count; i++)
+        {
+            if (Create.p.Drops[i].name == "Monster Eye" && Create.p.Drops[i].amount == weapon.MonsterEye[weapon.Level]) haveEyes = true;
+            if (Create.p.Drops[i].name == "Monster Tooth" && Create.p.Drops[i].amount == weapon.MonsterTooth[weapon.Level]) haveTeeth = true;
+        }
+        if (haveTeeth && haveEyes)
+        {
+            for (int i = 0; i < Create.p.Drops.Count; i++)
+            {
+                if (Create.p.Drops[i].name == "Monster Eye")
+                {
+                    Create.p.Drops[i].amount -= weapon.MonsterEye[weapon.Level];
+                    if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
+                }
+                if (Create.p.Drops[i].name == "Monster Tooth")
+                {
+                    Create.p.Drops[i].amount -= weapon.MonsterTooth[weapon.Level];
+                    if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
+                }
+            }
+            return true;
+        }
+        else return false;
     }
 }

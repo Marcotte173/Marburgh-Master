@@ -27,16 +27,16 @@ public class Dungeon1BossRoom : Room
         });
         global::Summon.Orc();
         Location.list[10].Go();
-        GameState.CanCraft = true;
-        Buttons.adventureButton.Add(Colour.MONSTER + "2" + Colour.RESET);
-        Buttons.adventureList.Add("Dungeon 2");
+        GameState.CanCraft = true;        
+        House.houseOptionList.Add("nhancement Machine");
+        House.houseOptionButton.Add(Colour.ENHANCEMENT + "E" + Colour.RESET);
         UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
         {
             "You emerge vitorious!",
             "",
             "Searching the room you find a strange looking machine",
             "",
-            "Curious, you bring the machine with you"
+            "Curious, you bring the machine home with you"
         }) ;
         Utilities.ToTown();
     }
