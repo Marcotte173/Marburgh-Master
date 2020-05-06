@@ -1,0 +1,154 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{82E4EDBD-CA75-4C6B-92FD-50F641E81881}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Marburgh</RootNamespace>
+    <AssemblyName>Marburgh</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Adventure\Dungeon 1\Dungeon1.cs" />
+    <Compile Include="Adventure\Dungeon 1\Specific Rooms\Dungeon1Room.cs" />
+    <Compile Include="Adventure\Dungeon2\Dungeon2.cs" />
+    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2BossRoom.cs" />
+    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2LockRoom.cs" />
+    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2MiniBoss.cs" />
+    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2Room.cs" />
+    <Compile Include="Adventure\Explore\Rooms\All Dungeons\ChestRoom.cs" />
+    <Compile Include="Adventure\Explore\Rooms\All Dungeons\ShrineRoom.cs" />
+    <Compile Include="Adventure\Dungeon 1\Specific Rooms\VillagersRoom.cs" />
+    <Compile Include="Adventure\Explore\Events\Events.cs" />
+    <Compile Include="Adventure\Explore\Rooms\All Dungeons\Entrance.cs" />
+    <Compile Include="Base Classes\Room.cs" />
+    <Compile Include="Adventure\Explore\Rooms\All Dungeons\Library.cs" />
+    <Compile Include="Adventure\Explore\Rooms\Constructors\Shell.cs" />
+    <Compile Include="Adventure\Explore\Rooms\Constructors\Summon.cs" />
+    <Compile Include="Adventure\Dungeon 1\Specific Rooms\Dungeon1BossRoom.cs" />
+    <Compile Include="GameState.cs" />
+    <Compile Include="Items\Weapons\Dagger.cs" />
+    <Compile Include="Prepare\Other\Craft.cs" />
+    <Compile Include="UI\CombatUI.cs" />
+    <Compile Include="Base Classes\Explore.cs" />
+    <Compile Include="Base Classes\Create.cs" />
+    <Compile Include="Base Classes\Creature.cs" />
+    <Compile Include="Base Classes\Equipment.cs" />
+    <Compile Include="Base Classes\Location.cs" />
+    <Compile Include="Base Classes\Monster.cs" />
+    <Compile Include="Base Classes\Player.cs" />
+    <Compile Include="Base Classes\Shop.cs" />
+    <Compile Include="Base Classes\Weapon.cs" />
+    <Compile Include="Base Classes\Combat.cs" />
+    <Compile Include="Creatures\Monsters\Bosses\SavageOrc.cs" />
+    <Compile Include="Creatures\Monsters\Dungeon 1\Kobald.cs" />
+    <Compile Include="Creatures\Monsters\Normal\Orc.cs" />
+    <Compile Include="Creatures\Monsters\Dungeon 1\Slime.cs" />
+    <Compile Include="Creatures\Player\Mage.cs" />
+    <Compile Include="Creatures\Player\Rogue.cs" />
+    <Compile Include="Creatures\Player\Warrior.cs" />
+    <Compile Include="Creatures\Monsters\Dungeon 1\Goblin.cs" />
+    <Compile Include="Items\Armor\Armor.cs" />
+    <Compile Include="Items\Upgrade\Drops\Drop.cs" />
+    <Compile Include="Items\Weapons\Blunt.cs" />
+    <Compile Include="Items\Weapons\Magic.cs" />
+    <Compile Include="Items\Weapons\Sword.cs" />
+    <Compile Include="Items\Weapons\Shield.cs" />
+    <Compile Include="Misc\Program.cs" />
+    <Compile Include="Prepare\Other\Help.cs" />
+    <Compile Include="Prepare\Other\House.cs" />
+    <Compile Include="Prepare\Other\Other.cs" />
+    <Compile Include="Prepare\Service\Bank.cs" />
+    <Compile Include="Prepare\Service\Tavern\Gamble\BlackJackGame.cs" />
+    <Compile Include="Prepare\Service\Level.cs" />
+    <Compile Include="Prepare\Service\Tavern\Gamble\DiceGame.cs" />
+    <Compile Include="Prepare\Service\Tavern\Gamble\ThreeCardMonte.cs" />
+    <Compile Include="Prepare\Service\Tavern\Tavern.cs" />
+    <Compile Include="Prepare\Shop\ArmorShop.cs" />
+    <Compile Include="Prepare\Shop\MagicShop.cs" />
+    <Compile Include="Prepare\Town.cs" />
+    <Compile Include="Prepare\Shop\WeaponShop.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="StartGame\Family.cs" />
+    <Compile Include="StartGame\GameStart.cs" />
+    <Compile Include="StartGame\Name.cs" />
+    <Compile Include="Utilities\Button.cs" />
+    <Compile Include="Utilities\CharacterSheet.cs" />
+    <Compile Include="Utilities\Colour.cs" />
+    <Compile Include="Utilities\Return.cs" />
+    <Compile Include="Utilities\Time.cs" />
+    <Compile Include="Utilities\TimeEvent.cs" />
+    <Compile Include="UI\UI.cs" />
+    <Compile Include="UI\UIComponent.cs" />
+    <Compile Include="Utilities\Utilities.cs" />
+    <Compile Include="Utilities\Write.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Misc\App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Creatures\Monsters\Mini Bosses\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7.2 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
