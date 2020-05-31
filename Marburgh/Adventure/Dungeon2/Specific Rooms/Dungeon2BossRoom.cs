@@ -22,7 +22,7 @@ public class Dungeon2BossRoom : Room
             "There's no turning back now!",
         });
         global::Summon.SavageOrc();
-        Location.list[10].Go();
+        Combat.Menu();
         UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
         {
             "You have beaten the first dungeon and for now, the game",

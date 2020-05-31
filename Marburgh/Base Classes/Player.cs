@@ -8,9 +8,9 @@ public class Player : Creature
     public List<Drop> combatDropList = new List<Drop> { };
     public List<Monster> combatMonsters = new List<Monster> { };
     protected int spellpower;
-    protected Weapon mainHand;
-    protected Weapon offHand;
-    protected Armor armor;
+    protected Equipment  mainHand;
+    protected Equipment  offHand;
+    protected Equipment armor;
     protected string pClass;
     protected int[] lvlSpellpower;
     protected int[] lvlHealth;
@@ -41,31 +41,31 @@ public class Player : Creature
             stun--;
             if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
             Write.Position(0, 6);
-            Console.WriteLine(Colour.NAME + "You " + Colour.RESET + "are " + Colour.STUNNED + "stunned" + Colour.RESET + "!");
+            Console.WriteLine(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!");
         }
         if (canAct)
         {
             CombatUI.Declare();
-            if (bleed > 0 && !Status.Contains(Colour.BLOOD + "Bleeding" + Colour.RESET)) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
-            if (burning > 0 && !Status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) Status.Add(Colour.BLOOD + "Burning" + Colour.RESET);
+            if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
+            if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
             string choice = Return.Option();            
             CombatUI.Box();
             Write.Position(47, 22);
-            Write.ColourText(Colour.ENERGY, "Press any key to continue");
+            Write.Line(Color.ENERGY, "Press any key to continue");
             Write.Position(0,6);
             if (bleed > 0)
             {
-                Console.WriteLine(Colour.NAME + "You " + Colour.BLOOD + "bleed " + Colour.RESET + "for " + Colour.DAMAGE + bleedDam + Colour.RESET + " damage!");
+                Console.WriteLine(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
                 TakeDamage(bleedDam);
                 bleed--;
-                if (bleed <= 0 && status.Contains(Colour.BLOOD + "Bleeding" + Colour.RESET)) status.Remove(Colour.BLOOD + "Bleeding" + Colour.RESET);
+                if (bleed <= 0 && status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
             }
             if (burning > 0)
             {
-                Console.WriteLine(Colour.NAME + "You " + Colour.BURNING + "burn " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
+                Console.WriteLine(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
                 TakeDamage(burnDam);
                 burning--;
-                if (burning <= 0 && status.Contains(Colour.BLOOD + "Burning" + Colour.RESET)) status.Remove(Colour.BLOOD + "Burning" + Colour.RESET);
+                if (burning <= 0 && status.Contains(Color.BLOOD + "Burning" + Color.RESET)) status.Remove(Color.BLOOD + "Burning" + Color.RESET);
             }
             if (choice == "1") Attack1(GetTarget());
             else if (choice == "2") Attack2(null);
@@ -135,25 +135,25 @@ public class Player : Creature
         combatMonsters = new List<Monster> { };
     }    
 
-    internal void Equip(Armor a) { armor = a; }
-    internal void Equip(Weapon w, Weapon hand)
+    internal void Equip(Equipment e) { armor = e.Copy(); }
+    internal void Equip(Equipment e, Equipment hand)
     {
-        if (w.OneHand)
+        if (e.OneHand)
         {
             UI.Keypress(new List<int> { 1 }, new List<string>
             {
-                Colour.ITEM, "You equip the ",w.Name,""
+                Color.ITEM, "You equip the ",e.Name,""
             });
-            if (hand == MainHand) MainHand = w;
-            else if (hand == OffHand) OffHand = w;
+            if (hand == MainHand) MainHand = e.Copy();
+            else if (hand == OffHand) OffHand = e.Copy();
         }
         else
         {
             UI.Keypress(new List<int> { 1 }, new List<string>
             {
-                Colour.ITEM, "You equip the ",w.Name,""
+                Color.ITEM, "You equip the ",e.Name,""
             });
-            mainHand = w;
+            mainHand = e.Copy();
             offHand = Sword.list[0];
         }
     }
@@ -163,7 +163,7 @@ public class Player : Creature
         health = (health < 0) ? 0 : health;
         if (health == 0)
         {            
-            Console.WriteLine("You have been " + Colour.BOSS + "killed" + Colour.RESET + " by the " + Colour.MONSTER + hitMe.Name + Colour.RESET + "!\n");
+            Console.WriteLine("You have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!\n");
             Utilities.Keypress();
             Death(hitMe);
         }
@@ -184,7 +184,7 @@ public class Player : Creature
         {
             UI.Keypress(new List<int> { 1,0,0 }, new List<string>
             {
-                Colour.NAME, "You are the last of the ", Family.lastName,"s",
+                Color.NAME, "You are the last of the ", Family.lastName,"s",
                 "",
                 "Your bloodline ends here"
             });
@@ -208,7 +208,7 @@ public class Player : Creature
         if (MaxHealth == Health) DontNeedHeal();
         else
         {
-            if (PotionSize == 0) Console.WriteLine("Your " + Colour.HEALTH+ "potion"+Colour.RESET+" is empty!");
+            if (PotionSize == 0) Console.WriteLine("Your " + Color.HEALTH+ "potion"+Color.RESET+" is empty!");
             else if ((MaxHealth - Health) > PotionSize)
             {
                 AddHealth(PotionSize);
@@ -231,7 +231,7 @@ public class Player : Creature
     }
     public virtual void Attack1(Creature target)
     {
-        Console.WriteLine($"You attack the " + Colour.MONSTER + target.Name + Colour.RESET+ " for "+ Colour.DAMAGE + Damage+Colour.RESET+" damage");
+        Console.WriteLine($"You attack the " + Color.MONSTER + target.Name + Color.RESET+ " for "+ Color.DAMAGE + Damage+Color.RESET+" damage");
         target.TakeDamage(Damage);
     }
     public virtual void Attack2(Creature target)
@@ -257,12 +257,12 @@ public class Player : Creature
 
     public override void HealStatement(int heal)
     {
-        Console.WriteLine("You " + Colour.HEALTH + "heal " + Colour.RESET + "yourself for " + Colour.HEALTH+ heal + Colour.RESET +" hit points");
+        Console.WriteLine("You " + Color.HEALTH + "heal " + Color.RESET + "yourself for " + Color.HEALTH+ heal + Color.RESET +" hit points");
     }
 
     public override void DontNeedHeal()
     {
-        Console.WriteLine("You don't need " + Colour.HEALTH + "healing" + Colour.RESET + "!");
+        Console.WriteLine("You don't need " + Color.HEALTH + "healing" + Color.RESET + "!");
     }
 
     public int[] LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
@@ -278,13 +278,13 @@ public class Player : Creature
     public int[] LvlHit { get { return lvlHit; } set { lvlHit = value; } }
     public int[] LvlMitigation { get { return lvlMitigation; } set { lvlMitigation = value; } }
     public List<Drop> Drops { get { return drops; } set { drops = value; } }
-    public Armor Armor { get { return armor; } set { armor = value; } }
-    public Weapon MainHand { get { return mainHand; } set { mainHand = value; } }
-    public Weapon OffHand { get { return offHand; } set { offHand = value; } }
+    public Equipment Armor { get { return armor; } set { armor = value; } }
+    public Equipment MainHand { get { return mainHand; } set { mainHand = value; } }
+    public Equipment OffHand { get { return offHand; } set { offHand = value; } }
     public string PClass { get { return pClass; } set { pClass = value; } }
-    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage + Armor.Damage; } set { damage = value; } }
-    public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } set { hit = value; } }
-    public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; } set { crit = value; } }
+    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage + Armor.Damage; } }
+    public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } }
+    public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; }  }
     public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }
     public int PlayerDamage { get { return playerDamage; } set { playerDamage = value; } }
     public int PlayerMitigation { get { return playerMitigation; } set { playerMitigation = value; } }
@@ -293,7 +293,7 @@ public class Player : Creature
     public int PlayerSpellpower { get { return playerSpellpower; } set { playerSpellpower = value; } }
     public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence; } }
     public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation; } set { mitigation = value; } }
-    public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } set { spellpower = value; } }
+    public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } }
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }
 }

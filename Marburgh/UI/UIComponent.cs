@@ -128,16 +128,16 @@ public class UIComponent
             Console.Write("-");
         }
         Console.SetCursorPosition(Return.Width(10) - Create.p.Name.Length / 2, 16);
-        Console.WriteLine(Colour.NAME + $"{Create.p.Name}" + Colour.RESET);
+        Console.WriteLine(Color.NAME + $"{Create.p.Name}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(28), 16);
-        Console.WriteLine("Level:" + Colour.XP + $"{Create.p.Level}" + Colour.RESET);
+        Console.WriteLine("Level:" + Color.XP + $"{Create.p.Level}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(47), 16);
-        Console.WriteLine("Gold:" + Colour.GOLD + $"{Create.p.Gold}" + Colour.RESET);
+        Console.WriteLine("Gold:" + Color.GOLD + $"{Create.p.Gold}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(67), 16);
-        Console.WriteLine("[" + Colour.CLASS + "9" + Colour.RESET + "]Character");
+        Console.WriteLine("[" + Color.CLASS + "9" + Color.RESET + "]Character");
         Console.SetCursorPosition(Return.Width(88), 16);
-        if (Location.now == Location.list[0]) Console.WriteLine("[" + Colour.MITIGATION + "0" + Colour.RESET + "]Quit");
-        else Console.WriteLine("[" + Colour.MITIGATION + "0" + Colour.RESET + "]Return");
+        if (GameState.location == Location.Town) Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Quit");
+        else Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Return");
     }
 
     internal static void BarBlank()
@@ -203,7 +203,7 @@ public class UIComponent
     public static void TimeDisplay()
     {
         Console.SetCursorPosition(35, 27);
-        Write.EmbedColourText(Colour.TIME, Colour.TIME, Colour.TIME, Colour.TIME, "It is day ", $"{Time.day}", ", the ", $"{Time.weeks[Time.week]}", " week of ", $"{Time.months[Time.month]}", ", ", $"{Time.year}", "");
+        Write.Line(Color.TIME, Color.TIME, Color.TIME, Color.TIME, "It is day ", $"{Time.day}", ", the ", $"{Time.weeks[Time.week]}", " week of ", $"{Time.months[Time.month]}", ", ", $"{Time.year}", "");
     }
 
     internal static void BottomBar()

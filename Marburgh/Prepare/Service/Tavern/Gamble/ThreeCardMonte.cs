@@ -12,7 +12,7 @@ public class ThreeCardMonteGame
                 "He's a cheat but he's so sure he's going to win he's offered 3 to 1 odds!",
                 "After moving the balls around, you are pretty sure you've kept track",
                 "",
-                Colour.SPEAK,"","'Well, what do you think? Which cup is it in?'",""
+                Color.SPEAK,"","'Well, what do you think? Which cup is it in?'",""
             },
             new List<string> { "", "", "" }, new List<string> { "1", "2", "3" });
         Console.SetCursorPosition(Console.WindowWidth / 2 - 2, 12);
@@ -29,7 +29,7 @@ public class ThreeCardMonteGame
                     "",
                     "You win! The man looks shocked.",
                     "",
-                    Colour.GOLD, "", $"Clearly unhappy, he gives you {wager * 3} gold",""
+                    Color.GOLD, "", $"Clearly unhappy, he gives you {wager * 3} gold",""
                 });
                 p.Gold += wager * 3;
             }
@@ -39,7 +39,7 @@ public class ThreeCardMonteGame
                 {
                     "There's nothing there!",
                     "",
-                    Colour.GOLD, "You lose! Smiling smugly, the man takes your ", "gold",""
+                    Color.GOLD, "You lose! Smiling smugly, the man takes your ", "gold",""
                 });
             }
         }

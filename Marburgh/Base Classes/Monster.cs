@@ -45,8 +45,8 @@ public class Monster : Creature
     public virtual void Declare()
     {
         action = Return.RandomInt(0, 4);        
-        if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add(Colour.BLOOD+"Bleeding"+Colour.RESET);
-        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Colour.STUNNED+"Stunned"+ Colour.RESET);
+        if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add(Color.BLOOD+"Bleeding"+Color.RESET);
+        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED+"Stunned"+ Color.RESET);
         if (action != 0) intention = "Ready";
         else Declare2();
     }
@@ -64,14 +64,14 @@ public class Monster : Creature
     {
         if (bleed > 0)
         {
-            Console.WriteLine($"The "+Colour.MONSTER+Name+Colour.BLOOD+" bleeds " +Colour.RESET +"for " + Colour.DAMAGE + bleedDam + Colour.RESET+" damage!");
+            Console.WriteLine($"The "+Color.MONSTER+Name+Color.BLOOD+" bleeds " +Color.RESET +"for " + Color.DAMAGE + bleedDam + Color.RESET+" damage!");
             TakeDamage(bleedDam);
             bleed--;
             if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
         }
         if (burning > 0)
         {
-            Console.WriteLine($"The " + Colour.MONSTER + Name + Colour.BURNING + " burns " + Colour.RESET + "for " + Colour.DAMAGE + burnDam + Colour.RESET + " damage!");
+            Console.WriteLine($"The " + Color.MONSTER + Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
             TakeDamage(burnDam);
             burning--;
             if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");

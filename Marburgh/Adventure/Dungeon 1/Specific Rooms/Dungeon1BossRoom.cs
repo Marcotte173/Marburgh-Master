@@ -19,17 +19,17 @@ public class Dungeon1BossRoom : Room
         {
             "Entering the lair you find a large Orc, but not the one you expecte to find",
             "",
-            Colour.SPEAK, "","Heh, you thought you found da boss, eh?","",
+            Color.SPEAK, "","Heh, you thought you found da boss, eh?","",
             "",
-            Colour.SPEAK, "","He's further inside not that it matters to you. Now you gonna die"," ",
+            Color.SPEAK, "","He's further inside not that it matters to you. Now you gonna die"," ",
             "",
             "The Orc charges "
         });
         global::Summon.Orc();
-        Location.list[10].Go();
+        Combat.Menu();
         GameState.CanCraft = true;        
         House.houseOptionList.Add("nhancement Machine");
-        House.houseOptionButton.Add(Colour.ENHANCEMENT + "E" + Colour.RESET);
+        House.houseOptionButton.Add(Color.ENHANCEMENT + "E" + Color.RESET);
         UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
         {
             "You emerge vitorious!",

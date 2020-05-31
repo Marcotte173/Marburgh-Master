@@ -11,24 +11,24 @@ public class UI
         UIComponent.DisplayText(colourArray, descriptions);
         Write.Position(0, 15);
         Console.WriteLine("+-----------------------------+----------------------------------------------------------------------------------------+");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx   xxxxxxxxxx    xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx   xxxxxxxxxx    xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx    xxxxxxxxx    xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx    xxxxxxxxx    xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  x  xxxxxxx  x  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  x  xxxxxxx  x  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xx  xxxxx  xx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xx  xxxxx  xx  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxx  xxx  xxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxx  xxx  xxx  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxx  x  xxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxx  x  xxxx  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxx   xxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxx   xxxxx  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|");
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Colour.RESET + "|");        
-        Console.WriteLine("|" + Colour.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|                                                          |" + Colour.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Colour.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx   xxxxxxxxxx    xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx   xxxxxxxxxx    xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx    xxxxxxxxx    xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx    xxxxxxxxx    xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  x  xxxxxxx  x  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  x  xxxxxxx  x  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xx  xxxxx  xx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xx  xxxxx  xx  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxx  xxx  xxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxx  xxx  xxx  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxxx  x  xxxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxxx  x  xxxx  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxxxx   xxxxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxxxx   xxxxx  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|");
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|");        
+        Console.WriteLine("|" + Color.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Color.RESET + "|");
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
         UIComponent.OptionsText(options, optionButton);
         Write.Position(55,26);
-        Write.EmbedColourText(Colour.DAMAGE, "[", "Q", "]uit");
+        Write.Line(Color.DAMAGE, "[", "Q", "]uit");
         Write.Position(42, 14);
-        Write.EmbedColourText(Colour.GOLD, "", "Version 0.15 March 6, 2020, 12:22 A.M.", "");
+        Write.Line(Color.GOLD, "", "Version 0.20 May 31, 2020, 3:04 A.M.", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
@@ -51,26 +51,26 @@ public class UI
         Console.WriteLine("|                                                                                                                      |");
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Console.SetCursorPosition(Return.Width(10) - Create.p.Name.Length / 2, 16);
-        Console.WriteLine(Colour.NAME + $"{Create.p.Name}" + Colour.RESET);
+        Console.WriteLine(Color.NAME + $"{Create.p.Name}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(28), 16);
-        Console.WriteLine("Level:" + Colour.XP + $"{Create.p.Level}" + Colour.RESET);
+        Console.WriteLine("Level:" + Color.XP + $"{Create.p.Level}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(47), 16);
-        Console.WriteLine("Gold:" + Colour.GOLD + $"{Create.p.Gold}" + Colour.RESET);
+        Console.WriteLine("Gold:" + Color.GOLD + $"{Create.p.Gold}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(67), 16);
-        Console.WriteLine("[" + Colour.CLASS + "9" + Colour.RESET + "]Character");
+        Console.WriteLine("[" + Color.CLASS + "9" + Color.RESET + "]Character");
         Console.SetCursorPosition(Return.Width(88), 16);
-        Console.WriteLine("[" + Colour.MITIGATION + "0" + Colour.RESET + "]Return");
+        Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Return");
         UIComponent.OptionsText(options, optionButton);
         Console.SetCursorPosition(4, 21);
-        Console.Write(Colour.SPEAK + "Gold In Bank" + Colour.RESET);
+        Console.Write(Color.SPEAK + "Gold In Bank" + Color.RESET);
         Console.SetCursorPosition(10 - Bank.bankGold.ToString().Length, 22);
-        Write.ColourText(Colour.GOLD, $"{Bank.bankGold}");
+        Write.Line(Color.GOLD, $"{Bank.bankGold}");
         Console.SetCursorPosition(105, 21);
-        Console.Write(Colour.SPEAK + "Investments" + Colour.RESET);
+        Console.Write(Color.SPEAK + "Investments" + Color.RESET);
         Console.SetCursorPosition(111 - Bank.investment.ToString().Length, 22);
-        Write.ColourText(Colour.GOLD, $"{Bank.investment}");
+        Write.Line(Color.GOLD, $"{Bank.investment}");
         Console.SetCursorPosition(0, 13);
-        Write.CenterColourText(Colour.GOLD, "The current investment rate is ", $"{Bank.bankRate}", "%");
+        Write.CenterColourText(Color.GOLD, "The current investment rate is ", $"{Bank.bankRate}", "%");
         UIComponent.TimeDisplay();
     }
 
@@ -83,7 +83,7 @@ public class UI
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
         Write.Position(50, 22);
-        Console.WriteLine("[" + Colour.HEALTH + "Y" + Colour.RESET + "]es         [" + Colour.BOSS + "N" + Colour.RESET + "]o");
+        Console.WriteLine("[" + Color.HEALTH + "Y" + Color.RESET + "]es         [" + Color.BOSS + "N" + Color.RESET + "]o");
         return (Return.Option() == "y") ? true : false;
     }
 
@@ -96,18 +96,20 @@ public class UI
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
         Write.Position(47, 22);
-        Write.ColourText(Colour.ENERGY, "Press any key to continue");
+        Write.Line(Color.ENERGY, "Press any key to continue");
         Console.ReadKey(true);
     }
 
-    internal static Weapon Hand(Weapon w)
+    internal static Equipment Hand(Equipment w)
     {
         if (w.Type == "Shield") return Create.p.OffHand;
         Console.Clear();
         UIComponent.DisplayText(new List<int> { 0 }, new List<string> { "Would you like to equip this in your Main hand or your Off hand ?" });
         Console.SetCursorPosition(0, 15);
         StandardBox();
-        UIComponent.OptionsText(new List<string> { "ain hand", "ff hand" }, new List<string> { Colour.ITEM + "M" + Colour.RESET, Colour.ITEM + "O" + Colour.RESET });
+        UIComponent.OptionsText(new List<string> { "ain hand", "ff hand" }, new List<string> { Color.ITEM + "M" + Color.RESET, Color.ITEM + "O" + Color.RESET });
+        Write.Line(35, 24,Color.ITEM, "Current: ", Create.p.MainHand.Name,"");
+        Write.Line(74, 24, Color.ITEM, "Current: " , Create.p.OffHand.Name,"");
         string choice = Return.Option();
         if (choice == "m") return Create.p.MainHand;
         else if (choice == "o") return Create.p.OffHand;
@@ -120,16 +122,16 @@ public class UI
         UIComponent.DisplayText(new List<int> { 0, 1 }, new List<string>
         {
             "You are the oldest child of an old adventuring family",
-            Colour.NAME, "What is your family " ,"name" , "?"
+            Color.NAME, "What is your family " ,"name" , "?"
         });
         Write.SetY(15);
         UIComponent.BarBlank();
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
         Write.Position(55, 20);
-        Console.Write(Colour.NAME);
+        Console.Write(Color.NAME);
         string choice = Return.String();
-        Console.Write(Colour.RESET);
+        Console.Write(Color.RESET);
         return choice;
     }
 
@@ -206,16 +208,16 @@ public class UI
         Console.SetCursorPosition(Return.MaxWidth(), Console.CursorTop);
         Console.Write("|\n");
         Console.SetCursorPosition(Return.Width(8), 18);
-        Write.ColourText(Colour.MONSTER, "Adventure");
+        Write.Line(Color.MONSTER, "Adventure");
         Console.SetCursorPosition(Return.Width(37), 18);
-        Write.ColourText(Colour.ITEM, "Shops");
+        Write.Line(Color.ITEM, "Shops");
         Console.SetCursorPosition(Return.Width(60), 18);
-        Write.ColourText(Colour.TIME, "Services");
+        Write.Line(Color.TIME, "Services");
         Console.SetCursorPosition(Return.Width(86), 18);
-        Write.ColourText(Colour.XP, "Other");
+        Write.Line(Color.XP, "Other");
     }
 
-    public static void Store(List<int> colourArray, List<string> descriptions, List<Weapon> list)
+    public static void Store(List<int> colourArray, List<string> descriptions, List<Equipment> list)
     {
         Console.Clear();
         UIComponent.DisplayText(colourArray, descriptions);
@@ -230,7 +232,7 @@ public class UI
         Console.SetCursorPosition(Return.Width(16), 19);
         Console.Write("-----------------------------------------------------------------------------------");
         Console.SetCursorPosition(Return.Width(16), 18);
-        if (list[1].Type == "Shield") Console.WriteLine(string.Format("{0,-24 }{1,-24 }{2,-19}{3,-10}", "Item", "Defence", "Mitigation", "Price"));
+        if (list[1].Type == "Shield" || list[1].Type == "Armor") Console.WriteLine(string.Format("{0,-24 }{1,-24 }{2,-24}{3,-10}", "Item", "Defence", "Mitigation", "Price"));
         else Console.WriteLine(string.Format("{0,-25 }{1,-10 }{2,-10 }{3,-10}{4,-15}{5,-10}", "Item","Hit", "Crit", "Damage","Spellpower", "Price"));
         for (int i = 1; i < list.Count; i++)
         {
@@ -238,36 +240,37 @@ public class UI
             else
             {
                 Console.SetCursorPosition(Return.Width(16), 19 + i);
-                if (list[i].Type == "Shield") Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-35 }{3,-31 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.DEFENCE + list[i].Defence + Colour.RESET, Colour.MITIGATION + list[i].Mitigation + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
-                else Console.WriteLine(string.Format("{0,-44 }{1,-31 }{2,-31 }{3,-31 }{4,-30 }{5,-10 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.HIT + list[i].Hit + Colour.RESET, Colour.CRIT + list[i].Crit + Colour.RESET, Colour.DAMAGE + list[i].Damage + Colour.RESET, Colour.SPECIAL + list[i].SpellPower + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
+                if (list[i].Type == "Shield" || list[1].Type == "Armor") Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-40 }{3,-31 }", $"[{i}]{Color.ITEM + list[i].Name + Color.RESET}", Color.DEFENCE + list[i].Defence + Color.RESET, Color.MITIGATION + list[i].Mitigation + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
+                else Console.WriteLine(string.Format("{0,-44 }{1,-31 }{2,-31 }{3,-31 }{4,-30 }{5,-10 }", $"[{i}]{Color.ITEM + list[i].Name + Color.RESET}", Color.HIT + list[i].Hit + Color.RESET, Color.CRIT + list[i].Crit + Color.RESET, Color.DAMAGE + list[i].Damage + Color.RESET, Color.SPECIAL + list[i].SpellPower + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
             }
         }
     }
-    public static void Store(List<int> colourArray, List<string> descriptions, List<Armor> list)
+
+    public static void StoreSell(List<int> colourArray, List<string> descriptions, List<Equipment> list)
     {
         Console.Clear();
         UIComponent.DisplayText(colourArray, descriptions);
         Write.SetY(15);
-        UIComponent.TopBar(); for (int i = 0; i < Console.WindowWidth; i++)
+        UIComponent.TopBar();
+        for (int i = 0; i < Console.WindowWidth; i++)
         {
             Console.Write("-");
         }
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
-        Console.SetCursorPosition(Return.Width(16), 19);
-        Console.Write("-----------------------------------------------------------------------------------");
-        Console.SetCursorPosition(Return.Width(16), 18);
-        Console.WriteLine(string.Format("{0,-24 }{1,-24 }{2,-19}{3,-10}", "Item", "Defence", "Mitigation", "Price"));
+        Write.Line(19, 18, "    Item");
+        Write.Line(89, 18, "Resale Value");
         for (int i = 1; i < list.Count; i++)
         {
             if (list[i].Name == "") Console.WriteLine("");
             else
             {
-                Console.SetCursorPosition(Return.Width(16), 19  + i);
-                Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-35 }{3,-31 }", $"[{i}]{Colour.ITEM + list[i].Name + Colour.RESET}", Colour.DEFENCE + list[i].Defence + Colour.RESET, Colour.MITIGATION + list[i].Mitigation + Colour.RESET, "$ " + Colour.GOLD + list[i].Price + Colour.RESET));
+                Write.Line(19, 19 +i, $"[{i}] {Color.ITEM + list[i].Name+ Color.RESET}");
+                Write.Line(89, 19 + i, Color.GOLD + (list[i].Price/2).ToString() + Color.RESET); ;
             }
         }
     }
+
 
     internal static void Choice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
     {
@@ -303,7 +306,7 @@ public class UI
         Write.SetY(15);
         StandardBoxBlank();
         Write.Position(50,22);
-        Console.WriteLine("[" + Colour.HEALTH + "Y" + Colour.RESET + "]es         [" + Colour.BOSS + "N" + Colour.RESET + "]o");
+        Console.WriteLine("[" + Color.HEALTH + "Y" + Color.RESET + "]es         [" + Color.BOSS + "N" + Color.RESET + "]o");
         return (Return.Option() == "y") ? true : false;
     }
 
@@ -314,7 +317,7 @@ public class UI
         Write.SetY(15);
         StandardBoxBlank();
         Write.Position(47, 22);
-        Write.ColourText(Colour.ENERGY, "Press any key to continue");
+        Write.Line(Color.ENERGY, "Press any key to continue");
         Console.ReadKey(true);
     }
     public static int HowMuch(List<int> colourArray, List<string> descriptions)
@@ -324,9 +327,9 @@ public class UI
         Write.SetY(15);
         StandardBoxBlank();
         Write.Position(47, 22);
-        Console.Write(Colour.GOLD);
+        Console.Write(Color.GOLD);
         int number = Return.Integer();
-        Console.Write(Colour.RESET);
+        Console.Write(Color.RESET);
         return number;
     }
     public static void DotDotDot(List<string> options, List<string> optionButton)

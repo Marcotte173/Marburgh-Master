@@ -18,8 +18,8 @@ public class Time
         new TimeEvent(1,3,1,345, false, true, true, new List<int> { 1 ,1 },
             new List<string>
             {
-                Colour.BOSS, "","Time has run out.","",
-                Colour.BOSS, "","The Savage orc's forces have overrun your town.",""
+                Color.BOSS, "","Time has run out.","",
+                Color.BOSS, "","The Savage orc's forces have overrun your town.",""
             })
     };
 

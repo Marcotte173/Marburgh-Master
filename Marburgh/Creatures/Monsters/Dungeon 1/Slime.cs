@@ -43,8 +43,8 @@ public class Slime : Monster
 
     public override void Declare()
     {
-        if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Colour.BLOOD + "Bleeding" + Colour.RESET);
-        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Colour.STUNNED + "Stunned" + Colour.RESET);
+        if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
+        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
         if (health < maxHealth/2 && Create.p.combatMonsters.Count<3)
         {
             action = 0;

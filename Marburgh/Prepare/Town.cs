@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using System.Text;
 
-public class Town : Location
+public class Town
 {
-    Dungeon1 dungeon1 = new Dungeon1();
-    Dungeon2 dungeon2 = new Dungeon2();
-    public Town()
-    : base() { }
-
-    public override void Menu()
+    static Dungeon1 dungeon1 = new Dungeon1();
+    static Dungeon2 dungeon2 = new Dungeon2();
+    
+    public static void Menu()
     {
+        GameState.location = Location.Town;
         Console.Clear();
         UI.Town(new string[]
             {
@@ -22,19 +21,25 @@ public class Town : Location
         {
             if (UI.Confirm(new List<int> { 1 }, new List<string>
                 {
-                    Colour.DAMAGE, "Would you like to ", "quit","?"
+                    Color.DAMAGE, "Would you like to ", "quit","?"
                 })) Utilities.Quit();
         }
-        else if (choice == "m") Location.now = Location.list[1];
-        else if (choice == "w") Location.now = Location.list[2];
-        else if (choice == "a") Location.now = Location.list[3];
-        else if (choice == "l") Location.now = Location.list[4];
-        else if (choice == "t") Location.now = Location.list[5];
-        else if (choice == "?") Location.now = Location.list[6];
-        else if (choice == "o") Location.now = Location.list[7];
-        else if (choice == "y") Location.now = Location.list[8];
-        else if (choice == "b") Location.now = Location.list[9];
-        else if (choice == "z") Create.p.TakeDamage(100, new Goblin()) ;
+        else if (choice == "m") Shop.Menu("Marley");
+        else if (choice == "w") Shop.Menu("Oscar");
+        else if (choice == "a") Shop.Menu("Lela");
+        else if (choice == "l") Level.Menu();
+        else if (choice == "t") Tavern.Menu();
+        else if (choice == "?") Help.Menu();
+        else if (choice == "o") Other.Menu();
+        else if (choice == "y") House.Menu();
+        else if (choice == "b") Bank.Menu();
+        else if (choice == "k")
+        {
+            Create.p.PlayerDamage = 100;
+            Create.p.Health = 200;
+            Create.p.Drops.Add(new Drop("Chest Key", 1, 1));
+        }
+        else if (choice == "z") Create.p.TakeDamage(100, new Goblin());
         else if (choice == "1" || (choice == "2" && GameState.Dungeon2Available))
         {
             //If no, go home
@@ -71,11 +76,9 @@ public class Town : Location
                     Explore.currentShell = Dungeon2.shell[1];
                     dungeon2.Reset();
                 }
-                Location.list[11].Go();
+                Explore.Menu();
             }
         }
-        else if (choice == "x") Create.p.XP += 5;
-        else if (choice == "k") Time.DayChange(1);
-        Location.now.Go();
+        Menu();
     }
 }

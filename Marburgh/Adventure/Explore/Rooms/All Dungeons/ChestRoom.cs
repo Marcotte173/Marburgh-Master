@@ -25,10 +25,10 @@ public class ChestRoom : Room
                 "The goblins haven't managed to bypass the lock yet",
                 "An old goblin dagger sticks out of the top of the chest where they attempted to create a new opening.",
                 "",
-                Colour.DAMAGE,"You could ", "bash"," the lock, but risk destroying the contents",
-                Colour.ABILITY,"You could"," pick"," the lock, but in the time it takes, more monsters may find you",
-                Colour.NAME,"If only you had a"," key","!"
-            }, new List<string> { "ash the lock", "ick the lock", "ey" }, new List<string> { Colour.DAMAGE + "B" + Colour.RESET, Colour.ABILITY + "P" + Colour.RESET, Colour.NAME + "K" + Colour.RESET });
+                Color.DAMAGE,"You could ", "bash"," the lock, but risk destroying the contents",
+                Color.ABILITY,"You could"," pick"," the lock, but in the time it takes, more monsters may find you",
+                Color.NAME,"If only you had a"," key","!"
+            }, new List<string> { "ash the lock", "ick the lock", "ey" }, new List<string> { Color.DAMAGE + "B" + Color.RESET, Color.ABILITY + "P" + Color.RESET, Color.NAME + "K" + Color.RESET });
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "b")
         {
@@ -40,7 +40,7 @@ public class ChestRoom : Room
             if (Return.RandomInt(1,101) <= 50)
             {
                 bashColourArray.Add(1);
-                bashList.Add(Colour.XP);
+                bashList.Add(Color.XP);
                 bashList.Add("");
                 bashList.Add("Success! ");
                 bashList.Add("");
@@ -49,7 +49,7 @@ public class ChestRoom : Room
             else
             {
                 bashColourArray.Add(1);
-                bashList.Add(Colour.DAMAGE);
+                bashList.Add(Color.DAMAGE);
                 bashList.Add("");
                 bashList.Add("Failure!");
                 bashList.Add("");
@@ -58,7 +58,7 @@ public class ChestRoom : Room
                 bashColourArray.Add(0);
                 bashList.Add("It looks like the valuables inside were fragile indeed.Oh well, maybe next time");
             }
-            ActionWait(bashColourArray, bashList, Colour.DAMAGE + "BLAM!" + Colour.RESET, null);
+            ActionWait(bashColourArray, bashList, Color.DAMAGE + "BLAM!" + Color.RESET, null);
         }
         else if (choice == "p")
         {
@@ -71,7 +71,7 @@ public class ChestRoom : Room
             if (pickRoll <= 50)
             {
                 pickColourArray.Add(1);
-                pickList.Add(Colour.XP);
+                pickList.Add(Color.XP);
                 pickList.Add("");
                 pickList.Add("Success! ");
                 pickList.Add("");
@@ -97,7 +97,7 @@ public class ChestRoom : Room
         else if (choice == "k" && key == true)
         {
             Console.Clear();
-            Write.ColourText(Colour.NAME, "CLICK!");
+            Write.Line(Color.NAME, "CLICK!");
             Write.DotDotDot();
             Console.WriteLine("\n\n\n\n\n\n\n");
             Console.WriteLine("Success!\n\n");
@@ -109,7 +109,7 @@ public class ChestRoom : Room
         {
             UI.Keypress(new List<int> { 1 }, new List<string>
             {
-                Colour.NAME, "You don't have a ", "key", "!"
+                Color.NAME, "You don't have a ", "key", "!"
             });
             Explore();
         }

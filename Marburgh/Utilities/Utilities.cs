@@ -8,8 +8,7 @@ public class Utilities
 {
     internal static void ToTown()
     {
-        Location.now = Location.list[0];
-        Location.now.Go();
+        Town.Menu();
     }
 
     internal static void Quit()

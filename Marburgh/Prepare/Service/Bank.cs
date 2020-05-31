@@ -1,29 +1,27 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class Bank:Location
+public class Bank
 {
-    public Bank()
-    : base() { }
     internal static int bankGold;
     internal static int investment;
     internal static int term;
     public static double bankRate = 0.05;
-    public static List<string> bankButton = new List<string> { Colour.GOLD + "D" + Colour.RESET, Colour.GOLD + "W" + Colour.RESET, Colour.GOLD + "I" + Colour.RESET };
+    public static List<string> bankButton = new List<string> { Color.GOLD + "D" + Color.RESET, Color.GOLD + "W" + Color.RESET, Color.GOLD + "I" + Color.RESET };
     public static List<string> bankText = new List<string> { "eposit", "ithdraw", "nvest" };
-    public override void Menu()
+    public static void Menu()
     {
-
+        GameState.location = Location.Bank;
         Console.Clear();
         UI.BankChoice(new List<int> { 0, 0, 1 }, new List<string>
             {
                 $"You enter a small but busy bank. One teller appears to be free. You walk up to him",
                 "",
-                Colour.SPEAK,"", $"'Hello, how may I be of service?'",""
+                Color.SPEAK,"", $"'Hello, how may I be of service?'",""
             },
             bankText, bankButton);
         Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Colour.BLOOD + "MORE INFO" + Colour.RESET);
+        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "d")
         {
@@ -31,7 +29,7 @@ public class Bank:Location
             {
                 int deposit = UI.HowMuch(new List<int> { 1, 0, 0 }, new List<string>
                 {
-                    Colour.SPEAK, " ", "'Excellent! How much would you like to deposit?'", "",
+                    Color.SPEAK, " ", "'Excellent! How much would you like to deposit?'", "",
                     "",
                     "[0] Return"
                 });
@@ -42,18 +40,18 @@ public class Bank:Location
                     bankGold += deposit;
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
-                        Colour.GOLD,"You deposit ", $"{deposit} ","gold."
+                        Color.GOLD,"You deposit ", $"{deposit} ","gold."
                     });
                 }
                 else
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
-                        Colour.SPEAK,"", "'You don't have enough money!'",""
+                        Color.SPEAK,"", "'You don't have enough money!'",""
                     });
             }
             else UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Colour.SPEAK,"", "'You don't have any money!'",""
+                    Color.SPEAK,"", "'You don't have any money!'",""
                 });
         }
         else if (choice == "?") Info();
@@ -63,7 +61,7 @@ public class Bank:Location
             {
                 int withdraw = UI.HowMuch(new List<int> { 1, 0, 0 }, new List<string>
                 {
-                    Colour.SPEAK, " ", "'Excellent! How much would you like to withdraw?'", "",
+                    Color.SPEAK, " ", "'Excellent! How much would you like to withdraw?'", "",
                     "",
                     "[0] Return"
                 });
@@ -74,18 +72,18 @@ public class Bank:Location
                     bankGold -= withdraw;
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
-                        Colour.GOLD,"You withdraw ", $"{withdraw} ","gold."
+                        Color.GOLD,"You withdraw ", $"{withdraw} ","gold."
                     });
                 }
                 else
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
-                        Colour.SPEAK,"", "'You don't have enough money in the bank!'",""
+                        Color.SPEAK,"", "'You don't have enough money in the bank!'",""
                     });
             }
             else UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Colour.SPEAK,"", "'You don't have any money in the bank!'",""
+                    Color.SPEAK,"", "'You don't have any money in the bank!'",""
                 });
         }
         else if (choice == "9") CharacterSheet.Display();
@@ -95,7 +93,7 @@ public class Bank:Location
             {
                 int invest = UI.HowMuch(new List<int> { 1, 0, 0 }, new List<string>
                 {
-                    Colour.SPEAK, " ", "'Excellent! How much would you like to invest?'", "",
+                    Color.SPEAK, " ", "'Excellent! How much would you like to invest?'", "",
                     "",
                     "[0] Return"
                 });
@@ -106,7 +104,7 @@ public class Bank:Location
                     Create.p.Gold -= invest;
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
-                        Colour.GOLD,"You invest ", $"{invest} ","gold."
+                        Color.GOLD,"You invest ", $"{invest} ","gold."
                     });
                     term = 3;
                     bankButton.RemoveAt(2);
@@ -115,13 +113,13 @@ public class Bank:Location
                 else
                     UI.Keypress(new List<int> { 1 }, new List<string>
                     {
-                        Colour.SPEAK,"", "'You don't have enough money!'",""
+                        Color.SPEAK,"", "'You don't have enough money!'",""
                     });
             }
             else
                 UI.Keypress(new List<int> { 1 }, new List<string>
                         {
-                            Colour.SPEAK,"", "'You don't have any money!'",""
+                            Color.SPEAK,"", "'You don't have any money!'",""
                         });
         }
         else if (choice == "0") Utilities.ToTown();
@@ -134,11 +132,11 @@ public class Bank:Location
         {
             "Your investments have paid off!",
             "",
-            Colour.SPEAK,"You receive ", $"{investment}", " gold"
+            Color.SPEAK,"You receive ", $"{investment}", " gold"
         });
         Create.p.Gold += investment;
         investment = 0;
-        bankButton.Add(Colour.GOLD + "I" + Colour.RESET);
+        bankButton.Add(Color.GOLD + "I" + Color.RESET);
         bankText.Add("nvest");
     }
 
@@ -153,14 +151,14 @@ public class Bank:Location
         if (Return.RandomInt(0,2) == 0) return bankRate += (Return.RandomInt(0, 99) / 10000);
         else return bankRate -= (Return.RandomInt(0, 99) / 10000);
     }
-    void Info()
+    static void Info()
     {
         Console.Clear();
-        Console.WriteLine("\n" + Colour.ITEM + "Items" + Colour.RESET + " are a very important part of " + Colour.ENERGY + "Marburgh" + Colour.RESET + "\n\nThe right " + Colour.ITEM + "equipment" + Colour.RESET + " can mean the difference between sucess and " + Colour.DAMAGE + "death" + Colour.RESET + ".");
-        Console.WriteLine("\n\n" + Colour.CLASS + "CHARACTER SCREEN" + Colour.RESET + "\n\nPress [" + Colour.CLASS + "9" + Colour.RESET + "] from the shop to see your character information, including which items you currently have equiped");
-        Console.WriteLine("\n\n" + Colour.GOLD + "BUYING" + Colour.RESET + "\n\n" + Colour.ITEM + "Items" + Colour.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Colour.ITEM + "B" + Colour.RESET + "]uy, then the " + Colour.ITEM + "item" + Colour.RESET + " you would like to purchase.\nIf you have the required " + Colour.GOLD + "gold" + Colour.RESET + ", you can purchase it");
-        Console.WriteLine("\n\n" + Colour.GOLD + "SELLING" + Colour.RESET + "\n\nWhen you sell an " + Colour.ITEM + "item" + Colour.RESET + ", you will receive half of the item's " + Colour.GOLD + "value" + Colour.RESET + "");
-        Console.WriteLine("\nIf you attempt to equip an " + Colour.ITEM + "item" + Colour.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
+        Console.WriteLine("\n" + Color.ITEM + "Items" + Color.RESET + " are a very important part of " + Color.ENERGY + "Marburgh" + Color.RESET + "\n\nThe right " + Color.ITEM + "equipment" + Color.RESET + " can mean the difference between sucess and " + Color.DAMAGE + "death" + Color.RESET + ".");
+        Console.WriteLine("\n\n" + Color.CLASS + "CHARACTER SCREEN" + Color.RESET + "\n\nPress [" + Color.CLASS + "9" + Color.RESET + "] from the shop to see your character information, including which items you currently have equiped");
+        Console.WriteLine("\n\n" + Color.GOLD + "BUYING" + Color.RESET + "\n\n" + Color.ITEM + "Items" + Color.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Color.ITEM + "B" + Color.RESET + "]uy, then the " + Color.ITEM + "item" + Color.RESET + " you would like to purchase.\nIf you have the required " + Color.GOLD + "gold" + Color.RESET + ", you can purchase it");
+        Console.WriteLine("\n\n" + Color.GOLD + "SELLING" + Color.RESET + "\n\nWhen you sell an " + Color.ITEM + "item" + Color.RESET + ", you will receive half of the item's " + Color.GOLD + "value" + Color.RESET + "");
+        Console.WriteLine("\nIf you attempt to equip an " + Color.ITEM + "item" + Color.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
         Utilities.Keypress();
     }
 }

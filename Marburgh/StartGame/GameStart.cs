@@ -11,15 +11,15 @@ namespace MedievalRPG
             Console.Clear();
             UI.GameMenu(new List<int> { 1, 1, 1, 1, 1, 1, 1 }, new List<string>
             {
-                Colour.TIME,  "",  "/'\\_/`\\             ( )                       ( )    ","",
-                Colour.XP,    "",  "|     |   _ _  _ __ | |_    _   _  _ __   __  | |__  ","",
-                Colour.BOSS,  "",  "| (_) | /'_` )( '__)| '_`\\ ( ) ( )( '__)/'_ `\\|  _ `\\","",
-                Colour.DROP,  "",  "| | | |( (_| || |   | |_) )| (_) || |  ( (_) || | | |,","",
-                Colour.RAREDROP,"","(_) (_)`\\__,_)(_)   (_,__/'`\\___/'(_)  `\\__  |(_) (_)","",
-                Colour.NAME,  "",  "                                       ( )_) |       ","",
-                Colour.GOLD,  "", "                                        \\___/'       ",""
+                Color.TIME,  "",  "/'\\_/`\\             ( )                       ( )    ","",
+                Color.XP,    "",  "|     |   _ _  _ __ | |_    _   _  _ __   __  | |__  ","",
+                Color.BOSS,  "",  "| (_) | /'_` )( '__)| '_`\\ ( ) ( )( '__)/'_ `\\|  _ `\\","",
+                Color.DROP,  "",  "| | | |( (_| || |   | |_) )| (_) || |  ( (_) || | | |,","",
+                Color.RAREDROP,"","(_) (_)`\\__,_)(_)   (_,__/'`\\___/'(_)  `\\__  |(_) (_)","",
+                Color.NAME,  "",  "                                       ( )_) |       ","",
+                Color.GOLD,  "", "                                        \\___/'       ",""
             },
-            new List<string> { "ew Game" }, new List<string> { Colour.HEALTH + "N" + Colour.RESET });
+            new List<string> { "ew Game" }, new List<string> { Color.HEALTH + "N" + Color.RESET });
             string choice = Return.Option();
             if (choice == "n") Family.Make();
             else if (choice == "q") Environment.Exit(0);

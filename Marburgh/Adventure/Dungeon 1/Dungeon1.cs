@@ -16,7 +16,7 @@ public class Dungeon1
             new Shell(0, 1, 3, 6 ,false, new Dungeon1Room(Return.RandomInt(0,2),Return.RandomInt(0,2))),            //2
             new Shell(4, 0, 0, 2 ,false, new Library(Return.RandomInt(0,2),Return.RandomInt(0,2))),         //3
             new Shell(5, 3, 0, 0 ,false, new Dungeon1Room(Return.RandomInt(0,2),Return.RandomInt(0,2))),            //4
-            new Shell(0, 5, 0, 10 ,false, new Dungeon1Room(Return.RandomInt(0,2),Return.RandomInt(0,2))),            //5
+            new Shell(0, 4, 0, 10 ,false, new Dungeon1Room(Return.RandomInt(0,2),Return.RandomInt(0,2))),            //5
             new Shell(7, 0, 2, 0 ,false, new ChestRoom()),                                               //6
             new Shell(9, 6, 8, 0 ,false, new Dungeon1Room(Return.RandomInt(0,2),Return.RandomInt(0,2))),            //7
             new Shell(0, 0, 0, 7 ,false, new VillagersRoom()),                                           //8
@@ -33,6 +33,5 @@ public class Dungeon1
         shell[4].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
         shell[5].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
         shell[7].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
-        shell[8].room = new Dungeon1Room(2, Return.RandomInt(0, 2));
     }
 }

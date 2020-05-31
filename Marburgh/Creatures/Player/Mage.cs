@@ -14,7 +14,7 @@ public class Mage : Player
         potionSize = maxPotionSize += 5;
         offHand = Magic.list[0];
         mainHand = Magic.list[1];
-        armor = Armor.list[0];
+        armor = ARMOR.list[0];
         pClass = "Mage";
         CombatUI.option[1] = "Shield" ;
         option3 =  "Fire Blast";
@@ -36,12 +36,12 @@ public class Mage : Player
         if (energy > 0 && shielded == false)
         {
             shielded = true;
-            Status.Add(Colour.SHIELD + "Shielded" + Colour.RESET);
+            Status.Add(Color.SHIELD + "Shielded" + Color.RESET);
         }
         else if (shielded)
         {
             shielded = false;
-            Status.Remove(Colour.SHIELD + "Shielded" + Colour.RESET);
+            Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
         }
         AttackChoice();
     }
@@ -51,7 +51,7 @@ public class Mage : Player
         int flameDamage = 2 + spellpower + mainHand.SpellPower + offHand.SpellPower;
         if (Return.HaveEnergy(1))
         {
-            Console.WriteLine(Colour.BURNING + "Flames " + Colour.RESET + "burst out of your hands, burning the " + Colour.MONSTER + target.Name + Colour.RESET +" for " + Colour.DAMAGE + flameDamage + Colour.RESET +" damage and " + Colour.BURNING + "igniting " + Colour.RESET + "him!");
+            Console.WriteLine(Color.BURNING + "Flames " + Color.RESET + "burst out of your hands, burning the " + Color.MONSTER + target.Name + Color.RESET +" for " + Color.DAMAGE + flameDamage + Color.RESET +" damage and " + Color.BURNING + "igniting " + Color.RESET + "him!");
             target.TakeDamage(flameDamage);
             if (target.Burning > 0) target.BurnDam += 1;
             else target.BurnDam = 1;
@@ -93,7 +93,7 @@ public class Mage : Player
                 damage -= energy;
                 energy = 0;
                 shielded = false;
-                Status.Remove(Colour.SHIELD + "Shielded" + Colour.RESET);
+                Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
                 base.TakeDamage(damage, hitMe);
             }
         }

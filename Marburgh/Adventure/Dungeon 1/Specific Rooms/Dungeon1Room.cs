@@ -15,7 +15,7 @@ public class Dungeon1Room:Room
         string b = (tier == 0) ? "squalid" : (tier == 1) ? "nondescript" : (tier == 2) ? "nice" : "splendid";
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { $"You enter a {a} {b} room" };
-        name = $"{a} room";
+        name = $"Room";
     }
     public override void Summon(int amount)
     {
@@ -26,7 +26,7 @@ public class Dungeon1Room:Room
             int summon = Return.RandomInt(0, 3);
             string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : " goblin";
             colourArray.Add(1);
-            summonList.Add(Colour.MONSTER);
+            summonList.Add(Color.MONSTER);
             summonList.Add("A");
             summonList.Add(a);
             summonList.Add("");
@@ -37,7 +37,7 @@ public class Dungeon1Room:Room
             else if (summon == 2) global::Summon.Goblin();
         }
         ActionWait(colourArray, summonList, "You have been discovered by", null);
-        Location.list[10].Go();
+        Combat.Menu();
         visited = true;
     }
 }

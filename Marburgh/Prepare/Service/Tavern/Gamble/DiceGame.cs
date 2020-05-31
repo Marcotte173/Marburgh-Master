@@ -12,7 +12,7 @@ public class DiceGame
         UI.StandardBoxBlank();
         //Sound.PlayOnce("Other/dice");
         Console.SetCursorPosition(0, 7);
-        Write.CenterColourText(Colour.GOLD, "Confident, you set ", $"{wager}", " gold on the table");
+        Write.CenterColourText(Color.GOLD, "Confident, you set ", $"{wager}", " gold on the table");
         Console.SetCursorPosition(Console.WindowWidth / 2 - 16, 9);
         Console.Write($"You roll a die, it comes up.");
         RollDice(playerRoll);
@@ -20,7 +20,7 @@ public class DiceGame
         Console.Write($"Your opponent rolls a die, it comes up.");
         RollDice(opponentRoll);
         Console.SetCursorPosition(Console.WindowWidth / 2 - 12, 21);
-        Write.ColourText(Colour.ENERGY, "Press any key to continue");
+        Write.Line(Color.ENERGY, "Press any key to continue");
         Console.ReadKey(true);
         if (playerRoll == opponentRoll)
             UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
@@ -34,7 +34,7 @@ public class DiceGame
         {
             "You win!",
             "",
-            Colour.GOLD, "You receive ", $"{wager * 2 }" ," gold!",
+            Color.GOLD, "You receive ", $"{wager * 2 }" ," gold!",
         });
         else
             UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
@@ -53,7 +53,7 @@ public class DiceGame
         Thread.Sleep(300);
         Console.Write($".");
         Thread.Sleep(300);
-        Console.Write(Colour.NAME + $"{roll}" + Colour.RESET + "!");
+        Console.Write(Color.NAME + $"{roll}" + Color.RESET + "!");
         Thread.Sleep(400);
     }
 }

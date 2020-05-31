@@ -12,7 +12,7 @@ namespace MedievalRPG
     {
         static void Main(string[] args)
         {
-            Colour.SetupConsole();
+            Color.SetupConsole();
             GameStart.Menu();
         }
     }

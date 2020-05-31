@@ -52,7 +52,7 @@ public class Room
             {
                 Create.p.Gold +=120;
                 findColourArray.Add(1);
-                findList.Add(Colour.GOLD);
+                findList.Add(Color.GOLD);
                 findList.Add("You find ");
                 findList.Add($"120");
                 findList.Add(" gold");
@@ -64,7 +64,7 @@ public class Room
                 if (Create.p.PotionSize == Create.p.MaxPotionSize)
                 {
                     findColourArray.Add(1);
-                    findList.Add(Colour.HEALTH);
+                    findList.Add(Color.HEALTH);
                     findList.Add("Somebody already drank the ");
                     findList.Add($"potion");
                     findList.Add("");
@@ -79,7 +79,7 @@ public class Room
                 {
                     Create.p.PotionSize = Create.p.MaxPotionSize;
                     findColourArray.Add(1);
-                    findList.Add(Colour.HEALTH);
+                    findList.Add(Color.HEALTH);
                     findList.Add("You refill your ");
                     findList.Add("potion");
                     findList.Add("");
@@ -91,12 +91,12 @@ public class Room
             {
                 Create.p.XP += 10;
                 findColourArray.Add(1);
-                findList.Add(Colour.XP);
+                findList.Add(Color.XP);
                 findList.Add("You find a ");
                 findList.Add("book");
                 findList.Add(" providing insight into the dungeon and its inhabitants");
                 findColourArray.Add(1);
-                findList.Add(Colour.XP);
+                findList.Add(Color.XP);
                 findList.Add("You gain ");
                 findList.Add($"10 ");
                 findList.Add("experience");
@@ -122,7 +122,7 @@ public class Room
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
         Console.SetCursorPosition(Console.WindowWidth / 2 - 12, 21);
-        Write.ColourText(Colour.ENERGY, "Press any key to continue");
+        Write.Line(Color.ENERGY, "Press any key to continue");
         Console.SetCursorPosition(Console.WindowWidth / 2 - text.Length / 2, 6 - colourArray.Count / 2);
         Console.Write(text);
         Write.DotDotDotSL();

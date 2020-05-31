@@ -4,19 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Explore : Location
+public class Explore
 {
     public static List<Shell> shell = new List<Shell> { };
     protected static Room starter;
     public static Shell currentShell;
-    public Explore()
-    : base()
+    public static void Menu()
     {
-        
-    }
-
-    public override void Menu()
-    {        
+        GameState.location = Location.Exploring;
         Navigate();
         while (true)
         {        
@@ -29,7 +24,7 @@ public class Explore : Location
         }
     }
 
-    private void Navigate()
+    private static void Navigate()
     {
         Console.Clear();
         NavigateUI(currentShell.room.FlavorColourArray, currentShell.room.Flavor, new int[] { currentShell.North, currentShell.South, currentShell.East, currentShell.West });
@@ -82,7 +77,7 @@ public class Explore : Location
     {
         Box(colourArray, descriptions);
         Console.SetCursorPosition(57, 23);
-        Write.EmbedColourText(Colour.HEALTH, "[", "H", "]eal");
+        Write.Line(Color.HEALTH, "[", "H", "]eal");
         TopExploreInfoBar();
         NavOptions(navConnect);
     }
@@ -97,15 +92,15 @@ public class Explore : Location
     private static void TopExploreInfoBar()
     {
         Console.SetCursorPosition(5, 17);
-        Console.WriteLine(Colour.NAME + $"{Create.p.Name}" + Colour.RESET);
+        Console.WriteLine(Color.NAME + $"{Create.p.Name}" + Color.RESET);
         Console.SetCursorPosition(32, 17);
-        Console.WriteLine("Level:" + Colour.XP + $"{Create.p.Level}" + Colour.RESET);
+        Console.WriteLine("Level:" + Color.XP + $"{Create.p.Level}" + Color.RESET);
         Console.SetCursorPosition(54, 17);
-        Console.WriteLine("Health: " + Colour.HEALTH + $"{Create.p.Health}" + Colour.RESET + "/" + Colour.HEALTH + $"{Create.p.MaxHealth}" + Colour.RESET);
+        Console.WriteLine("Health: " + Color.HEALTH + $"{Create.p.Health}" + Color.RESET + "/" + Color.HEALTH + $"{Create.p.MaxHealth}" + Color.RESET);
         Console.SetCursorPosition(78, 17);
-        Console.WriteLine("[" + Colour.CLASS + "9" + Colour.RESET + "]Character");
+        Console.WriteLine("[" + Color.CLASS + "9" + Color.RESET + "]Character");
         Console.SetCursorPosition(104, 17);
-        Console.WriteLine("[" + Colour.MITIGATION + "0" + Colour.RESET + "]Return");
+        Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Return");
     }
 
     private static void Box(List<int> colourArray, List<string> descriptions)
@@ -116,11 +111,11 @@ public class Explore : Location
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
         Console.WriteLine("|                       |                       |                       |                       |                      |");
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|       \\                  /       |xxxxxxxxxxxxx  " + Colour.SHIELD + "Dungeon Map" + Colour.RESET + "  xxxxxxxxxxxxx|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|       \\                  /       |xxxxxxxxxxxxx  " + Color.SHIELD + "Dungeon Map" + Color.RESET + "  xxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|        \\                /        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         +--------------+         |xxxxxxxxxxxxx               xxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         |              |         |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         |              |         |              xxxxx " + Colour.BOSS + "O" + Colour.RESET + " xxxxx              |");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         |              |         |              xxxxx " + Color.BOSS + "O" + Color.RESET + " xxxxx              |");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         |              |         |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         +--------------+         |xxxxxxxxxxxxx               xxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|        /                \\        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
@@ -133,7 +128,7 @@ public class Explore : Location
         if (navConnect[0] > 0)
         {
             Console.SetCursorPosition(56, 19);
-            Write.EmbedColourText(Colour.NAME, "[", "N", "]orth");
+            Write.Line(Color.NAME, "[", "N", "]orth");
             if (shell[currentShell.North].room.visited)
             {
                 Console.SetCursorPosition(98 - shell[currentShell.North].room.Name.Length / 2, 21);
@@ -153,7 +148,7 @@ public class Explore : Location
         if (navConnect[1] > 0)
         {
             Console.SetCursorPosition(56, 27);
-            Write.EmbedColourText(Colour.NAME, "[", "S", "]outh");
+            Write.Line(Color.NAME, "[", "S", "]outh");
             if (shell[currentShell.South].room.visited)
             {
                 Console.SetCursorPosition(98 - shell[currentShell.South].room.Name.Length / 2, 25);
@@ -173,7 +168,7 @@ public class Explore : Location
         if (navConnect[2] > 0)
         {
             Console.SetCursorPosition(70, 23);
-            Write.EmbedColourText(Colour.NAME, "[", "E", "]ast");
+            Write.Line(Color.NAME, "[", "E", "]ast");
             if (shell[currentShell.East].room.visited)
             {
                 Console.SetCursorPosition(113 - shell[currentShell.East].room.Name.Length / 2, 23);
@@ -193,7 +188,7 @@ public class Explore : Location
         if (navConnect[3] > 0)
         {
             Console.SetCursorPosition(44, 23);
-            Write.EmbedColourText(Colour.NAME, "[", "W", "]est");
+            Write.Line(Color.NAME, "[", "W", "]est");
             if (shell[currentShell.West].room.visited)
             {
                 Console.SetCursorPosition(84 - shell[currentShell.West].room.Name.Length / 2, 23);

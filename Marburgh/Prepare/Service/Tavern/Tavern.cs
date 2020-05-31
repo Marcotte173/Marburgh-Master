@@ -4,16 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Tavern:Location
+public class Tavern
 {    
     public static int wager;
-    public Tavern()
-    : base() { }
+
     public static List<string> tavernOptionButton = new List<string>
     {
-        Colour.XP + "L" + Colour.RESET,
-        Colour.XP + "T" + Colour.RESET,
-        Colour.GOLD + "G" + Colour.RESET,
+        Color.XP + "L" + Color.RESET,
+        Color.XP + "T" + Color.RESET,
+        Color.GOLD + "G" + Color.RESET,
         ""
     };
     public static List<string> tavernOptionList = new List<string>
@@ -24,16 +23,17 @@ public class Tavern:Location
         ""
     };
     
-    public override void Menu()
+    public static void Menu()
     {
+        GameState.location = Location.Tavern;
         Console.Clear();
         UI.Choice(new List<int> { 1 }, new List<string>
             {
-                Colour.SPEAK, "", "You enter a bustling tavern. More flavor will be added soon describing the place and what you can do.",""
+                Color.SPEAK, "", "You enter a bustling tavern. More flavor will be added soon describing the place and what you can do.",""
             },
            tavernOptionList, tavernOptionButton);
         Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Colour.BLOOD + "MORE INFO" + Colour.RESET);
+        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "g")
             Gamble(Create.p);
@@ -61,9 +61,9 @@ public class Tavern:Location
                 {
                     UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
                     {
-                         Colour.SPEAK,"","'Thank the gods you were able to save us all'","",
+                         Color.SPEAK,"","'Thank the gods you were able to save us all'","",
                         "",
-                        Colour.SPEAK, "", "'We will start rebuilding immediately'","",
+                        Color.SPEAK, "", "'We will start rebuilding immediately'","",
                         
                     });                    
                 }
@@ -71,21 +71,21 @@ public class Tavern:Location
                 {
                     UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
                     {
-                         Colour.SPEAK,"",$"'Thank you so much for saving us all. We owe everything to you and your family, especially {GameState.Villagers}","",
+                         Color.SPEAK,"",$"'Thank you so much for saving us all. We owe everything to you and your family, especially {GameState.Villagers}","",
                         "",
-                        Colour.SPEAK, "", "'We will start rebuilding immediately'","",
+                        Color.SPEAK, "", "'We will start rebuilding immediately'","",
 
                     });
                 }
                 UI.Keypress(new List<int> { 1, 0, 1, 0, 1 }, new List<string>
                 {
-                    Colour.SPEAK, "",$"'I am worried, however'","",
+                    Color.SPEAK, "",$"'I am worried, however'","",
                     "",
-                        Colour.SPEAK,"","'The Savage Orc is still out there, raising and army'","",
+                        Color.SPEAK,"","'The Savage Orc is still out there, raising and army'","",
                     "",
-                    Colour.SPEAK, "", "'Take this, we found it when we were prisoner. It may lead you to his real location''","",
+                    Color.SPEAK, "", "'Take this, we found it when we were prisoner. It may lead you to his real location''","",
                 });
-                Buttons.adventureButton.Add(Colour.MONSTER + "2" + Colour.RESET);
+                Buttons.adventureButton.Add(Color.MONSTER + "2" + Color.RESET);
                 Buttons.adventureList.Add("Savage Orc's Lair");
                 GameState.Dungeon2Available = true;
             }
@@ -96,18 +96,18 @@ public class Tavern:Location
                     {
                         "One of the townsfolk approaches, while the others regard you, gratitude in their eyes.",
                         "",
-                        Colour.SPEAK, Colour.NAME, Colour.SPEAK, "", "'Thank you so much ","", $"{Create.p.Name} ","","for rescuing us!","",
-                        Colour.SPEAK, "",$"We were sure we were going to die in there","",
-                        Colour.SPEAK, "","If only that horrible Orc was dead we would be able to start rebuilding our village'","",
+                        Color.SPEAK, Color.NAME, Color.SPEAK, "", "'Thank you so much ","", $"{Create.p.Name} ","","for rescuing us!","",
+                        Color.SPEAK, "",$"We were sure we were going to die in there","",
+                        Color.SPEAK, "","If only that horrible Orc was dead we would be able to start rebuilding our village'","",
                     });
                 else
                     UI.Keypress(new List<int> { 0, 0, 3, 3, 1 }, new List<string>
                     {
                         "One of the townsfolk approaches, while the others regard you, gratitude in their eyes.",
                         "",
-                        Colour.SPEAK, Colour.NAME, Colour.SPEAK, "", "'We are so sorry for your loss, ","", $"{Create.p.Name} ","",".","",
-                        Colour.SPEAK, Colour.NAME, Colour.SPEAK,"", "We know ","", $"{GameState.Villagers} ","","was family, and saving us from that Orc is a debt we'll never be able to repay.","",
-                        Colour.SPEAK, "","We'll certainly try tho, once that Orc and his army are gone and we can rebuild'",""
+                        Color.SPEAK, Color.NAME, Color.SPEAK, "", "'We are so sorry for your loss, ","", $"{Create.p.Name} ","",".","",
+                        Color.SPEAK, Color.NAME, Color.SPEAK,"", "We know ","", $"{GameState.Villagers} ","","was family, and saving us from that Orc is a debt we'll never be able to repay.","",
+                        Color.SPEAK, "","We'll certainly try tho, once that Orc and his army are gone and we can rebuild'",""
                     });
             }
         }
@@ -119,7 +119,7 @@ public class Tavern:Location
         Console.Clear();
         UI.Keypress(new List<int> { 1 }, new List<string>
         {
-            Colour.SPEAK, "","The Bartender will have more to say once dungeoning has been implemented",""
+            Color.SPEAK, "","The Bartender will have more to say once dungeoning has been implemented",""
         });
     }
 
@@ -128,7 +128,7 @@ public class Tavern:Location
         Console.Clear();
         UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Colour.SPEAK, "","Word is this game's gonna be pretty cool when it gets finished",""
+                    Color.SPEAK, "","Word is this game's gonna be pretty cool when it gets finished",""
                 });
     }
 
@@ -144,9 +144,9 @@ public class Tavern:Location
                 "",
                 "What do you feel like playing?"
             },
-            new List<string> { "lack Jack", "hree Card Monty", "ice", "" }, new List<string> { Colour.GOLD + "B" + Colour.RESET, Colour.GOLD + "T" + Colour.RESET, Colour.GOLD + "D" + Colour.RESET, "" });
+            new List<string> { "lack Jack", "hree Card Monty", "ice", "" }, new List<string> { Color.GOLD + "B" + Color.RESET, Color.GOLD + "T" + Color.RESET, Color.GOLD + "D" + Color.RESET, "" });
             string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
-            if (choice == "0") Location.list[5].Menu();
+            if (choice == "0") Menu();
             else if (choice != "b" && choice != "t" && choice != "d") Gamble(p);
             Wager(p);
             if (choice == "b") BlackJackGame.StartBlackJack(p, wager);
@@ -164,13 +164,13 @@ public class Tavern:Location
         Console.Clear();
         wager = UI.HowMuch(new List<int> { 1, 0, 0, 0, 0 }, new List<string>
                 {
-                    Colour.GOLD, "You have ", $"{p.Gold}", " gold",
+                    Color.GOLD, "You have ", $"{p.Gold}", " gold",
                     "",
                     "How much would you like to wager?",
                     "",
                     "[0] Return"
                 });
-        if (wager == 0) Location.list[5].Menu();
+        if (wager == 0) Menu();
         else if (wager > 150 * p.Level)
         {
             UI.Keypress(new List<int> { 0 }, new List<string>
@@ -183,19 +183,19 @@ public class Tavern:Location
         {
             if (UI.Confirm(new List<int> { 1 }, new List<string>
             {
-                Colour.GOLD, "You want to wager ", $"{wager}", " gold?"
+                Color.GOLD, "You want to wager ", $"{wager}", " gold?"
             }) == false) Wager(p);
             else p.Gold -= wager;
         }
     }
-    void Info()
+    static void Info()
     {
         Console.Clear();
-        Console.WriteLine("\n" + Colour.ITEM + "Items" + Colour.RESET + " are a very important part of " + Colour.ENERGY + "Marburgh" + Colour.RESET + "\n\nThe right " + Colour.ITEM + "equipment" + Colour.RESET + " can mean the difference between sucess and " + Colour.DAMAGE + "death" + Colour.RESET + ".");
-        Console.WriteLine("\n\n" + Colour.CLASS + "CHARACTER SCREEN" + Colour.RESET + "\n\nPress [" + Colour.CLASS + "9" + Colour.RESET + "] from the shop to see your character information, including which items you currently have equiped");
-        Console.WriteLine("\n\n" + Colour.GOLD + "BUYING" + Colour.RESET + "\n\n" + Colour.ITEM + "Items" + Colour.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Colour.ITEM + "B" + Colour.RESET + "]uy, then the " + Colour.ITEM + "item" + Colour.RESET + " you would like to purchase.\nIf you have the required " + Colour.GOLD + "gold" + Colour.RESET + ", you can purchase it");
-        Console.WriteLine("\n\n" + Colour.GOLD + "SELLING" + Colour.RESET + "\n\nWhen you sell an " + Colour.ITEM + "item" + Colour.RESET + ", you will receive half of the item's " + Colour.GOLD + "value" + Colour.RESET + "");
-        Console.WriteLine("\nIf you attempt to equip an " + Colour.ITEM + "item" + Colour.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
+        Console.WriteLine("\n" + Color.ITEM + "Items" + Color.RESET + " are a very important part of " + Color.ENERGY + "Marburgh" + Color.RESET + "\n\nThe right " + Color.ITEM + "equipment" + Color.RESET + " can mean the difference between sucess and " + Color.DAMAGE + "death" + Color.RESET + ".");
+        Console.WriteLine("\n\n" + Color.CLASS + "CHARACTER SCREEN" + Color.RESET + "\n\nPress [" + Color.CLASS + "9" + Color.RESET + "] from the shop to see your character information, including which items you currently have equiped");
+        Console.WriteLine("\n\n" + Color.GOLD + "BUYING" + Color.RESET + "\n\n" + Color.ITEM + "Items" + Color.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Color.ITEM + "B" + Color.RESET + "]uy, then the " + Color.ITEM + "item" + Color.RESET + " you would like to purchase.\nIf you have the required " + Color.GOLD + "gold" + Color.RESET + ", you can purchase it");
+        Console.WriteLine("\n\n" + Color.GOLD + "SELLING" + Color.RESET + "\n\nWhen you sell an " + Color.ITEM + "item" + Color.RESET + ", you will receive half of the item's " + Color.GOLD + "value" + Color.RESET + "");
+        Console.WriteLine("\nIf you attempt to equip an " + Color.ITEM + "item" + Color.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
         Utilities.Keypress();
     }
 }

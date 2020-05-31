@@ -54,18 +54,18 @@ public class BlackJackGame
             displayText.Add("Blackjack! That pays 3 to 1!");
             UI.Keypress(displayColourArray, displayText);
             Win(p, wager, 3);
-            Location.list[5].Menu();
+            Tavern.Menu();
         }
         if (Count(playerHand) > 21)
         {
             UI.Keypress(displayColourArray, displayText);
             Lose();
-            Location.list[5].Menu();
+            Tavern.Menu();
         }
         displayColourArray.Add(2);
-        string dhColour = Colour.MONSTER;
-        if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour = Colour.SHIELD;
-        displayText.Add(Colour.NAME);
+        string dhColour = Color.MONSTER;
+        if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour = Color.SHIELD;
+        displayText.Add(Color.NAME);
         displayText.Add(dhColour);
         displayText.Add("The dealer is showing a");
         displayText.Add($"{dealerHand[0].svalue} ");
@@ -73,7 +73,7 @@ public class BlackJackGame
         displayText.Add($"{dealerHand[0].suit}");
         displayText.Add("");
         UI.Choice(displayColourArray, displayText,
-            new List<string> { "it", "tay" }, new List<string> { Colour.ITEM + "H" + Colour.RESET, Colour.ITEM + "S" + Colour.RESET });
+            new List<string> { "it", "tay" }, new List<string> { Color.ITEM + "H" + Color.RESET, Color.ITEM + "S" + Color.RESET });
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "h")
         {
@@ -91,9 +91,9 @@ public class BlackJackGame
         for (int i = 0; i < playerHand.Count; i++)
         {
             displayColourArray.Add(2);
-            string pHColour = Colour.MONSTER;
-            if (playerHand[i].suit == "Spades" || playerHand[i].suit == "Clubs") pHColour = Colour.SHIELD;
-            displayText.Add(Colour.NAME);
+            string pHColour = Color.MONSTER;
+            if (playerHand[i].suit == "Spades" || playerHand[i].suit == "Clubs") pHColour = Color.SHIELD;
+            displayText.Add(Color.NAME);
             displayText.Add(pHColour);
             if (playerHand[i].svalue == " Ace" || playerHand[i].svalue == " Eight") displayText.Add("You have an");
             else displayText.Add("You have a");
@@ -105,7 +105,7 @@ public class BlackJackGame
         displayColourArray.Add(0);
         displayText.Add("");
         displayColourArray.Add(1);
-        displayText.Add(Colour.NAME);
+        displayText.Add(Color.NAME);
         displayText.Add("That makes ");
         displayText.Add($"{Count(playerHand)}");
         displayText.Add("");
@@ -134,7 +134,7 @@ public class BlackJackGame
             {
                 "You win!",
                 "",
-                Colour.GOLD, "You receive ",$"{wager * multiplier}"," gold!"
+                Color.GOLD, "You receive ",$"{wager * multiplier}"," gold!"
             });
     }
 
@@ -142,13 +142,13 @@ public class BlackJackGame
     {
         DisplayTextCreate();
         displayColourArray.Add(4);
-        string dhColour1 = Colour.MONSTER;
-        if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour1 = Colour.SHIELD;
-        string dhColour2 = Colour.MONSTER;
-        if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour2 = Colour.SHIELD;
-        displayText.Add(Colour.NAME);
+        string dhColour1 = Color.MONSTER;
+        if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour1 = Color.SHIELD;
+        string dhColour2 = Color.MONSTER;
+        if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour2 = Color.SHIELD;
+        displayText.Add(Color.NAME);
         displayText.Add(dhColour1);
-        displayText.Add(Colour.NAME);
+        displayText.Add(Color.NAME);
         displayText.Add(dhColour2);
         if (dealerHand[0].svalue == " Ace" || dealerHand[0].svalue == " Eight") displayText.Add("The dealer flips his cards, revealing an");
         else displayText.Add("The dealer flips his cards, revealing a");
@@ -167,9 +167,9 @@ public class BlackJackGame
         {
             Deal(dealerHand);
             displayColourArray.Add(2);
-            string dhColour = Colour.MONSTER;
-            if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour = Colour.SHIELD;
-            displayText.Add(Colour.NAME);
+            string dhColour = Color.MONSTER;
+            if (dealerHand[0].suit == "Spades" || dealerHand[0].suit == "Clubs") dhColour = Color.SHIELD;
+            displayText.Add(Color.NAME);
             displayText.Add(dhColour);
             if (dealerHand[dealerHand.Count - 1].svalue == " Ace" || dealerHand[dealerHand.Count - 1].svalue == " Eight") displayText.Add("The dealer draws an");
             else displayText.Add("The dealer draws a");
@@ -190,12 +190,12 @@ public class BlackJackGame
         else
         {
             displayColourArray.Add(1);
-            displayText.Add(Colour.NAME);
+            displayText.Add(Color.NAME);
             displayText.Add("Your total is ");
             displayText.Add($"{Count(playerHand)}");
             displayText.Add("");
             displayColourArray.Add(1);
-            displayText.Add(Colour.NAME);
+            displayText.Add(Color.NAME);
             displayText.Add("The Dealer's total is ");
             displayText.Add($"{Count(dealerHand)}");
             displayText.Add("");

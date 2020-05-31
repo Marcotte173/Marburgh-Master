@@ -4,21 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Combat : Location
+public class Combat
 {
     public static bool desecrated;
     public static int xpReward;
-    public static int goldReward;
+    public static int goldReward;    
     
-    
-    public Combat()
-    : base()
+    public static void Menu()
     {
-        
-    }
-
-    public override void Menu()
-    {
+        GameState.location = Location.Combat;
         while (Create.p.combatMonsters.Count > 0)
         {
             foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
@@ -43,14 +37,14 @@ public class Combat : Location
         colours.Add(0);
         text.Add("");
         colours.Add(1);
-        text.Add(Colour.GOLD);
+        text.Add(Color.GOLD);
         text.Add("You find ");
         text.Add($"{ gold} ");
         text.Add("gold");
         colours.Add(0);
         text.Add("");
         colours.Add(1);
-        text.Add(Colour.XP);
+        text.Add(Color.XP);
         text.Add("You gain ");
         text.Add($"{ xp} ");
         text.Add("experience");
@@ -61,7 +55,7 @@ public class Combat : Location
             colours.Add(0);
             text.Add("");
             colours.Add(1);
-            text.Add(Colour.XP);
+            text.Add(Color.XP);
             text.Add("");
             text.Add("YOU ARE ELIGIBLE FOR A LEVEL RAISE");
             text.Add("");
@@ -73,7 +67,7 @@ public class Combat : Location
             colours.Add(0);
             text.Add("");
             colours.Add(1);
-            text.Add(Colour.dropColour[Create.p.combatDropList[i].rare]);
+            text.Add(Color.dropColour[Create.p.combatDropList[i].rare]);
             text.Add("You find a ");
             text.Add($"{Create.p.combatDropList[i].name}");
             text.Add("");

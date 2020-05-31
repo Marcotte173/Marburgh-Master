@@ -26,7 +26,7 @@ public class Dungeon2Room : Room
             int summon = Return.RandomInt(0, 4);
             string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : (summon == 2 )?" goblin": "n Orc";
             colourArray.Add(1);
-            summonList.Add(Colour.MONSTER);
+            summonList.Add(Color.MONSTER);
             summonList.Add("A");
             summonList.Add(a);
             summonList.Add("");
@@ -37,7 +37,7 @@ public class Dungeon2Room : Room
             else if (summon == 2) global::Summon.Goblin();
         }
         ActionWait(colourArray, summonList, "You have been discovered by", null);
-        Location.list[10].Go();
+        Combat.Menu();
         visited = true;
     }
 }

@@ -31,5 +31,4 @@ public class Summon
     {
         Create.p.combatMonsters.Add(savageOrc.MonsterCopy());
     }
-
 }

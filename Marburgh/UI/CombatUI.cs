@@ -4,9 +4,9 @@ using System.Text;
 
 internal class CombatUI
 {
-    public static List<string> option = new List<string> { Colour.DAMAGE + "Attack" + Colour.RESET, Colour.DEFENCE + "Defend" + Colour.RESET };
+    public static List<string> option = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
     public static List<string> button = new List<string> { "1" , "2" };
-    public static List<string> optionBasic = new List<string> { Colour.DAMAGE + "Attack" + Colour.RESET, Colour.DEFENCE + "Defend" + Colour.RESET };
+    public static List<string> optionBasic = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
     public static List<string> buttonBasic = new List<string> { "1", "2" };
     public static List<string> targetOption = new List<string> {  };
     public static List<string> targetButton = new List<string> {  };
@@ -30,11 +30,11 @@ internal class CombatUI
         int x = (Create.p.combatMonsters.Count == 2) ? 35 : 60; 
         Monster a = Create.p.combatMonsters[0];
         Write.SetX(x - a.Name.Length/2);
-        Console.WriteLine(Colour.MONSTER + a.Name + Colour.RESET);
+        Console.WriteLine(Color.MONSTER + a.Name + Color.RESET);
         Write.Position(x-1, 2);
-        Console.WriteLine(Colour.HEALTH + a.Health + Colour.RESET);
+        Console.WriteLine(Color.HEALTH + a.Health + Color.RESET);
         Write.Position(x - a.Name.Length / 2, 1);
-        Console.WriteLine(Colour.ABILITY + a.Intention + Colour.RESET);
+        Console.WriteLine(Color.ABILITY + a.Intention + Color.RESET);
         for (int i = 0; i < a.Status.Count; i++)
         {
             Write.Position(x - a.Name.Length / 2, 3+i);
@@ -46,11 +46,11 @@ internal class CombatUI
     {
         Monster b = Create.p.combatMonsters[1];
         Write.Position(90 - b.Name.Length / 2, 0);
-        Console.WriteLine(Colour.MONSTER + b.Name + Colour.RESET);
+        Console.WriteLine(Color.MONSTER + b.Name + Color.RESET);
         Write.Position(89, 2);
-        Console.WriteLine(Colour.HEALTH + b.Health + Colour.RESET);
+        Console.WriteLine(Color.HEALTH + b.Health + Color.RESET);
         Write.Position(90 - b.Name.Length / 2, 1);
-        Console.WriteLine(Colour.ABILITY + b.Intention + Colour.RESET);
+        Console.WriteLine(Color.ABILITY + b.Intention + Color.RESET);
         for (int i = 0; i < b.Status.Count; i++)
         {
             Write.Position(90 - b.Name.Length / 2, 3 + i);
@@ -62,11 +62,11 @@ internal class CombatUI
     {
         Monster b = Create.p.combatMonsters[2];
         Write.Position(35 - b.Name.Length / 2, 0);
-        Console.WriteLine(Colour.MONSTER + b.Name + Colour.RESET);
+        Console.WriteLine(Color.MONSTER + b.Name + Color.RESET);
         Write.Position(34, 2);
-        Console.WriteLine(Colour.HEALTH + b.Health + Colour.RESET);
+        Console.WriteLine(Color.HEALTH + b.Health + Color.RESET);
         Write.Position(35 - b.Name.Length / 2, 1);
-        Console.WriteLine(Colour.ABILITY + b.Intention + Colour.RESET);
+        Console.WriteLine(Color.ABILITY + b.Intention + Color.RESET);
         for (int i = 0; i < b.Status.Count; i++)
         {
             Write.Position(35 - b.Name.Length / 2, 3 + i);
@@ -124,32 +124,32 @@ internal class CombatUI
         Console.WriteLine("|                       |                       |                       |                       |                      |");
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxx   "+Colour.SPEAK + "Health"+Colour.RESET+"  xxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxx   "+Color.SPEAK + "Health"+Color.RESET+"  xxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxx       xxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |x  " + Colour.SPEAK + "Potion Size" + Colour.RESET + "  x|");
+        Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |x  " + Color.SPEAK + "Potion Size" + Color.RESET + "  x|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxx           xxx|");
-        Console.WriteLine("|xxx   " + Colour.SPEAK + "Energy" + Colour.RESET + "  xxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
+        Console.WriteLine("|xxx   " + Color.SPEAK + "Energy" + Color.RESET + "  xxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxx      xxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxx|                                                                                  |xxxxxxxxxxxxxxxxx|");
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("|                                                                                                                      |");
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Write.Position(7, 20);
-        Console.WriteLine(Colour.HEALTH + Create.p.Health + Colour.RESET + "/" + Colour.HEALTH + Create.p.MaxHealth + Colour.RESET);
+        Console.WriteLine(Color.HEALTH + Create.p.Health + Color.RESET + "/" + Color.HEALTH + Create.p.MaxHealth + Color.RESET);
         Write.Position(108, 22);
-        Console.WriteLine(Colour.HEALTH + Create.p.PotionSize + Colour.RESET + "/" + Colour.HEALTH + Create.p.MaxPotionSize + Colour.RESET);
+        Console.WriteLine(Color.HEALTH + Create.p.PotionSize + Color.RESET + "/" + Color.HEALTH + Create.p.MaxPotionSize + Color.RESET);
         Write.Position(9, 24);
-        Console.WriteLine(Colour.ENERGY + Create.p.Energy + Colour.RESET + "/" + Colour.ENERGY + Create.p.MaxEnergy + Colour.RESET);
+        Console.WriteLine(Color.ENERGY + Create.p.Energy + Color.RESET + "/" + Color.ENERGY + Create.p.MaxEnergy + Color.RESET);
         Console.SetCursorPosition(Return.Width(10) - Create.p.Name.Length / 2, 16);
-        Console.WriteLine(Colour.NAME + $"{Create.p.Name}" + Colour.RESET);
+        Console.WriteLine(Color.NAME + $"{Create.p.Name}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(28), 16);
-        Console.WriteLine("Level:" + Colour.XP + $"{Create.p.Level}" + Colour.RESET);
+        Console.WriteLine("Level:" + Color.XP + $"{Create.p.Level}" + Color.RESET);
         Console.SetCursorPosition(Return.Width(47), 16);
-        Console.WriteLine("["+Colour.HEALTH + "H" + Colour.RESET+"]eal");
+        Console.WriteLine("["+Color.HEALTH + "H" + Color.RESET+"]eal");
         Console.SetCursorPosition(Return.Width(67), 16);
-        Console.WriteLine("[" + Colour.CLASS + "9" + Colour.RESET + "]Character");
+        Console.WriteLine("[" + Color.CLASS + "9" + Color.RESET + "]Character");
         Console.SetCursorPosition(Return.Width(88), 16);
-        Console.WriteLine("[" + Colour.MITIGATION + "0" + Colour.RESET + "]Run");
+        Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Run");
         Console.SetCursorPosition(20, 27);
         foreach (string s in Create.p.Status) Console.Write(s);
     }

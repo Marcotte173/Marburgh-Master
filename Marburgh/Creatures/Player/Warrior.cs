@@ -13,7 +13,7 @@ public class Warrior : Player
         playerHit += 5;
         offHand = Shield.list[1];
         mainHand = Blunt.list[1];
-        armor = Armor.list[1];
+        armor = ARMOR.list[1];
         pClass = "Warrior";
         option3 = "Rend";
         option4 = "Scream";
@@ -32,7 +32,7 @@ public class Warrior : Player
         int rendDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
         if (Return.HaveEnergy(1))
         {
-            Console.WriteLine($"You deliver a sturdy blow! The "+Colour.MONSTER+target.Name +Colour.RESET+" takes "+Colour.DAMAGE + rendDamage + Colour.RESET +" damage and starts to "+Colour.BLOOD + "bleed"+Colour.RESET+"!");
+            Console.WriteLine($"You deliver a sturdy blow! The "+Color.MONSTER+target.Name +Color.RESET+" takes "+Color.DAMAGE + rendDamage + Color.RESET +" damage and starts to "+Color.BLOOD + "bleed"+Color.RESET+"!");
             target.TakeDamage(rendDamage);
             target.Bleed = 2;
             target.BleedDam = 3;

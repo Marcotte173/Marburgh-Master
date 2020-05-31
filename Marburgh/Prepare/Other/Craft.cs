@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Craft:Location
+public class Craft
 {    
-    public Craft()
-    : base() { }
-
-    public override void Menu()
+    public static void Menu()
     {
+        GameState.location = Location.Craft;
         Console.Clear();
         UI.Choice(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
         {
@@ -20,7 +18,7 @@ public class Craft:Location
             "",
             "But hopefully more will become apparent over time"
         },
-        new List<string> { "pgrade"}, new List<string> { Colour.ITEM + "U" + Colour.RESET, });
+        new List<string> { "pgrade"}, new List<string> { Color.ITEM + "U" + Color.RESET, });
         string choice = Return.Option();
         if (choice == "u") Upgrade();
         else if (choice == "b" && GameState.BossWeapon) BossWeapon();
@@ -35,29 +33,29 @@ public class Craft:Location
         else Menu();
     }
 
-    private void BossWeapon()
+    private static void BossWeapon()
     {
         
     }
 
-    private void Upgrade()
+    private static void Upgrade()
     {
         List<string> upgradeList = new List<string> { };
         List<string> upgradeButton = new List<string> { };
         if (Create.p.MainHand.Upgraded == false)
         {
             upgradeList.Add(Create.p.MainHand.Name);
-            upgradeButton.Add(Colour.ITEM + "1" + Colour.RESET);
+            upgradeButton.Add(Color.ITEM + "1" + Color.RESET);
         }
         if (Create.p.OffHand.Upgraded == false)
         {
             upgradeList.Add(Create.p.OffHand.Name);
-            upgradeButton.Add(Colour.ITEM + "2" + Colour.RESET);
+            upgradeButton.Add(Color.ITEM + "2" + Color.RESET);
         }
         if (Create.p.Armor.Upgraded == false)
         {
             upgradeList.Add(Create.p.Armor.Name);
-            upgradeButton.Add(Colour.ITEM + "3" + Colour.RESET);       
+            upgradeButton.Add(Color.ITEM + "3" + Color.RESET);       
         }
         if (upgradeList.Count == 0)
         {
@@ -89,13 +87,13 @@ public class Craft:Location
                 if (Check(Create.p.Armor)) Success(Create.p.Armor.Name);
                     else NoMats();
             }
-            else if (choice == "0") Location.list[8].Go();
+            else if (choice == "0") Menu();
             else if (choice == "9") CharacterSheet.Display();
             else Menu();
         }
     }
 
-    private void Success(string name)
+    private static void Success(string name)
     {
         UI.Keypress(new List<int> { 0,0,0 }, new List<string>
         {
@@ -105,7 +103,7 @@ public class Craft:Location
         });
     }
 
-    void NoMats()
+    static void NoMats()
     {
         UI.Keypress(new List<int> { 0 }, new List<string>
         {
@@ -113,14 +111,14 @@ public class Craft:Location
         });
     }
 
-    private bool Check(Armor armor)
+    private static bool Check(Equipment item)
     {
         bool haveTeeth = false;
         bool haveEyes = false;
         for (int i = 0; i < Create.p.Drops.Count; i++)
         {
-            if (Create.p.Drops[i].name == "Monster Eye" && Create.p.Drops[i].amount == armor.MonsterEye[armor.Level]) haveEyes = true;
-            if (Create.p.Drops[i].name == "Monster Tooth" && Create.p.Drops[i].amount == armor.MonsterTooth[armor.Level]) haveTeeth = true;
+            if (Create.p.Drops[i].name == "Monster Eye" && Create.p.Drops[i].amount == item.MonsterEye[item.Level]) haveEyes = true;
+            if (Create.p.Drops[i].name == "Monster Tooth" && Create.p.Drops[i].amount == item.MonsterTooth[item.Level]) haveTeeth = true;
         }
         if (haveTeeth && haveEyes)
         {
@@ -128,46 +126,17 @@ public class Craft:Location
             {
                 if (Create.p.Drops[i].name == "Monster Eye")
                 {
-                    Create.p.Drops[i].amount -= armor.MonsterEye[armor.Level];
+                    Create.p.Drops[i].amount -= item.MonsterEye[item.Level];
                     if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
                 }
                if (Create.p.Drops[i].name == "Monster Tooth")
                 {
-                    Create.p.Drops[i].amount -= armor.MonsterTooth[armor.Level];
+                    Create.p.Drops[i].amount -= item.MonsterTooth[item.Level];
                     if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
                 }
             }
             return true;
         }
         else return false;
-    }
-
-    private bool Check(Weapon weapon)
-    {
-        bool haveTeeth = false;
-        bool haveEyes = false;
-        for (int i = 0; i < Create.p.Drops.Count; i++)
-        {
-            if (Create.p.Drops[i].name == "Monster Eye" && Create.p.Drops[i].amount == weapon.MonsterEye[weapon.Level]) haveEyes = true;
-            if (Create.p.Drops[i].name == "Monster Tooth" && Create.p.Drops[i].amount == weapon.MonsterTooth[weapon.Level]) haveTeeth = true;
-        }
-        if (haveTeeth && haveEyes)
-        {
-            for (int i = 0; i < Create.p.Drops.Count; i++)
-            {
-                if (Create.p.Drops[i].name == "Monster Eye")
-                {
-                    Create.p.Drops[i].amount -= weapon.MonsterEye[weapon.Level];
-                    if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
-                }
-                if (Create.p.Drops[i].name == "Monster Tooth")
-                {
-                    Create.p.Drops[i].amount -= weapon.MonsterTooth[weapon.Level];
-                    if (Create.p.Drops[i].amount <= 0) Create.p.Drops.Remove(Create.p.Drops[i]);
-                }
-            }
-            return true;
-        }
-        else return false;
-    }
+    }    
 }

@@ -27,7 +27,7 @@ public class Family
     {
         Console.Clear();
         lastName = UI.CreationBox();
-        if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Colour.NAME, "Is ", $"{lastName}", " correct?" })) FamilyName();
+        if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "Is ", $"{lastName}", " correct?" })) FamilyName();
     }
 
     private static void GenerateSiblings()

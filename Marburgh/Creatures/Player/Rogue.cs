@@ -14,7 +14,7 @@ public class Rogue : Player
         playerHit += 10;
         offHand = Dagger.list[0];
         mainHand = Dagger.list[1];
-        armor = Armor.list[1];
+        armor = ARMOR.list[1];
         pClass = "Rogue";
         option3 = "Stun";
         option4 = "Backstab";
@@ -33,7 +33,7 @@ public class Rogue : Player
         int stunDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
         if (Return.HaveEnergy(1))
         {            
-            Console.WriteLine($"You deliver a sturdy blow! The "+Colour.MONSTER+target.Name +Colour.RESET+" takes "+Colour.DAMAGE + stunDamage + Colour.RESET +" damage and is "+Colour.STUNNED + "stunned"+Colour.RESET+"!");
+            Console.WriteLine($"You deliver a sturdy blow! The "+Color.MONSTER+target.Name +Color.RESET+" takes "+Color.DAMAGE + stunDamage + Color.RESET +" damage and is "+Color.STUNNED + "stunned"+Color.RESET+"!");
             target.TakeDamage(stunDamage);
             target.Stun = 2;
         }

@@ -1,37 +1,36 @@
 ﻿using System;
 using System.Collections.Generic;
 
-public class House:Location
+public class House
 {
     public static List<string> houseOptionButton = new List<string>
     {
-        Colour.NAME + "S" + Colour.RESET
+        Color.NAME + "S" + Color.RESET
     };
     public static List<string> houseOptionList = new List<string>
     {
         "leep"
     };
-    public House()
-    : base() { }
-    //When you go to your house
-    public override void Menu()
+    
+    public static void Menu()
     {
+        GameState.location = Location.House;
         Console.Clear();
         if (houseOptionList.Count < 3)
             UI.Choice(new List<int> { 1 }, new List<string>
             {
-                Colour.SPEAK, "", "You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.", "",
+                Color.SPEAK, "", "You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.", "",
             },
             houseOptionList, houseOptionButton);
         else
             UI.Choice(new List<int> { 1, 1 }, new List<string>
             {
-                Colour.SPEAK, "","You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.","",
-                Colour.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","","Now you just have to figure out how it works"
+                Color.SPEAK, "","You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.","",
+                Color.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","","Now you just have to figure out how it works"
             },
             houseOptionList, houseOptionButton);
         Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Colour.BLOOD + "MORE INFO" + Colour.RESET);
+        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();        
         if (choice == "0") Utilities.ToTown();
         else if (choice == "9") CharacterSheet.Display();
@@ -43,8 +42,8 @@ public class House:Location
                 new List<int> { 0, 2, 1 }, new List<string>
                 {
                     "Would you like to sleep until morning?",
-                    Colour.HEALTH,Colour.ENERGY,"Your ", "Health " ,"and " ,"Energy " , "will be restored to maximum",
-                    Colour.TIME, "Time will advance by ","one ","day",
+                    Color.HEALTH,Color.ENERGY,"Your ", "Health " ,"and " ,"Energy " , "will be restored to maximum",
+                    Color.TIME, "Time will advance by ","one ","day",
                 }))
             {
                 Console.Clear();
@@ -53,27 +52,26 @@ public class House:Location
                     {
                         "You sleep until morning",
                         "",
-                        Colour.HEALTH, "", "Health " , "at Maximum ",
-                        Colour.ENERGY , "", "Energy " ,  "at maximum",
-                        Colour.HEALTH, "Your potion returns to " , "full " , "size",
+                        Color.HEALTH, "", "Health " , "at Maximum ",
+                        Color.ENERGY , "", "Energy " ,  "at maximum",
+                        Color.HEALTH, "Your potion returns to " , "full " , "size",
                         "",
                         "You can explore again",
                     });
             }
-            else Location.list[8].Menu();
+            else Menu();
         }
         //If you hit c and it's available, you get to choose how to craft
-        if (choice == "e" && GameState.CanCraft) Location.list[12].Go();
-        Location.list[8].Menu();
+        if (choice == "e" && GameState.CanCraft) Craft.Menu();
+        Menu();
     }
-    void Info()
+    static void Info()
     {
         Console.Clear();
-        Console.WriteLine("\n" + Colour.ITEM + "Items" + Colour.RESET + " are a very important part of " + Colour.ENERGY + "Marburgh" + Colour.RESET + "\n\nThe right " + Colour.ITEM + "equipment" + Colour.RESET + " can mean the difference between sucess and " + Colour.DAMAGE + "death" + Colour.RESET + ".");
-        Console.WriteLine("\n\n" + Colour.CLASS + "CHARACTER SCREEN" + Colour.RESET + "\n\nPress [" + Colour.CLASS + "9" + Colour.RESET + "] from the shop to see your character information, including which items you currently have equiped");
-        Console.WriteLine("\n\n" + Colour.GOLD + "BUYING" + Colour.RESET + "\n\n" + Colour.ITEM + "Items" + Colour.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Colour.ITEM + "B" + Colour.RESET + "]uy, then the " + Colour.ITEM + "item" + Colour.RESET + " you would like to purchase.\nIf you have the required " + Colour.GOLD + "gold" + Colour.RESET + ", you can purchase it");
-        Console.WriteLine("\n\n" + Colour.GOLD + "SELLING" + Colour.RESET + "\n\nWhen you sell an " + Colour.ITEM + "item" + Colour.RESET + ", you will receive half of the item's " + Colour.GOLD + "value" + Colour.RESET + "");
-        Console.WriteLine("\nIf you attempt to equip an " + Colour.ITEM + "item" + Colour.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
+        Write.Line(Color.BLOOD, "", "MORE INFO", "\n\n");
+        Console.WriteLine(Color.XP + "YOUR HOUSE" + Color.RESET + "\n\nYour" + Color.XP + " house" + Color.RESET + " is where you return at the end of each day to heal up, pass time and craft poweful items ");
+        Console.WriteLine("\n\n" + Color.TIME + "SLEEPING" + Color.RESET + "\n\nWhen you sleep, several things happen. \n\n- Your potion refills itself\n- You can go adventuring. You can go adventuring once per day\n- The day passes. This is important as many events will happen on specific days");
+        Console.WriteLine("\n\n" + Color.ENHANCEMENT + "CRAFTING" + Color.RESET + "\n\nDefeated " + Color.MONSTER + "monsters" + Color.RESET + " can " + Color.DROP + "drop" + Color.RESET + " special loot that can be used to craft " + Color.ITEM + "items" + Color.RESET + ".\nTo begin, you must find the " + Color.ENHANCEMENT + "crafting machine" + Color.RESET + "\n\n");
         Utilities.Keypress();
     }
 }
