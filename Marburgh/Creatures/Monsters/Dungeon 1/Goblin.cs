@@ -25,7 +25,7 @@ public class Goblin:Monster
     {
         if (AttemptToHit(target, 0))
         {
-            Console.WriteLine($"The goblin rakes you for {Damage - 1} damage, causing bleeding");
+            Combat.combatText.Add($"The "+Color.MONSTER + "goblin" + Color.RESET +$" rakes you for {Color.DAMAGE + damage  + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET );
             target.Bleed = 2;
             target.BleedDam = 2;
             target.TakeDamage(Damage - 1,this);

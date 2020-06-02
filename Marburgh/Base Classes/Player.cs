@@ -31,42 +31,31 @@ public class Player : Creature
     protected string option4;
     protected int run;
     protected List<Drop> drops = new List<Drop> { };
+    static List<string> text = Combat.combatText;
 
     internal void AttackChoice()
     {
-        if (stun > 0)
+        if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
+        if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
+        if (bleed > 0)
         {
-            CombatUI.Stunned();
-            canAct = false;
-            stun--;
-            if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
-            Write.Position(0, 6);
-            Console.WriteLine(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!");
+            text.Add(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!\n");
+            TakeDamage(bleedDam);
+            bleed--;
+            if (bleed <= 0 && status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
         }
+        if (burning > 0)
+        {
+            text.Add(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!\n");
+            TakeDamage(burnDam);
+            burning--;
+            if (burning <= 0 && status.Contains(Color.BLOOD + "Burning" + Color.RESET)) status.Remove(Color.BLOOD + "Burning" + Color.RESET);
+        }
+
         if (canAct)
         {
-            CombatUI.Declare();
-            if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
-            if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
-            string choice = Return.Option();            
-            CombatUI.Box();
-            Write.Position(47, 22);
-            Write.Line(Color.ENERGY, "Press any key to continue");
-            Write.Position(0,6);
-            if (bleed > 0)
-            {
-                Console.WriteLine(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
-                TakeDamage(bleedDam);
-                bleed--;
-                if (bleed <= 0 && status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
-            }
-            if (burning > 0)
-            {
-                Console.WriteLine(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
-                TakeDamage(burnDam);
-                burning--;
-                if (burning <= 0 && status.Contains(Color.BLOOD + "Burning" + Color.RESET)) status.Remove(Color.BLOOD + "Burning" + Color.RESET);
-            }
+            string choice = Return.Option();
+            Write.Position(0, 6);
             if (choice == "1") Attack1(GetTarget());
             else if (choice == "2") Attack2(null);
             else if (choice == "3" && CanAttack3) Attack3(GetTarget());
@@ -76,7 +65,6 @@ public class Player : Creature
             else if (choice == "h")
             {
                 DrinkPotion();
-                Console.ReadKey(true);
                 AttackChoice();
             }
             else if (choice == "9")
@@ -88,14 +76,18 @@ public class Player : Creature
             {
                 if (Return.RandomInt(1, 101) <= run)
                 {
-                    Console.WriteLine("You have succesfully run away.... Coward");
-                    Console.ReadKey(true);
+                    Console.Clear();
+                    UI.Keypress(new List<int> { 0 }, new List<string> {"You succesfully runa way... Coward" });
                     combatMonsters.Clear();
                     Utilities.ToTown();
                 }
-                else Console.WriteLine("You try to get away but can't!");
+                else text.Add("You try to get away but can't!\n\n");
             }
             else AttackChoice();
+        }
+        else
+        {
+            Console.ReadKey();
         }
     }
 
@@ -123,7 +115,7 @@ public class Player : Creature
         playerDefence = 5;
         playerMitigation = 1;
         level = 1;
-        playerDamage = 3;
+        playerDamage = 6;
         canExplore = true;
         canAct = true;
         xp = 0;
@@ -162,9 +154,16 @@ public class Player : Creature
         health -= damage;
         health = (health < 0) ? 0 : health;
         if (health == 0)
-        {            
-            Console.WriteLine("You have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!\n");
-            Utilities.Keypress();
+        {
+            Console.Clear();
+            CombatUI.Box();
+            int n = 6;
+            for (int i = 0; i < Combat.combatText.Count; i++)
+            {
+                Write.Line(0, n + i, Combat.combatText[i]);
+            }
+            Console.WriteLine("\n\nYou have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!\n");
+            Utilities.Keypress(40,22);
             Death(hitMe);
         }
     }
@@ -184,7 +183,7 @@ public class Player : Creature
         {
             UI.Keypress(new List<int> { 1,0,0 }, new List<string>
             {
-                Color.NAME, "You are the last of the ", Family.lastName,"s",
+                Color.NAME, "You are the last of the ", Family.lastName+"s","",
                 "",
                 "Your bloodline ends here"
             });
@@ -192,9 +191,9 @@ public class Player : Creature
         }
         else
         {
-            UI.Keypress(new List<int> { 0,0,0 }, new List<string>
+            UI.Keypress(new List<int> { 1,0,0 }, new List<string>
             {
-                 "YOU DIED!",
+                 Color.BOSS ,"", "YOU DIED!","",
                  "",
                  "Hopefully one of your family members can carry on for you"
             });
@@ -231,7 +230,7 @@ public class Player : Creature
     }
     public virtual void Attack1(Creature target)
     {
-        Console.WriteLine($"You attack the " + Color.MONSTER + target.Name + Color.RESET+ " for "+ Color.DAMAGE + Damage+Color.RESET+" damage");
+        text.Add($"You attack the " + Color.MONSTER + target.Name + Color.RESET+ " for "+ Color.DAMAGE + Damage+Color.RESET+" damage\n");
         target.TakeDamage(Damage);
     }
     public virtual void Attack2(Creature target)
@@ -282,7 +281,7 @@ public class Player : Creature
     public Equipment MainHand { get { return mainHand; } set { mainHand = value; } }
     public Equipment OffHand { get { return offHand; } set { offHand = value; } }
     public string PClass { get { return pClass; } set { pClass = value; } }
-    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage + Armor.Damage; } }
+    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage/3 + Armor.Damage; } }
     public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } }
     public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; }  }
     public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }

@@ -33,4 +33,10 @@ public class Utilities
         Console.WriteLine("Press any key to continue");
         Console.ReadKey(true);
     }
+    internal static void Keypress(int x, int y)
+    {
+        Console.SetCursorPosition(x, y);
+        Console.WriteLine("Press any key to continue");
+        Console.ReadKey(true);
+    }
 }

@@ -12,12 +12,13 @@ public class Monster : Creature
     protected int dropRate;
     protected Drop monsterEye = new Drop("Monster Eye", 1, 0);
     protected Drop monsterTooth = new Drop("Monster Tooth", 1, 0);
+    static List<string> text = Combat.combatText;
     public virtual void Attack1(Player target)
     {
         if (AttemptToHit(target, 0) == false) Miss(target);
         else
         {
-            Console.WriteLine($"The {Name} hits you for {Damage} damage");
+            text.Add($"The {Color.MONSTER + Name + Color.RESET} hits you for {Color.DAMAGE + Damage + Color.RESET} damage");
             target.TakeDamage(Damage, this);
         }
     }
@@ -64,14 +65,14 @@ public class Monster : Creature
     {
         if (bleed > 0)
         {
-            Console.WriteLine($"The "+Color.MONSTER+Name+Color.BLOOD+" bleeds " +Color.RESET +"for " + Color.DAMAGE + bleedDam + Color.RESET+" damage!");
+            text.Add($"The "+Color.MONSTER+Name+Color.BLOOD+" bleeds " +Color.RESET +"for " + Color.DAMAGE + bleedDam + Color.RESET+" damage!");
             TakeDamage(bleedDam);
             bleed--;
             if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
         }
         if (burning > 0)
         {
-            Console.WriteLine($"The " + Color.MONSTER + Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
+            text.Add($"The " + Color.MONSTER + Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
             TakeDamage(burnDam);
             burning--;
             if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
@@ -87,7 +88,7 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        Console.WriteLine($"\nYou have killed the {name}!");
+        text.Add($"\nYou have killed the {Color.MONSTER + Name + Color.RESET}!");
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
@@ -96,7 +97,7 @@ public class Monster : Creature
 
     public override void Miss(Creature target)
     {
-        Console.WriteLine($"The {Name} misses you!");
+        text.Add($"The {Color.MONSTER + Name + Color.RESET} misses you!\n");
     }
     public string Intention { get { return intention; } set { intention = value; } }
     public virtual void Drop() 

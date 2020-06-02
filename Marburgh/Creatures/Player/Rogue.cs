@@ -8,8 +8,8 @@ public class Rogue : Player
     public Rogue()
     : base()
     {
-        Health = maxHealth = 20;
-        playerDamage += 1;
+        Health = maxHealth = 78;
+        playerDamage += 2;
         playerCrit += 3;
         playerHit += 10;
         offHand = Dagger.list[0];
@@ -20,27 +20,26 @@ public class Rogue : Player
         option4 = "Backstab";
         run = 66;
 
-        lvlHealth = new int[]           { 0, 4, 4,                   4,   5,   4, 4, 4, 5,   5,  5, 5, 10 };
-        lvlDamage = new int[]           { 0, 2, 2,                   2,   4,   3, 3, 3, 5,   5,  5, 5, 10 };
-        lvlEnergy = new int[]           { 0, 1, 1,                   1,   2,   1, 2, 1, 2,   3,  1, 2, 1 };
-        lvlMitigation = new int[]       { 0, 1, 0,                   2,   2,   0, 1, 0, 1,   2,  0, 1, 2 };
-        lvlHit = new int[]              { 0, 5, 5,                   3,   5,   4, 4, 4, 4,   5,  4, 4, 4 };
-        lvlCrit = new int[]             { 0, 2, 2,                   1,   2,   0, 1, 0, 1,   2,  0, 1, 0 };
-        lvlPlayerDefence = new int[]    { 0, 3, 4,                   3,   5,   4, 4, 4, 4,   5,  5, 5, 5 };
+        lvlHealth = new int[]           { 0, 4, 4, 4, 5, 4, 4};
+        lvlDamage = new int[]           { 0, 2, 2, 2, 4, 3, 3};
+        lvlEnergy = new int[]           { 0, 1, 1, 1, 2, 1, 2};
+        lvlMitigation = new int[]       { 0, 1, 0, 2, 2, 0, 1};
+        lvlHit = new int[]              { 0, 5, 5, 3, 5, 4, 4};
+        lvlCrit = new int[]             { 0, 2, 2, 1, 2, 0, 1};
+        lvlPlayerDefence = new int[]    { 0, 3, 4, 3, 5, 4, 4};
     }
     public override void Attack3(Creature target)
     {
         int stunDamage = damage + (mainHand.Damage + offHand.Damage) / 2;
         if (Return.HaveEnergy(1))
-        {            
-            Console.WriteLine($"You deliver a sturdy blow! The "+Color.MONSTER+target.Name +Color.RESET+" takes "+Color.DAMAGE + stunDamage + Color.RESET +" damage and is "+Color.STUNNED + "stunned"+Color.RESET+"!");
+        {
+            Combat.combatText.Add($"You deliver a sturdy blow! The "+Color.MONSTER+target.Name +Color.RESET+" takes "+Color.DAMAGE + stunDamage + Color.RESET +" damage and is "+Color.STUNNED + "stunned"+Color.RESET+"!");
             target.TakeDamage(stunDamage);
             target.Stun = 2;
         }
         else
         {
             Console.WriteLine("You don't have enough Energy!");
-            Console.ReadKey(true);
             AttackChoice();
         }
 

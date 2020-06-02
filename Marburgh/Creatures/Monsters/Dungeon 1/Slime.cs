@@ -24,7 +24,7 @@ public class Slime : Monster
     }
     public override void Attack2(Player target)
     {
-        Console.WriteLine($"The slime splits in two! Now there are TWO slimes!");
+        Combat.combatText.Add($"The " + Color.MONSTER + "slime "+Color.RESET +"splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
         MaxHealth = Health;
         Slime s = new Slime();
         s.Health = s.MaxHealth = MaxHealth;

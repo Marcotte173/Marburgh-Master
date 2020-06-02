@@ -25,7 +25,7 @@ public class Kobald : Monster
     {
         if (AttemptToHit(target, 0))
         {
-            Console.WriteLine($"The kobald throws a candle at you, causing 1 damage, and igniting you!");
+            Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + " throws a candle at you, causing "+Color.DAMAGE + "1"+Color.RESET + " damage, and " + Color.BURNING + "igniting " + Color.RESET + "you!");
             if (target.Burning > 0) target.Burning += 1;
             else target.BurnDam = 1;
             target.Burning = 3;

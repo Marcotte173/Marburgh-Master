@@ -4,9 +4,11 @@ using System.Text;
 
 public class Dagger : Weapon
 {
-    int[] damageArray = new int[] { 0, 2, 5, 8, 12, 15 };
-    int[] hitArray = new int[] { 0, 3, 5, 7, 10, 15 };
-    int[] critArray = new int[] { 0, 3, 5, 7, 10, 12 };
+    int[] damageArray = new int[] { 0, 10, 5, 8, 12, 15 };
+    int[] hitArray = new int[] { 0, 0, 5, 7, 10, 15 };
+    int[] critArray = new int[] { 0, 10, 5, 7, 10, 12 };
+
+    int[] damageBoost = new int[] { 0, 2, 4, 6, 8, 10, 0, 0 };
 
     internal static string[] names = new string[]
    {
@@ -44,7 +46,7 @@ public class Dagger : Weapon
     public override void Upgrade()
     {
         base.Upgrade();
-        damage += DamageBoost[level];
+        damage += damageBoost[level];
         crit += EffectBoost[level];
         Name = $"Deadly {names[level]}";
     }

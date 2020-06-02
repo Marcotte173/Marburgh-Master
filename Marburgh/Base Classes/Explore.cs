@@ -86,7 +86,7 @@ public class Explore
     public static void ExploreNextRoom(List<int> colourArray, List<string> descriptions, int[] navConnect)
     {
         Console.Clear();
-        DotDotDot(colourArray, descriptions, navConnect, "Exploring");
+        DotDotDot(colourArray, descriptions, navConnect, Color.MONSTER + "Exploring" + Color.RESET);
     }
 
     private static void TopExploreInfoBar()
@@ -129,82 +129,37 @@ public class Explore
         {
             Console.SetCursorPosition(56, 19);
             Write.Line(Color.NAME, "[", "N", "]orth");
-            if (shell[currentShell.North].room.visited)
-            {
-                Console.SetCursorPosition(98 - shell[currentShell.North].room.Name.Length / 2, 21);
-                Console.WriteLine(shell[currentShell.North].room.Name);
-            }
-            else
-            {
-                Console.SetCursorPosition(97, 21);
-                Console.WriteLine("???");
-            }
+            if (shell[currentShell.North].room.visited) Write.Line(98 - shell[currentShell.North].room.Name.Length / 2, 21, Color.SPEAK + shell[currentShell.North].room.Name);
+            else Write.Line(97, 21, Color.SPEAK + "???");
         }
-        else
-        {
-            Console.SetCursorPosition(91, 21);
-            Console.WriteLine("xxxxxxxxxxxxxxx");
-        }
+        else Write.Line(91, 21, "xxxxxxxxxxxxxxx");
+
         if (navConnect[1] > 0)
         {
             Console.SetCursorPosition(56, 27);
             Write.Line(Color.NAME, "[", "S", "]outh");
-            if (shell[currentShell.South].room.visited)
-            {
-                Console.SetCursorPosition(98 - shell[currentShell.South].room.Name.Length / 2, 25);
-                Console.WriteLine(shell[currentShell.South].room.Name);
-            }
-            else
-            {
-                Console.SetCursorPosition(97, 25);
-                Console.WriteLine("???");
-            }
+            if (shell[currentShell.South].room.visited) Write.Line(98 - shell[currentShell.South].room.Name.Length / 2, 25, Color.SPEAK + shell[currentShell.South].room.Name);
+            else Write.Line(97, 25, Color.SPEAK + "???");
         }
-        else
-        {
-            Console.SetCursorPosition(91, 25);
-            Console.WriteLine("xxxxxxxxxxxxxxx" );
-        }
+        else Write.Line(91, 25, "xxxxxxxxxxxxxxx");
+
         if (navConnect[2] > 0)
         {
             Console.SetCursorPosition(70, 23);
             Write.Line(Color.NAME, "[", "E", "]ast");
-            if (shell[currentShell.East].room.visited)
-            {
-                Console.SetCursorPosition(113 - shell[currentShell.East].room.Name.Length / 2, 23);
-                Console.WriteLine(shell[currentShell.East].room.Name);
-            }
-            else
-            {
-                Console.SetCursorPosition(112, 23);
-                Console.WriteLine("???");
-            }
+            if (shell[currentShell.East].room.visited) Write.Line(113 - shell[currentShell.East].room.Name.Length / 2, 23, Color.SPEAK + shell[currentShell.East].room.Name);
+            else Write.Line(112, 23, Color.SPEAK + "???");
         }
-        else
-        {
-            Console.SetCursorPosition(105, 23);
-            Console.WriteLine("xxxxxxxxxxxxxx");
-        }
+        else Write.Line(105, 23, "xxxxxxxxxxxxxxx");
+
         if (navConnect[3] > 0)
         {
             Console.SetCursorPosition(44, 23);
             Write.Line(Color.NAME, "[", "W", "]est");
-            if (shell[currentShell.West].room.visited)
-            {
-                Console.SetCursorPosition(84 - shell[currentShell.West].room.Name.Length / 2, 23);
-                Console.WriteLine(shell[currentShell.West].room.Name);
-            }
-            else
-            {
-                Console.SetCursorPosition(83, 23);
-                Console.WriteLine("???");
-            }
+            if (shell[currentShell.West].room.visited) Write.Line(84 - shell[currentShell.West].room.Name.Length / 2, 23, shell[currentShell.West].room.Name);
+            else Write.Line(83, 23, Color.SPEAK + "???");
         }
-        else
-        {
-            Console.SetCursorPosition(78, 23);
-            Console.WriteLine( "xxxxxxxxxxxxxxx");
-        }
+        else Write.Line(78, 23, "xxxxxxxxxxxxxxx");
     }
     
     public static void DotDotDot(List<int> colourArray, List<string> descriptions, int[] navConnect, string a)

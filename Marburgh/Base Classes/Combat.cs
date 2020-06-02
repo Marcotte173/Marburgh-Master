@@ -8,14 +8,17 @@ public class Combat
 {
     public static bool desecrated;
     public static int xpReward;
-    public static int goldReward;    
+    public static int goldReward;
+    public static List<string> combatText = new List<string>  { };
     
     public static void Menu()
     {
+        combatText.Clear();
         GameState.location = Location.Combat;
         while (Create.p.combatMonsters.Count > 0)
         {
             foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
+            DisplayCombatText();            
             Create.p.AttackChoice();
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
@@ -24,7 +27,6 @@ public class Combat
                 if (m.CanAct) m.MakeAttack();
                 else Console.WriteLine("The monster is stunned and cannot act!");
             }
-            Console.ReadKey(true);
         }
         List<int> colours = new List<int> { };
         List<string> text = new List<string> { };
@@ -88,5 +90,26 @@ public class Combat
         Create.p.Burning = 0;
         Create.p.Bleed = 0;
         Create.p.Stun = 0;
+    }
+    public static void DisplayCombatText()
+    {
+        Console.Clear();
+        CombatUI.Box();
+        Write.Position(0, 6);
+        if (Create.p.Stun > 0)
+        {
+            Create.p.CanAct = false;
+            Create.p.Stun--;
+            if (Create.p.Stun <= 0 && Create.p.Status.Contains("Stunned")) Create.p.Status.Remove("Stunned");
+            combatText.Add(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!\n");
+        }
+        if (Create.p.CanAct) CombatUI.AttackOptions();
+        else CombatUI.Stunned();        
+        int n = 6;
+        for (int i = 0; i < combatText.Count; i++)
+        {
+            Write.Line(0, n + i, combatText[i]);
+        }
+        combatText.Clear();
     }
 }

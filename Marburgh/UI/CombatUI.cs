@@ -11,17 +11,10 @@ internal class CombatUI
     public static List<string> targetOption = new List<string> {  };
     public static List<string> targetButton = new List<string> {  };
 
-
-    internal static void Declare()
-    {                
-        Box();
-        AttackOptions();        
-    }
     internal static void Stunned()
     {
         Box();
-        Write.Position(45, 20);
-        Console.WriteLine("You are stunned");
+        Write.Line(45, 20,"You are stunned");
         Console.ReadKey(true);
     }
 
@@ -74,7 +67,7 @@ internal class CombatUI
         }        
     }
 
-    private static void AttackOptions()
+    public static void AttackOptions()
     {
         UIComponent.OptionsText(option, button);
     }
@@ -85,18 +78,17 @@ internal class CombatUI
         targetOption.Clear();
         if (Create.p.combatMonsters.Count != 1)
         {
-            targetOption.Add(Create.p.combatMonsters[0].Name);
+            targetOption.Add(Color.MONSTER + Create.p.combatMonsters[0].Name + Color.RESET);
             targetButton.Add("1");
-            targetOption.Add(Create.p.combatMonsters[1].Name);
+            targetOption.Add(Color.MONSTER + Create.p.combatMonsters[1].Name + Color.RESET);
             targetButton.Add("2");
             if (Create.p.combatMonsters.Count == 3)
             {
-                targetOption.Add(Create.p.combatMonsters[2].Name);
+                targetOption.Add(Color.MONSTER+ Create.p.combatMonsters[2].Name + Color.RESET);
                 targetButton.Add("3");
             }
             Box();
-            Write.Position(45, 20);
-            Console.WriteLine("Please select a target");
+            Write.Line(45, 19,"Please select a target");
             UIComponent.OptionsText(targetOption, targetButton);
             int choice = Return.Int();
             if (choice > 0 && choice < 4)

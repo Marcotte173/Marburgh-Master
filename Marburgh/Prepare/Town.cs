@@ -38,6 +38,7 @@ public class Town
             Create.p.PlayerDamage = 100;
             Create.p.Health = 200;
             Create.p.Drops.Add(new Drop("Chest Key", 1, 1));
+            Create.p.XP = 200;
         }
         else if (choice == "z") Create.p.TakeDamage(100, new Goblin());
         else if (choice == "1" || (choice == "2" && GameState.Dungeon2Available))

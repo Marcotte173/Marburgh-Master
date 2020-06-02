@@ -48,7 +48,7 @@ public class House
             {
                 Console.Clear();
                 Time.DayChange(1);
-                UI.Keypress(new List<int> { 0, 0, 1, 1, 1, 0, 0 }, new List<string>
+                UI.Keypress(new List<int> { 0, 0, 1, 1, 1, 0, 1 }, new List<string>
                     {
                         "You sleep until morning",
                         "",
@@ -56,7 +56,7 @@ public class House
                         Color.ENERGY , "", "Energy " ,  "at maximum",
                         Color.HEALTH, "Your potion returns to " , "full " , "size",
                         "",
-                        "You can explore again",
+                        Color.MONSTER, "You can ","explore"," again"
                     });
             }
             else Menu();

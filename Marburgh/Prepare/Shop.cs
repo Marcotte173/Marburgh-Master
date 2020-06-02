@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Shop 
 {
-    static List<Equipment> bluntList = new List<Equipment> { Blunt.list[0], Blunt.list[1], };
+    static List<Equipment> bluntList = new List<Equipment> { Blunt.list[0], Blunt.list[1], Blunt.list[2], Blunt.list[3], Blunt.list[4], Blunt.list[5], Blunt.list[6], Blunt.list[7] };
     static List<Equipment> swordList = new List<Equipment> { Sword.list[0], Sword.list[1], };
     static List<Equipment> daggerList = new List<Equipment> { Dagger.list[0], Dagger.list[1], };
     static List<Equipment> shieldList = new List<Equipment> { Shield.list[0], Shield.list[1], };
@@ -29,9 +29,9 @@ public class Shop
             choices.Add(Color.HEALTH + "P" + Color.RESET);
             buttons.Add("otions");
         }
-        UI.Choice(new List<int> { 0, 2, 0, 1,0,1,1,1 }, new List<string>
+        UI.Choice(new List<int> { 1, 2, 0, 1,0,1,1,1 }, new List<string>
         {
-            $"You walk into {shopKeep}'s Weapon Shop",
+            Color.NAME, "You walk into ",$"{shopKeep}'s"," Weapon Shop",
             Color.NAME, Color.CLASS, $" ", shopKeep, " the ", race, " comes over to greet you",
             "",
             Color.SPEAK,"", $"'Greetings, what can I do for you?'","",
@@ -46,9 +46,9 @@ public class Shop
         string choice = Return.Option();
         if (choice == "b" && shopKeep == "Oscar")
         {
-            UI.Choice(new List<int> { 0, 0,1, 1, 1 }, new List<string>
+            UI.Choice(new List<int> { 1, 0,1, 1, 1 }, new List<string>
             {
-                $"And what can I interest you in?",
+                Color.SPEAK,"", $"'And what can I interest you in?'","",
                 "",
                 Color.ITEM,"Main Hand:  ",$"{Create.p.MainHand.Name} ",  "",
                 Color.ITEM,"Off Hand:   ",$"{Create.p.OffHand.Name} " ,  "",
@@ -162,7 +162,7 @@ public class Shop
         else
         {
             Console.Clear();
-            List<Equipment> EquipmentList = new List<Equipment> { new Blunt(0) };
+            List<Equipment> EquipmentList = new List<Equipment> { new Blunt("Fist",0,0,0,0,false) };
             if (Create.p.MainHand.Name != "None") { EquipmentList.Add(Create.p.MainHand); }
             if (Create.p.OffHand.Name != "None") { EquipmentList.Add(Create.p.OffHand); }
             if (Create.p.OffHand.Name != "None") { EquipmentList.Add(Create.p.Armor); }

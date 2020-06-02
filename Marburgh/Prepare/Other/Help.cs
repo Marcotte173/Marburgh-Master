@@ -9,23 +9,35 @@ public class Help
     public static void Menu()
     {
         GameState.location = Location.Help;
+        //Page One
         Console.Clear();
         Write.Line(Color.BLOOD,"","MORE INFO","\n\nWelcome to Marburgh\n\nThis is a fairly straightforward dungeon crawler.");
         Write.Line(Color.NAME, "\nFamily\n");
         Console.WriteLine("\nYou are part of an adventuring family. Your family consists of 3 siblings.\nYou play as each sibling until their death or until the game ends.\nMoney in the bank when a sibling dies remains in the bank for the rest of the family");
         Console.WriteLine("If all of the siblings die, the game is over.\n");
-        Write.Line(Color.ITEM, "WEAPONS AND ARMOR\n\n");
+        Write.Line(Color.ITEM, "Weapons and armor\n\n");
         Console.WriteLine("Weapons and armor can be purchased at the Item shop");
         Console.WriteLine("With an enhancement machine, you can use monster drops to enhance your weapons.\nYou can also use it to craft powerful weapons from boss drops");
-        Write.Line(Color.MONSTER, "\nDUNGEON\n\n");
-        Console.WriteLine("Dungeons are navigated with the N,S,E, and W keys.\nIn each room you will face choices, random events and monsters");
+        Write.Line(Color.MONSTER, "\nExploring\n\n");
+        Console.WriteLine("Exploring is navigated with the N,S,E, and W keys.\nAt each point you will face choices, random events and monsters");
         Console.WriteLine("When you find monsters, you will begin combat, where you use your unique skills to defeat them\nWatch out though, they have their own unique skills as well!");
-        Utilities.Keypress();
+        Utilities.Keypress(0,28);
+        //Page Two
+        Console.Clear();
+        Write.Line(Color.TIME, "Your House\n\n");
+        Write.Line("Your house serves as your base of operations. \nYou can sleep to regain health, energy, potions and the ability to explore.\nSleeping causes time to move forward by one day\n\n");
+        Write.Line(Color.GOLD, "The Bank\n\n");
+        Write.Line("You can use the bank to store money and make investments. \nAll siblings share one bank account \nIf a family member dies, the siblings can access their money and investments\n\n");
+        Write.Line(Color.XP, "Level Master\n\n");
+        Write.Line("When you have enough experience, you can visit your level master.\nLeveling up with increase your combat stats, and occasionally give you access to new abilities\n\n");
+        Write.Line(Color.DEFENCE, "Other Places\n\n");
+        Write.Line("As marburgh continues to grow, there will be more place to visit.\nFor now, you can visit your family's grave.");
+        Utilities.Keypress(0,28);
         Console.Clear();
         if (Create.p.PClass == "Warrior") Warrior();
         if (Create.p.PClass == "Mage") Mage();
         if (Create.p.PClass == "Rogue") Rogue();
-        Utilities.Keypress();
+        Utilities.Keypress(0, 28);
         Utilities.ToTown();
     }
 

@@ -24,7 +24,7 @@ public class Orc : Monster
     {
         if (AttemptToHit(target, 0))
         {
-            Console.WriteLine($"The orc charges at you, stunning and doing {damage} damage!");
+            Combat.combatText.Add($"The " + Color.MONSTER + "orc" + Color.RESET + $"charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + damage + Color.RESET} damage!");
             Create.p.Stun = 2;
             Create.p.TakeDamage(damage,this);
         }
