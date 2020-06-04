@@ -28,7 +28,7 @@ public class UI
         Write.Position(55,26);
         Write.Line(Color.DAMAGE, "[", "Q", "]uit");
         Write.Position(42, 14);
-        Write.Line(Color.GOLD, "", "Version 0.20 May 31, 2020, 3:04 A.M.", "");
+        Write.Line(Color.GOLD, "", "Version 0.25 June 04, 2020, 1:49 A.M.", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
@@ -229,8 +229,6 @@ public class UI
         }        
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
-        Console.SetCursorPosition(Return.Width(16), 19);
-        Console.Write("-----------------------------------------------------------------------------------");
         Console.SetCursorPosition(Return.Width(16), 18);
         if (list[1].Type == "Shield" || list[1].Type == "Armor") Console.WriteLine(string.Format("{0,-24 }{1,-24 }{2,-24}{3,-10}", "Item", "Defence", "Mitigation", "Price"));
         else Console.WriteLine(string.Format("{0,-25 }{1,-10 }{2,-10 }{3,-10}{4,-15}{5,-10}", "Item","Hit", "Crit", "Damage","Spellpower", "Price"));
@@ -239,7 +237,7 @@ public class UI
             if (list[i].Name == "") Console.WriteLine("");
             else
             {
-                Console.SetCursorPosition(Return.Width(16), 19 + i);
+                Console.SetCursorPosition(Return.Width(16), 18 + i);
                 if (list[i].Type == "Shield" || list[1].Type == "Armor") Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-40 }{3,-31 }", $"[{i}]{Color.ITEM + list[i].Name + Color.RESET}", Color.DEFENCE + list[i].Defence + Color.RESET, Color.MITIGATION + list[i].Mitigation + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
                 else Console.WriteLine(string.Format("{0,-44 }{1,-31 }{2,-31 }{3,-31 }{4,-30 }{5,-10 }", $"[{i}]{Color.ITEM + list[i].Name + Color.RESET}", Color.HIT + list[i].Hit + Color.RESET, Color.CRIT + list[i].Crit + Color.RESET, Color.DAMAGE + list[i].Damage + Color.RESET, Color.SPECIAL + list[i].SpellPower + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
             }

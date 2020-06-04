@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Shop 
+public class 
+    Shop 
 {
     static List<Equipment> bluntList = new List<Equipment> { Blunt.list[0], Blunt.list[1], Blunt.list[2], Blunt.list[3], Blunt.list[4], Blunt.list[5], Blunt.list[6], Blunt.list[7] };
-    static List<Equipment> swordList = new List<Equipment> { Sword.list[0], Sword.list[1], };
-    static List<Equipment> daggerList = new List<Equipment> { Dagger.list[0], Dagger.list[1], };
-    static List<Equipment> shieldList = new List<Equipment> { Shield.list[0], Shield.list[1], };
-    static List<Equipment> armorList = new List<Equipment> { ARMOR.list[0], ARMOR.list[1] };
-    static List<Equipment> magicList = new List<Equipment> { Magic.list[0], Magic.list[1] };
+    static List<Equipment> swordList = new List<Equipment> { Sword.list[0], Sword.list[1], Sword.list[2], Sword.list[3], Sword.list[4], Sword.list[5], Sword.list[6], Sword.list[7] };
+    static List<Equipment> daggerList = new List<Equipment> { Dagger.list[0], Dagger.list[1], Dagger.list[2], Dagger.list[3], Dagger.list[4], Dagger.list[5], Dagger.list[6], Dagger.list[7] };
+    static List<Equipment> shieldList = new List<Equipment> { Shield.list[0], Shield.list[1], Shield.list[2], Shield.list[3], Shield.list[4], Shield.list[5], Shield.list[6], Shield.list[7] };
+    static List<Equipment> armorList = new List<Equipment> { ARMOR.list[0], ARMOR.list[1], ARMOR.list[2], ARMOR.list[3], ARMOR.list[4], ARMOR.list[5], ARMOR.list[6], ARMOR.list[7] };
+    static List<Equipment> magicList = new List<Equipment> { Magic.list[0], Magic.list[1], Magic.list[2], Magic.list[3], Magic.list[4], Magic.list[5], Magic.list[6], Magic.list[7] };
     static int[] upgrade = new int[] { 1000, 3000, 10000, 20000, 35000 };
     static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
     static int current = 0;
@@ -162,7 +163,7 @@ public class Shop
         else
         {
             Console.Clear();
-            List<Equipment> EquipmentList = new List<Equipment> { new Blunt("Fist",0,0,0,0,false) };
+            List<Equipment> EquipmentList = new List<Equipment> { new Blunt("Fist",0,0,0,0,false,0) };
             if (Create.p.MainHand.Name != "None") { EquipmentList.Add(Create.p.MainHand); }
             if (Create.p.OffHand.Name != "None") { EquipmentList.Add(Create.p.OffHand); }
             if (Create.p.OffHand.Name != "None") { EquipmentList.Add(Create.p.Armor); }

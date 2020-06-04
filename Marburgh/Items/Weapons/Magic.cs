@@ -4,47 +4,37 @@ using System.Text;
 
 public class Magic : Weapon
 {
-    int[] spellPowerArray = new int[] { 0, 2, 5, 7, 10, 15 };
-    int[] damageArray = new int[] { 0, 2, 4, 6, 8, 10 };
-    int[] hitArray =    new int[] { 0, 1, 2, 3, 4, 5 };
-    int[] critArray =   new int[] { 0, 0, 0, 0, 0, 0 };
-
-    internal static string[] names = new string[]
-    {
-        "None",
-        "Walking stick",
-        "Orb",
-        "Wand",
-        "Staff",
-        "Ring"
-    };
+    int[] damageBoost = new int[] { 0, 2, 5, 8, 16, 20, 28, 35 };
 
     internal static Magic[] list = new Magic[]
     {
-        new Magic(0),
-        new Magic(1),
-        new Magic(2),
-        new Magic(3),
-        new Magic(4),
-        new Magic(5),
+        new Magic("None",0,0,0,0,0,false,0),
+        new Magic("Walking stick",4,3,0,0,250,false,1),
+        new Magic("Staff",10,7,1,2,400,false,2),
+        new Magic("Book",15,12,4,4,550,false,3),
+        new Magic("Wand",20,18,6,6,700,false,4),
+        new Magic("Orb",28,25,11,10,1000,false,5),
+        new Magic("Ring",36,34,14,13,1300,false,6),
+        new Magic("Source",50,45,16,16,1800,false,7)
     };
 
-    public Magic(int level)
+    public Magic(string name, int damage, int spellpower, int hit, int crit, int price, bool twoHand, int level)
     : base()
     {
         this.level = level;
-        Name = names[level];
-        damage = damageArray[level];
-        hit = hitArray[level];
-        crit = critArray[level];
-        spellPower = spellPowerArray[level];
-        price = priceArray[level];
+        this.spellPower = spellpower;
+        this.name = name;
+        this.damage = damage;
+        this.hit = hit;
+        this.crit = crit;
+        this.price = price;
+        this.twoHand = twoHand;
         type = "Magic";
     }
     public override void Upgrade()
     {
         base.Upgrade();
-        spellPower += DamageBoost[level];
-        Name = $"Arcane {names[level]}";
+        spellPower += damageBoost[level];
+        Name = $"Arcane {name}";
     }
 }

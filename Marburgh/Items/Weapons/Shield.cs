@@ -12,6 +12,8 @@ public class Shield : Weapon
         "None",
         "Buckler",
         "Round Shield",
+        "Pavise",
+        "Targ",
         "Heater shield",
         "Kite Shield",
         "Teardrop Shield"
@@ -19,28 +21,31 @@ public class Shield : Weapon
 
     internal static Shield[] list = new Shield[]
     {
-        new Shield(0),
-        new Shield(1),
-        new Shield(2),
-        new Shield(3),
-        new Shield(4),
-        new Shield(5),
+        new Shield("Fist",0,0,0,0),
+        new Shield("Buckler",0,0,250,1),
+        new Shield("Round Shield",0,0,400,2),
+        new Shield("Pavise",0,0,550,3),
+        new Shield("Targ",0,0,700,4),
+        new Shield("Heater Shield",0,0,1000,5),
+        new Shield("Kite Shield",0,0,1300,6),
+        new Shield("Teardrop Shield",0,0,1800,7),
     };
 
-    public Shield(int level)
+    public Shield(string name, int mitigation, int defence, int price, int level)
     : base()
     {
         this.level = level;
-        Name = names[level];
-        mitigation = mitigationArray[level];
-        defence = defenceArray[level];
-        price = priceArray[level];
+        this.name = name;
+        this.mitigation = mitigation;
+        this.defence = defence;
+        this.price = price;
+        this.twoHand = false;
         type = "Shield";
     }
     public override void Upgrade()
     {
         base.Upgrade();
-        mitigation += EffectBoost[Level] * 2;
-        Name = $"Honed {names[level]}";
+        mitigation += mitigationArray[Level] ;
+        Name = $"Honed {name}";
     }
 }

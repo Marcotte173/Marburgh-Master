@@ -17,7 +17,7 @@ public class Town
             }, Buttons.adventureList, Buttons.shopList, Buttons.serviceList, Buttons.otherList, Buttons.adventureButton, Buttons.shopButton, Buttons.serviceButton, Buttons.otherButton);
         string choice = Return.Option();
         if (choice == "9") CharacterSheet.Display();
-        else if (choice == "q")
+        else if (choice == "0")
         {
             if (UI.Confirm(new List<int> { 1 }, new List<string>
                 {

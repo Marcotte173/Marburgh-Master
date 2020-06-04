@@ -130,14 +130,14 @@ public class Player : Creature
     internal void Equip(Equipment e) { armor = e.Copy(); }
     internal void Equip(Equipment e, Equipment hand)
     {
-        if (e.OneHand)
+        if (e.TwoHand)
         {
             UI.Keypress(new List<int> { 1 }, new List<string>
             {
                 Color.ITEM, "You equip the ",e.Name,""
             });
-            if (hand == MainHand) MainHand = e.Copy();
-            else if (hand == OffHand) OffHand = e.Copy();
+            mainHand = e.Copy();
+            offHand = Sword.list[0];            
         }
         else
         {
@@ -145,8 +145,8 @@ public class Player : Creature
             {
                 Color.ITEM, "You equip the ",e.Name,""
             });
-            mainHand = e.Copy();
-            offHand = Sword.list[0];
+            if (hand == MainHand) MainHand = e.Copy();
+            else if (hand == OffHand) OffHand = e.Copy();
         }
     }
     public virtual void TakeDamage(int damage, Monster hitMe)

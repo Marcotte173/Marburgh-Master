@@ -18,13 +18,14 @@ public class Equipment
     protected bool upgraded;
     protected string modifier;
     protected bool splash;
-    protected bool oneHand;
+    protected bool twoHand;
     protected int[] monsterEye = new int[] { 0, 1, 3, 5 };
     protected int[] monsterTooth = new int[] { 0, 1, 5, 3 };
     protected int[] effectBoost = new int[] { 0, 1, 1, 2, 2, 3 };
+    protected int[] priceArray = new int[] { 0, 500, 1500, 3000, 5000, 7500 };
     public Equipment() { }
 
-    public bool OneHand { get { return oneHand; } set { oneHand = value; } }
+    public bool TwoHand { get { return twoHand; } set { twoHand = value; } }
     public bool Splash { get { return splash; } set { splash = value; } }
     public string Name { get { return name; } set { name = value; } }
     public string Modifier { get { return modifier; } set { modifier = value; } }
