@@ -122,6 +122,7 @@
     <Compile Include="Utilities\CharacterSheet.cs" />
     <Compile Include="Utilities\Color.cs" />
     <Compile Include="Utilities\Return.cs" />
+    <Compile Include="Utilities\Sound.cs" />
     <Compile Include="Utilities\Time.cs" />
     <Compile Include="Utilities\TimeEvent.cs" />
     <Compile Include="UI\UI.cs" />

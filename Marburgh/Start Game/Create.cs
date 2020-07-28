@@ -100,6 +100,7 @@ public class Create
                "",
                a
             });
+        Sound.Stop();
         Utilities.ToTown();
     }
 
