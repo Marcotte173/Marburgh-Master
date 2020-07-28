@@ -61,65 +61,63 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adventure\Dungeon 1\Dungeon1.cs" />
-    <Compile Include="Adventure\Dungeon 1\Specific Rooms\Dungeon1Room.cs" />
-    <Compile Include="Adventure\Dungeon2\Dungeon2.cs" />
-    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2BossRoom.cs" />
-    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2LockRoom.cs" />
-    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2MiniBoss.cs" />
-    <Compile Include="Adventure\Dungeon2\Specific Rooms\Dungeon2Room.cs" />
-    <Compile Include="Adventure\Explore\Rooms\All Dungeons\ChestRoom.cs" />
-    <Compile Include="Adventure\Explore\Rooms\All Dungeons\ShrineRoom.cs" />
-    <Compile Include="Adventure\Dungeon 1\Specific Rooms\VillagersRoom.cs" />
-    <Compile Include="Adventure\Explore\Events\Events.cs" />
-    <Compile Include="Adventure\Explore\Rooms\All Dungeons\Entrance.cs" />
-    <Compile Include="Base Classes\Room.cs" />
-    <Compile Include="Adventure\Explore\Rooms\All Dungeons\Library.cs" />
-    <Compile Include="Adventure\Explore\Rooms\Constructors\Shell.cs" />
-    <Compile Include="Adventure\Explore\Rooms\Constructors\Summon.cs" />
-    <Compile Include="Adventure\Dungeon 1\Specific Rooms\Dungeon1BossRoom.cs" />
-    <Compile Include="GameState.cs" />
-    <Compile Include="Items\Weapons\Dagger.cs" />
-    <Compile Include="Prepare\Other\Craft.cs" />
+    <Compile Include="Adventure\AdventureItems.cs" />
+    <Compile Include="Adventure\Layouts\DungeonTutorial_A_Layout.cs" />
+    <Compile Include="Adventure\Layouts\DungeonTutorial_B_Layout.cs" />
+    <Compile Include="Adventure\Boss Rooms\DungeonTutorial_B_BossRoom.cs" />
+    <Compile Include="Adventure\Special Rooms\DungeonTutorial_B_LockRoom.cs" />
+    <Compile Include="Adventure\Boss Rooms\DungeonTutorial_B_MiniBossRoom.cs" />
+    <Compile Include="Adventure\Special Rooms\ChestRoom.cs" />
+    <Compile Include="Adventure\Special Rooms\GuardRoom.cs" />
+    <Compile Include="Adventure\Special Rooms\Latrine.cs" />
+    <Compile Include="Adventure\Special Rooms\ShrineRoom.cs" />
+    <Compile Include="Adventure\Special Rooms\VillagersRoom.cs" />
+    <Compile Include="Adventure\Special Rooms\Entrance.cs" />
+    <Compile Include="Adventure\Room.cs" />
+    <Compile Include="Adventure\Shell.cs" />
+    <Compile Include="Adventure\Summon.cs" />
+    <Compile Include="Adventure\Boss Rooms\DungeonTutorial_A_BossRoom.cs" />
+    <Compile Include="Utilities\GameState.cs" />
+    <Compile Include="Items\Dagger.cs" />
+    <Compile Include="Town\Craft.cs" />
     <Compile Include="UI\CombatUI.cs" />
-    <Compile Include="Base Classes\Explore.cs" />
-    <Compile Include="Base Classes\Create.cs" />
-    <Compile Include="Base Classes\Creature.cs" />
-    <Compile Include="Base Classes\Equipment.cs" />
-    <Compile Include="Base Classes\Monster.cs" />
-    <Compile Include="Base Classes\Player.cs" />
-    <Compile Include="Prepare\Shop.cs" />
-    <Compile Include="Base Classes\Weapon.cs" />
-    <Compile Include="Base Classes\Combat.cs" />
-    <Compile Include="Creatures\Monsters\Bosses\SavageOrc.cs" />
-    <Compile Include="Creatures\Monsters\Dungeon 1\Kobald.cs" />
-    <Compile Include="Creatures\Monsters\Normal\Orc.cs" />
-    <Compile Include="Creatures\Monsters\Dungeon 1\Slime.cs" />
-    <Compile Include="Creatures\Player\Mage.cs" />
-    <Compile Include="Creatures\Player\Rogue.cs" />
-    <Compile Include="Creatures\Player\Warrior.cs" />
-    <Compile Include="Creatures\Monsters\Dungeon 1\Goblin.cs" />
-    <Compile Include="Items\Armor\ARMOR.cs" />
-    <Compile Include="Items\Upgrade\Drops\Drop.cs" />
-    <Compile Include="Items\Weapons\Blunt.cs" />
-    <Compile Include="Items\Weapons\Magic.cs" />
-    <Compile Include="Items\Weapons\Sword.cs" />
-    <Compile Include="Items\Weapons\Shield.cs" />
-    <Compile Include="Misc\Program.cs" />
-    <Compile Include="Prepare\Other\Help.cs" />
-    <Compile Include="Prepare\Other\House.cs" />
-    <Compile Include="Prepare\Other\Other.cs" />
-    <Compile Include="Prepare\Service\Bank.cs" />
-    <Compile Include="Prepare\Service\Tavern\Gamble\BlackJackGame.cs" />
-    <Compile Include="Prepare\Service\Level.cs" />
-    <Compile Include="Prepare\Service\Tavern\Gamble\DiceGame.cs" />
-    <Compile Include="Prepare\Service\Tavern\Gamble\ThreeCardMonte.cs" />
-    <Compile Include="Prepare\Service\Tavern\Tavern.cs" />
-    <Compile Include="Prepare\Town.cs" />
+    <Compile Include="Adventure\Explore.cs" />
+    <Compile Include="Start Game\Create.cs" />
+    <Compile Include="Player\Creature.cs" />
+    <Compile Include="Items\Equipment.cs" />
+    <Compile Include="Monsters\Monster.cs" />
+    <Compile Include="Player\Player.cs" />
+    <Compile Include="Town\Shop.cs" />
+    <Compile Include="Adventure\Combat.cs" />
+    <Compile Include="Monsters\SavageOrc.cs" />
+    <Compile Include="Monsters\Kobald.cs" />
+    <Compile Include="Monsters\Orc.cs" />
+    <Compile Include="Monsters\Slime.cs" />
+    <Compile Include="Player\Mage.cs" />
+    <Compile Include="Player\Rogue.cs" />
+    <Compile Include="Player\Warrior.cs" />
+    <Compile Include="Monsters\Goblin.cs" />
+    <Compile Include="Items\ARMOR.cs" />
+    <Compile Include="Items\Drop.cs" />
+    <Compile Include="Items\Blunt.cs" />
+    <Compile Include="Items\Magic.cs" />
+    <Compile Include="Items\Sword.cs" />
+    <Compile Include="Items\Shield.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Town\Help.cs" />
+    <Compile Include="Town\House.cs" />
+    <Compile Include="Town\Other.cs" />
+    <Compile Include="Town\Bank.cs" />
+    <Compile Include="Town\Tavern\BlackJackGame.cs" />
+    <Compile Include="Town\Level.cs" />
+    <Compile Include="Town\Tavern\DiceGame.cs" />
+    <Compile Include="Town\Tavern\ThreeCardMonte.cs" />
+    <Compile Include="Town\Tavern\Tavern.cs" />
+    <Compile Include="Town\Town.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="StartGame\Family.cs" />
-    <Compile Include="StartGame\GameStart.cs" />
-    <Compile Include="StartGame\Name.cs" />
+    <Compile Include="Start Game\Family.cs" />
+    <Compile Include="Start Game\GameStart.cs" />
+    <Compile Include="Start Game\Name.cs" />
     <Compile Include="Utilities\Button.cs" />
     <Compile Include="Utilities\CharacterSheet.cs" />
     <Compile Include="Utilities\Color.cs" />
@@ -132,11 +130,9 @@
     <Compile Include="Utilities\Write.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Misc\App.config" />
+    <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Creatures\Monsters\Mini Bosses\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
       <Visible>False</Visible>

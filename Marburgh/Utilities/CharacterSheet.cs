@@ -61,7 +61,7 @@ public class CharacterSheet
 
         Console.SetCursorPosition(2, 25);
         Console.Write("Armor: ");
-        Write.Line(Color.ITEM, Create.p.Armor.Name);
+        Write.Line(Color.ITEM, Create.p.Armour.Name);
 
         Console.SetCursorPosition(99, 19);
         Write.Line(Color.DAMAGE, "Damage: ", $"{Create.p.Damage}", "");

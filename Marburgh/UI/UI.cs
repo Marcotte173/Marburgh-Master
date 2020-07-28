@@ -28,7 +28,7 @@ public class UI
         Write.Position(55,26);
         Write.Line(Color.DAMAGE, "[", "Q", "]uit");
         Write.Position(42, 14);
-        Write.Line(Color.GOLD, "", "Version 0.25 June 04, 2020, 1:49 A.M.", "");
+        Write.Line(Color.GOLD, "", "Version 0.30 July 27, 2020, 7:21 P.M.", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
@@ -239,7 +239,7 @@ public class UI
             {
                 Console.SetCursorPosition(Return.Width(16), 18 + i);
                 if (list[i].Type == "Shield" || list[1].Type == "Armor") Console.WriteLine(string.Format("{0,-45 }{1,-45 }{2,-40 }{3,-31 }", $"[{i}]{Color.ITEM + list[i].Name + Color.RESET}", Color.DEFENCE + list[i].Defence + Color.RESET, Color.MITIGATION + list[i].Mitigation + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
-                else Console.WriteLine(string.Format("{0,-44 }{1,-31 }{2,-31 }{3,-31 }{4,-30 }{5,-10 }", $"[{i}]{Color.ITEM + list[i].Name + Color.RESET}", Color.HIT + list[i].Hit + Color.RESET, Color.CRIT + list[i].Crit + Color.RESET, Color.DAMAGE + list[i].Damage + Color.RESET, Color.SPECIAL + list[i].SpellPower + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
+                else Console.WriteLine(string.Format("{0,-44 }{1,-31 }{2,-31 }{3,-31 }{4,-30 }{5,-10 }", $"[{i}] {Color.ITEM + list[i].Name + Color.RESET}", Color.HIT + list[i].Hit + Color.RESET, Color.CRIT + list[i].Crit + Color.RESET, Color.DAMAGE + list[i].Damage + Color.RESET, Color.SPECIAL + list[i].SpellPower + Color.RESET, "$ " + Color.GOLD + list[i].Price + Color.RESET));
             }
         }
     }
