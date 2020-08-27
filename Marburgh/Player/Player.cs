@@ -223,7 +223,7 @@ public class Player : Creature
         if (MaxHealth == Health) DontNeedHeal();
         else
         {
-            if (PotionSize == 0) Console.WriteLine("Your " + Color.HEALTH+ "potion"+Color.RESET+" is empty!");
+            if (PotionSize == 0) text.Add("Your " + Color.HEALTH+ "potion"+Color.RESET+" is empty!");
             else if ((MaxHealth - Health) > PotionSize)
             {
                 AddHealth(PotionSize);
@@ -235,6 +235,7 @@ public class Player : Creature
                 AddHealth(MaxHealth - Health);
             }
         }
+        Combat.DisplayCombatText();
     }
 
     public virtual void Refresh()

@@ -37,9 +37,9 @@ public class
             "",
             Color.SPEAK,"", $"'Greetings, what can I do for you?'","",
             "",
-            Color.ITEM,"Main Hand:  ",$"{Create.p.MainHand.Name} ",  "",
-            Color.ITEM,"Off Hand:   ",$"{Create.p.OffHand.Name} " ,  "",
-            Color.ITEM,"Armor Hand: ",$"{Create.p.Armour.Name}   " ,  "",
+            Color.ITEM,"Main Hand :   ",$"{Create.p.MainHand.Name} ",  "",
+            Color.ITEM,"Off Hand  :   ",$"{Create.p.OffHand.Name} " ,  "",
+            Color.ITEM,"Armor Hand:   ",$"{Create.p.Armour.Name}   " ,  "",
         },
         buttons, choices);
         Console.SetCursorPosition(53, 25);
@@ -51,9 +51,9 @@ public class
             {
                 Color.SPEAK,"", $"'And what can I interest you in?'","",
                 "",
-                Color.ITEM,"Main Hand:  ",$"{Create.p.MainHand.Name} ",  "",
-                Color.ITEM,"Off Hand:   ",$"{Create.p.OffHand.Name} " ,  "",
-                Color.ITEM,"Armor Hand: ",$"{Create.p.Armour.Name}   " ,  "",
+                Color.ITEM,"Main Hand :   ",$"{Create.p.MainHand.Name} ",  "",
+                Color.ITEM,"Off Hand  :   ",$"{Create.p.OffHand.Name} " ,  "",
+                Color.ITEM,"Armor Hand:   ",$"{Create.p.Armour.Name}   " ,  "",
             },
             new List<string> { "Swords", "Daggers", "Hammers", "Shields" }, new List<string> { Color.ITEM + "1" + Color.RESET, Color.ITEM + "2" + Color.RESET, Color.ITEM + "3" + Color.RESET, Color.ITEM + "4" + Color.RESET });
             string choice2 = Return.Option();
