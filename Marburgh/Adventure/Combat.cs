@@ -95,7 +95,12 @@ public class Combat
             combatText.Add(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!\n");
         }
         if (Create.p.CanAct) CombatUI.AttackOptions();
-        else CombatUI.Stunned();        
+        else CombatUI.Stunned();
+        if (Create.p.combatMonsters.Count == 0)
+        {
+            combatText.Add("Press any key to continue");
+            Console.ReadKey(true);
+        }
         int n = 6;
         for (int i = 0; i < combatText.Count; i++)
         {

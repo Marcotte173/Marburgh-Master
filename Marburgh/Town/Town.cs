@@ -66,14 +66,16 @@ public class Town
                 Create.p.CanExplore = false;
                 if (choice == "1")
                 {
-                    Explore.shell = DungeonTutorial_A_Layout.shell;
-                    Explore.currentShell = DungeonTutorial_A_Layout.shell[1];
+                    Explore.dungeon  = dungeon1.dungeon;
+                    Explore.monstersPerRoom = dungeon1.monstersPerRoom;
+                    Explore.currentDungeon = dungeon1.dungeon[1];
                 }
                 else if (choice == "2")
                 {
 
-                    Explore.shell = DungeonTutorial_B_Layout.shell;
-                    Explore.currentShell = DungeonTutorial_B_Layout.shell[1];
+                    Explore.dungeon = dungeon2.dungeon;
+                    Explore.monstersPerRoom = dungeon2.monstersPerRoom;
+                    Explore.currentDungeon = dungeon2.dungeon[1];
                 }
                 Explore.Menu();
             }

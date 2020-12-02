@@ -26,7 +26,7 @@ public class DungeonTutorial_B_LockRoom:Room
                 "",
                 "Sucess! the way is open!"
             });
-            DungeonTutorial_B_Layout.shell[10].West = 11;
+            global::Explore.dungeon[10].West = 11;
             Create.p.Drops.Remove(AdventureItems.tutorialKey);
             visited = true;
         }

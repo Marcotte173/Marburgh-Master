@@ -65,6 +65,7 @@
     <Compile Include="Adventure\Layouts\DungeonTutorial_A_Layout.cs" />
     <Compile Include="Adventure\Layouts\DungeonTutorial_B_Layout.cs" />
     <Compile Include="Adventure\Boss Rooms\DungeonTutorial_B_BossRoom.cs" />
+    <Compile Include="Adventure\Layouts\Layout.cs" />
     <Compile Include="Adventure\Special Rooms\DungeonTutorial_B_LockRoom.cs" />
     <Compile Include="Adventure\Boss Rooms\DungeonTutorial_B_MiniBossRoom.cs" />
     <Compile Include="Adventure\Special Rooms\ChestRoom.cs" />

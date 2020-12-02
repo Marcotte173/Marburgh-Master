@@ -6,19 +6,20 @@ using System.Threading.Tasks;
 
 public class Explore
 {
-    public static List<Shell> shell = new List<Shell> { };
+    public static int monstersPerRoom;
+    public static List<Shell> dungeon = new List<Shell> { };
     protected static Room starter;
-    public static Shell currentShell;
+    public static Shell currentDungeon;
     public static void Menu()
     {
         GameState.location = Location.Exploring;
         Navigate();
         while (true)
         {        
-            if (currentShell.room.visited == false)
+            if (currentDungeon.room.visited == false)
             {
-                UI.Keypress(currentShell.room.FlavorColourArray, currentShell.room.Flavor);
-                currentShell.room.Explore();
+                UI.Keypress(currentDungeon.room.FlavorColourArray, currentDungeon.room.Flavor);
+                currentDungeon.room.Explore();
             }                
             Navigate();
         }
@@ -27,37 +28,37 @@ public class Explore
     private static void Navigate()
     {
         Console.Clear();
-        NavigateUI(currentShell.room.FlavorColourArray, currentShell.room.Flavor, new int[] { currentShell.North, currentShell.South, currentShell.East, currentShell.West });
+        NavigateUI(currentDungeon.room.FlavorColourArray, currentDungeon.room.Flavor, new int[] { currentDungeon.North, currentDungeon.South, currentDungeon.East, currentDungeon.West });
         string choice = Return.Option();
-        if (choice == "n" && currentShell.North > 0)
+        if (choice == "n" && currentDungeon.North > 0)
         {
-            if (shell[currentShell.North].room.visited == false) ExploreNextRoom(null, null, new int[] { currentShell.North, currentShell.South, currentShell.East, currentShell.West });
-            ChangeShell(currentShell.North);
+            if (dungeon[currentDungeon.North].room.visited == false) ExploreNextRoom(null, null, new int[] { currentDungeon.North, currentDungeon.South, currentDungeon.East, currentDungeon.West });
+            ChangeDungeon(currentDungeon.North);
         }
-        else if (choice == "s" && currentShell.South > 0)
+        else if (choice == "s" && currentDungeon.South > 0)
         {
-            if (shell[currentShell.South].room.visited == false) ExploreNextRoom(null, null, new int[] { currentShell.North, currentShell.South, currentShell.East, currentShell.West });
-            ChangeShell(currentShell.South);
+            if (dungeon[currentDungeon.South].room.visited == false) ExploreNextRoom(null, null, new int[] { currentDungeon.North, currentDungeon.South, currentDungeon.East, currentDungeon.West });
+            ChangeDungeon(currentDungeon.South);
         }
-        else if (choice == "e" && currentShell.East > 0)
+        else if (choice == "e" && currentDungeon.East > 0)
         {
-            if (shell[currentShell.East].room.visited == false) ExploreNextRoom(null, null, new int[] { currentShell.North, currentShell.South, currentShell.East, currentShell.West });
-            ChangeShell( currentShell.East);
+            if (dungeon[currentDungeon.East].room.visited == false) ExploreNextRoom(null, null, new int[] { currentDungeon.North, currentDungeon.South, currentDungeon.East, currentDungeon.West });
+            ChangeDungeon( currentDungeon.East);
         }
-        else if (choice == "w" && currentShell.West > 0)
+        else if (choice == "w" && currentDungeon.West > 0)
         {
-            if (shell[currentShell.West].room.visited == false) ExploreNextRoom(null, null, new int[] { currentShell.North, currentShell.South, currentShell.East, currentShell.West });
-            ChangeShell( currentShell.West);
+            if (dungeon[currentDungeon.West].room.visited == false) ExploreNextRoom(null, null, new int[] { currentDungeon.North, currentDungeon.South, currentDungeon.East, currentDungeon.West });
+            ChangeDungeon( currentDungeon.West);
         }
         else if (choice == "9") CharacterSheet.Display();
         else if (choice == "h") Create.p.DrinkPotion();
-        else if (choice == "0" && currentShell == shell[1])
+        else if (choice == "0" && currentDungeon == dungeon[1])
         {
             //Utilities.ResetNormalRooms();
             //Sound.Stop();
             Utilities.ToTown();
         }
-        else if (choice == "0" && currentShell != shell[1])
+        else if (choice == "0" && currentDungeon != dungeon[1])
         {
             Console.Clear();
             Console.WriteLine("You can only leave the dungeon from the entance");
@@ -67,10 +68,10 @@ public class Explore
     }
 
     //Changes the current room
-    public static void ChangeShell(int connect)
+    public static void ChangeDungeon(int connect)
     {
-        //Current shell isn't current anymore, the shell connection number is not current and visited 
-        currentShell = shell[connect];
+        //Current Dungeon isn't current anymore, the Dungeon connection number is not current and visited 
+        currentDungeon = dungeon[connect];
     }    
 
     public static void NavigateUI(List<int> colourArray, List<string> descriptions, int[] navConnect)
@@ -129,7 +130,7 @@ public class Explore
         {
             Console.SetCursorPosition(56, 19);
             Write.Line(Color.NAME, "[", "N", "]orth");
-            if (shell[currentShell.North].room.visited) Write.Line(98 - shell[currentShell.North].room.Name.Length / 2, 21, Color.SPEAK + shell[currentShell.North].room.Name);
+            if (dungeon[currentDungeon.North].room.visited) Write.Line(98 - dungeon[currentDungeon.North].room.Name.Length / 2, 21, Color.SPEAK + dungeon[currentDungeon.North].room.Name);
             else Write.Line(97, 21, Color.SPEAK + "???");
         }
         else Write.Line(91, 21, "xxxxxxxxxxxxxxx");
@@ -138,7 +139,7 @@ public class Explore
         {
             Console.SetCursorPosition(56, 27);
             Write.Line(Color.NAME, "[", "S", "]outh");
-            if (shell[currentShell.South].room.visited) Write.Line(98 - shell[currentShell.South].room.Name.Length / 2, 25, Color.SPEAK + shell[currentShell.South].room.Name);
+            if (dungeon[currentDungeon.South].room.visited) Write.Line(98 - dungeon[currentDungeon.South].room.Name.Length / 2, 25, Color.SPEAK + dungeon[currentDungeon.South].room.Name);
             else Write.Line(97, 25, Color.SPEAK + "???");
         }
         else Write.Line(91, 25, "xxxxxxxxxxxxxxx");
@@ -147,7 +148,7 @@ public class Explore
         {
             Console.SetCursorPosition(70, 23);
             Write.Line(Color.NAME, "[", "E", "]ast");
-            if (shell[currentShell.East].room.visited) Write.Line(113 - shell[currentShell.East].room.Name.Length / 2, 23, Color.SPEAK + shell[currentShell.East].room.Name);
+            if (dungeon[currentDungeon.East].room.visited) Write.Line(113 - dungeon[currentDungeon.East].room.Name.Length / 2, 23, Color.SPEAK + dungeon[currentDungeon.East].room.Name);
             else Write.Line(112, 23, Color.SPEAK + "???");
         }
         else Write.Line(105, 23, "xxxxxxxxxxxxxxx");
@@ -156,7 +157,7 @@ public class Explore
         {
             Console.SetCursorPosition(44, 23);
             Write.Line(Color.NAME, "[", "W", "]est");
-            if (shell[currentShell.West].room.visited) Write.Line(84 - shell[currentShell.West].room.Name.Length / 2, 23, shell[currentShell.West].room.Name);
+            if (dungeon[currentDungeon.West].room.visited) Write.Line(84 - dungeon[currentDungeon.West].room.Name.Length / 2, 23, dungeon[currentDungeon.West].room.Name);
             else Write.Line(83, 23, Color.SPEAK + "???");
         }
         else Write.Line(78, 23, "xxxxxxxxxxxxxxx");

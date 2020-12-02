@@ -36,3 +36,10 @@ C:\Marburgh\Marburgh\obj\Debug\Marburgh.csprojAssemblyReference.cache
 C:\Marburgh\Marburgh\obj\Debug\Marburgh.csproj.CoreCompileInputs.cache
 C:\Marburgh\Marburgh\obj\Debug\Marburgh.exe
 C:\Marburgh\Marburgh\obj\Debug\Marburgh.pdb
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\bin\Debug\Marburgh.exe.config
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\bin\Debug\Marburgh.exe
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\bin\Debug\Marburgh.pdb
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.csprojAssemblyReference.cache
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.csproj.CoreCompileInputs.cache
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.exe
+C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.pdb

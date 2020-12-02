@@ -4,13 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class DungeonTutorial_A_Layout
+public class DungeonTutorial_A_Layout :Layout
 {
-    public static List<Shell> shell = new List<Shell> { };
-
     public DungeonTutorial_A_Layout()
     {
-        shell = new List<Shell> 
+        monstersPerRoom = 1;
+        dungeon = new List<Shell> 
         { 
             null,
 
@@ -26,6 +25,6 @@ public class DungeonTutorial_A_Layout
             new Shell(0, 7, 10, 0 ,false, new GuardRoom(Summon.goblin)),            //9
             new Shell(0, 0, 5, 9 ,false, new DungeonTutorial_A_BossRoom())                                         //10
         };
-        if (Return.RandomInt(0, 2) == 0) shell[6].room = new ShrineRoom();
+        if (Return.RandomInt(0, 2) == 0) dungeon[6].room = new ShrineRoom();
     }   
 }

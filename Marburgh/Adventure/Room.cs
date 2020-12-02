@@ -34,7 +34,7 @@ public class Room
 
     internal virtual void Explore()
     {
-        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(2);
+        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(global::Explore.monstersPerRoom);
         else Alone();
     }
 

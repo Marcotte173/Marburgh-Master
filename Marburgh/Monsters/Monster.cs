@@ -90,7 +90,7 @@ public class Monster : Creature
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
-        Drop();
+        Drop();        
     }
 
     public override void Miss(Creature target)

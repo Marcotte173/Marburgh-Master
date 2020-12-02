@@ -12,6 +12,8 @@ public class Player : Creature
     protected Equipment  offHand;
     protected Equipment armor;
     protected string pClass;
+    protected int tempDefence;
+    protected int tempMit;
     protected int[] lvlSpellpower;
     protected int[] lvlHealth;
     protected int[] lvlDamage;
@@ -35,6 +37,8 @@ public class Player : Creature
 
     internal void AttackChoice()
     {
+        tempMit = 0;
+        tempDefence = 0;
         if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
         if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
         if (bleed > 0)
@@ -247,12 +251,18 @@ public class Player : Creature
     }
     public virtual void Attack1(Creature target)
     {
-        text.Add($"You attack the " + Color.MONSTER + target.Name + Color.RESET+ " for "+ Color.DAMAGE + Damage+Color.RESET+" damage\n");
-        target.TakeDamage(Damage);
+        if (AttemptToHit(target, 0) == false) Miss(target);
+        else
+        {
+            text.Add($"You attack the " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Damage + Color.RESET + " damage\n");
+            target.TakeDamage(Damage);
+        }
     }
     public virtual void Attack2(Creature target)
     {
-
+        tempMit = 2;
+        tempMit = 15;
+        text.Add("You focus on protecting yourself, increasing your defence and mitigation");
     }
     public virtual void Attack3(Creature target)
     {
@@ -281,6 +291,11 @@ public class Player : Creature
         text.Add("You don't need " + Color.HEALTH + "healing" + Color.RESET + "!");
     }
 
+    public override bool AttemptToHit(Creature target, int bonus)
+    {
+        return (Return.RandomInt(1, 101) < Hit + bonus - target.Defence);
+    }
+
     public int[] LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
     public bool Alive { get { return alive; } set { alive = value; } }
     public string Option3 { get { return option3; } set { option3 = value; } }
@@ -307,8 +322,8 @@ public class Player : Creature
     public int PlayerHit { get { return playerHit; } set { playerHit = value; } }
     public int PlayerCrit { get { return playerCrit; } set { playerCrit = value; } }
     public int PlayerSpellpower { get { return playerSpellpower; } set { playerSpellpower = value; } }
-    public override int Defence { get { return playerDefence + Armour.Defence + MainHand.Defence + OffHand.Defence; } }
-    public override int Mitigation { get { return playerMitigation + Armour.Mitigation + MainHand.Mitigation + OffHand.Mitigation; } set { mitigation = value; } }
+    public override int Defence { get { return playerDefence + Armour.Defence + MainHand.Defence + OffHand.Defence + tempDefence; } }
+    public override int Mitigation { get { return playerMitigation + Armour.Mitigation + MainHand.Mitigation + OffHand.Mitigation + tempMit; } set { mitigation = value; } }
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armour.SpellPower; } }
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }

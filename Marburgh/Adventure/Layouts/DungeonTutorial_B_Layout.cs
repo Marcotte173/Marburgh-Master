@@ -4,12 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class DungeonTutorial_B_Layout 
+public class DungeonTutorial_B_Layout : Layout
 {
-    public static List<Shell> shell = new List<Shell> { };
-    public DungeonTutorial_B_Layout()
+    public DungeonTutorial_B_Layout() 
     {
-        shell = new List<Shell>
+        monstersPerRoom = 2;
+        dungeon = new List<Shell>
         {
             null,
 

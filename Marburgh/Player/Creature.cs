@@ -99,7 +99,7 @@ public class Creature
     
     public virtual void Miss(Creature target)
     {
-        Console.WriteLine("You miss the " + target + " !"); ;
+        Combat.combatText.Add("You miss the " + target + " !"); 
     }
 
     public virtual bool AttemptToHit(Creature target, int bonus)

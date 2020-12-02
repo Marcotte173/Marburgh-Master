@@ -11,11 +11,11 @@ public class Time
     public static int month = 1;
     public static int year = 345;
     public static string[] weeks = new string[] { "none", "first", "second" };
-    public static string[] months = new string[] { "none", "Janbruarch", "ApmaJune", "Jaugtempber", "Octvemdec" };
+    public static string[] months = new string[] { "none", "Janbruarch", "Apmajune", "Jaugtempber", "Octvemdec" };
 
     public static List<TimeEvent> Events = new List<TimeEvent>
     {
-        new TimeEvent(1,3,1,345, false, true, true, new List<int> { 1 ,1 },
+        new TimeEvent(1,2,1,345, false, true, true, new List<int> { 1 ,1 },
             new List<string>
             {
                 Color.BOSS, "","Time has run out.","",
