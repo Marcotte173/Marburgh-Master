@@ -8,10 +8,10 @@ public class Rogue : Player
     public Rogue()
     : base()
     {
-        Health = maxHealth = 78;
-        playerDamage += 2;
+        Health = maxHealth = 12;
+        playerDamage += 1;
         playerCrit += 3;
-        playerHit += 10;
+        playerHit += 5;
         offHand = Dagger.list[0];
         mainHand = Dagger.list[1];
         armor = global::Armor.list[1];

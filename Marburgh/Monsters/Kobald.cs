@@ -15,8 +15,8 @@ public class Kobold : Monster
         defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 40;
-        damage = 12;
+        health = maxHealth = 8;
+        damage = 6;
         xp = 6;
         gold = 20;
         dropRate = 30;

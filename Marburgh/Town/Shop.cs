@@ -30,32 +30,33 @@ public class
             choices.Add(Color.HEALTH + "P" + Color.RESET);
             buttons.Add("otions");
         }
-        UI.Choice(new List<int> { 1, 2, 0, 1,0,1,1,1 }, new List<string>
+        UI.Choice(new List<int> { 1, 2, 0, 1,0, }, new List<string>
         {
             Color.NAME, "You walk into ",$"{shopKeep}'s"," Weapon Shop",
             Color.NAME, Color.CLASS, $" ", shopKeep, " the ", race, " comes over to greet you",
             "",
             Color.SPEAK,"", $"'Greetings, what can I do for you?'","",
             "",
-            Color.ITEM,"Main Hand :   ",$"{Create.p.MainHand.Name} ",  "",
-            Color.ITEM,"Off Hand  :   ",$"{Create.p.OffHand.Name} " ,  "",
-            Color.ITEM,"Armor Hand:   ",$"{Create.p.Armour.Name}   " ,  "",
         },
         buttons, choices);
+        Write.Line(50, 11, Color.ITEM, "Main Hand:  ", $"{Create.p.MainHand.Name} ", "");
+        Write.Line(50, 12, Color.ITEM, "Off Hand:   ", $"{Create.p.OffHand.Name} ", "");
+        Write.Line(50, 13, Color.ITEM, "Armor Hand: ", $"{Create.p.Armour.Name}   ", "");
         Console.SetCursorPosition(53, 25);
         Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Return.Option();
         if (choice == "b" && shopKeep == "Oscar")
         {
-            UI.Choice(new List<int> { 1, 0,1, 1, 1 }, new List<string>
+            UI.Choice(new List<int> { 1, 0, }, new List<string>
             {
                 Color.SPEAK,"", $"'And what can I interest you in?'","",
                 "",
-                Color.ITEM,"Main Hand :   ",$"{Create.p.MainHand.Name} ",  "",
-                Color.ITEM,"Off Hand  :   ",$"{Create.p.OffHand.Name} " ,  "",
-                Color.ITEM,"Armor Hand:   ",$"{Create.p.Armour.Name}   " ,  "",
+                
             },
             new List<string> { "Swords", "Daggers", "Hammers", "Shields" }, new List<string> { Color.ITEM + "1" + Color.RESET, Color.ITEM + "2" + Color.RESET, Color.ITEM + "3" + Color.RESET, Color.ITEM + "4" + Color.RESET });
+            Write.Line(50, 11, Color.ITEM, "Main Hand:  ", $"{Create.p.MainHand.Name} ", "");
+            Write.Line(50, 12, Color.ITEM, "Off Hand:   ", $"{Create.p.OffHand.Name} ", "");
+            Write.Line(50, 13, Color.ITEM, "Armor Hand: ", $"{Create.p.Armour.Name}   ", "");
             string choice2 = Return.Option();
             if (choice2 == "1") Buy(swordList, shopKeep);
             else if (choice2 == "2") Buy(daggerList, shopKeep);
@@ -74,17 +75,16 @@ public class
     }
     public static void Buy(List<Equipment> list, string shopKeep)
     {
-        UI.Store(new List<int> { 0, 0, 1,1,1,0,0 }, new List<string>
+        UI.Store(new List<int> { 0 }, new List<string>
         {
-            "Great! What would you like to buy?",
-            "",
-            Color.ITEM,"Main Hand:  ",$"{Create.p.MainHand.Name} ",  "",
-            Color.ITEM,"Off Hand:   ",$"{Create.p.OffHand.Name} " ,  "",
-            Color.ITEM,"Armor Hand: ",$"{Create.p.Armour.Name}   " ,  "",
-            "",
-            "[0] Return"
+            ""
         },
         list);
+        Write.Line(42,7, Color.SPEAK + "Great! What would you like to buy?"+ Color.RESET);
+        Write.Line(50, 11, Color.ITEM, "Main Hand:  ", $"{Create.p.MainHand.Name} ", "");
+        Write.Line(50, 12, Color.ITEM, "Off Hand:   ", $"{Create.p.OffHand.Name} ", "");
+        Write.Line(50, 13, Color.ITEM, "Armor Hand: ", $"{Create.p.Armour.Name}   ", "");
+        Write.Line(50, 9, "[0]Return");
         int choice = Return.Int();
         if (choice > 0 && choice < list.Count)
         {

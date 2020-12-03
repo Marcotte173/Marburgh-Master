@@ -22,7 +22,7 @@ public class Shield : Equipment
     internal static Shield[] list = new Shield[]
     {
         new Shield("Fist",0,0,0,0),
-        new Shield("Buckler",0,5,250,1),
+        new Shield("Buckler",0,3,250,1),
         new Shield("Round Shield",0,10,400,2),
         new Shield("Pavise",0,15,550,3),
         new Shield("Targ",0,20,700,4),

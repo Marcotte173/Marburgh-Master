@@ -16,8 +16,8 @@ public class SavageOrc : Monster
         defence = 8;
         mitigation = 2;
         level = 2;
-        health = maxHealth = 100;
-        damage = 12;
+        health = maxHealth = 25;
+        damage = 10;
         xp = 15;
         gold = 30;
         dropRate = 100;

@@ -86,7 +86,11 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        text.Add($"\nYou have killed the {Color.MONSTER + Name + Color.RESET}!");
+        text.Add($"\nYou have killed the {Color.MONSTER + Name + Color.RESET}!");        
+        text.Add("");
+        text.Add("Press any key to continue");
+        Combat.DisplayCombatText();
+        Console.ReadKey(true);
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;

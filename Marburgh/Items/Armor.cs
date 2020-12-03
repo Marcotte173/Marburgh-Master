@@ -10,7 +10,7 @@ public class Armor : Equipment
     internal static Armor[] list = new Armor[]
     {
         new Armor("Fist",0,0,0,0),
-        new Armor("Cloth",0,10,250,1),
+        new Armor("Cloth",0,3,250,1),
         new Armor("Leather",1,10,400,2),
         new Armor("Hardened Leather",2,8,550,3),
         new Armor("Mail",3,6,700,4),

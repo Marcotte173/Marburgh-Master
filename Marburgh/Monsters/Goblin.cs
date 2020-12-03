@@ -15,8 +15,8 @@ public class Goblin:Monster
         defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 40;
-        damage = 12;
+        health = maxHealth = 8;
+        damage = 5;
         xp = 6;
         gold = 22;
         dropRate = 30;

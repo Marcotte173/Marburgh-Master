@@ -17,6 +17,8 @@ public class Combat
         xpReward = 0;
         combatText.Clear();
         GameState.location = Location.Combat;
+        if (Create.p == Create.m) CombatUI.option[1] = Color.SHIELD + "Shield" + Color.RESET;
+        else CombatUI.option[1] = Color.DEFENCE + "Defend" + Color.RESET;
         while (Create.p.combatMonsters.Count > 0)
         {
             foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
@@ -29,7 +31,7 @@ public class Combat
                 if (m.CanAct) m.MakeAttack();
                 else Console.WriteLine("The monster is stunned and cannot act!");
             }
-        }
+        }        
         List<int> colours = new List<int> { };
         List<string> text = new List<string> { };
         int goldroll = Return.RandomInt(-2, 6);

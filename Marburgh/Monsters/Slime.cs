@@ -16,8 +16,8 @@ public class Slime : Monster
         defence = 15;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 50;
-        damage = 9;
+        health = maxHealth = 10;
+        damage = 5;
         xp = 6;
         gold = 22;
         dropRate = 25;

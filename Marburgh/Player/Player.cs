@@ -33,7 +33,7 @@ public class Player : Creature
     protected string option4;
     protected int run;
     protected List<Drop> drops = new List<Drop> { };
-    static List<string> text = Combat.combatText;
+    public static List<string> text = Combat.combatText;
 
     internal void AttackChoice()
     {
@@ -81,7 +81,7 @@ public class Player : Creature
                 if (Return.RandomInt(1, 101) <= run)
                 {
                     Console.Clear();
-                    UI.Keypress(new List<int> { 0 }, new List<string> {"You succesfully runa way... Coward" });
+                    UI.Keypress(new List<int> { 0 }, new List<string> {"You succesfully run away... Coward" });
                     combatMonsters.Clear();
                     Utilities.ToTown();
                 }
@@ -113,13 +113,12 @@ public class Player : Creature
         xpNeeded = new int[] { 0, 45, 100, 150, 250, 450, 800};
         Energy = MaxEnergy = 1;
         gold = 200;
-        potionSize = maxPotionSize = 40;
+        potionSize = maxPotionSize = 15;
         playerCrit = 5;
-        playerHit = 65;
-        playerDefence = 5;
+        playerHit = 70;
         playerMitigation = 1;
         level = 1;
-        playerDamage = 6;
+        playerDamage = 2;
         canExplore = true;
         canAct = true;
         xp = 0;

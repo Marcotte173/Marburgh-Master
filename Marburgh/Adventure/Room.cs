@@ -20,6 +20,8 @@ public class Room
     //Constructor
     public Room()
     {
+        size = 1;
+        tier = 2;
     }
     
     public Room(RoomType roomType)
@@ -34,7 +36,7 @@ public class Room
 
     internal virtual void Explore()
     {
-        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(global::Explore.monstersPerRoom);
+        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(Return.RandomInt(1,global::Explore.monstersPerRoom));
         else Alone();
     }
 
@@ -62,11 +64,12 @@ public class Room
         {
             if (i == 1)
             {
-                Create.p.Gold +=120;
+                int goldFind = Return.RandomInt(3, 10) + Return.RandomInt(0, 12) * global::Explore.rewardMod;
+                Create.p.Gold += goldFind;
                 findColourArray.Add(1);
                 findList.Add(Color.GOLD);
                 findList.Add("You find ");
-                findList.Add($"120");
+                findList.Add($"{goldFind}");
                 findList.Add(" gold");
                 findColourArray.Add(0);
                 findList.Add("");

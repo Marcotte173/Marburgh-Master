@@ -67,14 +67,16 @@ public class Town
                 if (choice == "1")
                 {
                     Explore.dungeon  = dungeon1.dungeon;
-                    Explore.monstersPerRoom = dungeon1.monstersPerRoom;
+                    Explore.monstersPerRoom = 2;
+                    Explore.rewardMod = 1;
                     Explore.currentDungeon = dungeon1.dungeon[1];
                 }
                 else if (choice == "2")
                 {
 
                     Explore.dungeon = dungeon2.dungeon;
-                    Explore.monstersPerRoom = dungeon2.monstersPerRoom;
+                    Explore.monstersPerRoom = 2;
+                    Explore.rewardMod = 1;
                     Explore.currentDungeon = dungeon2.dungeon[1];
                 }
                 Explore.Menu();

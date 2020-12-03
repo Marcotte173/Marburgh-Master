@@ -43,3 +43,10 @@ C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Ma
 C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.csproj.CoreCompileInputs.cache
 C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.exe
 C:\Users\tmarcott\source\repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.pdb
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\bin\Debug\Marburgh.exe.config
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\bin\Debug\Marburgh.exe
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\bin\Debug\Marburgh.pdb
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.csprojAssemblyReference.cache
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.csproj.CoreCompileInputs.cache
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.exe
+C:\Users\Marcotte\Source\Repos\Marcotte173\Marburgh-Master\Marburgh\obj\Debug\Marburgh.pdb

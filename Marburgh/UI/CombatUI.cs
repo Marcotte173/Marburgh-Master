@@ -31,7 +31,7 @@ internal class CombatUI
         for (int i = 0; i < a.Status.Count; i++)
         {
             Write.Position(x - a.Name.Length / 2, 3+i);
-            Console.WriteLine( a.Status[i]);
+            Console.WriteLine($"{a.Status[i]} ");
         }
     }
 

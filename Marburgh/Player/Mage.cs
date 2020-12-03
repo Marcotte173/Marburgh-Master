@@ -8,20 +8,18 @@ public class Mage : Player
     public Mage()
     : base()
     {
-        Health = MaxHealth = 70;
+        Health = MaxHealth = 8;
         playerSpellpower = 1;
         Energy = MaxEnergy = 3;
         potionSize = maxPotionSize += 5;
         offHand = Magic.list[0];
         mainHand = Magic.list[1];
         armor = global::Armor.list[0];
-        pClass = "Mage";
-        CombatUI.option[1] = "Shield" ;
+        pClass = "Mage";        
         option3 =  "Fire Blast";
         option4 =  "Magic Missiles";
-        run = 60;                           //5          //10
-        lvlSpellpower = new int[] { 0, 1, 2,      1, 3, 1, 2, 2, 3, 4, 4, 5, 10 };
-
+        run = 60;                                       //5  
+        lvlSpellpower = new int[]       { 0, 1, 2, 1, 3, 1, 2};
         lvlHealth = new int[]           { 0, 3, 3, 3, 5, 4, 4};
         lvlDamage = new int[]           { 0, 1, 2, 2, 3, 2, 2};
         lvlEnergy = new int[]           { 0, 2, 2, 2, 4, 3, 3};
@@ -43,12 +41,13 @@ public class Mage : Player
             shielded = false;
             Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
         }
+        Combat.DisplayCombatText();
         AttackChoice();
     }
 
     public override void Attack3(Creature target)
     {
-        int flameDamage = 2 + spellpower + mainHand.SpellPower + offHand.SpellPower;
+        int flameDamage = 2 + Spellpower;
         if (Return.HaveEnergy(1))
         {
             Combat.combatText.Add(Color.BURNING + "Flames " + Color.RESET + "burst out of your hands, burning the " + Color.MONSTER + target.Name + Color.RESET +" for " + Color.DAMAGE + flameDamage + Color.RESET +" damage and " + Color.BURNING + "igniting " + Color.RESET + "him!");
@@ -85,7 +84,7 @@ public class Mage : Player
         }
         else
         {
-            Console.WriteLine($"Your shield absorbs {energy} damage!");
+            Player.text.Add("Your "+ Color.SHIELD + "shield " + Color.RESET + $"absorbs {Color.SHIELD + energy + Color.RESET} damage!");
             if (energy >= damage) energy -= damage;
             else
             {

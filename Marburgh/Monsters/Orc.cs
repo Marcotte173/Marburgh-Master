@@ -15,8 +15,8 @@ public class Orc : Monster
         defence = 7;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 65;
-        damage = 9;
+        health = maxHealth = 14;
+        damage = 7;
         xp = 9;
         gold = 19;
     }

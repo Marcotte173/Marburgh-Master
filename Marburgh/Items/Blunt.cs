@@ -9,7 +9,7 @@ public class Blunt : Equipment
     internal static Blunt[] list = new Blunt[]
     {
         new Blunt("Fist",0,0,0,0,false,0),
-        new Blunt("Club",8,0,0,250,false,1),
+        new Blunt("Club",4,0,0,250,false,1),
         new Blunt("Hammer",15,1,1,400,false,2),
         new Blunt("Shillelagh",21,3,3,550,false,3),
         new Blunt("Flail",26,4,4,700,false,4),

@@ -11,7 +11,7 @@ public class Sword : Equipment
     internal static Sword[] list = new Sword[]
     {
         new Sword("Fist",0,0,0,0,false,0),
-        new Sword("Short Sword",7,4,1,250,false,1),
+        new Sword("Short Sword",4,4,1,250,false,1),
         new Sword("Arming Sword",13,8,2,400,false,2),
         new Sword("Long Sword",18,12,3,550,false,3),
         new Sword("Katana",22,16,5,700,false,4),

@@ -79,7 +79,7 @@ public class CharacterSheet
         Write.Line(Color.ENERGY, "Press any key to continue");
 
         Console.SetCursorPosition(49, 22);
-        Write.Line(Color.RAREDROP, "", "[D]ROPS", "");
+        Write.Line("["+ Color.RAREDROP+ "D" + Color.RESET+"]rops");
         string choice = Return.Option();
         if (choice == "d")
         {

@@ -10,7 +10,7 @@ public class Dagger : Equipment
     internal static Dagger[] list = new Dagger[]
     {
         new Dagger("Fist",0,0,0,0,false,0),
-        new Dagger("Butcher's Knife",7,1,4,250,false,1),
+        new Dagger("Butcher's Knife",4,1,4,250,false,1),
         new Dagger("Knife",14,2,8,400,false,2),
         new Dagger("Push Dagger",19,3,12,550,false,3),
         new Dagger("Stilleto",22,5,16,700,false,4),

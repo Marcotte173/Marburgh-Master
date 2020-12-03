@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 public class Explore
 {
     public static int monstersPerRoom;
+    public static int rewardMod;
     public static List<Shell> dungeon = new List<Shell> { };
     protected static Room starter;
     public static Shell currentDungeon;
@@ -51,7 +52,54 @@ public class Explore
             ChangeDungeon( currentDungeon.West);
         }
         else if (choice == "9") CharacterSheet.Display();
-        else if (choice == "h") Create.p.DrinkPotion();
+        else if (choice == "h")
+        {
+            if (Create.p.MaxHealth == Create.p.Health)
+            {
+                UI.Keypress(
+                new List<int> { 1 },
+                new List<string>
+                {
+                Color.HEALTH,"You don't need " ,"healing", "!"
+                });
+            }
+            else
+            {
+                if (Create.p.PotionSize == 0)
+                {
+                    UI.Keypress(
+                    new List<int> { 1 },
+                    new List<string>
+                    {
+                    Color.HEALTH, "Your " ,"potion ", "is empty!"
+                    });
+                }
+                else if ((Create.p.MaxHealth - Create.p.Health) > Create.p.PotionSize)
+                {
+                    int heal = Create.p.PotionSize;
+                    Create.p.AddHealth(heal);
+                    Create.p.PotionSize = 0;
+                    UI.Keypress(
+                    new List<int> { 1 },
+                    new List<string>
+                    {
+                    Color.HEALTH,"You heal for " ,heal.ToString(), " hp!"
+                    });
+                }
+                else
+                {
+                    int heal = Create.p.MaxHealth - Create.p.Health;
+                    Create.p.PotionSize -= (Create.p.MaxHealth - Create.p.Health);
+                    Create.p.AddHealth(heal);
+                    UI.Keypress(
+                    new List<int> { 1 },
+                    new List<string>
+                    {
+                    Color.HEALTH,"You heal for " , heal.ToString() , " hp!"
+                    });
+                }
+            }
+        }
         else if (choice == "0" && currentDungeon == dungeon[1])
         {
             //Utilities.ResetNormalRooms();

@@ -8,9 +8,7 @@ public class Warrior : Player
     public Warrior()
     : base()
     {
-        Health = MaxHealth = 85;
-        playerDefence += 3;
-        playerHit += 5;
+        Health = MaxHealth = 16;
         offHand = Shield.list[1];
         mainHand = Blunt.list[1];
         armor = global::Armor.list[1];
