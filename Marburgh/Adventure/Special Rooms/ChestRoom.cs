@@ -37,14 +37,14 @@ public class ChestRoom : Room
             List<string> bashList = new List<string> { };
             bashColourArray.Add(0);
             bashList.Add("");
-            if (Return.RandomInt(1,101) <= 50)
+            bool success = Return.RandomInt(1, 101) <= 30;
+            if (success)
             {
                 bashColourArray.Add(1);
                 bashList.Add(Color.XP);
                 bashList.Add("");
                 bashList.Add("Success! ");
-                bashList.Add("");
-                //Treasure
+                bashList.Add("");                
             }
             else
             {
@@ -56,9 +56,12 @@ public class ChestRoom : Room
                 bashColourArray.Add(0);
                 bashList.Add("");
                 bashColourArray.Add(0);
-                bashList.Add("It looks like the valuables inside were fragile indeed.Oh well, maybe next time");
+                bashList.Add("It looks like the valuables inside were fragile indeed");
+                bashColourArray.Add(0);
+                bashList.Add("Oh well, maybe next time");
             }
             ActionWait(bashColourArray, bashList, Color.DAMAGE + "BLAM!" + Color.RESET, null);
+            if(success)Receive();
         }
         else if (choice == "p")
         {
@@ -67,43 +70,74 @@ public class ChestRoom : Room
             List<string> pickList = new List<string> { };
             pickColourArray.Add(0);
             pickList.Add("");
-            int pickRoll = Return.RandomInt(1, 101);
-            if (pickRoll <= 50)
+            bool success = Return.RandomInt(1, 101) <= 50;
+            bool summon = Return.RandomInt(1, 101) <= 15;
+            if (success && !summon)
             {
                 pickColourArray.Add(1);
                 pickList.Add(Color.XP);
                 pickList.Add("");
                 pickList.Add("Success! ");
                 pickList.Add("");
-                //Treasure
+                
             }
-            else if (pickRoll > 50 && pickRoll <= 66)
+            else if (success && summon)
             {
-                Console.WriteLine("You got in!\n\n");
-                Thread.Sleep(300);
-                //Treasure
-                Utilities.Keypress();
-                Console.WriteLine("\nThat took a while though, it looks like someone found you!");
-                //Summon Monsters, fight
+                pickColourArray.Add(1);
+                pickList.Add(Color.XP);
+                pickList.Add("");
+                pickList.Add("You got in! ");
+                pickList.Add("");
+                pickColourArray.Add(1);
+                pickList.Add(Color.DAMAGE);
+                pickList.Add("That took a while though, it looks like ");
+                pickList.Add("someone ");
+                pickList.Add("found you!");
+            }
+            else if (!success && summon)
+            {
+                pickColourArray.Add(1);
+                pickList.Add(Color.DAMAGE);
+                pickList.Add("");
+                pickList.Add("Failure!");
+                pickList.Add("");
+                pickColourArray.Add(0);
+                pickList.Add("");
+                pickColourArray.Add(0);
+                pickList.Add("Try as you might, lack lock is not going to budge!");
+                pickColourArray.Add(1);
+                pickList.Add(Color.DAMAGE);
+                pickList.Add("That took a while though, it looks like ");
+                pickList.Add("someone ");
+                pickList.Add("found you!");
             }
             else
             {
-                Console.WriteLine("Failure!");
-                Thread.Sleep(300);
-                Console.WriteLine("Not only could you not get in, you took so long that someone found you!");
-                //Summon Monsters, fight
+                pickColourArray.Add(1);
+                pickList.Add(Color.DAMAGE);
+                pickList.Add("");
+                pickList.Add("Failure!");
+                pickList.Add("");
+                pickColourArray.Add(0);
+                pickList.Add("");
+                pickColourArray.Add(0);
+                pickList.Add("Try as you might, that lock is not going to budge!");
             }
+            ActionWait(pickColourArray, pickList, Color.SHIELD + "*Tick* *Tick*" + Color.RESET, null);
+            if (success) Receive();
+            if (summon) Summon(1);
         }
         else if (choice == "k" && key == true)
         {
-            Console.Clear();
-            Write.Line(Color.NAME, "CLICK!");
-            Write.DotDotDot();
-            Console.WriteLine("\n\n\n\n\n\n\n");
-            Console.WriteLine("Success!\n\n");
+            ActionWait(new List<int> {1}, new List<string>
+            {
+                Color.XP,
+                "",
+                "Success!",
+                ""
+            }, Color.NAME + "*Click*" + Color.RESET, null);
             Thread.Sleep(300);
-            Console.WriteLine("Inside you find a bunch of treasure, to be described later!");
-            Utilities.Keypress();
+            Receive();
         }
         else if (choice == "k" && key == false)
         {
@@ -124,5 +158,58 @@ public class ChestRoom : Room
         }
         else Explore(); 
         visited = true;
-    }     
+    }
+
+    private void Receive()
+    {
+        int treasure = Return.RandomInt(0, 3);
+        if(treasure == 0)
+        {
+            int goldAdd = Return.RandomInt(60, 90) + Return.RandomInt(20, 40) * global::Explore.rewardMod;
+            UI.Keypress(new List<int> { 1 }, new List<string>
+            {
+                Color.GOLD, "You find ", goldAdd.ToString(), " gold!"
+            });
+            Create.p.Gold += goldAdd;
+        }
+        else if(treasure == 1)
+        {
+            Armor armor = Armor.list[Return.RandomInt(global::Explore.rewardMod, global::Explore.rewardMod*2)];
+            if (UI.Confirm(new List<int> { 1, 1 }, new List<string>
+                {
+                    Color.ITEM, "You find some ", armor.Name, " armor!",
+                    Color.SPEAK, "Would you like to", " equip ","it?",
+                }))
+            {
+                Create.p.Equip(armor);
+            }
+        }
+        else if (treasure == 2)
+        {
+            int weaponType = Return.RandomInt(0,5);
+            Equipment[] list = new Equipment[8] ;
+            if (weaponType == 0) list = Blunt.list;
+            else if (weaponType == 1) list = Dagger.list;
+            else if (weaponType == 2) list = Magic.list;
+            else if (weaponType == 3) list = Shield.list;
+            else list = Sword.list;
+            Equipment weapon = list[Return.RandomInt(global::Explore.rewardMod, global::Explore.rewardMod * 2)];
+            if (UI.Confirm(new List<int> { 1, 1 }, new List<string>
+                {
+                    Color.ITEM, "You find a", weapon.Name, "!",
+                    Color.SPEAK, "Would you like to", " equip ","it?",
+                }))
+            {
+                if (Create.p.MainHand == UI.Hand(weapon))
+                {
+                    Create.p.Equip(weapon,Create.p.MainHand);
+                }
+                else
+                {
+                    Create.p.Equip(weapon,Create.p.OffHand);
+                }
+            }
+        }
+        
+    }
 }

@@ -130,7 +130,14 @@ public class Player : Creature
         combatMonsters = new List<Monster> { };
     }    
 
-    internal void Equip(Equipment e) { armor = e.Copy(); }
+    internal void Equip(Equipment e)
+    {
+        UI.Keypress(new List<int> { 1 }, new List<string>
+            {
+                Color.ITEM, "You equip the ",e.Name,""
+            });
+        armor = e.Copy();
+    }
     internal void Equip(Equipment e, Equipment hand)
     {
         if (e.TwoHand)
@@ -198,11 +205,11 @@ public class Player : Creature
         Family.timeOfDeath[0, 1] = Time.week;
         Family.timeOfDeath[0, 2] = Time.month;
         Family.timeOfDeath[0, 3] = Time.year;
-        if (Family.alive.Count == 0)
+        if (Family.dead.Count == 3)
         {
             UI.Keypress(new List<int> { 1,0,0 }, new List<string>
             {
-                Color.NAME, "You are the last of the ", Family.lastName+"s","",
+                Color.NAME, "You are the last of the ", Family.lastName+"","s",
                 "",
                 "Your bloodline ends here"
             });

@@ -47,40 +47,60 @@ public class Create
         UIComponent.BarBlank();
         UIComponent.StandardMiddle(8);
         UIComponent.BarBlank();
-        Console.SetCursorPosition(Return.Width(0), Return.Height(7));
-        if (w.Alive) Write.Line(Color.NAME, "[1]", Family.alive[0], ". The Warrior");
-        Console.SetCursorPosition(Return.Width(0), Return.Height(12));
-        if (r.Alive) Write.Line(Color.NAME,  "[2]", Family.alive[1], ". The Rogue");
-        Console.SetCursorPosition(Return.Width(0), Return.Height(16));
-        if (m.Alive) Write.Line(Color.NAME, "[3]", Family.alive[2],". The Mage");
-        Write.Position(47, 22);
-        Console.WriteLine("Please select a sibling");
+        if (w.Alive)
+        {
+            Write.Line(0, 6, "[1]" + Color.NAME+ Family.alive[0]);
+            Write.Line(32, 6, "The " + Color.SHIELD + "firstborn" + Color.RESET+". With the weight of the world on their shoulders, they trained everyday");
+            Write.Line(32, 7, "Bulding themelves into the ultimate " + Color.CLASS + "warrior");
+        }
+        if (r.Alive)
+        {
+            Write.Line(0, 9, "[2]" + Color.NAME + Family.alive[1]);
+            Write.Line(32, 9, "The " + Color.SHIELD + "middle child" + Color.RESET + ". Fed up with the pressure, they fell into the wrong crowd.");
+            Write.Line(32, 10, "Sneaking and dirty tricks became the norm for this "+ Color.CLASS + "rogue");
+        }
+        if (m.Alive)
+        {
+            Write.Line(0, 12, "[3]" + Color.NAME + Family.alive[2]);
+            Write.Line(32, 12, "The " + Color.SHIELD + "youngest" + Color.RESET + ". Free to persue their own interests, They studied the occult");
+            Write.Line(32, 13, "One day they hope to be an all powerful " + Color.CLASS + "mage");
+        }
+        Write.Line(47,22,"Please select a sibling");
         string choice = Return.Option();
         p = new Player();
         if (choice != "1" & choice != "2" && choice != "3") ChooseSibling();
         else
         {
-            if (choice == "1") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[0], ", correct?" })) ChooseSibling();
-            else
+            if (choice == "1" && w.Alive)
             {
-                p = w;
-                p.Name = Family.alive[0];
-                Name(0);
+                if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[0], ", correct?" })) ChooseSibling();
+                else
+                {
+                    p = w;
+                    p.Name = Family.alive[0];
+                    Name(0);
+                }
             }
-            else if (choice == "2") if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[1], ", correct?" })) ChooseSibling();
-            else
+            else if (choice == "2" && r.Alive)
             {
-                p = r;
-                p.Name = Family.alive[1];
-                Name(1);
+                if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[1], ", correct?" })) ChooseSibling();
+                else
+                {
+                    p = r;
+                    p.Name = Family.alive[1];
+                    Name(1);
+                }
             }
-            else if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[2], ", correct?" })) ChooseSibling();
-            else
+            else if (choice == "3" && m.Alive)
             {
-                p = m;
-                p.Name = Family.alive[2];
-                Name(2);
-            }            
+                if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[2], ", correct?" })) ChooseSibling();
+                else
+                {
+                    p = m;
+                    p.Name = Family.alive[2];
+                    Name(2);
+                }
+            }                      
         }
     }
 

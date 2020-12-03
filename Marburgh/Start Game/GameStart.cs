@@ -7,7 +7,7 @@ namespace MedievalRPG
     {
         internal static void Menu()
         {
-            Sound.Loop("town");
+            //Sound.Loop("town");
             Console.CursorVisible = false;
             Console.Clear();
             UI.GameMenu(new List<int> { 1, 1, 1, 1, 1, 1, 1 }, new List<string>

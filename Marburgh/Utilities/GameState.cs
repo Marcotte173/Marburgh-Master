@@ -10,6 +10,6 @@ public class GameState
     public static string villagersSaved = "";    
     public static bool canCraft;
     public static bool canCraftWeaponsFromBossDrops;
-    public static bool tutorialDungeon_B_available = true;
+    public static bool tutorialDungeon_B_available;
     public static Location location;
 }
