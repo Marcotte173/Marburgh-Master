@@ -127,4 +127,12 @@ public class ShrineRoom : Room
         else Explore();
         visited = true;
     }
+    public override List<string> Flavor
+    {
+        get
+        {
+            if (visited) return new List<string> { $"You see a shrine. There is clearly nothing else to learn from it" };
+            else return flavor;
+        }
+    }
 }

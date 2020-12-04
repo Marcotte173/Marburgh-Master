@@ -35,4 +35,12 @@ public class GuardRoom : Room
         });
         visited = true;
     }
+    public override List<string> Flavor
+    {
+        get
+        {
+            if (visited) return new List<string> { $"You return to the guard post. Luckily, no one has noticed the dead guard. Yet" };
+            else return flavor;
+        }
+    }
 }

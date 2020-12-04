@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Monster : Creature
-{    
+{
     protected string intention;
     protected int action;
     protected Drop drop;
@@ -16,9 +16,17 @@ public class Monster : Creature
         if (AttemptToHit(target, 0) == false) Miss(target);
         else
         {
-            text.Add($"The {Color.MONSTER + Name + Color.RESET} hits you for {Color.DAMAGE + Damage + Color.RESET} damage");
-            target.TakeDamage(Damage, this);
+            text.Add($"The {Color.MONSTER + Name + Color.RESET} hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
+            target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }
+    }
+    public Monster(int strength, int agility, int stamina)
+    : base(strength, agility, stamina)
+    {
+        damage = strength * 2;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
     }
     public virtual void Attack2(Player target)
     {
@@ -26,7 +34,7 @@ public class Monster : Creature
     }
     public virtual void Attack3(Creature target)
     {
-        
+
     }
     public virtual void Attack4(Creature target)
     {
@@ -43,9 +51,9 @@ public class Monster : Creature
 
     public virtual void Declare()
     {
-        action = Return.RandomInt(0, 4);        
-        if (bleed > 0 && !Status.Contains("Bleeding"))Status.Add(Color.BLOOD+"Bleeding"+Color.RESET);
-        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED+"Stunned"+ Color.RESET);
+        action = Return.RandomInt(0, 4);
+        if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
+        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
         if (action != 0) intention = "Ready";
         else Declare2();
     }
@@ -63,7 +71,7 @@ public class Monster : Creature
     {
         if (bleed > 0)
         {
-            text.Add($"The "+Color.MONSTER+Name+Color.BLOOD+" bleeds " +Color.RESET +"for " + Color.DAMAGE + bleedDam + Color.RESET+" damage!");
+            text.Add($"The " + Color.MONSTER + Name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
             TakeDamage(bleedDam);
             bleed--;
             if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
@@ -75,7 +83,7 @@ public class Monster : Creature
             burning--;
             if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
         }
-        if(stun > 0)
+        if (stun > 0)
         {
             canAct = false;
             stun--;
@@ -86,7 +94,7 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        text.Add($"\nYou have killed the {Color.MONSTER + Name + Color.RESET}!");        
+        text.Add($"\nYou have killed the {Color.MONSTER + Name + Color.RESET}!");
         text.Add("");
         text.Add("Press any key to continue");
         Combat.DisplayCombatText();
@@ -94,7 +102,7 @@ public class Monster : Creature
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
-        Drop();        
+        Drop();
     }
 
     public override void Miss(Creature target)
@@ -102,12 +110,12 @@ public class Monster : Creature
         text.Add($"The {Color.MONSTER + Name + Color.RESET} misses you!\n");
     }
     public string Intention { get { return intention; } set { intention = value; } }
-    public virtual void Drop() 
-    { 
-        if (Return.RandomInt(1, 101) <= dropRate )
+    public virtual void Drop()
+    {
+        if (Return.RandomInt(1, 101) <= dropRate)
         {
             Create.p.combatDropList.Add(ChooseDrop());
-        }        
+        }
     }
 
     public virtual Drop ChooseDrop()
@@ -116,5 +124,5 @@ public class Monster : Creature
         else return AdventureItems.monsterTooth.Copy();
     }
 
-    public int Action { get { return action; } set { action = value; } }    
+    public int Action { get { return action; } set { action = value; } }
 }

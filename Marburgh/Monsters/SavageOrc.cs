@@ -7,17 +7,12 @@ using System.Threading.Tasks;
 public class SavageOrc : Monster
 {
     Drop savageOrcClaw = new Drop("Savage Orc Claw", 1, 1);
-    public SavageOrc()
-    : base()
+    public SavageOrc(int strength, int agility, int stamina)
+    : base(strength, agility, stamina)
     {
         name = "Savage Orc";
-        crit = 10;
-        hit = 80;
-        defence = 8;
         mitigation = 2;
         level = 2;
-        health = maxHealth = 25;
-        damage = 10;
         xp = 15;
         gold = 30;
         dropRate = 100;
@@ -26,9 +21,9 @@ public class SavageOrc : Monster
     {
         if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "orc" + Color.RESET +$" charges at you, " + Color.STUNNED + "stunning " + Color.RESET + $"you and doing {Color.DAMAGE+damage*2+Color.RESET} damage!");
+            Combat.combatText.Add($"The " + Color.MONSTER + "orc" + Color.RESET + $" charges at you, " + Color.STUNNED + "stunning " + Color.RESET + $"you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) * 2 + Color.RESET} damage!");
             target.Stun = 2;
-            target.TakeDamage(damage,this);
+            target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }
         else Miss(target);
     }

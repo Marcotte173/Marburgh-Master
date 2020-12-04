@@ -204,7 +204,14 @@ public class ChestRoom : Room
                     Create.p.Equip(weapon,Create.p.OffHand);
                 }
             }
+        }        
+    }
+    public override List<string> Flavor
+    {
+        get
+        {
+            if (visited) return new List<string> { $"You see chest. Having spent enough time on it, you decide to move on" };
+            else return flavor;
         }
-        
     }
 }

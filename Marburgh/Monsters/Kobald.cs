@@ -6,17 +6,12 @@ using System.Threading.Tasks;
 
 public class Kobold : Monster
 {
-    public Kobold()
-     : base()
+    public Kobold(int strength, int agility, int stamina)
+    : base(strength, agility, stamina)
     {
         name = "Kobald";
-        crit = 15;
-        hit = 70;
-        defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 8;
-        damage = 6;
         xp = 6;
         gold = 20;
         dropRate = 30;
@@ -25,11 +20,11 @@ public class Kobold : Monster
     {
         if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + " throws a candle at you, causing "+Color.DAMAGE + "1"+Color.RESET + " damage, and " + Color.BURNING + "igniting " + Color.RESET + "you!");
-            if (target.Burning > 0) target.Burning += 1;
-            else target.BurnDam = 3;
-            target.Burning = 3;
-            target.TakeDamage(1,this);
+            Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + " throws a candle at you, causing " + Color.DAMAGE + "4" + Color.RESET + " damage, and " + Color.BURNING + "igniting " + Color.RESET + "you!");
+            if (target.Burning > 0) target.BurnDam += 2;
+            else target.BurnDam = 4;
+            target.Burning = 4;
+            target.TakeDamage(4, this);
         }
         else Miss(target);
     }

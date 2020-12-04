@@ -23,7 +23,7 @@ public class GameState
 
     public static void Death()
     {
-        Create.p.TakeDamage(100, new Goblin());
+        Create.p.TakeDamage(100, new Goblin(3,3,3));
     }
 
     public static void CraftCheat()

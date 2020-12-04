@@ -7,26 +7,21 @@ using System.Threading.Tasks;
 public class Slime : Monster
 {
     Drop slime = new Drop("Slime", 1, 1);
-    public Slime()
-     : base()
+    public Slime(int strength, int agility, int stamina)
+    : base(strength, agility, stamina)
     {
         name = "Slime";
-        crit = 5;
-        hit = 70;
-        defence = 15;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 10;
-        damage = 5;
         xp = 6;
         gold = 22;
         dropRate = 25;
     }
     public override void Attack2(Player target)
     {
-        Combat.combatText.Add($"The " + Color.MONSTER + "slime "+Color.RESET +"splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
+        Combat.combatText.Add($"The " + Color.MONSTER + "slime " + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
         MaxHealth = Health;
-        Slime s = new Slime();
+        Slime s = new Slime(2, 2, 3);
         s.Health = s.MaxHealth = MaxHealth;
         Create.p.combatMonsters.Add(s);
     }
@@ -45,7 +40,7 @@ public class Slime : Monster
     {
         if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
         if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
-        if (health < maxHealth/2 && Create.p.combatMonsters.Count<3)
+        if (health < maxHealth / 2 && Create.p.combatMonsters.Count < 3)
         {
             action = 0;
             Declare2();
@@ -53,7 +48,7 @@ public class Slime : Monster
         else
         {
             action = 1;
-            intention = "Ready";            
+            intention = "Ready";
         }
     }
 }

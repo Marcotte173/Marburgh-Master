@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 public class Create
 {
-    internal static Warrior w = new Warrior();
-    internal static Mage m = new Mage();
-    internal static Rogue r = new Rogue();
+    internal static Warrior w = new Warrior(3, 3, 3, 2);
+    internal static Mage m = new Mage(3, 3, 2, 3);
+    internal static Rogue r = new Rogue(3, 3, 3, 2);
     internal static Player p;
 
     public static void Story()
@@ -49,15 +49,15 @@ public class Create
         UIComponent.BarBlank();
         if (w.Alive)
         {
-            Write.Line(0, 6, "[1]" + Color.NAME+ Family.alive[0]);
-            Write.Line(32, 6, "The " + Color.SHIELD + "firstborn" + Color.RESET+". With the weight of the world on their shoulders, they trained everyday");
+            Write.Line(0, 6, "[1]" + Color.NAME + Family.alive[0]);
+            Write.Line(32, 6, "The " + Color.SHIELD + "firstborn" + Color.RESET + ". With the weight of the world on their shoulders, they trained everyday");
             Write.Line(32, 7, "Bulding themelves into the ultimate " + Color.CLASS + "warrior");
         }
         if (r.Alive)
         {
             Write.Line(0, 9, "[2]" + Color.NAME + Family.alive[1]);
             Write.Line(32, 9, "The " + Color.SHIELD + "middle child" + Color.RESET + ". Fed up with the pressure, they fell into the wrong crowd.");
-            Write.Line(32, 10, "Sneaking and dirty tricks became the norm for this "+ Color.CLASS + "rogue");
+            Write.Line(32, 10, "Sneaking and dirty tricks became the norm for this " + Color.CLASS + "rogue");
         }
         if (m.Alive)
         {
@@ -65,9 +65,9 @@ public class Create
             Write.Line(32, 12, "The " + Color.SHIELD + "youngest" + Color.RESET + ". Free to persue their own interests, They studied the occult");
             Write.Line(32, 13, "One day they hope to be an all powerful " + Color.CLASS + "mage");
         }
-        Write.Line(47,22,"Please select a sibling");
+        Write.Line(47, 22, "Please select a sibling");
         string choice = Return.Option();
-        p = new Player();
+        p = new Player(2, 2, 2, 2);
         if (choice != "1" & choice != "2" && choice != "3") ChooseSibling();
         else
         {
@@ -100,17 +100,17 @@ public class Create
                     p.Name = Family.alive[2];
                     Name(2);
                 }
-            }                      
+            }
         }
     }
 
     internal static void Name(int birthOrder)
     {
-        string a = (birthOrder == 0)?"You have the weight of the world on your shoulders. It's all up to you now":(birthOrder ==1)?"It's time to come back into the fold and use the skills you learned on the streets":"You're not much of a fighter, but maybe brute strength isn't what's required";
+        string a = (birthOrder == 0) ? "You have the weight of the world on your shoulders. It's all up to you now" : (birthOrder == 1) ? "It's time to come back into the fold and use the skills you learned on the streets" : "You're not much of a fighter, but maybe brute strength isn't what's required";
         string b = (birthOrder == 0) ? "You were by her side as she fell, and swore revenge." : (birthOrder == 1) ? "You have returned to Marburgh to pay your respects... and get revenge" : "You were never close, but you love Marburgh, and know that the Orcs mean the destruction of everything you known";
         string[] order = new string[] { "eldest", "middle", "youngest" };
         Console.Clear();
-        UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0 ,0,0}, new List<string>
+        UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 0, 0 }, new List<string>
             {
                Color.NAME,  "Your name is ", p.Name ,"",
                Color.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
@@ -124,6 +124,6 @@ public class Create
         Utilities.ToTown();
     }
 
-    
-    
+
+
 }

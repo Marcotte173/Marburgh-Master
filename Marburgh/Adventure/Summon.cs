@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 public class Summon
 {
-    public static Goblin goblin = new Goblin();
-    public static Slime  slime = new Slime();
-    public static Kobold kobald = new Kobold();
-    public static Orc orc = new Orc();
-    public static SavageOrc savageOrc = new SavageOrc();
+    public static Goblin goblin = new Goblin(4, 2, 3);
+    public static Slime slime = new Slime(4, 2, 4);
+    public static Kobold kobald = new Kobold(4, 3, 3);
+    public static Orc orc = new Orc(4, 3, 4);
+    public static SavageOrc savageOrc = new SavageOrc(5, 4, 5);
     public static void Goblin()
     {
         Create.p.combatMonsters.Add(goblin.MonsterCopy());

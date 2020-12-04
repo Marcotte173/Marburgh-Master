@@ -10,6 +10,7 @@ public class Return
         return Console.ReadLine();
     }
 
+    public static int MitigatedDamage(int damage, int mitigation) => (damage - mitigation <= 0) ? 0 : damage - mitigation;
     internal static int Integer()
     {
         int sellChoice;
