@@ -154,11 +154,11 @@ public class Bank
     static void Info()
     {
         Console.Clear();
-        Console.WriteLine("\n" + Color.ITEM + "Items" + Color.RESET + " are a very important part of " + Color.ENERGY + "Marburgh" + Color.RESET + "\n\nThe right " + Color.ITEM + "equipment" + Color.RESET + " can mean the difference between sucess and " + Color.DAMAGE + "death" + Color.RESET + ".");
-        Console.WriteLine("\n\n" + Color.CLASS + "CHARACTER SCREEN" + Color.RESET + "\n\nPress [" + Color.CLASS + "9" + Color.RESET + "] from the shop to see your character information, including which items you currently have equiped");
-        Console.WriteLine("\n\n" + Color.GOLD + "BUYING" + Color.RESET + "\n\n" + Color.ITEM + "Items" + Color.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Color.ITEM + "B" + Color.RESET + "]uy, then the " + Color.ITEM + "item" + Color.RESET + " you would like to purchase.\nIf you have the required " + Color.GOLD + "gold" + Color.RESET + ", you can purchase it");
-        Console.WriteLine("\n\n" + Color.GOLD + "SELLING" + Color.RESET + "\n\nWhen you sell an " + Color.ITEM + "item" + Color.RESET + ", you will receive half of the item's " + Color.GOLD + "value" + Color.RESET + "");
-        Console.WriteLine("\nIf you attempt to equip an " + Color.ITEM + "item" + Color.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
+        Write.Line(Color.BLOOD, "", "MORE INFO", "\n\n");
+        Console.WriteLine("The" + Color.TIME + " Bank " + Color.RESET + "is where you store your " + Color.GOLD + "gold" + Color.RESET + ". ");
+        Console.WriteLine("\n\n" + Color.CLASS + "DEPOSIT" + Color.RESET + "\n\nStores gold in the bank. Any gold in the bank can be accessed by any other character. \nIf you die, any gold on your person(not in the bank) will be lost!");
+        Console.WriteLine("\n\n" + Color.CLASS + "WITHDRAWL" + Color.RESET + "\n\nRetrieves your gold from the bank.");
+        Console.WriteLine("\n\n" + Color.GOLD + "INVESTMENT" + Color.RESET + "\n\nYou can place your gold in the bank for 5 days. You will not be able to access it until the day is over.\nEach day, your invested gold sum increases based on the daily interest rate.\nAfter 5 days, you receive your investment sum, assuming you are still alive\n\n\n\n\n\n");
         Utilities.Keypress();
     }
 }

@@ -30,6 +30,7 @@ public class Magic : Equipment
         this.price = price;
         this.twoHand = twoHand;
         type = "Magic";
+        monsterEye = monsterTooth = level * 2 - 1;
     }
     public override void Upgrade()
     {

@@ -33,14 +33,9 @@ public class Town
         else if (choice == "o") Other.Menu();
         else if (choice == "y") House.Menu();
         else if (choice == "b") Bank.Menu();
-        else if (choice == "k")
-        {
-            Create.p.PlayerDamage = 100;
-            Create.p.Health = 200;
-            Create.p.AddDrop(new Drop("Chest Key", 1, 1));
-            Create.p.XP = 200;
-        }
-        else if (choice == "z") Create.p.TakeDamage(100, new Goblin());
+        //else if (choice == "x") GameState.Cheat();
+        //else if (choice == "z") GameState.Death();
+        //else if (choice == "c") GameState.CraftCheat();
         else if (choice == "1" || (choice == "2" && GameState.tutorialDungeon_B_available))
         {
             //If no, go home

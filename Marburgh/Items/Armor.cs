@@ -28,6 +28,7 @@ public class Armor : Equipment
         this.defence = defence;
         this.price = price;
         type = "Armor";
+        monsterEye = monsterTooth = level * 2 - 1;
     }
 
     public override void Upgrade()

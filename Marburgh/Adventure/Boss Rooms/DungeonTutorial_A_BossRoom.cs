@@ -11,6 +11,7 @@ public class DungeonTutorial_A_BossRoom : Room
     {
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a secret Lair!" };
+        name = "Lair";
     }
 
     internal override void Explore()

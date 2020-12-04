@@ -9,6 +9,7 @@ public class DungeonTutorial_B_BossRoom : Room
     public DungeonTutorial_B_BossRoom()
     : base()
     {
+        name = "Savage Orc";
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the Savage Orc's Lair!" };
     }

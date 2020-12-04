@@ -44,7 +44,8 @@ public class UIComponent
     internal static void OptionsText(List<string> options, List<string> optionButton)
     {
         int height = 22;
-        if (options.Count == 1)
+        if (options.Count == 0) { }
+        else if (options.Count == 1)
         {
             Console.SetCursorPosition(Return.Width(50) - (options[0].Length + 3) / 2, height);
             Console.WriteLine($"[{optionButton[0]}]{options[0]}");
@@ -58,18 +59,18 @@ public class UIComponent
         }
         else if (options.Count == 3)
         {
-            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height-2);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height - 2);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
-            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height-2);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 2);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
             Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
         }
         else if (options.Count == 4)
         {
-            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height-2);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height - 2);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
-            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height-2);
+            Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 2);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");
             Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height);
             if (optionButton[2] != "") Console.WriteLine($"[{optionButton[2]}]{options[2]}");
@@ -78,7 +79,7 @@ public class UIComponent
         }
         else if (options.Count == 5)
         {
-            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height -3);
+            Console.SetCursorPosition(Return.Width(33) - (options[0].Length + 3) / 2, height - 3);
             if (optionButton[0] != "") Console.WriteLine($"[{optionButton[0]}]{options[0]}");
             Console.SetCursorPosition(Return.Width(66) - (options[1].Length + 3) / 2, height - 3);
             if (optionButton[1] != "") Console.WriteLine($"[{ optionButton[1]}]{ options[1]}");

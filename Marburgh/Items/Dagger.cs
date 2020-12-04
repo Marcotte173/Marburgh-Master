@@ -31,6 +31,7 @@ public class Dagger : Equipment
         this.price = price;
         this.twoHand = twoHand;
         type = "Dagger";
+        monsterEye = monsterTooth = level * 2 - 1;
     }
     public override void Upgrade()
     {

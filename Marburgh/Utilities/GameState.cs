@@ -12,4 +12,24 @@ public class GameState
     public static bool canCraftWeaponsFromBossDrops;
     public static bool tutorialDungeon_B_available;
     public static Location location;
+    public static void Cheat()
+    {
+        Create.p.PlayerDamage = 300;
+        Create.p.PlayerHit = 100;
+        Create.p.Health = 300;
+        Explore.monstersPerRoom = 0;
+        tutorialDungeon_B_available = true;
+    }
+
+    public static void Death()
+    {
+        Create.p.TakeDamage(100, new Goblin());
+    }
+
+    public static void CraftCheat()
+    {
+        Create.p.AddDrop(AdventureItems.monsterEye.Copy());
+        Create.p.AddDrop(AdventureItems.monsterTooth.Copy());
+        Craft.Menu();
+    }
 }

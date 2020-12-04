@@ -9,6 +9,7 @@ public class DungeonTutorial_B_MiniBossRoom : Room
     public DungeonTutorial_B_MiniBossRoom()
     : base()
     {
+        name = "Lieutenant";
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found an Orc Lieutenant!" };
     }
@@ -31,7 +32,7 @@ public class DungeonTutorial_B_MiniBossRoom : Room
             "",
             "Could this be useful somewhere in the dungeon?"
         });
-        Create.p.Drops.Add(AdventureItems.tutorialKey);
+        Create.p.AddDrop(AdventureItems.tutorialKey);
         visited = true;
     }
 }

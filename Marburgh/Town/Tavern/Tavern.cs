@@ -191,11 +191,11 @@ public class Tavern
     static void Info()
     {
         Console.Clear();
-        Console.WriteLine("\n" + Color.ITEM + "Items" + Color.RESET + " are a very important part of " + Color.ENERGY + "Marburgh" + Color.RESET + "\n\nThe right " + Color.ITEM + "equipment" + Color.RESET + " can mean the difference between sucess and " + Color.DAMAGE + "death" + Color.RESET + ".");
-        Console.WriteLine("\n\n" + Color.CLASS + "CHARACTER SCREEN" + Color.RESET + "\n\nPress [" + Color.CLASS + "9" + Color.RESET + "] from the shop to see your character information, including which items you currently have equiped");
-        Console.WriteLine("\n\n" + Color.GOLD + "BUYING" + Color.RESET + "\n\n" + Color.ITEM + "Items" + Color.RESET + " are listed in the store in order of price as well as power.\nTo purchase an item, select [" + Color.ITEM + "B" + Color.RESET + "]uy, then the " + Color.ITEM + "item" + Color.RESET + " you would like to purchase.\nIf you have the required " + Color.GOLD + "gold" + Color.RESET + ", you can purchase it");
-        Console.WriteLine("\n\n" + Color.GOLD + "SELLING" + Color.RESET + "\n\nWhen you sell an " + Color.ITEM + "item" + Color.RESET + ", you will receive half of the item's " + Color.GOLD + "value" + Color.RESET + "");
-        Console.WriteLine("\nIf you attempt to equip an " + Color.ITEM + "item" + Color.RESET + " in a slot that already has one, you will be prompted to sell your current item\n\n\n");
+        Write.Line(Color.BLOOD, "", "MORE INFO", "\n\n");
+        Console.WriteLine("\nThe" + Color.TIME + " Tavern" + Color.RESET + " is a place to relax, socialize, gamble and meet the locals ");
+        Console.WriteLine("\n\n" + Color.CLASS + "GOSSIP" + Color.RESET + "\n\nThe locals are a veritable font of information. \nWhere to find a job, who's in love with whom, where to find a secret dungeon.....");
+        Console.WriteLine("\n\n" + Color.XP + "TALK TO THE BARTENDER" + Color.RESET + "\n\nThe bartender has his finger on the pulse of this town.\nGranted, that's not saying much\nBut for the right price anything can be yours");
+        Console.WriteLine("\n\n" + Color.GOLD + "GAMBLE" + Color.RESET + "\n\nWho needs adventure? You have all the excitement you need at the table surrounded by stuffy old men.\nI mean, the orcs are still coming, but maybe uf you don't lose it all, you can get a new weapon.\n\n\n\n");
         Utilities.Keypress();
     }
 }

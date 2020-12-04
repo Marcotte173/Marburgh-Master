@@ -151,11 +151,6 @@ public class ChestRoom : Room
         {
             
         }
-        else if (choice == "x")
-        {
-            Create.p.Drops.Add(new Drop("Chest Key", 1, 1));
-            Explore();
-        }
         else Explore(); 
         visited = true;
     }

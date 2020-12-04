@@ -41,6 +41,7 @@ public class Shield : Equipment
         this.price = price;
         this.twoHand = false;
         type = "Shield";
+        monsterEye = monsterTooth = level * 2 - 1;
     }
     public override void Upgrade()
     {

@@ -19,20 +19,17 @@ public class Equipment
     protected string modifier;
     protected bool splash;
     protected bool twoHand;
-    protected int[] monsterEye = new int[] { 0, 1, 3, 5 };
-    protected int[] monsterTooth = new int[] { 0, 1, 5, 3 };
-    protected int[] effectBoost = new int[] { 0, 1, 1, 2, 2, 3 };
-    protected int[] priceArray = new int[] { 0, 500, 1500, 3000, 5000, 7500 };
-    public Equipment() { }
+    protected int monsterEye ;
+    protected int monsterTooth ;
+    public Equipment() {  }
 
     public bool TwoHand { get { return twoHand; } set { twoHand = value; } }
     public bool Splash { get { return splash; } set { splash = value; } }
     public string Name { get { return name; } set { name = value; } }
     public string Modifier { get { return modifier; } set { modifier = value; } }
     public int Price { get { return price; } set { price = value; } }
-    public int[] MonsterEye { get { return monsterEye; } set { monsterEye = value; } }
-    public int[] MonsterTooth { get { return monsterTooth; } set { monsterTooth = value; } }
-    public int[] EffectBoost { get { return effectBoost; } set { effectBoost = value; } }
+    public int MonsterEye { get { return monsterEye; } set { monsterEye = value; } }
+    public int MonsterTooth { get { return monsterTooth; } set { monsterTooth = value; } }
     public int Level { get { return level; } set { level = value; } }
     public bool Upgraded { get { return upgraded; } set { upgraded = value; } }
     public int Defence { get { return defence; } set { defence = value; } }
