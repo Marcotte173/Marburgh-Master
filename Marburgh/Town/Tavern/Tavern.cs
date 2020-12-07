@@ -85,9 +85,7 @@ public class Tavern
                     "",
                     Color.SPEAK, "", "'Take this, we found it when we were prisoner. It may lead you to his real location''","",
                 });
-                Buttons.adventureButton.Add(Color.MONSTER + "2" + Color.RESET);
-                Buttons.adventureList.Add("Savage Orc's Lair");
-                GameState.tutorialDungeon_B_available = true;
+                GameState.DungeonTutorialB();
             }
             else
             {

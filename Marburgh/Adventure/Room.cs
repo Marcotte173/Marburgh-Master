@@ -22,8 +22,14 @@ public class Room
     {
         size = 1;
         tier = 2;
+        int roomRand = Return.RandomInt(0, 4);
+        roomType = (roomRand == 0) ? RoomType.Hallway : (roomRand == 1) ? RoomType.Passage : (roomRand == 2) ? RoomType.StoreRoom : RoomType.Library;
+        flavorColourArray = new List<int> { 0 };
+        name = (roomType == RoomType.Passage) ? "Passage" : (roomType == RoomType.Hallway) ? "Hallway" : "Store Room";
+        flavor = (roomType == RoomType.Passage) ? new List<string> { "You have found a passageway. While tight, you are pretty sure you can squeeze through it." } :
+               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
     }
-    
+
     public Room(RoomType roomType)
     : base()
     {

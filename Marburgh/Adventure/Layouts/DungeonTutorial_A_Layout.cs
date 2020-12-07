@@ -25,6 +25,6 @@ public class DungeonTutorial_A_Layout :Layout
             new Shell(0, 7, 10, 0 ,false, new GuardRoom(Summon.goblin)),            //9
             new Shell(0, 0, 5, 9 ,false, new DungeonTutorial_A_BossRoom())                                         //10
         };
-        //if (Return.RandomInt(0, 2) == 0) dungeon[6].room = new ShrineRoom();
+        if (Return.RandomInt(0, 2) == 0) dungeon[6].room = new ShrineRoom();
     }   
 }

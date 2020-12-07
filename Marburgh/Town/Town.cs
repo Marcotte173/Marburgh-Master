@@ -5,7 +5,7 @@ using System.Text;
 public class Town
 {
     static DungeonTutorial_A_Layout dungeon1 = new DungeonTutorial_A_Layout();
-    static DungeonTutorial_B_Layout dungeon2 = new DungeonTutorial_B_Layout();
+    static DungeonTutorial_B_Layout dungeon2 = new DungeonTutorial_B_Layout();    
     
     public static void Menu()
     {
@@ -33,7 +33,7 @@ public class Town
         else if (choice == "o") Other.Menu();
         else if (choice == "y") House.Menu();
         else if (choice == "b") Bank.Menu();
-        //else if (choice == "x") GameState.Cheat();
+        else if (choice == "x") GameState.Test();
         //else if (choice == "z") GameState.Death();
         //else if (choice == "c") GameState.CraftCheat();
         else if (choice == "1" || (choice == "2" && GameState.tutorialDungeon_B_available))

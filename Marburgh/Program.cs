@@ -12,6 +12,7 @@ namespace MedievalRPG
     {
         static void Main(string[] args)
         {
+            AreaCreation.CreateGrid();
             Color.SetupConsole();
             GameStart.Menu();
         }
