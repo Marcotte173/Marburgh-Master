@@ -35,4 +35,12 @@ public class DungeonTutorial_B_MiniBossRoom : Room
         Create.p.AddDrop(AdventureItems.tutorialKey);
         visited = true;
     }
+    public override List<string> Flavor
+    {
+        get
+        {
+            if (visited) return new List<string> { $"You a dead Orc lieutenant" };
+            else return flavor;
+        }
+    }
 }

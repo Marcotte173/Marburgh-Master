@@ -33,7 +33,7 @@ public class VillagersRoom : Room
             "One comes up to you to speak",
             "",
             Color.SPEAK, "","'Thank god you're here! We'd given up all hope!","",
-            Color.SPEAK, "","Untie us and we will reward you handomely when we get back!'","",
+            Color.SPEAK, "","Untie us and we will reward you handsomely when we get back!'","",
             "",
             "You untie them and point the way out.",
             "Be sure to meet them in the tavern afterwards to claim your reward.",

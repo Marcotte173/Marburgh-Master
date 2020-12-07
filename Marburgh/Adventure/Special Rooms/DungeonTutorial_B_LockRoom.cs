@@ -42,4 +42,12 @@ public class DungeonTutorial_B_LockRoom:Room
             });
         }        
     }
+    public override List<string> Flavor
+    {
+        get
+        {
+            if (visited) return new List<string> { $"You see an unlocked door, leading onwards" };
+            else return flavor;
+        }
+    }
 }

@@ -33,6 +33,18 @@ public class Help
         Write.Line(Color.DEFENCE, "Other Places\n\n");
         Write.Line("As marburgh continues to grow, there will be more place to visit.\nFor now, you can visit your family's grave.");
         Utilities.Keypress(0,28);
+        //Page Three
+        Console.Clear();
+        Write.Line(Color.BURNING, "Stats\n\n");
+        Write.Line(Color.DAMAGE, "STRENGTH\n\n");
+        Write.Line("Strength determines your damage in combat. It also determines your success in some events\n\n");
+        Write.Line(Color.CRIT, "AGILITY\n\n");
+        Write.Line("Agility affects your ability to hit and avoid being hit, as well as your ability to critically strike. \nIf you are a rogue, agility also impact your damage. \nAgility can be used to determine the success of some events\n\n");
+        Write.Line(Color.XP, "Stamina\n\n");
+        Write.Line("Stamina affects your ability to take damage in combat as well as your success in some events\n\n");
+        Write.Line(Color.ENERGY, "Intelligence\n\n");
+        Write.Line("Intelligence affects your ability to cast spells, the damage from the spells and your success in some events");
+        Utilities.Keypress(0, 28);
         Console.Clear();
         if (Create.p.PClass == "Warrior") Warrior();
         if (Create.p.PClass == "Mage") Mage();

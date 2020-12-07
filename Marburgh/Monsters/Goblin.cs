@@ -4,32 +4,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Goblin:Monster
-{    
-    public Goblin()
-     : base()
+public class Goblin : Monster
+{
+    public Goblin(int strength, int agility, int stamina)
+    : base(strength, agility, stamina)
     {
         name = "Goblin";
-        crit = 5;
-        hit = 85;
-        defence = 5;
         mitigation = 1;
         level = 1;
-        health = maxHealth = 8;
-        damage = 5;
         xp = 6;
         gold = 22;
         dropRate = 30;
     }
     public override void Attack2(Player target)
-    {
+    {        
         if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add($"The "+Color.MONSTER + "goblin" + Color.RESET +$" rakes you for {Color.DAMAGE + damage  + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET );
+            Combat.combatText.Add($"The " + Color.MONSTER + "goblin" + Color.RESET + $" rakes you for {Color.DAMAGE + Return.MitigatedDamage(damage,target.Mitigation) + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET);
             target.Bleed = 2;
-            target.BleedDam = 4;
-            target.TakeDamage(Damage - 1,this);
-        } 
+            target.BleedDam = 6;
+            target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation) , this);
+        }
         else Miss(target);
     }
 
@@ -37,5 +32,5 @@ public class Goblin:Monster
     {
         intention = "Raking";
     }
-    
+
 }

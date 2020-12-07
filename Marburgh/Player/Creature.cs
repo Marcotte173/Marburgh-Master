@@ -9,6 +9,10 @@ public class Creature
 
     protected int potionSize;
     protected int maxPotionSize;
+    protected int strength;
+    protected int agility;
+    protected int intelligence;
+    protected int stamina;
     protected string name;
     protected int damage;
     protected int maxHealth;
@@ -38,12 +42,17 @@ public class Creature
     protected bool attack5;
     protected bool attack6;
 
-    public Creature() { }
+    public Creature(int strength, int agility, int stamina)
+    {
+        this.strength = strength;
+        this.agility = agility;
+        this.stamina = stamina;
+    }
 
     public List<string> Status { get { return status; } set { status = value; } }
     public string Name { get { return name; } set { name = value; } }
     public virtual int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
-    public virtual int Health { get { return health; } set { health = value; } }    
+    public virtual int Health { get { return health; } set { health = value; } }
     public virtual int MaxEnergy { get { return maxEnergy; } set { maxEnergy = value; } }
     public virtual int Energy { get { return energy; } set { energy = value; } }
     public int Gold { get { return gold; } set { gold = value; } }
@@ -66,6 +75,10 @@ public class Creature
     public int BleedDam { get { return bleedDam; } set { bleedDam = value; } }
     public int PotionSize { get { return potionSize; } set { potionSize = value; } }
     public int MaxPotionSize { get { return maxPotionSize; } set { maxPotionSize = value; } }
+    public int Strength { get { return strength; } set { strength = value; } }
+    public int Agility { get { return agility; } set { agility = value; } }
+    public int Stamina { get { return stamina; } set { stamina = value; } }
+    public int Intelilgence { get { return intelligence; } set { intelligence = value; } }
     public bool Defending { get { return defending; } set { defending = value; } }
     public bool CanAttack3 { get { return attack3; } set { attack3 = value; } }
     public bool CanAttack4 { get { return attack4; } set { attack4 = value; } }
@@ -96,14 +109,14 @@ public class Creature
     public virtual void DontNeedHeal() { }
     public virtual void HealStatement(int heal) { }
     public virtual void Death() { }
-    
+
     public virtual void Miss(Creature target)
     {
-        Combat.combatText.Add("You miss the " +Color.MONSTER+ target + Color.RESET+"!"); 
+        Combat.combatText.Add("You miss the " + Color.MONSTER + target + Color.RESET + "!");
     }
 
     public virtual bool AttemptToHit(Creature target, int bonus)
     {
-        return (Return.RandomInt(1, 101)< hit + bonus - target.defence);
+        return (Return.RandomInt(1, 101) < hit + bonus - target.defence);
     }
 }

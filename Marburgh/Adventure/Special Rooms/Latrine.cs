@@ -68,4 +68,12 @@ public class Latrine : Room
         }
         visited = true;
     }
+    public override List<string> Flavor
+    {
+        get
+        {
+            if (visited) return new List<string> { $"You enter the latrines. The smell is overwhelming. Time to move on" };
+            else return flavor;
+        }
+    }
 }
