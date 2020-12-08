@@ -64,14 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Adventure\AdventureItems.cs" />
-    <Compile Include="Adventure\Layouts\DungeonTutorial_A_Layout.cs" />
-    <Compile Include="Adventure\Layouts\DungeonTutorial_B_Layout.cs" />
-    <Compile Include="Adventure\Boss Rooms\DungeonTutorial_B_BossRoom.cs" />
-    <Compile Include="Adventure\Layouts\Layout.cs" />
+    <Compile Include="Adventure\Dungeon.cs" />
+    <Compile Include="Items\DropList.cs" />
+    <Compile Include="Adventure\Boss Rooms\Tutorial\DungeonTutorial_B_BossRoom.cs" />
     <Compile Include="Adventure\AreaCreation.cs" />
     <Compile Include="Adventure\Special Rooms\DungeonTutorial_B_LockRoom.cs" />
-    <Compile Include="Adventure\Boss Rooms\DungeonTutorial_B_MiniBossRoom.cs" />
+    <Compile Include="Adventure\Boss Rooms\Tutorial\DungeonTutorial_B_MiniBossRoom.cs" />
     <Compile Include="Adventure\Special Rooms\ChestRoom.cs" />
     <Compile Include="Adventure\Special Rooms\GuardRoom.cs" />
     <Compile Include="Adventure\Special Rooms\Latrine.cs" />
@@ -80,8 +78,12 @@
     <Compile Include="Adventure\Special Rooms\Entrance.cs" />
     <Compile Include="Adventure\Room.cs" />
     <Compile Include="Adventure\Shell.cs" />
-    <Compile Include="Adventure\Summon.cs" />
-    <Compile Include="Adventure\Boss Rooms\DungeonTutorial_A_BossRoom.cs" />
+    <Compile Include="Adventure\Boss Rooms\Tutorial\DungeonTutorial_A_BossRoom.cs" />
+    <Compile Include="Monsters\Ghoul.cs" />
+    <Compile Include="Monsters\Necromancer.cs" />
+    <Compile Include="Monsters\Rat.cs" />
+    <Compile Include="Monsters\Skeleton.cs" />
+    <Compile Include="Monsters\Zombie.cs" />
     <Compile Include="Utilities\GameState.cs" />
     <Compile Include="Items\Dagger.cs" />
     <Compile Include="Town\Craft.cs" />

@@ -4,9 +4,7 @@ using System.Text;
 
 public class Town
 {
-    static DungeonTutorial_A_Layout dungeon1 = new DungeonTutorial_A_Layout();
-    static DungeonTutorial_B_Layout dungeon2 = new DungeonTutorial_B_Layout();    
-    
+    public static List<Shell> dungeon2 = AreaCreation.CreateGrid(EnterFrom.North, 15);
     public static void Menu()
     {
         GameState.location = Location.Town;
@@ -33,7 +31,7 @@ public class Town
         else if (choice == "o") Other.Menu();
         else if (choice == "y") House.Menu();
         else if (choice == "b") Bank.Menu();
-        else if (choice == "x") GameState.Test();
+        //else if (choice == "x") GameState.Test();
         //else if (choice == "z") GameState.Death();
         //else if (choice == "c") GameState.CraftCheat();
         else if (choice == "1" || (choice == "2" && GameState.tutorialDungeon_B_available))
@@ -61,18 +59,14 @@ public class Town
                 Create.p.CanExplore = false;
                 if (choice == "1")
                 {
-                    Explore.dungeon  = dungeon1.dungeon;
-                    Explore.monstersPerRoom = 2;
-                    Explore.rewardMod = 1;
-                    Explore.currentDungeon = dungeon1.dungeon[1];
+                    Explore.dungeon  = Dungeon.dungeon1a;
+                    Explore.currentRoom = Explore.dungeon.layout[1];
                 }
                 else if (choice == "2")
                 {
 
-                    Explore.dungeon = dungeon2.dungeon;
-                    Explore.monstersPerRoom = 2;
-                    Explore.rewardMod = 1;
-                    Explore.currentDungeon = dungeon2.dungeon[1];
+                    Explore.dungeon = Dungeon.dungeon1b;
+                    Explore.currentRoom = Explore.dungeon.layout[1];
                 }
                 Explore.Menu();
             }

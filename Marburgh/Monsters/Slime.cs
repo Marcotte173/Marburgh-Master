@@ -5,10 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Slime : Monster
-{
-    Drop slime = new Drop("Slime", 1, 1);
-    public Slime(int strength, int agility, int stamina)
-    : base(strength, agility, stamina)
+{    
+    public Slime(int strength, int agility, int stamina, int level)
+    : base(strength, agility, stamina, level)
     {
         name = "Slime";
         mitigation = 1;
@@ -21,7 +20,7 @@ public class Slime : Monster
     {
         Combat.combatText.Add($"The " + Color.MONSTER + "slime " + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
         MaxHealth = Health;
-        Slime s = new Slime(2, 2, 3);
+        Slime s = new Slime(2, 2, 3,1);
         s.Health = s.MaxHealth = MaxHealth;
         Create.p.combatMonsters.Add(s);
     }
@@ -32,8 +31,8 @@ public class Slime : Monster
     }
     public override Drop ChooseDrop()
     {
-        if (Return.RandomInt(0, 4) == 0) return slime;
-        else return AdventureItems.monsterEye.Copy();
+        if (Return.RandomInt(0, 4) == 0) return DropList.slime;
+        else return DropList.monsterEye.Copy();
     }
 
     public override void Declare()

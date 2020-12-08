@@ -5,7 +5,15 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Craft
-{    
+{
+    public static List<string> craftOptionButton = new List<string>
+    {
+        Color.ENHANCEMENT + "U" + Color.RESET
+    };
+    public static List<string> craftOptionList = new List<string>
+    {
+        "pgrade"
+    };
     public static void Menu()
     {
         GameState.location = Location.Craft;
@@ -18,10 +26,10 @@ public class Craft
             "",
             "But hopefully more will become apparent over time"
         },
-        new List<string> { "pgrade"}, new List<string> { Color.ITEM + "U" + Color.RESET, });
+        craftOptionList, craftOptionButton);
         string choice = Return.Option();
         if (choice == "u") Upgrade();
-        else if (choice == "b" && GameState.canCraftWeaponsFromBossDrops) BossWeapon();
+        else if (choice == "c" && GameState.canCraftWeaponsFromBossDrops) BossWeapon();
         else if (choice == "0") Utilities.ToTown();
         else if (choice == "9") CharacterSheet.Display();
         else Menu();
@@ -29,7 +37,47 @@ public class Craft
 
     private static void BossWeapon()
     {
-        
+        if (CheckFang())
+        {
+            if (UI.Confirm(new List<int> { 1 }, new List<string>
+            {
+                Color.BURNING, "" +
+                "Would you like to create the ",
+                "Savage Dagger",
+                "?"
+            }))
+            {
+                UI.Keypress(new List<int> { 0, 0, 1 }, new List<string>
+                {
+                    "Success!",
+                    "",
+                    Color.BURNING,
+                    $"You have created the ",
+                    "Savage Dagger",
+                    "!"
+                });
+                if (Create.p.MainHand == UI.Hand(Dagger.savageDagger))
+                {
+                    Create.p.Equip(Dagger.savageDagger, Create.p.MainHand);
+                }
+                else
+                {
+                    Create.p.Equip(Dagger.savageDagger, Create.p.OffHand);
+                }
+                for (int i = 0; i < Create.p.Drops.Count; i++)
+                {
+                    if (Create.p.Drops[i].name == "Savage Orc Fang") Create.p.RemoveDrop(DropList.savageOrcFang, 1);
+                    if (Create.p.Drops[i].name == "Slime") Create.p.RemoveDrop(DropList.slime, 2);
+                }
+            }
+        }
+        else
+        {
+            UI.Keypress(new List<int> { 0 }, new List<string>
+            {
+                "You don't have the materials required to create a weapon"
+            });
+        }
     }
 
     private static void Upgrade()
@@ -93,12 +141,12 @@ public class Craft
                 "",
                 $"You have upgraded your {e.Name}"
             });
-            e.Upgrade();
             for (int i = 0; i < Create.p.Drops.Count; i++)
             {
-                if (Create.p.Drops[i].name == "Monster Eye") Create.p.Drops[i].amount -= e.MonsterEye;
-                if (Create.p.Drops[i].name == "Monster Tooth") Create.p.Drops[i].amount -= e.MonsterTooth;
+                if (Create.p.Drops[i].name == "Monster Eye") Create.p.RemoveDrop(DropList.monsterEye, e.MonsterEye);
+                if (Create.p.Drops[i].name == "Monster Tooth") Create.p.RemoveDrop(DropList.monsterTooth, e.MonsterTooth);
             }
+            e.Upgrade();
         }        
     }
 
@@ -120,5 +168,16 @@ public class Craft
             if (Create.p.Drops[i].name == "Monster Tooth" && Create.p.Drops[i].amount >= item.MonsterTooth) haveTeeth = true;
         }
         return haveEyes && haveTeeth;
-    }    
+    }
+    private static bool CheckFang()
+    {
+        bool haveFang = false;
+        bool haveSlime = false;
+        for (int i = 0; i < Create.p.Drops.Count; i++)
+        {
+            if (Create.p.Drops[i].name == "Savage Orc Fang" ) haveFang = true;
+            if (Create.p.Drops[i].name == "Slime" && Create.p.Drops[i].amount >= 2) haveSlime = true;
+        }
+        return haveFang && haveSlime;
+    }
 }

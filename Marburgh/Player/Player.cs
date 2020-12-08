@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 
 public class Player : Creature
 {
@@ -37,28 +37,37 @@ public class Player : Creature
     public static List<string> text = Combat.combatText;
 
     internal void AttackChoice()
-    {
+    {        
         tempMit = 0;
         tempDefence = 0;
+        canAct = true;
         if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
         if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
         if (bleed > 0)
         {
-            text.Add(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!\n");
+            text.Add(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
             TakeDamage(bleedDam);
             bleed--;
             if (bleed <= 0 && status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
         }
         if (burning > 0)
         {
-            text.Add(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!\n");
+            text.Add(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
             TakeDamage(burnDam);
             burning--;
             if (burning <= 0 && status.Contains(Color.BLOOD + "Burning" + Color.RESET)) status.Remove(Color.BLOOD + "Burning" + Color.RESET);
         }
-
+        if (stun > 0)
+        {
+            Create.p.CanAct = false;
+            Create.p.Stun--;
+            if (Create.p.Stun <= 0 && Create.p.Status.Contains("Stunned")) Create.p.Status.Remove("Stunned");
+            Combat.combatText.Add(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!");
+        }
+        CombatUI.AttackOptions();
         if (canAct)
         {
+                    
             string choice = Return.Option();
             Write.Position(0, 6);
             if (choice == "1") Attack1(GetTarget());
@@ -86,13 +95,13 @@ public class Player : Creature
                     combatMonsters.Clear();
                     Utilities.ToTown();
                 }
-                else text.Add("You try to get away but can't!\n\n");
+                else text.Add("You try to get away but can't!");
             }
             else AttackChoice();
         }
         else
         {
-            Console.ReadKey();
+            Console.ReadKey(true);
         }
     }
 
@@ -176,7 +185,7 @@ public class Player : Creature
             {
                 Write.Line(0, n + i, Combat.combatText[i]);
             }
-            Console.WriteLine("\n\nYou have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!\n");
+            Console.WriteLine("\n\nYou have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!");
             Utilities.Keypress(40, 22);
             Death(hitMe);
         }
@@ -195,6 +204,18 @@ public class Player : Creature
             }
         }
         if (exists == false) Drops.Add(d);
+    }
+
+    public void RemoveDrop(Drop d,int amount)
+    {
+        foreach (Drop D in Drops.ToList())
+        {
+            if (D.name == d.name)
+            {
+                D.amount -= amount;
+                if (D.amount <= 0) Drops.Remove(D);
+            }
+        }
     }
 
     public void Death(Monster hitMe)
@@ -263,7 +284,7 @@ public class Player : Creature
         if (AttemptToHit(target, 0) == false) Miss(target);
         else
         {
-            text.Add($"You attack the " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(Damage, target.Mitigation) + Color.RESET + " damage\n");
+            text.Add($"You attack the " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(Damage, target.Mitigation) + Color.RESET + " damage");
             target.TakeDamage(Return.MitigatedDamage(Damage, target.Mitigation));
         }
     }
@@ -306,7 +327,7 @@ public class Player : Creature
     }
 
     public int Reputation { get { return reputation; } set { reputation = value; } }
-    public string Rep => (reputation == 0)?"Kill on sight":(reputation <=10)?"Hated":(reputation <=20)?"Loathed":(reputation<=40)?"Disliked":(Reputation <=60)?"Liked":(reputation <=80)?"Revered":(reputation <=90)?"Loved":"Exalted"; 
+    public string Rep => (reputation == 0)?"Kill on sight":(reputation <=10)?"Hated":(reputation <=20)?"Loathed":(reputation<=40)?"Disliked":(Reputation <=60)?"Neutral":(reputation <=80)?"Liked":(reputation <=90)?"Loved":"Exalted"; 
     public int[] LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
     public bool Alive { get { return alive; } set { alive = value; } }
     public string Option3 { get { return option3; } set { option3 = value; } }

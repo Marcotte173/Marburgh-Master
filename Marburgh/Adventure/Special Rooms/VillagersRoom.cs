@@ -25,7 +25,7 @@ public class VillagersRoom : Room
             "",
             "He pulls out his weapon and charges!",
         });
-        global::Summon.Orc();
+        Dungeon.Summon(Dungeon.orc1);
         Combat.Menu();
         UI.Keypress(new List<int> { 0, 0, 0, 1, 1, 0, 0, 0, 0, 0 }, new List<string>
         {

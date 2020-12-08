@@ -7,6 +7,8 @@ public class Dagger : Equipment
     int[] damageBoost = new int[] { 0, 3, 4, 4, 6, 7, 8, 10 };
     int[] critBoost = new int[]   { 0, 3, 2, 2, 2, 2, 3, 3};
 
+    public static Dagger savageDagger = new Dagger("Savage Dagger",7,2,5,1000,false,2);
+
     internal static Dagger[] list = new Dagger[]
     {
         new Dagger("Fist",0,0,0,0,false,0),

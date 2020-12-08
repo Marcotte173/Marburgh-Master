@@ -16,7 +16,7 @@ public class DungeonTutorial_B_LockRoom:Room
 
     internal override void Explore()
     {
-        if (Create.p.Drops.Contains(AdventureItems.tutorialKey))
+        if (Create.p.Drops.Contains(DropList.tutorialKey))
         {
             UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
             {
@@ -26,8 +26,8 @@ public class DungeonTutorial_B_LockRoom:Room
                 "",
                 "Sucess! the way is open!"
             });
-            global::Explore.dungeon[10].West = 11;
-            Create.p.Drops.Remove(AdventureItems.tutorialKey);
+            global::Explore.dungeon.layout[10].West = 11;
+            Create.p.Drops.Remove(DropList.tutorialKey);
             visited = true;
         }
         else

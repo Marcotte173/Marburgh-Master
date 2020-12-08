@@ -16,6 +16,7 @@ public class Room
     protected int modifier;
     public bool visited;
     public RoomType roomType;
+    public bool resetable;
 
     //Constructor
     public Room()
@@ -33,6 +34,7 @@ public class Room
     public Room(RoomType roomType)
     : base()
     {
+        resetable = true;
         this.roomType = roomType;
         flavorColourArray = new List<int> { 0 };
         name = (roomType == RoomType.Passage) ? "Passage":(roomType == RoomType.Hallway)?"Hallway":"Store Room";
@@ -42,7 +44,7 @@ public class Room
 
     internal virtual void Explore()
     {
-        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(Return.RandomInt(1,global::Explore.monstersPerRoom));
+        if (Return.RandomInt(1, 101) < 75 + (size * 5)) Summon(Return.RandomInt((global::Explore.dungeon.howManyMonstersPerRoom==1)?1: global::Explore.dungeon.howManyMonstersPerRoom-1, global::Explore.dungeon.howManyMonstersPerRoom+1));
         else Alone();
     }
 
@@ -70,7 +72,7 @@ public class Room
         {
             if (i == 1)
             {
-                int goldFind = Return.RandomInt(3, 10) + Return.RandomInt(0, 12) * global::Explore.rewardMod;
+                int goldFind = Return.RandomInt(3, 10) + Return.RandomInt(0, 12) * global::Explore.dungeon.rewardMod;
                 Create.p.Gold += goldFind;
                 findColourArray.Add(1);
                 findList.Add(Color.GOLD);
@@ -135,18 +137,16 @@ public class Room
         List<int> colourArray = new List<int> { };
         for (int i = 0; i < amount; i++)
         {
-            int summon = Return.RandomInt(0, 3);
-            string a = (summon == 0) ? " slime" : (summon == 1) ? " kobold" : " goblin";
+            Monster summon = global::Explore.dungeon.bestiary[Return.RandomInt(0, global::Explore.dungeon.bestiary.Count)];
             colourArray.Add(1);
             summonList.Add(Color.MONSTER);
-            summonList.Add("A");
-            summonList.Add(a);
+            if (summon.Name == "Orc")summonList.Add("An ");
+            else summonList.Add("A ");
+            summonList.Add(summon.Name);
             summonList.Add("");
             colourArray.Add(0);
             summonList.Add("");
-            if (summon == 0) global::Summon.Slime();
-            else if (summon == 1) global::Summon.Kobald();
-            else if (summon == 2) global::Summon.Goblin();
+            Dungeon.Summon(summon);
         }
         ActionWait(colourArray, summonList, "You have been discovered by", null);
         Combat.Menu();

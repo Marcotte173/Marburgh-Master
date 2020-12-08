@@ -20,9 +20,10 @@ public class Monster : Creature
             target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }
     }
-    public Monster(int strength, int agility, int stamina)
+    public Monster(int strength, int agility, int stamina, int level)
     : base(strength, agility, stamina)
     {
+        this.level = level;
         damage = strength * 2;
         hit = 65 + agility * 4;
         crit = agility * 4;
@@ -94,11 +95,8 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        text.Add($"\nYou have killed the {Color.MONSTER + Name + Color.RESET}!");
+        text.Add($"You have killed the {Color.MONSTER + Name + Color.RESET}!");
         text.Add("");
-        text.Add("Press any key to continue");
-        Combat.DisplayCombatText();
-        Console.ReadKey(true);
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
@@ -107,7 +105,7 @@ public class Monster : Creature
 
     public override void Miss(Creature target)
     {
-        text.Add($"The {Color.MONSTER + Name + Color.RESET} misses you!\n");
+        text.Add($"The {Color.MONSTER + Name + Color.RESET} misses you!");
     }
     public string Intention { get { return intention; } set { intention = value; } }
     public virtual void Drop()
@@ -120,8 +118,8 @@ public class Monster : Creature
 
     public virtual Drop ChooseDrop()
     {
-        if (Return.RandomInt(0, 2) == 0) return AdventureItems.monsterEye.Copy();
-        else return AdventureItems.monsterTooth.Copy();
+        if (Return.RandomInt(0, 2) == 0) return DropList.monsterEye.Copy();
+        else return DropList.monsterTooth.Copy();
     }
 
     public int Action { get { return action; } set { action = value; } }

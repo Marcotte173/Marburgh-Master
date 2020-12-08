@@ -10,7 +10,7 @@ public class AreaCreation
 {
     public static List<Shell> dungeon = new List<Shell> {};
     public static List<Shell> builtDungeon = new List<Shell> {null };
-    public static void CreateGrid()
+    public static List<Shell> CreateGrid(EnterFrom enterfrom, int howManyRooms)
     {
         for (int y = 1; y < 11; y++)
         {
@@ -31,8 +31,8 @@ public class AreaCreation
                 if (loc.x == l.x && loc.y == l.y - 1) l.neighbor[1] = loc;
             }
         }
-        RoomCreation(EnterFrom.North, 5);
-        Console.WriteLine("");
+        RoomCreation(enterfrom,howManyRooms);
+        return builtDungeon;
     }
 
     public static void RoomCreation(EnterFrom enterFrom, int x)
@@ -41,15 +41,16 @@ public class AreaCreation
         Build(startingTile);
         while (builtDungeon.Count < x)
         {
-            Shell theRoom = builtDungeon[Return.RandomInt(1, builtDungeon.Count)].neighbor[Return.RandomInt(0, 4)];
-            if (theRoom != null && !builtDungeon.Contains(theRoom)) Build(theRoom);                
+            Shell cameFrom = builtDungeon[Return.RandomInt(1, builtDungeon.Count)];
+            int neighbor = Return.RandomInt(0, 4);
+
+            Shell theRoom = cameFrom.neighbor[neighbor];
+            if (theRoom != null && !builtDungeon.Contains(theRoom)) Build(theRoom,cameFrom,neighbor);                
         }
-        int dungeonNumber = 0;
         foreach (Shell l in builtDungeon)
         {
             if(l != null)
-            {
-                l.roomNumber = dungeonNumber;
+            {                
                 foreach (Shell loc in builtDungeon)
                 {
                     if(loc != null)
@@ -61,10 +62,8 @@ public class AreaCreation
                     }                    
                 }
 
-            }            
-            dungeonNumber++;
-        }
-        MakeDoors();
+            }      
+        } 
     }
 
     private static void MakeDoors()
@@ -88,22 +87,22 @@ public class AreaCreation
                     //Add The door
                     if (doorToAdd == 0)
                     {
-                        room.North = room.neighbor[0].roomNumber;
+                        room.North = room.builtNeighbor[0].roomNumber;
                         room.neighbor[0].South = room.roomNumber;
                     }
                     else if (doorToAdd == 1)
                     {
-                        room.South = room.neighbor[1].roomNumber;
+                        room.South = room.builtNeighbor[1].roomNumber;
                         room.neighbor[1].North = room.roomNumber;
                     }
                     else if (doorToAdd == 2)
                     {
-                        room.East = room.neighbor[2].roomNumber;
+                        room.East = room.builtNeighbor[2].roomNumber;
                         room.neighbor[2].West = room.roomNumber;
                     }
                     else if (doorToAdd == 3)
                     {
-                        room.West = room.neighbor[3].roomNumber;
+                        room.West = room.builtNeighbor[3].roomNumber;
                         room.neighbor[3].East = room.roomNumber;
                     }
                 }
@@ -124,13 +123,33 @@ public class AreaCreation
     private static void Build(Shell tile)
     {
         tile.built = true;
-        if (builtDungeon.Count == 0)
+        tile.roomNumber = builtDungeon.Count;
+        tile.room = new Entrance();
+        builtDungeon.Add(tile);
+    }
+    private static void Build(Shell tile,Shell cameFrom, int neighbor)
+    {
+        tile.built = true;
+        tile.roomNumber = builtDungeon.Count;
+        if(neighbor == 0) 
         {
-            tile.room = new Entrance();
+            cameFrom.North = tile.roomNumber;
+            tile.South = cameFrom.roomNumber;
         }
-        else
+        else if (neighbor == 1)
         {
-
+            cameFrom.South = tile.roomNumber;
+            tile.North = cameFrom.roomNumber;
+        }
+        else if (neighbor == 2)
+        {
+            cameFrom.East = tile.roomNumber;
+            tile.West = cameFrom.roomNumber;
+        }
+        else if (neighbor == 3)
+        {
+            cameFrom.West = tile.roomNumber;
+            tile.East = cameFrom.roomNumber;
         }
         builtDungeon.Add(tile);
     }

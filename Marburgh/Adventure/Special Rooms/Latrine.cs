@@ -45,7 +45,7 @@ public class Latrine : Room
                     "",
                     "A lucky find! Almost worth it!",
                 });
-                for (int i = 0; i < teeth; i++) { Create.p.AddDrop(AdventureItems.monsterTooth); }                
+                for (int i = 0; i < teeth; i++) { Create.p.AddDrop(DropList.monsterTooth); }                
             }
             else
             {

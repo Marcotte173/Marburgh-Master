@@ -9,6 +9,7 @@ public class Combat
     public static bool desecrated;
     public static int xpReward;
     public static int goldReward;
+    public static List<Zombie> outOfFight = new List<Zombie> { };
     public static List<string> combatText = new List<string>  { };
     
     public static void Menu()
@@ -16,22 +17,43 @@ public class Combat
         goldReward = 0;
         xpReward = 0;
         combatText.Clear();
+        outOfFight.Clear();
         GameState.location = Location.Combat;
         if (Create.p == Create.m) CombatUI.option[1] = Color.SHIELD + "Shield" + Color.RESET;
         else CombatUI.option[1] = Color.DEFENCE + "Defend" + Color.RESET;
+        //Get intention and display to start, after that, do it at the end
+        foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
+        DisplayCombatText();
         while (Create.p.combatMonsters.Count > 0)
-        {
-            foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
-            DisplayCombatText();            
+        {            
             Create.p.AttackChoice();
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
                 if (m.Stun > 0) m.CanAct = false;
                 else m.CanAct = true;
                 if (m.CanAct) m.MakeAttack();
-                else Console.WriteLine("The monster is stunned and cannot act!");
+                else combatText.Add($"The {Color.MONSTER + m.Name+Color.RESET} is "+Color.STUNNED+ "stunned "+Color.RESET+"and cannot act!");
             }
-        }        
+            foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
+            foreach (Zombie z in outOfFight.ToList())
+            {
+                z.deadCount--;
+                if (z.deadCount <= 0) z.Revive();
+            }
+            DisplayCombatText();
+            if(Create.p.combatMonsters.Count ==0)
+            {
+                Console.WriteLine("\n\nPress any Key to continue");
+                Console.ReadKey(true);
+                foreach(Zombie z in outOfFight)
+                {
+                    goldReward += z.Gold;
+                    xpReward += z.XP;
+                    z.Drop();
+                }
+            }
+        }
+        
         List<int> colours = new List<int> { };
         List<string> text = new List<string> { };
         int goldroll = Return.RandomInt(-2, 6);
@@ -88,21 +110,7 @@ public class Combat
     {
         Console.Clear();
         CombatUI.Box();
-        Write.Position(0, 6);
-        if (Create.p.Stun > 0)
-        {
-            Create.p.CanAct = false;
-            Create.p.Stun--;
-            if (Create.p.Stun <= 0 && Create.p.Status.Contains("Stunned")) Create.p.Status.Remove("Stunned");
-            combatText.Add(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!\n");
-        }
-        if (Create.p.CanAct) CombatUI.AttackOptions();
-        else CombatUI.Stunned();
-        if (Create.p.combatMonsters.Count == 0)
-        {
-            combatText.Add("Press any key to continue");
-            Console.ReadKey(true);
-        }
+        Write.Position(0, 6);          
         int n = 6;
         for (int i = 0; i < combatText.Count; i++)
         {

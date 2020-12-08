@@ -6,12 +6,11 @@ using System.Threading.Tasks;
 
 public class Kobold : Monster
 {
-    public Kobold(int strength, int agility, int stamina)
-    : base(strength, agility, stamina)
+    public Kobold(int strength, int agility, int stamina, int level)
+    : base(strength, agility, stamina, level)
     {
         name = "Kobald";
         mitigation = 1;
-        level = 1;
         xp = 6;
         gold = 20;
         dropRate = 30;

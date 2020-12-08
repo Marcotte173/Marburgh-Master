@@ -21,10 +21,8 @@ public class GameState
     public static void Test()
     {
         Cheat();
-        Explore.dungeon = AreaCreation.dungeon;
-        Explore.monstersPerRoom = 2;
-        Explore.rewardMod = 1;
-        Explore.currentDungeon = AreaCreation.builtDungeon[1];
+        Explore.dungeon = Dungeon.dungeon1a;
+        Explore.currentRoom = Town.dungeon2[1];
         Explore.Menu();
     }
 
@@ -33,19 +31,35 @@ public class GameState
         Create.p.PlayerDamage = 300;
         Create.p.PlayerHit = 100;
         Create.p.Health = 300;
-        Explore.monstersPerRoom = 0;
         tutorialDungeon_B_available = true;
+    }
+
+    internal static void CanCraft()
+    {
+        canCraft = true;
+        House.houseOptionList.Add("nhancement Machine");
+        House.houseOptionButton.Add(Color.ENHANCEMENT + "E" + Color.RESET);
+    }
+
+    internal static void CanMakeBossWeapon()
+    {
+        canCraftWeaponsFromBossDrops = true;
+        Create.p.AddDrop(new Drop ("Savage Orc Fang",1,1));
+        Create.p.AddDrop(new Drop("Slime", 2, 1));
+        Craft.craftOptionList.Add("reate new weapon");
+        Craft.craftOptionButton.Add(Color.CRIT + "C" + Color.RESET);
     }
 
     public static void Death()
     {
-        Create.p.TakeDamage(100, new Goblin(3,3,3));
+        Create.p.TakeDamage(100, new Goblin(3,3,3,1));
     }
 
     public static void CraftCheat()
     {
-        Create.p.AddDrop(AdventureItems.monsterEye.Copy());
-        Create.p.AddDrop(AdventureItems.monsterTooth.Copy());
+        Create.p.AddDrop(DropList.monsterEye.Copy());
+        Create.p.AddDrop(DropList.monsterTooth.Copy());
+        CanMakeBossWeapon();
         Craft.Menu();
     }
 

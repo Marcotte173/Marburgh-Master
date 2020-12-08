@@ -6,6 +6,8 @@ internal class CombatUI
 {
     public static List<string> option = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
     public static List<string> button = new List<string> { "1" , "2" };
+    public static List<string> stunOption = new List<string> { Color.STUNNED + " You are stunned. Press Any Key to continue" + Color.RESET };
+    public static List<string> stunButton = new List<string> { "X" };
     public static List<string> optionBasic = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
     public static List<string> buttonBasic = new List<string> { "1", "2" };
     public static List<string> targetOption = new List<string> {  };
@@ -14,7 +16,7 @@ internal class CombatUI
     internal static void Stunned()
     {
         Box();
-        Write.Line(45, 20,"You are stunned");
+        Write.Line(50, 20,"You are " + Color.STUNNED + "stunned"+ Color.RESET);
         Console.ReadKey(true);
     }
 
@@ -69,7 +71,8 @@ internal class CombatUI
 
     public static void AttackOptions()
     {
-        UIComponent.OptionsText(option, button);
+        if (Create.p.CanAct) UIComponent.OptionsText(option, button);
+        else UIComponent.OptionsText(stunOption, stunButton);
     }
 
     internal static Monster Target()
@@ -106,7 +109,7 @@ internal class CombatUI
     internal static void Box()
     {
         Console.Clear();
-        Monster1();
+        if (Create.p.combatMonsters.Count > 0) Monster1();
         if (Create.p.combatMonsters.Count > 1) Monster2();
         if (Create.p.combatMonsters.Count > 2) Monster3();
         Write.SetY(5);
