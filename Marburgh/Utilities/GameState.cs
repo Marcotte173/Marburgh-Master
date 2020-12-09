@@ -16,8 +16,12 @@ public class GameState
     public static bool dungeon_4_available;
     public static bool dungeon_Secret_available;
     public static Location location;
-    
 
+
+    public static void Mansion()
+    {
+        Dungeon.Mansion1.layout[1].room.Explore();
+    }
     public static void Test()
     {
         Cheat();

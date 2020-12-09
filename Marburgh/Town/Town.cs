@@ -31,6 +31,7 @@ public class Town
         else if (choice == "o") Other.Menu();
         else if (choice == "y") House.Menu();
         else if (choice == "b") Bank.Menu();
+        else if (choice == "x") GameState.Mansion();
         //else if (choice == "x") GameState.Test();
         //else if (choice == "z") GameState.Death();
         //else if (choice == "c") GameState.CraftCheat();

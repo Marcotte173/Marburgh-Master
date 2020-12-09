@@ -18,10 +18,11 @@ public class Necromancer : Monster
 
     public override void Attack2(Player target)
     {
-        Combat.combatText.Add($"The " + Color.MONSTER + "slime " + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
-        Slime s = new Slime(2, 2, 3, 1);
-        s.Health = s.MaxHealth = MaxHealth;
-        Create.p.combatMonsters.Add(s);
+        Monster summon = (Return.RandomInt(0, 2) == 0) ? Dungeon.skeleton2 : Dungeon.zombie3;
+        Combat.combatText.Add($"The " + Color.MONSTER + "Necromancer " + Color.RESET + "mumbles something you can't quite hear ");
+        Combat.combatText.Add($"The ground in front of him moves ");
+        Combat.combatText.Add($"A {Color.MONSTER + summon.Name + Color.RESET} crawls out of the ground");
+        Dungeon.Summon(summon);
     }
 
     public override void Declare2()

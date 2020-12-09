@@ -161,7 +161,7 @@ public class Explore
         Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Return");
     }
 
-    private static void Box(List<int> colourArray, List<string> descriptions)
+    public static void Box(List<int> colourArray, List<string> descriptions)
     {
         Console.Clear();
         UIComponent.DisplayText(colourArray, descriptions);
@@ -214,7 +214,7 @@ public class Explore
         {
             Console.SetCursorPosition(44, 23);
             Write.Line(Color.NAME, "[", "W", "]est");
-            if (dungeon.layout[currentRoom.West].room.visited) Write.Line(84 - dungeon.layout[currentRoom.West].room.Name.Length / 2, 23, dungeon.layout[currentRoom.West].room.Name);
+            if (dungeon.layout[currentRoom.West].room.visited) Write.Line(84 - dungeon.layout[currentRoom.West].room.Name.Length / 2, 23, Color.SPEAK + dungeon.layout[currentRoom.West].room.Name);
             else Write.Line(83, 23, Color.SPEAK + "???");
         }
         else Write.Line(78, 23, "xxxxxxxxxxxxxxx");
