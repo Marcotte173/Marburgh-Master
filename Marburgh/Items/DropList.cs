@@ -11,4 +11,5 @@ public class DropList
     public static Drop savageOrcFang = new Drop("Savage Orc Fang", 1, 1);
     public static Drop necromancerBrain = new Drop("Necromancer Brain", 1, 1);
     public static Drop slime = new Drop("Slime", 1, 1);
+    public static Drop potionOfDeath = new Drop("Potion Of Death",1,2);
 }                 

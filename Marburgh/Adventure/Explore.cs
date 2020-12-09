@@ -17,7 +17,7 @@ public class Explore
         {        
             if (currentRoom.room.visited == false)
             {
-                UI.Keypress(currentRoom.room.FlavorColourArray, currentRoom.room.Flavor);
+                if (!currentRoom.room.skipExplore) UI.Keypress(currentRoom.room.FlavorColourArray, currentRoom.room.Flavor);
                 currentRoom.room.Explore();
             }                
             Navigate();
@@ -31,73 +31,26 @@ public class Explore
         string choice = Return.Option();
         if (choice == "n" && currentRoom.North > 0)
         {
-            if (dungeon.layout[currentRoom.North].room.visited == false) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
+            if (dungeon.layout[currentRoom.North].room.visited == false && !dungeon.layout[currentRoom.North].room.skipExplore ) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
             ChangeDungeon(currentRoom.North);
         }
         else if (choice == "s" && currentRoom.South > 0)
         {
-            if (dungeon.layout[currentRoom.South].room.visited == false) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
+            if (dungeon.layout[currentRoom.South].room.visited == false && !dungeon.layout[currentRoom.South].room.skipExplore) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
             ChangeDungeon(currentRoom.South);
         }
         else if (choice == "e" && currentRoom.East > 0)
         {
-            if (dungeon.layout[currentRoom.East].room.visited == false) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
-            ChangeDungeon( currentRoom.East);
+            if (dungeon.layout[currentRoom.East].room.visited == false && !dungeon.layout[currentRoom.East].room.skipExplore) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
+            ChangeDungeon(currentRoom.East);
         }
         else if (choice == "w" && currentRoom.West > 0)
         {
-            if (dungeon.layout[currentRoom.West].room.visited == false) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
-            ChangeDungeon( currentRoom.West);
+            if (dungeon.layout[currentRoom.West].room.visited == false && !dungeon.layout[currentRoom.West].room.skipExplore) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
+            ChangeDungeon(currentRoom.West);
         }
         else if (choice == "9") CharacterSheet.Display();
-        else if (choice == "h")
-        {
-            if (Create.p.MaxHealth == Create.p.Health)
-            {
-                UI.Keypress(
-                new List<int> { 1 },
-                new List<string>
-                {
-                Color.HEALTH,"You don't need " ,"healing", "!"
-                });
-            }
-            else
-            {
-                if (Create.p.PotionSize == 0)
-                {
-                    UI.Keypress(
-                    new List<int> { 1 },
-                    new List<string>
-                    {
-                    Color.HEALTH, "Your " ,"potion ", "is empty!"
-                    });
-                }
-                else if ((Create.p.MaxHealth - Create.p.Health) > Create.p.PotionSize)
-                {
-                    int heal = Create.p.PotionSize;
-                    Create.p.AddHealth(heal);
-                    Create.p.PotionSize = 0;
-                    UI.Keypress(
-                    new List<int> { 1 },
-                    new List<string>
-                    {
-                    Color.HEALTH,"You heal for " ,heal.ToString(), " hp!"
-                    });
-                }
-                else
-                {
-                    int heal = Create.p.MaxHealth - Create.p.Health;
-                    Create.p.PotionSize -= (Create.p.MaxHealth - Create.p.Health);
-                    Create.p.AddHealth(heal);
-                    UI.Keypress(
-                    new List<int> { 1 },
-                    new List<string>
-                    {
-                    Color.HEALTH,"You heal for " , heal.ToString() , " hp!"
-                    });
-                }
-            }
-        }
+        else if (choice == "h") Utilities.Heal();        
         else if (choice == "0" && currentRoom == dungeon.layout[1])
         {
             ResetRoom();
@@ -147,7 +100,7 @@ public class Explore
         DotDotDot(colourArray, descriptions, navConnect, Color.MONSTER + "Exploring" + Color.RESET);
     }
 
-    private static void TopExploreInfoBar()
+    internal static void TopExploreInfoBar()
     {
         Console.SetCursorPosition(5, 17);
         Console.WriteLine(Color.NAME + $"{Create.p.Name}" + Color.RESET);

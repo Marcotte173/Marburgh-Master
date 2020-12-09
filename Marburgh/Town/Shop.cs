@@ -42,8 +42,6 @@ public class
         Write.Line(50, 11, Color.ITEM, "Main Hand:  ", $"{Create.p.MainHand.Name} ", "");
         Write.Line(50, 12, Color.ITEM, "Off Hand:   ", $"{Create.p.OffHand.Name} ", "");
         Write.Line(50, 13, Color.ITEM, "Armor Hand: ", $"{Create.p.Armour.Name}   ", "");
-        Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Return.Option();
         if (choice == "b" && shopKeep == "Oscar")
         {

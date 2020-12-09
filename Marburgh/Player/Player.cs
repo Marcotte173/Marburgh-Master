@@ -33,6 +33,7 @@ public class Player : Creature
     protected string option3;
     protected string option4;
     protected int run;
+    protected bool haveItems;
     protected List<Drop> drops = new List<Drop> { };
     public static List<string> text = Combat.combatText;
 
@@ -75,7 +76,7 @@ public class Player : Creature
             else if (choice == "3" && CanAttack3) Attack3(GetTarget());
             else if (choice == "4" && CanAttack4) Attack4(GetTarget());
             else if (choice == "5" && CanAttack5) Attack5(GetTarget());
-            else if (choice == "6" && CanAttack6) Attack6(GetTarget());
+            else if (choice == "6" && haveItems) Items();
             else if (choice == "h")
             {
                 DrinkPotion();
@@ -306,9 +307,54 @@ public class Player : Creature
     {
 
     }
-    public virtual void Attack6(Creature target)
+    public virtual void Items()
     {
+        List<Drop> items = new List<Drop> { };
+        foreach (Drop d in Create.p.drops) if (d.rare == 2) items.Add(d);
+        CombatUI.Box();
+        Write.Line(50, 10, "Please select an "+ Color.POTION + "Item"+ Color.RESET);
+        Write.Line(46, 12, "Press [0] to return to combat");
+        int width = 50;
+        int height = 19;
+        for (int i = 0; i < items.Count; i++)
+        {
+            Write.Line(width, height + i, $"[{i+1}] {Color.POTION+ items[i].name+ Color.RESET}");
+        }
+        int x = Return.Int();
+        if (x > 0 && x <= items.Count)
+        {
+            Drop chosenItem = items[x - 1];
+            CombatUI.Box();
+            Write.Line(45, 19, "[" + Color.HEALTH + "Y" + Color.RESET + "]es         [" + Color.BOSS + "N" + Color.RESET + "]o");
+            UIComponent.DisplayText(new List<int> { 1 }, new List<string>
+            {
+            Color.POTION, "Use the ", chosenItem.name,"?"
+            });
+            string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+            if (choice == "y") ItemUse(chosenItem);
+        }
+        else AttackChoice();
+    }
 
+    private void ItemUse(Drop chosenItem)
+    {
+        if (chosenItem.name == DropList.potionOfDeath.name)
+        {
+            RemoveDrop(DropList.potionOfDeath,1);
+            Creature target = GetTarget();
+            if (target.Undead)
+            {
+                text.Add($"The {Color.POTION + chosenItem.name + Color.RESET} splashes harmlessly at the feet of the {Color.MONSTER+ target.Name+ Color.RESET}");
+                if(target.Name == "Necromancer") text.Add(Color.SPEAK+"'You fool! I control Death!'");
+                else text.Add($"You can't kill something that is already dead!");
+            }
+            else
+            {
+                text.Add($"You throw the potion at the " + Color.MONSTER + target.Name + Color.RESET + ".");
+                text.Add($"It doesn't even have time to react as it's life force is instantly snuffed out");
+                target.TakeDamage(100000);
+            }            
+        }
     }
 
     public override void HealStatement(int heal)
@@ -335,6 +381,7 @@ public class Player : Creature
     public int[] LvlSpellpower { get { return lvlSpellpower; } set { lvlSpellpower = value; } }
     public int[] LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
+    public bool HaveItems { get { return haveItems; } set { haveItems = value; } }
     public int[] LvlDefence { get { return lvlPlayerDefence; } set { lvlPlayerDefence = value; } }
     public int[] LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
     public int[] LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }

@@ -75,10 +75,6 @@ public class Mage : Player
     {
         base.Attack5(target);
     }
-    public override void Attack6(Creature target)
-    {
-        base.Attack6(target);
-    }
 
     public override void TakeDamage(int damage, Monster hitMe)
     {

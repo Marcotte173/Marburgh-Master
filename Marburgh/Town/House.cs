@@ -29,8 +29,6 @@ public class House
                 Color.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","","Now you just have to figure out how it works"
             },
             houseOptionList, houseOptionButton);
-        Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();        
         if (choice == "0") Utilities.ToTown();
         else if (choice == "9") CharacterSheet.Display();

@@ -18,7 +18,7 @@ public class DungeonTutorial_A_BossRoom : Room
     {
         UI.Keypress(new List<int> { 0, 0, 1, 0 , 1, 0, 0 }, new List<string>
         {
-            "Entering the lair you find a large Orc, but not the one you expecte to find",
+            "Entering the lair you find a large Orc, but not the one you expected to find",
             "",
             Color.SPEAK, "","Heh, you thought you found da boss, eh?","",
             "",

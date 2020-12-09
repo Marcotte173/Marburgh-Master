@@ -20,8 +20,6 @@ public class Bank
                 Color.SPEAK,"", $"'Hello, how may I be of service?'",""
             },
             bankText, bankButton);
-        Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "d")
         {

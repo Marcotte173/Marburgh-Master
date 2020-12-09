@@ -53,8 +53,4 @@ public class Warrior : Player
     {
         base.Attack5(target);
     }
-    public override void Attack6(Creature target)
-    {
-        base.Attack6(target);
-    }
 }

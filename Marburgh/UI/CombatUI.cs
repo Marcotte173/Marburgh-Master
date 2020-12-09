@@ -5,7 +5,7 @@ using System.Text;
 internal class CombatUI
 {
     public static List<string> option = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
-    public static List<string> button = new List<string> { "1" , "2" };
+    public static List<string> button = new List<string> { "1", "2" };
     public static List<string> stunOption = new List<string> { Color.STUNNED + " You are stunned. Press Any Key to continue" + Color.RESET };
     public static List<string> stunButton = new List<string> { "X" };
     public static List<string> optionBasic = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
@@ -22,7 +22,7 @@ internal class CombatUI
 
     private static void Monster1()
     {
-        int x = (Create.p.combatMonsters.Count == 2) ? 35 : 60; 
+        int x = (Create.p.combatMonsters.Count == 1) ? 60 : 35; 
         Monster a = Create.p.combatMonsters[0];
         Write.SetX(x - a.Name.Length/2);
         Console.WriteLine(Color.MONSTER + a.Name + Color.RESET);
@@ -56,23 +56,23 @@ internal class CombatUI
     private static void Monster3()
     {
         Monster b = Create.p.combatMonsters[2];
-        Write.Position(35 - b.Name.Length / 2, 0);
+        Write.Position(60 - b.Name.Length / 2, 0);
         Console.WriteLine(Color.MONSTER + b.Name + Color.RESET);
-        Write.Position(34, 2);
+        Write.Position(60, 2);
         Console.WriteLine(Color.HEALTH + b.Health + Color.RESET);
-        Write.Position(35 - b.Name.Length / 2, 1);
+        Write.Position(60 - b.Name.Length / 2, 1);
         Console.WriteLine(Color.ABILITY + b.Intention + Color.RESET);
         for (int i = 0; i < b.Status.Count; i++)
         {
-            Write.Position(35 - b.Name.Length / 2, 3 + i);
+            Write.Position(60 - b.Name.Length / 2, 3 + i);
             Console.WriteLine(b.Status[i]);
         }        
     }
 
     public static void AttackOptions()
     {
-        if (Create.p.CanAct) UIComponent.OptionsText(option, button);
-        else UIComponent.OptionsText(stunOption, stunButton);
+        if (Create.p.CanAct) UIComponent.OptionsText(option, button,3);
+        else UIComponent.OptionsText(stunOption, stunButton,3);
     }
 
     internal static Monster Target()
@@ -91,8 +91,8 @@ internal class CombatUI
                 targetButton.Add("3");
             }
             Box();
-            Write.Line(45, 19,"Please select a target");
-            UIComponent.OptionsText(targetOption, targetButton);
+            Write.Line(50, 10,"Please select a target");
+            UIComponent.OptionsText(targetOption, targetButton,3);
             int choice = Return.Int();
             if (choice > 0 && choice < 4)
             {                

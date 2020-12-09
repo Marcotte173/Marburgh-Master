@@ -14,6 +14,7 @@ public class Room
     protected List<int> flavorColourArray;
     protected List<string> flavor;
     protected int modifier;
+    public bool skipExplore;
     public bool visited;
     public RoomType roomType;
     public bool resetable;

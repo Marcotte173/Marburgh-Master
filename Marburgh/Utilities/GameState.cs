@@ -17,16 +17,10 @@ public class GameState
     public static bool dungeon_Secret_available;
     public static Location location;
 
-
-    public static void Mansion()
-    {
-        Dungeon.Mansion1.layout[1].room.Explore();
-    }
+    
     public static void Test()
     {
         Cheat();
-        Explore.dungeon = Dungeon.dungeon1a;
-        Explore.currentRoom = Town.dungeon2[1];
         Explore.Menu();
     }
 
@@ -54,6 +48,25 @@ public class GameState
         Craft.craftOptionButton.Add(Color.CRIT + "C" + Color.RESET);
     }
 
+    internal static void TestCombat(List<Monster> monsters)
+    {
+        Create.p = new Warrior(3,3,3,3);
+        Create.p.Name = "Travis Marcotte";
+        Create.p.AddDrop(DropList.potionOfDeath);
+        foreach(Monster m in monsters)
+        {
+            Dungeon.Summon(m.MonsterCopy());
+        }        
+        Combat.Menu();
+    }
+
+    internal static void TestMansion()
+    {
+        Create.p = new Warrior(3, 3, 3, 3);
+        Create.p.Name = "Travis Marcotte";
+        new Altar().Explore();
+    }
+
     public static void Death()
     {
         Create.p.TakeDamage(100, new Goblin(3,3,3,1));
@@ -70,7 +83,7 @@ public class GameState
     public static void Dungeon2()
     {
         Buttons.adventureButton.Add(Color.MONSTER + "3" + Color.RESET);
-        Buttons.adventureList.Add("Savage Orc's Lair");
+        Buttons.adventureList.Add("The Mansion on the Hill");
         GameState.dungeon_2_available = true;
     }
     public static void Dungeon3()

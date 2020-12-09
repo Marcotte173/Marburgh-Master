@@ -15,6 +15,7 @@ public class Zombie : Monster
         xp = 6;
         gold = 22;
         dropRate = 30;
+        undead = true;
     }
     public override void Declare()
     {

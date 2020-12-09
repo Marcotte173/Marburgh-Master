@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 public class Color
 {
-    public static string[] dropColour = new string[] { DROP, RAREDROP };
+    public static string[] dropColour = new string[] { DROP, RAREDROP, POTION };
 
     //ESCAPE CODES FOR COLOUR
     public const string BOLD = "\u001B[1m";
@@ -34,7 +34,8 @@ public class Color
     public const string CRIT = "\u001b[38;5;167m";
     public const string DEFENCE = "\u001b[38;5;189m";
     public const string RESET = "\u001B[1m\u001B[37m";
-
+    public const string POTION = "\u001b[38;5;140m";
+    public const string DEATH = "\u001b[38;5;94m";
 
     const int STD_OUTPUT_HANDLE = -11;
     const uint ENABLE_VIRTUAL_TERMINAL_PROCESSING = 4;

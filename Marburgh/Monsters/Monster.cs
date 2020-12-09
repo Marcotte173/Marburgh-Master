@@ -10,6 +10,7 @@ public class Monster : Creature
     protected int action;
     protected Drop drop;
     protected int dropRate;
+    
     static List<string> text = Combat.combatText;
     public virtual void Attack1(Player target)
     {
@@ -122,5 +123,5 @@ public class Monster : Creature
         else return DropList.monsterTooth.Copy();
     }
 
-    public int Action { get { return action; } set { action = value; } }
+    public int Action { get { return action; } set { action = value; } }    
 }

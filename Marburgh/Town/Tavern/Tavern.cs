@@ -13,14 +13,12 @@ public class Tavern
         Color.XP + "L" + Color.RESET,
         Color.XP + "T" + Color.RESET,
         Color.GOLD + "G" + Color.RESET,
-        ""
     };
     public static List<string> tavernOptionList = new List<string>
     {
         "ocal gossip",
         "alk to the bartender",
         "amble",
-        ""
     };
     
     public static void Menu()
@@ -32,8 +30,6 @@ public class Tavern
                 Color.SPEAK, "", "You enter a bustling tavern. More flavor will be added soon describing the place and what you can do.",""
             },
            tavernOptionList, tavernOptionButton);
-        Console.SetCursorPosition(53, 25);
-        Console.Write("[?] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "g")
             Gamble(Create.p);
@@ -142,7 +138,7 @@ public class Tavern
                 "",
                 "What do you feel like playing?"
             },
-            new List<string> { "lack Jack", "hree Card Monty", "ice", "" }, new List<string> { Color.GOLD + "B" + Color.RESET, Color.GOLD + "T" + Color.RESET, Color.GOLD + "D" + Color.RESET, "" });
+            new List<string> { "lack Jack", "hree Card Monty", "ice" }, new List<string> { Color.GOLD + "B" + Color.RESET, Color.GOLD + "T" + Color.RESET, Color.GOLD + "D" + Color.RESET });
             string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
             if (choice == "0") Menu();
             else if (choice != "b" && choice != "t" && choice != "d") Gamble(p);

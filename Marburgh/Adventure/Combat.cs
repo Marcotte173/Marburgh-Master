@@ -13,7 +13,7 @@ public class Combat
     public static List<string> combatText = new List<string>  { };
     
     public static void Menu()
-    {
+    {        
         goldReward = 0;
         xpReward = 0;
         combatText.Clear();
@@ -25,7 +25,8 @@ public class Combat
         foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
         DisplayCombatText();
         while (Create.p.combatMonsters.Count > 0)
-        {            
+        {
+            ItemCheck();
             Create.p.AttackChoice();
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
@@ -106,6 +107,21 @@ public class Combat
         Create.p.Bleed = 0;
         Create.p.Stun = 0;
     }
+
+    private static void ItemCheck()
+    {
+        Create.p.HaveItems = false ;
+        foreach (string s in CombatUI.option.ToList()) if (s == Color.POTION + "Items" + Color.RESET) CombatUI.option.Remove(s);
+        foreach (string s in CombatUI.button.ToList()) if (s == Color.POTION + "6" + Color.RESET)     CombatUI.button.Remove(s);
+        foreach(Drop d in Create.p.Drops) if (d.rare == 2)
+            {
+                Create.p.HaveItems = true;
+                CombatUI.option.Add(Color.POTION + "Items" + Color.RESET);
+                CombatUI.button.Add("6");
+                break;
+            }
+    }
+
     public static void DisplayCombatText()
     {
         Console.Clear();

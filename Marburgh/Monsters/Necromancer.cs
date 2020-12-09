@@ -14,6 +14,7 @@ public class Necromancer : Monster
         xp = 6;
         gold = 22;
         dropRate = 30;
+        undead = true;
     }
 
     public override void Attack2(Player target)

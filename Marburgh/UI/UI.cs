@@ -24,7 +24,7 @@ public class UI
         Console.WriteLine("|" + Color.SHIELD + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxx  xxxxxxxxxxxxx  xxxxxx" + Color.RESET + "|");        
         Console.WriteLine("|" + Color.SHIELD + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Color.RESET + "|                                                          |" + Color.DAMAGE + "xxxxxxxxxxxxxxxxxxxxxxxxxxxxx" + Color.RESET + "|");
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
-        UIComponent.OptionsText(options, optionButton);
+        UIComponent.OptionsText(options, optionButton,20);
         Write.Position(55,26);
         Write.Line(Color.DAMAGE, "[", "Q", "]uit");
         Write.Position(42, 14);
@@ -60,7 +60,7 @@ public class UI
         Console.WriteLine("[" + Color.CLASS + "9" + Color.RESET + "]Character");
         Console.SetCursorPosition(Return.Width(88), 16);
         Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Return");
-        UIComponent.OptionsText(options, optionButton);
+        UIComponent.OptionsText(options, optionButton, 15);
         Console.SetCursorPosition(4, 21);
         Console.Write(Color.SPEAK + "Gold In Bank" + Color.RESET);
         Console.SetCursorPosition(10 - Bank.bankGold.ToString().Length, 22);
@@ -107,7 +107,7 @@ public class UI
         UIComponent.DisplayText(new List<int> { 0 }, new List<string> { "Would you like to equip this in your Main hand or your Off hand ?" });
         Console.SetCursorPosition(0, 15);
         StandardBox();
-        UIComponent.OptionsText(new List<string> { "ain hand", "ff hand" }, new List<string> { Color.ITEM + "M" + Color.RESET, Color.ITEM + "O" + Color.RESET });
+        UIComponent.OptionsText(new List<string> { "ain hand", "ff hand" }, new List<string> { Color.ITEM + "M" + Color.RESET, Color.ITEM + "O" + Color.RESET },15);
         Write.Line(35, 24,Color.ITEM, "Current: ", Create.p.MainHand.Name,"");
         Write.Line(74, 24, Color.ITEM, "Current: " , Create.p.OffHand.Name,"");
         string choice = Return.Option();
@@ -276,7 +276,7 @@ public class UI
         UIComponent.DisplayText(colourArray, descriptions);
         Write.SetY(15);
         StandardBox();
-        UIComponent.OptionsText(options, optionButton);
+        UIComponent.OptionsText(options, optionButton,15);
     }
 
     internal static void StandardBoxBlank()
@@ -335,7 +335,7 @@ public class UI
         Console.Clear();
         Write.SetY(15);
         StandardBoxBlank();
-        UIComponent.OptionsText(options, optionButton);
+        UIComponent.OptionsText(options, optionButton,15);
         Console.SetCursorPosition(Console.WindowWidth / 2 - 1, 8);
         Write.DotDotDot();
     }

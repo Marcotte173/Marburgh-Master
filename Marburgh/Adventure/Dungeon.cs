@@ -8,12 +8,6 @@ public class Dungeon
 {
     public List<Shell> layout = new List<Shell> { };
     public List<Monster> bestiary = new List<Monster> { };
-    public Dungeon dungeonNorth;
-    public Dungeon dungeonSouth;
-    public Dungeon dungeonEast;
-    public Dungeon dungeonWest;
-    public Dungeon cameFrom;
-    public int cameFromRoom;
     public int howManyMonstersPerRoom;
     public int rewardMod;
 
@@ -34,6 +28,8 @@ public class Dungeon
 
     public static List<Monster> dungeonSummon1 = new List<Monster> { goblin1, slime1, kobald1 };
     public static List<Monster> dungeonSummon2 = new List<Monster> { orc2, rat1, slime2, skeleton2 };
+
+    
 
 
     public static void Summon(Monster monster)
@@ -89,9 +85,18 @@ public class Dungeon
             new Shell(0, 0, 0,  0 ,true,  new MansionEntrance()),                                         //12
         }, dungeonSummon1, 1, 1);
 
-    public static Dungeon MansionEast = new Dungeon(AreaCreation.CreateGrid(EnterFrom.East, 12), dungeonSummon1, 1, 1);
+    public static List<Shell> mansionEastSpecialRooms = new List<Shell> { };
+    public static List<int> mansionEastPlacement = new List<int> { };
+
+    public static List<Shell> mansionWestSpecialRooms = new List<Shell> { };
+    public static List<int> mansionWestPlacement = new List<int> { };
+
+
+    public static List<Shell> MansionLayoutEast = new AreaCreation(EnterFrom.West, 12, Mansion1.layout[1],mansionEastSpecialRooms,mansionEastPlacement).MonsterCopy().builtDungeon;
+    public static List<Shell> MansionLayoutWest = new AreaCreation(EnterFrom.East, 12, Mansion1.layout[1], mansionWestSpecialRooms, mansionWestPlacement).MonsterCopy().builtDungeon;
     
-    public static Dungeon MansionWest = new Dungeon(AreaCreation.CreateGrid(EnterFrom.West, 12), dungeonSummon1, 1, 1);
+    public static Dungeon MansionEast = new Dungeon(MansionLayoutEast, dungeonSummon1, 1, 1);
+    public static Dungeon MansionWest = new Dungeon(MansionLayoutWest, dungeonSummon1, 1, 1);
     
     public static Dungeon MansionNorth = new Dungeon(new List<Shell>
         {

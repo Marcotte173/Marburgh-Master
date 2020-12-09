@@ -14,6 +14,7 @@ public class Skeleton : Monster
         xp = 6;
         gold = 22;
         dropRate = 30;
+        undead = true;
     }
     public override void Declare()
     {

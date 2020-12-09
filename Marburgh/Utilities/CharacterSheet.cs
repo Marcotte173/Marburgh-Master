@@ -82,11 +82,12 @@ public class CharacterSheet
         Console.SetCursorPosition(92, 27);
         Write.Line(Color.CRIT+ "Reputation" +Color.RESET+ ": "+Create.p.Reputation+$" ({Color.CRIT + Create.p.Rep+Color.RESET})");
 
-        Console.SetCursorPosition(56, 27);
-        Write.Line("["+ Color.RAREDROP+ "D" + Color.RESET+"]rops");
+        Console.SetCursorPosition(54, 27);
+        Write.Line("["+ Color.RAREDROP+ "I" + Color.RESET+"]nventory");
         string choice = Return.Option();
-        if (choice == "d")
+        if (choice == "i")
         {
+            Create.p.AddDrop(new Drop("Potion of Death", 1, 2));
             Console.Clear();
             for (int i = 0; i < Create.p.Drops.Count; i++)
             {
@@ -97,7 +98,7 @@ public class CharacterSheet
             UIComponent.BarBlank();
             UIComponent.StandardMiddle(8);
             UIComponent.BarBlank();
-            if (Create.p.Drops.Count == 0) Write.Line(52, 8, "YOU HAVE NO DROPS");
+            if (Create.p.Drops.Count == 0) Write.Line(44, 8, "YOU HAVE NOTHING IN YOUR INVENTORY");
             Write.Position(47, 22);
             Write.Line(Color.ENERGY, "Press any key to continue");
             Console.ReadKey(true);          

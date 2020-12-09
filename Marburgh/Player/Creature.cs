@@ -7,6 +7,7 @@ public class Creature
     public static Random rand = new Random();
     protected List<string> status = new List<string> { };
 
+    protected bool undead;
     protected int potionSize;
     protected int maxPotionSize;
     protected int strength;
@@ -49,6 +50,7 @@ public class Creature
         this.stamina = stamina;
     }
 
+    public bool Undead { get { return undead; } set { undead = value; } }
     public List<string> Status { get { return status; } set { status = value; } }
     public string Name { get { return name; } set { name = value; } }
     public virtual int MaxHealth { get { return maxHealth; } set { maxHealth = value; } }
