@@ -48,7 +48,7 @@ public class Dungeon
             new Shell(5, 3, 0, 0 ,false, new  Room(RoomType.Passage)),            //4
             new Shell(0, 4, 0, 10 ,false, new Room(RoomType.StoreRoom)),            //5
             
-            new Shell(7, 0, 2, 0 ,false, new ChestRoom()),                                               //6
+            new Shell(7, 0, 2, 0 ,false, new ShrineRoom()),                                               //6
             new Shell(9, 6, 8, 0 ,false, new Room(RoomType.Hallway)),            //7
             new Shell(0, 0, 0, 7 ,false, new VillagersRoom()),                                           //8
             new Shell(0, 7, 10, 0 ,false, new GuardRoom(goblin1)),            //9
@@ -81,8 +81,7 @@ public class Dungeon
         new List<Shell>
         {
             null,
-
-            new Shell(0, 0, 0,  0 ,true,  new MansionEntrance()),                                         //12
+            new Shell(0, 0, 0,  0 ,true,  new MansionEntrance()),                                        
         }, dungeonSummon1, 1, 1);
 
     public static List<Shell> mansionEastSpecialRooms = new List<Shell> { };

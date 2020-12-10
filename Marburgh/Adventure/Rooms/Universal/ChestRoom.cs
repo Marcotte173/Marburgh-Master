@@ -191,7 +191,7 @@ public class ChestRoom : Room
             Equipment weapon = list[Return.RandomInt(global::Explore.dungeon.rewardMod, global::Explore.dungeon.rewardMod * 2)];
             if (UI.Confirm(new List<int> { 1, 1 }, new List<string>
                 {
-                    Color.ITEM, "You find a", weapon.Name, "!",
+                    Color.ITEM, "You find a ", weapon.Name, "!",
                     Color.SPEAK, "Would you like to", " equip ","it?",
                 }))
             {

@@ -15,7 +15,7 @@ public class Altar:Room
     }
     internal override void Explore()
     {
-        UI.Choice(new List<int> { 0,0,1,0,2,0,1 }, new List<string>
+        UI.Choice(new List<int> { 0,0,1,0,2,0,0,0,1 }, new List<string>
         {
             "As you approach, you see the dead body of a townsperson you couldn't save",
             "",
@@ -23,61 +23,12 @@ public class Altar:Room
             "",
             Color.DEATH,Color.DEATH,"You realize this is an altar to ","Toliax",", the god of"," Death","",
             "",
+            "At the base of the altar there is an empty pool",
+            "",
             Color.DEATH,"There is clearly a great deal of power here, and ","death ","plays no favorites...."
-        }, new List<string> { "tudy", "esecrate", "alk away" }, new List<string> { Color.ENERGY + "S" + Color.RESET, Color.DAMAGE + "D" + Color.RESET, Color.MITIGATION + "W" + Color.RESET }) ;
+        }, new List<string> { "ray to "+Color.DEATH+"Toliax"+Color.RESET, "estroy this abomination", Color.RESET+"alk away" }, new List<string> { Color.ENERGY + "P" + Color.RESET, Color.DAMAGE + "D" + Color.RESET, Color.MITIGATION + "W" + Color.RESET }) ;
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
-        if (choice == "s")
-        {
-            Console.Clear();
-            List<int> studyColourArray = new List<int> { };
-            List<string> studyList = new List<string> { };
-            studyColourArray.Add(0);
-            studyList.Add("");
-            if (Return.RandomInt(1, 101) <= 75)
-            {
-                if (Create.p.Health < Create.p.MaxHealth)
-                {
-                    studyColourArray.Add(1);
-                    studyList.Add(Color.ENERGY);
-                    studyList.Add("");
-                    studyList.Add("Success! ");
-                    studyList.Add("");
-                    studyColourArray.Add(0);
-                    studyList.Add("");
-                    studyColourArray.Add(1);
-                    studyList.Add(Color.HEALTH);
-                    studyList.Add("Your ");
-                    studyList.Add("health ");
-                    studyList.Add("returns to maximum!");
-                    Create.p.Health = Create.p.MaxHealth;
-                }
-                else
-                {
-                    studyColourArray.Add(0);
-                    studyList.Add("Sadly, you glean very little from the runes");
-                }
-            }
-            else
-            {
-                studyColourArray.Add(1);
-                studyList.Add(Color.DAMAGE);
-                studyList.Add("");
-                studyList.Add("This was not for you to know! It's too much for your mind and body!");
-                studyList.Add("");
-                studyColourArray.Add(0);
-                studyList.Add("");
-                studyColourArray.Add(2);
-                studyList.Add(Color.HEALTH);
-                studyList.Add(Color.DAMAGE);
-                studyList.Add("Your ");
-                studyList.Add("health ");
-                studyList.Add("is reduced to ");
-                studyList.Add("1");
-                studyList.Add("!");
-                Create.p.Health = 1;
-            }
-            ActionWait(studyColourArray, studyList, Color.ENERGY + "Studying" + Color.RESET, null);
-        }
+        if (choice == "p") Pray();
         else if (choice == "d")
         {
             Console.Clear();
@@ -85,49 +36,97 @@ public class Altar:Room
             List<string> desecrateList = new List<string> { };
             desecrateColourArray.Add(0);
             desecrateList.Add("");
-            if (Return.RandomInt(1, 101) <= 25)
-            {
-                desecrateColourArray.Add(1);
-                desecrateList.Add(Color.HEALTH);
-                desecrateList.Add("");
-                desecrateList.Add("Success! ");
-                desecrateList.Add("");
-                desecrateColourArray.Add(0);
-                desecrateList.Add("");
-                desecrateColourArray.Add(0);
-                desecrateList.Add("You hear screams from further in the dungeon!");
-                desecrateColourArray.Add(0);
-                desecrateList.Add("");
-                desecrateColourArray.Add(1);
-                desecrateList.Add(Color.HEALTH);
-                desecrateList.Add("Next fight, every monster starts with");
-                desecrateList.Add(" HALF ");
-                desecrateList.Add("health!");
-                Combat.desecrated = true;
-            }
-            else
-            {
-                desecrateColourArray.Add(1);
-                desecrateList.Add(Color.DAMAGE);
-                desecrateList.Add("");
-                desecrateList.Add("You have made the gods angry!");
-                desecrateList.Add("");
-                desecrateColourArray.Add(0);
-                desecrateList.Add("");
-                desecrateColourArray.Add(2);
-                desecrateList.Add(Color.HEALTH);
-                desecrateList.Add(Color.DAMAGE);
-                desecrateList.Add("Your ");
-                desecrateList.Add("health ");
-                desecrateList.Add("is reduced to ");
-                desecrateList.Add("1");
-                desecrateList.Add("!");
-            }
-            ActionWait(desecrateColourArray, desecrateList, Color.ENERGY + "Desecrating" + Color.RESET, null);
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("You destroy the altar");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.DEATH);
+            desecrateList.Add("You can feel a ");
+            desecrateList.Add("presence ");
+            desecrateList.Add("stirring. It is not happy");
+            ActionWait(desecrateColourArray, desecrateList, Color.DAMAGE + "Destroying" + Color.RESET, null);
         }
         else if (choice == "w") { }
         else Explore();
         visited = true;
+    }
+
+    private void Pray()
+    {
+        Console.Clear();
+        List<int> studyColourArray = new List<int> { };
+        List<string> studyList = new List<string> { };
+        studyColourArray.Add(0);
+        studyList.Add("");
+        studyColourArray.Add(1);
+        studyList.Add(Color.DEATH);
+        studyList.Add("You hear");
+        studyList.Add(" whispers");
+        studyList.Add(", or was it wind?");
+        ActionWait(studyColourArray, studyList, Color.ENERGY + "Praying" + Color.RESET, null);
+        UI.Choice(new List<int> { 0, 0, 1, 0, 0, 1 }, new List<string>
+            {
+                "",
+                "",
+                Color.DEATH,"","Toliax ","has heard you and responds",
+                "",
+                "",
+                Color.DEATH,"The pool at the base of the altar begins to fill with a pale ", "green ", "liquid",
+            }, new List<string> { "rink the liquid", "ottle the liquid", "alk awak" }, new List<string> { Color.DEATH + "D" + Color.RESET, Color.POTION + "B" + Color.RESET, Color.MITIGATION + "W" + Color.RESET });
+        string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
+        if (choice == "d")
+        {
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.HEALTH);
+            desecrateList.Add("You feel ");
+            desecrateList.Add("Strange");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.DEATH);
+            desecrateList.Add("");
+            desecrateList.Add("Death ");
+            desecrateList.Add("radiates from you");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.HEALTH);
+            desecrateList.Add("You are at ");
+            desecrateList.Add("-10 ");
+            desecrateList.Add("health!");
+            Create.p.Health = -10;
+            ActionWait(desecrateColourArray, desecrateList, Color.DEATH + "Drinking" + Color.RESET, null);
+        }
+        else if (choice == "b")
+        {
+            UI.Keypress(new List<int> { 1, 0, 0, 0, 1 }, new List<string>
+            {
+                Color.DEATH,"You fill a bottle with the ","liquid","",
+                "",
+                "Who knows, this may come in handy some time",
+                "",
+                Color.POTION, "You gain 1 ","Potion of Death",""
+            });
+        }
+        else if (choice == "w") { }
+        else Pray();
     }
 
     public override List<string> Flavor

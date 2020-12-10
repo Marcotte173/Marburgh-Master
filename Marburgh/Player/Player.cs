@@ -94,7 +94,8 @@ public class Player : Creature
                     Console.Clear();
                     UI.Keypress(new List<int> { 0 }, new List<string> { "You succesfully run away... Coward" });
                     combatMonsters.Clear();
-                    Utilities.ToTown();
+                    Explore.currentRoom = Explore.dungeon.layout[1];
+                    Explore.Menu();
                 }
                 else text.Add("You try to get away but can't!");
             }
