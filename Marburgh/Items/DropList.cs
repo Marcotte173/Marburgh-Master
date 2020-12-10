@@ -5,11 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 public class DropList
 {
-    public static Drop tutorialKey = new Drop("Iron Key", 1, 1);
+    public static Drop tutorialKey = new Drop("Iron Key", 1, 3);
     public static Drop monsterTooth = new Drop("Monster Tooth", 1, 0);
     public static Drop monsterEye = new Drop("Monster Eye", 1, 0);
     public static Drop savageOrcFang = new Drop("Savage Orc Fang", 1, 1);
     public static Drop necromancerBrain = new Drop("Necromancer Brain", 1, 1);
     public static Drop slime = new Drop("Slime", 1, 1);
     public static Drop potionOfDeath = new Drop("Potion Of Death",1,2);
+    public static Drop mansionMedalion = new Drop("Necromancer's Medallion", 1, 3);
+    public static Drop brokenCleaver = new Drop("Broken Cleaver", 1, 1);
 }                 

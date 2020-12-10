@@ -123,6 +123,11 @@ public class ShrineRoom : Room
             }
             ActionWait(desecrateColourArray, desecrateList, Color.ENERGY + "Desecrating" + Color.RESET, null);
         }
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Explore();
+        }
         else if (choice == "w") { }
         else Explore();
         visited = true;

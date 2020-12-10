@@ -42,9 +42,7 @@ public class MansionEntrance:Room
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "n")
         {
-            global::Explore.dungeon = Dungeon.MansionNorth;
-            global::Explore.currentRoom = global::Explore.dungeon.layout[1];
-            global::Explore.Menu();
+            Dungeon.mansionDoorToBoss.Explore();
         }
         else if (choice == "e")
         {
@@ -61,8 +59,16 @@ public class MansionEntrance:Room
             global::Explore.Menu();
         }
         else if (choice == "0") Utilities.ToTown();
-        else if (choice == "9") CharacterSheet.Display();
-        else if (choice == "h") Utilities.Heal();
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Explore();
+        }
+        else if (choice == "h")
+        {
+            Utilities.Heal();
+            Explore();
+        }
         else Explore();
     }    
 }

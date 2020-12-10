@@ -53,4 +53,13 @@ public class Rogue : Player
     {
         base.Attack5(target);
     }
+
+    public override void Update()
+    {
+        damage = playerDamage = strength + agility;
+        playerHit = 60 + agility * 4 + agility;
+        playerCrit = agility * 4;
+        playerDefence = 2 * agility;
+        health = maxHealth = 12 + 4 * stamina;
+    }
 }

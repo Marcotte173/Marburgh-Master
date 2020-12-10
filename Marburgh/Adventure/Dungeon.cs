@@ -37,6 +37,9 @@ public class Dungeon
         Create.p.combatMonsters.Add(monster.MonsterCopy());
     }
 
+    /// <summary>
+    /// TUTORIAL DUNGEON
+    /// </summary>
     public static Dungeon dungeon1a = new Dungeon(
         new List<Shell>
         {
@@ -74,15 +77,19 @@ public class Dungeon
 
             new Shell(0, 12, 10, 0  ,false, new Room(RoomType.Passage)),            //11
             new Shell(11, 0, 0,  0  ,false, new DungeonTutorial_B_BossRoom())                                         //12
-        }, dungeonSummon2, 2, 1);
+        }, dungeonSummon1, 2, 1);
+    ////////////////////////////////////
 
-    public static Dungeon Mansion1 =
+    /// <summary>
+    /// Necromancer Mansion
+    /// </summary>
+    public static Dungeon MansionEntrance =
         new Dungeon(
         new List<Shell>
         {
             null,
-            new Shell(0, 0, 0,  0 ,true,  new MansionEntrance()),                                        
-        }, dungeonSummon1, 1, 1);
+            new Shell(0, 0, 0,  0 ,false,  new MansionEntrance()),                                        
+        }, dungeonSummon2, 2, 2);
 
     public static List<Shell> mansionEastSpecialRooms = new List<Shell> { };
     public static List<int> mansionEastPlacement = new List<int> { };
@@ -91,32 +98,15 @@ public class Dungeon
     public static List<int> mansionWestPlacement = new List<int> { };
 
 
-    public static List<Shell> MansionLayoutEast = new AreaCreation(EnterFrom.West, 12, Mansion1.layout[1],mansionEastSpecialRooms,mansionEastPlacement).MonsterCopy().builtDungeon;
-    public static List<Shell> MansionLayoutWest = new AreaCreation(EnterFrom.East, 12, Mansion1.layout[1], mansionWestSpecialRooms, mansionWestPlacement).MonsterCopy().builtDungeon;
+    public static List<Shell> MansionLayoutEast = new AreaCreation(EnterFrom.West, 12, MansionEntrance.layout[1],mansionEastSpecialRooms,mansionEastPlacement).MonsterCopy().builtDungeon;
+    public static List<Shell> MansionLayoutWest = new AreaCreation(EnterFrom.East, 12, MansionEntrance.layout[1], mansionWestSpecialRooms, mansionWestPlacement).MonsterCopy().builtDungeon;
     
-    public static Dungeon MansionEast = new Dungeon(MansionLayoutEast, dungeonSummon1, 1, 1);
-    public static Dungeon MansionWest = new Dungeon(MansionLayoutWest, dungeonSummon1, 1, 1);
-    
-    public static Dungeon MansionNorth = new Dungeon(new List<Shell>
-        {
-            null,
+    public static Dungeon MansionEast = new Dungeon(MansionLayoutEast, dungeonSummon2, 3, 2);
+    public static Dungeon MansionWest = new Dungeon(MansionLayoutWest, dungeonSummon2, 3, 2);
 
-            new Shell(0, 0, 7,  2   ,true,  new Entrance()),                                                //1
-            new Shell(3, 0, 1,  0   ,false, new Room(RoomType.Hallway)),            //2
-            new Shell(4, 2, 5,  0   ,false, new ChestRoom()),         //3
-            new Shell(0, 3, 6,  0   ,false, new GuardRoom(goblin1) ),            //4
-            new Shell(6, 0, 0,  3   ,false, new GuardRoom(goblin1) ),            //5
-
-            new Shell(0, 5, 0,  4   ,false, new DungeonTutorial_B_MiniBossRoom()),   //MINI BOSS                                            //6
-            new Shell(0, 0, 8,  1   ,false, new Room(RoomType.StoreRoom)),            //7
-            new Shell(9, 0, 0,  7   ,false, new GuardRoom(goblin1)),                                           //8
-            new Shell(10, 8, 0, 0   ,false, new Latrine()),            //9
-            new Shell(0, 9, 0,  0   ,false, new DungeonTutorial_B_LockRoom()),     //LOCKED ROOM, NEED TO DEFEAT MINIBOSS      //10
-
-            new Shell(0, 12, 10, 0  ,false, new Room(RoomType.Passage)),            //11
-            new Shell(11, 0, 0,  0  ,false, new DungeonTutorial_B_BossRoom())                                         //12
-        }, dungeonSummon1, 1, 1);
-
+    public static Room mansionDoorToBoss = new MansionDoorToBoss();
+    public static Room mansionNecromancerBoss = new MansionNecromancerBoss();
+    ///////////////////////////////////
 
 
     public Dungeon(List<Shell> layout, List<Monster> bestiary, int howManyMonstersPerRoom, int rewardMod)
@@ -126,5 +116,6 @@ public class Dungeon
         this.howManyMonstersPerRoom = howManyMonstersPerRoom;
         this.rewardMod = rewardMod;
     }
+    
 }
 

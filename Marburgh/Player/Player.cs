@@ -132,7 +132,7 @@ public class Player : Creature
         level = 1;
         playerDamage = damage;
         playerHit = hit;
-        PlayerCrit = crit;
+        playerCrit = crit;
         canExplore = true;
         canAct = true;
         xp = 0;
@@ -191,6 +191,11 @@ public class Player : Creature
             Utilities.Keypress(40, 22);
             Death(hitMe);
         }
+    }
+
+    public virtual void Update()
+    {
+
     }
 
     public void AddDrop(Drop d)

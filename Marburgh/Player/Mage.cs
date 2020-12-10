@@ -76,6 +76,17 @@ public class Mage : Player
         base.Attack5(target);
     }
 
+    public override void Update()
+    {
+        damage = playerDamage = strength * 2;
+        playerHit = 60 + agility * 3 + agility;
+        playerCrit = agility * 3;
+        playerDefence = 2 * agility;
+        health = maxHealth = 12 + 3 * stamina;
+        energy = intelligence;
+        spellpower = intelligence;
+    }
+
     public override void TakeDamage(int damage, Monster hitMe)
     {
         if (shielded == false)

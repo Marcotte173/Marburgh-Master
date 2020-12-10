@@ -29,7 +29,6 @@ public class GameState
         Create.p.PlayerDamage = 300;
         Create.p.PlayerHit = 100;
         Create.p.Health = 300;
-        tutorialDungeon_B_available = true;
     }
 
     internal static void CanCraft()
@@ -63,8 +62,9 @@ public class GameState
     internal static void TestMansion()
     {
         Create.p = new Warrior(3, 3, 3, 3);
+        Explore.dungeon = Dungeon.MansionEntrance;
         Create.p.Name = "Travis Marcotte";
-        new Altar().Explore();
+        new Library().Explore();
     }
 
     public static void Death()

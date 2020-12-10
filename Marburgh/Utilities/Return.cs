@@ -55,15 +55,7 @@ public class Return
         double newdouble = percent * Convert.ToDouble(Console.WindowWidth);
         int newint = Convert.ToInt32(newdouble);
         return Console.WindowWidth - newint;
-    }
-    internal static int CurrentX()
-    {
-        return Console.CursorLeft;
-    }
-    internal static int CurrentY()
-    {
-        return Console.CursorTop;
-    }    
+    }  
 
     internal static int MaxWidth()
     {

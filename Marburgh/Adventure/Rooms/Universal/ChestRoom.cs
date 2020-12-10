@@ -147,6 +147,11 @@ public class ChestRoom : Room
             });
             Explore();
         }
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Explore();
+        }
         else if (choice == "0")
         {
             

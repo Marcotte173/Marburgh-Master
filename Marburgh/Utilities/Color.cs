@@ -3,7 +3,7 @@ using System.Runtime.InteropServices;
 
 public class Color
 {
-    public static string[] dropColour = new string[] { DROP, RAREDROP, POTION };
+    public static string[] dropColour = new string[] { DROP, RAREDROP, POTION, CRIT };
 
     //ESCAPE CODES FOR COLOUR
     public const string BOLD = "\u001B[1m";

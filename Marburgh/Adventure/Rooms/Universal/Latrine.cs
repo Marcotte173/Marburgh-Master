@@ -66,6 +66,11 @@ public class Latrine : Room
                 "That place stinks!",
             });
         }
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Decision();
+        }
         visited = true;
     }
     public override List<string> Flavor

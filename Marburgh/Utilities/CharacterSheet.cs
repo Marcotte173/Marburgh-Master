@@ -87,7 +87,6 @@ public class CharacterSheet
         string choice = Return.Option();
         if (choice == "i")
         {
-            Create.p.AddDrop(new Drop("Potion of Death", 1, 2));
             Console.Clear();
             for (int i = 0; i < Create.p.Drops.Count; i++)
             {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 
-public enum RoomType {Passage,Hallway,StoreRoom,Library, LargeRoom, SmallRoom };
+public enum RoomType {Passage,Hallway,StoreRoom, LargeRoom, SmallRoom };
 public class Room
 {
     //Variables, self explanatory
@@ -21,12 +21,12 @@ public class Room
     public Room()
     {
         resetable = true;
-        int roomRand = Return.RandomInt(0, 6);
-        roomType = (roomRand == 0) ? RoomType.Hallway : (roomRand == 1) ? RoomType.Passage : (roomRand == 2) ? RoomType.StoreRoom : (roomRand == 3) ? RoomType.SmallRoom : (roomRand == 4) ? RoomType.LargeRoom : RoomType.Library;
+        int roomRand = Return.RandomInt(0, 5);
+        roomType = (roomRand == 0) ? RoomType.Hallway : (roomRand == 1) ? RoomType.Passage : (roomRand == 2) ? RoomType.StoreRoom : (roomRand == 3) ? RoomType.SmallRoom : RoomType.LargeRoom ;
         flavorColourArray = new List<int> { 0 };
-        name = (roomType == RoomType.Passage) ? "Passage" : (roomType == RoomType.Hallway) ? "Hallway" : (roomType == RoomType.Library) ? "Library": (roomType == RoomType.SmallRoom) ? "Room" : (roomType == RoomType.LargeRoom) ? "Room" : "Store Room";
+        name = (roomType == RoomType.Passage) ? "Passage" : (roomType == RoomType.Hallway) ? "Hallway" : (roomType == RoomType.SmallRoom) ? "Room" : (roomType == RoomType.LargeRoom) ? "Room" : "Store Room";
         flavor = (roomType == RoomType.Passage) ? new List<string> { "You have found a passageway. While tight, you are pretty sure you can squeeze through it." } :
-               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } : (roomType == RoomType.Library) ? new List<string> { "You have found a library, full of books." } : (roomType == RoomType.SmallRoom) ? new List<string> { "You have found a small, non descript room." } : (roomType == RoomType.LargeRoom) ? new List<string> { "You have found a large rrom. Anything could be inside" } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
+               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } :  (roomType == RoomType.SmallRoom) ? new List<string> { "You have found a small, non descript room." } : (roomType == RoomType.LargeRoom) ? new List<string> { "You have found a large rrom. Anything could be inside" } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
     }
 
     public Room(RoomType roomType)
@@ -35,9 +35,9 @@ public class Room
         resetable = true;
         this.roomType = roomType;
         flavorColourArray = new List<int> { 0 };
-        name = (roomType == RoomType.Passage) ? "Passage" : (roomType == RoomType.Hallway) ? "Hallway" : (roomType == RoomType.Library) ? "Library" : (roomType == RoomType.SmallRoom) ? "Room" : (roomType == RoomType.LargeRoom) ? "Room" : "Store Room";
+        name = (roomType == RoomType.Passage) ? "Passage" : (roomType == RoomType.Hallway) ? "Hallway" :  (roomType == RoomType.SmallRoom) ? "Room" : (roomType == RoomType.LargeRoom) ? "Room" : "Store Room";
         flavor = (roomType == RoomType.Passage) ? new List<string> { "You have found a passageway. While tight, you are pretty sure you can squeeze through it." } :
-               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } : (roomType == RoomType.Library) ? new List<string> { "You have found a library, full of books." } : (roomType == RoomType.SmallRoom) ? new List<string> { "You have found a small, non descript room." } : (roomType == RoomType.LargeRoom) ? new List<string> { "You have found a large rrom. Anything could be inside" } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
+               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } :  (roomType == RoomType.SmallRoom) ? new List<string> { "You have found a small, non descript room." } : (roomType == RoomType.LargeRoom) ? new List<string> { "You have found a large rrom. Anything could be inside" } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
     }
 
     internal virtual void Explore()
@@ -124,15 +124,6 @@ public class Room
                 stuffFound.Add("Gold");
                 found++;
                 gold = true;
-            }
-        }
-        else if (roomType == RoomType.Library)
-        {
-            if (Return.RandomInt(0, 101) <= 40)
-            {
-                stuffFound.Add("Gold");
-                found++;
-                book = true;
             }
         }
         else if (roomType == RoomType.Hallway)

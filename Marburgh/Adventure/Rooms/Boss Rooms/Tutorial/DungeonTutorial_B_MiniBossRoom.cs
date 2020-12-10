@@ -39,7 +39,7 @@ public class DungeonTutorial_B_MiniBossRoom : Room
     {
         get
         {
-            if (visited) return new List<string> { $"You a dead Orc lieutenant" };
+            if (visited) return new List<string> { $"You see a dead Orc lieutenant" };
             else return flavor;
         }
     }

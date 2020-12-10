@@ -53,4 +53,13 @@ public class Warrior : Player
     {
         base.Attack5(target);
     }
+
+    public override void Update()
+    {
+        damage = playerDamage = strength * 2;
+        playerHit = 60 + agility * 3 + agility;
+        playerCrit = agility * 3;
+        health = maxHealth = 12 + 6 * stamina;
+        playerDefence = 3 * agility;
+    }
 }

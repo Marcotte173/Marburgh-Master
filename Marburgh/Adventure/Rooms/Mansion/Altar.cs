@@ -53,6 +53,11 @@ public class Altar:Room
             desecrateList.Add("stirring. It is not happy");
             ActionWait(desecrateColourArray, desecrateList, Color.DAMAGE + "Destroying" + Color.RESET, null);
         }
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Explore();
+        }
         else if (choice == "w") { }
         else Explore();
         visited = true;
@@ -60,6 +65,7 @@ public class Altar:Room
 
     private void Pray()
     {
+        visited = true;
         Console.Clear();
         List<int> studyColourArray = new List<int> { };
         List<string> studyList = new List<string> { };
@@ -133,7 +139,7 @@ public class Altar:Room
     {
         get
         {
-            if (visited) return new List<string> { $"You see an altar. Whatever mystical forces were enhabiting it, they are long gone" };
+            if (visited) return new List<string> { $"You see an altar. Whatever mystical forces were inhabiting it, they are long gone" };
             else return flavor;
         }
     }

@@ -57,7 +57,7 @@ public class Town
             {
                 Create.p.CanExplore = false;
                 if (choice == "1")
-                {
+                {                    
                     Explore.dungeon  = Dungeon.dungeon1a;
                     Explore.currentRoom = Explore.dungeon.layout[1];
                 }

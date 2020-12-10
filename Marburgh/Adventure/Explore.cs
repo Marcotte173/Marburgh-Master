@@ -86,9 +86,7 @@ public class Explore
 
     public static void NavigateUI(List<int> colourArray, List<string> descriptions, int[] navConnect)
     {
-        Box(colourArray, descriptions);
-        Console.SetCursorPosition(57, 23);
-        Write.Line(Color.HEALTH, "[", "H", "]eal");
+        Box(colourArray, descriptions);        
         TopExploreInfoBar();
         NavOptions(navConnect);
     }
@@ -116,7 +114,8 @@ public class Explore
 
     public static void Box(List<int> colourArray, List<string> descriptions)
     {
-        Console.Clear();
+        Console.Clear();        
+        
         UIComponent.DisplayText(colourArray, descriptions);
         Console.SetCursorPosition(0, 16);
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
@@ -132,6 +131,18 @@ public class Explore
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|        /                \\        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|       /                  \\       |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("+-----------------------------------------+----------------------------------+-----------------------------------------+");
+        bool haveItems = false;
+        foreach (Drop d in Create.p.Drops) if (d.rare == 2)
+            {
+                haveItems = true;
+                break;
+            }
+        if (haveItems)
+        {
+            Write.Line(57, 22, Color.HEALTH, "[", "H", "]eal");
+            Write.Line(57, 24, Color.POTION, "[", "I", "]tems");
+        }
+        else Write.Line(57, 23, Color.HEALTH, "[", "H", "]eal");
     }
 
     internal static void NavOptions(int[] navConnect)

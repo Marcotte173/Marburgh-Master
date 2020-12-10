@@ -65,13 +65,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventure\Dungeon.cs" />
+    <Compile Include="Adventure\Rooms\Boss Rooms\Mansion\MansionNecromancerBoss.cs" />
     <Compile Include="Adventure\Rooms\Mansion\Altar.cs" />
     <Compile Include="Adventure\Rooms\Mansion\Kitchen.cs" />
     <Compile Include="Adventure\Rooms\Mansion\Lab.cs" />
     <Compile Include="Adventure\Rooms\Mansion\Library.cs" />
+    <Compile Include="Adventure\Rooms\Mansion\MansionDoorToBoss.cs" />
     <Compile Include="Adventure\Rooms\Mansion\MansionEntrance.cs" />
-    <Compile Include="Adventure\Rooms\Mansion\MansionMiniBossNecromancer.cs" />
-    <Compile Include="Adventure\Rooms\Mansion\Morgue.cs" />
+    <Compile Include="Adventure\Rooms\Boss Rooms\Mansion\MansionMiniBossNecromancer.cs" />
+    <Compile Include="Adventure\Rooms\Mansion\Armory.cs" />
     <Compile Include="Items\DropList.cs" />
     <Compile Include="Adventure\Rooms\Boss Rooms\Tutorial\DungeonTutorial_B_BossRoom.cs" />
     <Compile Include="Adventure\AreaCreation.cs" />
