@@ -16,23 +16,23 @@ public class DungeonTutorial_B_BossRoom : Room
 
     internal override void Explore()
     {
-        UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
         {
-            "The Savage Orc bellows at you as he brandishes his weapon",
+            Color.BOSS,"The ","Savage Orc"," bellows at you as he brandishes his weapon",
             "",
             "There's no turning back now!",
         });
         Dungeon.Summon(Dungeon.savageOrc);
         Combat.Menu();
-        UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 1, 0, 0, 0, 2 }, new List<string>
         {
-            "The Savage Orc looks shocked as the life leaves his eyes",
+            Color.BOSS,"The ","Savage Orc"," looks shocked as the life leaves his eyes",
             "",
             "You have defeated your foes, saving your town forever!",
             "",
-            "Triumphant, you make your way back to town"
+            Color.XP,Color.TIME,"Exhausted, you return to you ","house"," and sleep for 3 ","days",""
         });
-        Utilities.ToTown();
         GameState.CanMakeBossWeapon();
+        Town.FakeMenu();        
     }
 }

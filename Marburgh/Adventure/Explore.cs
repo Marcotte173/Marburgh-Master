@@ -31,7 +31,7 @@ public class Explore
         string choice = Return.Option();
         if (choice == "n" && currentRoom.North > 0)
         {
-            if (dungeon.layout[currentRoom.North].room.visited == false && !dungeon.layout[currentRoom.North].room.skipExplore ) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
+            if (dungeon.layout[currentRoom.North].room.visited == false && !dungeon.layout[currentRoom.North].room.skipExplore) ExploreNextRoom(null, null, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
             ChangeDungeon(currentRoom.North);
         }
         else if (choice == "s" && currentRoom.South > 0)
@@ -50,7 +50,8 @@ public class Explore
             ChangeDungeon(currentRoom.West);
         }
         else if (choice == "9") CharacterSheet.Display();
-        else if (choice == "h") Utilities.Heal();        
+        else if (choice == "h") Utilities.Heal();
+        else if (choice == "i" && Create.p.HaveItems) Utilities.Item();
         else if (choice == "0" && currentRoom == dungeon.layout[1])
         {
             ResetRoom();
@@ -114,8 +115,7 @@ public class Explore
 
     public static void Box(List<int> colourArray, List<string> descriptions)
     {
-        Console.Clear();        
-        
+        Console.Clear();                
         UIComponent.DisplayText(colourArray, descriptions);
         Console.SetCursorPosition(0, 16);
         Console.WriteLine("+----------------------------------------------------------------------------------------------------------------------+");
@@ -130,14 +130,8 @@ public class Explore
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|         +--------------+         |xxxxxxxxxxxxx               xxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|        /                \\        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|       /                  \\       |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
-        Console.WriteLine("+-----------------------------------------+----------------------------------+-----------------------------------------+");
-        bool haveItems = false;
-        foreach (Drop d in Create.p.Drops) if (d.rare == 2)
-            {
-                haveItems = true;
-                break;
-            }
-        if (haveItems)
+        Console.WriteLine("+-----------------------------------------+----------------------------------+-----------------------------------------+");        
+        if (Create.p.HaveItems)
         {
             Write.Line(57, 22, Color.HEALTH, "[", "H", "]eal");
             Write.Line(57, 24, Color.POTION, "[", "I", "]tems");

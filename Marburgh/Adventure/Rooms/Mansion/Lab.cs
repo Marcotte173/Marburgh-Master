@@ -26,19 +26,14 @@ public class Lab : Room
 
         }, new List<string> { "ed potion", "ellow potion","reen potion","","alk away" }, new List<string> { Color.DAMAGE + "R" + Color.RESET, Color.HIT + "Y" + Color.RESET, Color.HEALTH + "G" + Color.RESET, "", Color.DEFENCE + "W" + Color.RESET });
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
-        if (choice != "r" && choice != "y" && choice != "g" ) 
-        {
-            if (choice == "9") CharacterSheet.Display();
-            Explore();
-        }
-        else
+        if (choice == "r" || choice == "y" || choice == "g" ) 
         {
             List<int> colourList = new List<int> { };
             List<string> stringList = new List<string> { };
             colourList.Add(0);
             stringList.Add("");
             string feel = "";
-            UI.Keypress(new List<int> { 1,0,0,0,0,0,0,0,0 }, new List<string>
+            UI.Keypress(new List<int> { 1, 0, 0, 0, 0, 0, 0, 0, 0 }, new List<string>
             {
                 Color.POTION,"You grab the ","potion"," and gulp it down",
                 "",
@@ -54,7 +49,7 @@ public class Lab : Room
             {
                 if (Return.RandomInt(1, 101) <= 40)
                 {
-                    feel = Color.DAMAGE + "Stronger!"+ Color.RESET;
+                    feel = Color.DAMAGE + "Stronger!" + Color.RESET;
                     colourList.Add(1);
                     stringList.Add(Color.DAMAGE);
                     stringList.Add("You gain 1");
@@ -121,13 +116,19 @@ public class Lab : Room
             }
             ActionWait(colourList, stringList, Color.RESET + "You feel " + Color.RESET, feel);
             Create.p.Update();
-            UI.Keypress(new List<int> { 1, 0,0 }, new List<string>
+            UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
             {
                 Color.MONSTER,"Unfortunately, your thrashing destroyed the other ","potions ","",
                 "",
                 "You have no choice but to press on"
             });
-        }          
+        }
+        else if (choice == "w") { }
+        else
+        {
+            if (choice == "9") CharacterSheet.Display();
+            Explore();
+        }
     }
 
     public override List<string> Flavor

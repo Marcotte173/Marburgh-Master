@@ -33,7 +33,6 @@ public class Player : Creature
     protected string option3;
     protected string option4;
     protected int run;
-    protected bool haveItems;
     protected List<Drop> drops = new List<Drop> { };
     public static List<string> text = Combat.combatText;
 
@@ -76,7 +75,7 @@ public class Player : Creature
             else if (choice == "3" && CanAttack3) Attack3(GetTarget());
             else if (choice == "4" && CanAttack4) Attack4(GetTarget());
             else if (choice == "5" && CanAttack5) Attack5(GetTarget());
-            else if (choice == "6" && haveItems) Items();
+            else if (choice == "6" && HaveItems) Items();
             else if (choice == "h")
             {
                 DrinkPotion();
@@ -387,7 +386,17 @@ public class Player : Creature
     public int[] LvlSpellpower { get { return lvlSpellpower; } set { lvlSpellpower = value; } }
     public int[] LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
     public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
-    public bool HaveItems { get { return haveItems; } set { haveItems = value; } }
+    public bool HaveItems
+    {
+        get
+        {
+            foreach (Drop d in Create.p.Drops) if (d.rare == 2)
+            {
+                return true;
+            }
+            return false;
+        }
+    }
     public int[] LvlDefence { get { return lvlPlayerDefence; } set { lvlPlayerDefence = value; } }
     public int[] LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
     public int[] LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }

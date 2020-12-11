@@ -110,16 +110,13 @@ public class Combat
 
     private static void ItemCheck()
     {
-        Create.p.HaveItems = false ;
         foreach (string s in CombatUI.option.ToList()) if (s == Color.POTION + "Items" + Color.RESET) CombatUI.option.Remove(s);
         foreach (string s in CombatUI.button.ToList()) if (s == Color.POTION + "6" + Color.RESET)     CombatUI.button.Remove(s);
-        foreach(Drop d in Create.p.Drops) if (d.rare == 2)
-            {
-                Create.p.HaveItems = true;
-                CombatUI.option.Add(Color.POTION + "Items" + Color.RESET);
-                CombatUI.button.Add("6");
-                break;
-            }
+        if (Create.p.HaveItems)
+        {
+            CombatUI.option.Add(Color.POTION + "Items" + Color.RESET);
+            CombatUI.button.Add("6");
+        }
     }
 
     public static void DisplayCombatText()

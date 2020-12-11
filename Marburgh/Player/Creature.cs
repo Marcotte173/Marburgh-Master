@@ -91,7 +91,7 @@ public class Creature
     {
         health -= damage;
         health = (health < 0) ? 0 : health;
-        if (health == 0) Death();
+        if (health <= 0) Death();
     }
 
     public virtual void AddHealth(int heal)

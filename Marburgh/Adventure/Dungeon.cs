@@ -91,14 +91,14 @@ public class Dungeon
             new Shell(0, 0, 0,  0 ,false,  new MansionEntrance()),                                        
         }, dungeonSummon2, 2, 2);
 
-    public static List<Shell> mansionEastSpecialRooms = new List<Shell> { };
-    public static List<int> mansionEastPlacement = new List<int> { };
+    public static List<Room> mansionEastSpecialRooms = new List<Room> {new Armory(),new Lab(), new MansionMiniBossNecromancer()  };
+    public static List<int> mansionEastPlacement = new List<int> {Return.RandomInt(3,5), Return.RandomInt(6, 9), Return.RandomInt(10, 12) };
 
-    public static List<Shell> mansionWestSpecialRooms = new List<Shell> { };
-    public static List<int> mansionWestPlacement = new List<int> { };
+    public static List<Room> mansionWestSpecialRooms = new List<Room> {new Library(), new Kitchen(), new Altar() };
+    public static List<int> mansionWestPlacement = new List<int> { Return.RandomInt(3, 5), Return.RandomInt(6, 9), Return.RandomInt(10, 12) };
 
 
-    public static List<Shell> MansionLayoutEast = new AreaCreation(EnterFrom.West, 12, MansionEntrance.layout[1],mansionEastSpecialRooms,mansionEastPlacement).MonsterCopy().builtDungeon;
+    public static List<Shell> MansionLayoutEast = new AreaCreation(EnterFrom.West, 12, MansionEntrance.layout[1], mansionEastSpecialRooms, mansionEastPlacement).MonsterCopy().builtDungeon;
     public static List<Shell> MansionLayoutWest = new AreaCreation(EnterFrom.East, 12, MansionEntrance.layout[1], mansionWestSpecialRooms, mansionWestPlacement).MonsterCopy().builtDungeon;
     
     public static Dungeon MansionEast = new Dungeon(MansionLayoutEast, dungeonSummon2, 3, 2);
@@ -116,6 +116,6 @@ public class Dungeon
         this.howManyMonstersPerRoom = howManyMonstersPerRoom;
         this.rewardMod = rewardMod;
     }
-    
+
 }
 

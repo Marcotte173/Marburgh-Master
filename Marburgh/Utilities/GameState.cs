@@ -11,17 +11,18 @@ public class GameState
     public static bool canCraft;
     public static bool canCraftWeaponsFromBossDrops;
     public static bool tutorialDungeon_B_available;
-    public static bool dungeon_2_available;
     public static bool dungeon_3_available;
     public static bool dungeon_4_available;
     public static bool dungeon_Secret_available;
+    public static bool mansionAvailable;
     public static Location location;
 
     
     public static void Test()
     {
-        Cheat();
-        Explore.Menu();
+        Create.p = new Warrior(3, 3, 3, 3);
+        Create.p.Name = "Travis Marcotte";
+        Town.FakeMenu();
     }
 
     public static void Cheat()
@@ -29,6 +30,7 @@ public class GameState
         Create.p.PlayerDamage = 300;
         Create.p.PlayerHit = 100;
         Create.p.Health = 300;
+        Create.p.AddDrop(DropList.potionOfDeath);
     }
 
     internal static void CanCraft()
@@ -64,7 +66,7 @@ public class GameState
         Create.p = new Warrior(3, 3, 3, 3);
         Explore.dungeon = Dungeon.MansionEntrance;
         Create.p.Name = "Travis Marcotte";
-        new Library().Explore();
+        Dungeon.MansionEntrance.layout[1].room.Explore();
     }
 
     public static void Death()
@@ -80,11 +82,11 @@ public class GameState
         Craft.Menu();
     }
 
-    public static void Dungeon2()
+    public static void Mansion()
     {
         Buttons.adventureButton.Add(Color.MONSTER + "3" + Color.RESET);
         Buttons.adventureList.Add("The Mansion on the Hill");
-        GameState.dungeon_2_available = true;
+        GameState.mansionAvailable = true;
     }
     public static void Dungeon3()
     {

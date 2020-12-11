@@ -84,7 +84,9 @@ public class MansionDoorToBoss : Room
                     "",
                     Color.DEATH,"The last thing you hear before you die is the mocking laugh of ","Toliax",""
                 });
-                Create.p.TakeDamage(1000);
+                Monster g = new Goblin(3, 3, 3, 3);
+                g.Name = Color.DEATH + "Death Fog"+Color.RESET;
+                Create.p.Death(g);
             }
         }
         else if (choice == "9")

@@ -13,9 +13,9 @@ public class AreaCreation
     public EnterFrom enterFrom;
     public int howManyRooms;
     public Shell cameFrom;
-    public List<Shell> specialRooms;
+    public List<Room> specialRooms;
     public List<int> placement;
-    public AreaCreation(EnterFrom enterFrom, int howManyRooms, List<Shell> specialRooms, List<int> placement)
+    public AreaCreation(EnterFrom enterFrom, int howManyRooms, List<Room> specialRooms, List<int> placement)
     {
         this.specialRooms = specialRooms;
         this.placement = placement;
@@ -42,7 +42,7 @@ public class AreaCreation
         }
         RoomCreation(enterFrom,howManyRooms);
     }
-    public AreaCreation(EnterFrom enterFrom, int howManyRooms, Shell cameFrom, List<Shell> specialRooms, List<int> placement)
+    public AreaCreation(EnterFrom enterFrom, int howManyRooms, Shell cameFrom, List<Room> specialRooms, List<int> placement)
     {
         this.specialRooms = specialRooms;
         this.placement = placement;
@@ -74,6 +74,10 @@ public class AreaCreation
         else if (enterFrom == EnterFrom.South) builtDungeon[1].South = builtDungeon.Count - 1;
         else if (enterFrom == EnterFrom.East) builtDungeon[1].East = builtDungeon.Count - 1;
         else if (enterFrom == EnterFrom.West) builtDungeon[1].West = builtDungeon.Count - 1;
+        for (int i = 0; i < specialRooms.Count; i++)
+        {
+            builtDungeon[placement[i]].room = specialRooms[i];
+        }
     }
 
     public void RoomCreation(EnterFrom enterFrom, int x)

@@ -27,7 +27,7 @@ public class UI
         UIComponent.OptionsText(options, optionButton,20);
         Write.Position(55,26);
         Write.Line(Color.DAMAGE, "[", "Q", "]uit");
-        Write.Line(51,14,Color.GOLD, "","0.38 December 10, 2020 ", "");
+        Write.Line(51,14,Color.GOLD, "","0.39 December 10, 2020 ", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)
@@ -137,11 +137,14 @@ public class UI
     public static void Town(string[] descriptions, List<string> adventure, List<string> shop, List<string> service, List<string> other, List<string> adventureButton, List<string> shopButton, List<string> serviceButton, List<string> otherButton)
     {
         Console.Clear();
-        for (int i = 0; i < descriptions.Length; i++)
+        if(descriptions != null)
         {
-            Console.SetCursorPosition(Return.Width(50) - (descriptions[i].Length / 2), (Return.Height(14) - descriptions.Length / 2) + i);
-            Console.WriteLine(descriptions[i]);
-        }
+            for (int i = 0; i < descriptions.Length; i++)
+            {
+                Console.SetCursorPosition(Return.Width(50) - (descriptions[i].Length / 2), (Return.Height(14) - descriptions.Length / 2) + i);
+                Console.WriteLine(descriptions[i]);
+            }
+        }        
         Write.SetY(15);
         UIComponent.TopBar();
         Console.SetCursorPosition(0, 19);
@@ -151,38 +154,50 @@ public class UI
         }
         Console.SetCursorPosition(0, 26);
         UIComponent.BottomBar();
-        for (int i = 0; i < adventure.Count; i++)
+        if(adventure != null)
         {
-            if (adventure[i] != "")
+            for (int i = 0; i < adventure.Count; i++)
             {
-                Console.SetCursorPosition(Return.Width(1), 20 + i);
-                Console.WriteLine($"[{adventureButton[i]}]{adventure[i]}");
+                if (adventure[i] != "")
+                {
+                    Console.SetCursorPosition(Return.Width(1), 20 + i);
+                    Console.WriteLine($"[{adventureButton[i]}]{adventure[i]}");
+                }
             }
         }
-        for (int i = 0; i < shop.Count; i++)
+        if (shop != null)
         {
-            if (shop[i] != "")
+            for (int i = 0; i < shop.Count; i++)
             {
-                Console.SetCursorPosition(Return.Width(26), 20 + i);
-                Console.WriteLine($"[{shopButton[i]}]{shop[i]}");
+                if (shop[i] != "")
+                {
+                    Console.SetCursorPosition(Return.Width(26), 20 + i);
+                    Console.WriteLine($"[{shopButton[i]}]{shop[i]}");
+                }
             }
         }
-        for (int i = 0; i < service.Count; i++)
+        if (service != null)
         {
-            if (service[i] != "")
+            for (int i = 0; i < service.Count; i++)
             {
-                Console.SetCursorPosition(Return.Width(51), 20 + i);
-                Console.WriteLine($"[{serviceButton[i]}]{service[i]}");
+                if (service[i] != "")
+                {
+                    Console.SetCursorPosition(Return.Width(51), 20 + i);
+                    Console.WriteLine($"[{serviceButton[i]}]{service[i]}");
+                }
             }
         }
-        for (int i = 0; i < other.Count; i++)
+        if (other != null)
         {
-            if (other[i] != "")
+            for (int i = 0; i < other.Count; i++)
             {
-                Console.SetCursorPosition(Return.Width(76), 20 + i);
-                Console.WriteLine($"[{otherButton[i]}]{other[i]}");
+                if (other[i] != "")
+                {
+                    Console.SetCursorPosition(Return.Width(76), 20 + i);
+                    Console.WriteLine($"[{otherButton[i]}]{other[i]}");
+                }
             }
-        }
+        }       
         Console.SetCursorPosition(0, Return.Height(33));
         for (int i = 0; i < 6; i++)
         {
