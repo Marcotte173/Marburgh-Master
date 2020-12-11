@@ -34,7 +34,7 @@ public class Creature
     protected int confused;
     protected int casting;
     protected int burning;
-    protected int shield;
+    protected bool shield;
     protected int burnDam;
     protected int bleedDam;
     protected bool defending;
@@ -42,6 +42,7 @@ public class Creature
     protected bool attack4;
     protected bool attack5;
     protected bool attack6;
+    protected string type;
 
     public Creature(int strength, int agility, int stamina)
     {
@@ -72,7 +73,7 @@ public class Creature
     public int Confused { get { return confused; } set { confused = value; } }
     public int Casting { get { return casting; } set { casting = value; } }
     public int Burning { get { return burning; } set { burning = value; } }
-    public int PersonalShield { get { return shield; } set { shield = value; } }
+    public bool PersonalShield { get { return shield; } set { shield = value; } }
     public int BurnDam { get { return burnDam; } set { burnDam = value; } }
     public int BleedDam { get { return bleedDam; } set { bleedDam = value; } }
     public int PotionSize { get { return potionSize; } set { potionSize = value; } }
@@ -111,6 +112,7 @@ public class Creature
     public virtual void DontNeedHeal() { }
     public virtual void HealStatement(int heal) { }
     public virtual void Death() { }
+    public string Type { get { return type; } set { type = value; } }
 
     public virtual void Miss(Creature target)
     {
@@ -119,6 +121,6 @@ public class Creature
 
     public virtual bool AttemptToHit(Creature target, int bonus)
     {
-        return (Return.RandomInt(1, 101) < hit + bonus - target.defence);
+        return (Return.RandomInt(1, 101) < hit + bonus - target.Defence);
     }
 }

@@ -4,7 +4,6 @@ using System.Text;
 
 public class Mage : Player
 {
-    bool shielded;
     public Mage(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
@@ -35,14 +34,14 @@ public class Mage : Player
 
     public override void Attack2(Creature target)
     {
-        if (energy > 0 && shielded == false)
+        if (energy > 0 && shield == false)
         {
-            shielded = true;
+            shield = true;
             Status.Add(Color.SHIELD + "Shielded" + Color.RESET);
         }
-        else if (shielded)
+        else if (shield)
         {
-            shielded = false;
+            shield = false;
             Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
         }
         Combat.DisplayCombatText();
@@ -89,7 +88,7 @@ public class Mage : Player
 
     public override void TakeDamage(int damage, Monster hitMe)
     {
-        if (shielded == false)
+        if (shield == false)
         {
             base.TakeDamage(damage, hitMe);
         }
@@ -101,7 +100,7 @@ public class Mage : Player
             {
                 damage -= energy;
                 energy = 0;
-                shielded = false;
+                shield = false;
                 Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
                 base.TakeDamage(damage, hitMe);
             }

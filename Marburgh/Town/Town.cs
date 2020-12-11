@@ -12,6 +12,7 @@ public class Town
         {
             "You are in the town of Marburgh", "It is a small town, but is clearly growing", "Who knows what will be here in a month?"
         }, Buttons.adventureList, Buttons.shopList, Buttons.serviceList, Buttons.otherList, Buttons.adventureButton, Buttons.shopButton, Buttons.serviceButton, Buttons.otherButton);
+        Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Return.Option();
         if (choice == "9") CharacterSheet.Display();
         else if (choice == "0")
@@ -89,6 +90,7 @@ public class Town
         }, null, null, new List<string> {"avern" }, null, null, null, new List<string> { Color.TIME + "T" + Color.RESET }, null);
         Write.Line(51, 6, "Something is "+Color.DEATH+"wrong"+Color.RESET);
         Write.Line(45,10, "The light is on at the "+Color.TIME+"Tavern"+Color.RESET);
+        Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Return.Option();
         if (choice == "9") CharacterSheet.Display();
         else if (choice == "0")
@@ -127,6 +129,7 @@ public class Town
                 Color.SPEAK, "", "The bartender looks at you wearily as he cleans a glass",""
             },
            new List<string> {"peak with the bartender" }, new List<string> {Color.XP + "S"+ Color.RESET });
+        Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "9") CharacterSheet.Display();
         else if (choice == "0") FakeMenu();

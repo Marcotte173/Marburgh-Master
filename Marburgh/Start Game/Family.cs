@@ -16,26 +16,24 @@ public class Family
         {0, 0, 0, 0 },
         {0, 0, 0, 0 }
     };
-    internal static void Make()
-    {
-        FamilyName();
-        GenerateSiblings();
-        Create.Story();
-    }
 
-    private static void FamilyName()
+    internal static void Name()
     {
         Console.Clear();
         lastName = UI.CreationBox();
-        if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "Is ", $"{lastName}", " correct?" })) FamilyName();
+        if (lastName.Length < 3) Name();
+        if (UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "Is ", $"{lastName}", " correct?" }))
+            GenerateSiblings(); 
+        else Name();        
     }
 
     private static void GenerateSiblings()
     {
         while (alive.Count < 3)
         {
-            alive.Add($"{Name.list[Return.RandomInt(0, Name.list.Count)]} {lastName}");
-            Name.list.Remove(alive[alive.Count - 1]);
+            alive.Add($"{(global::Name.list[Return.RandomInt(0, global::Name.list.Count)])} {lastName}");
+            global::Name.list.Remove(alive[alive.Count - 1]);
         }
+        Create.Story();
     }
 }

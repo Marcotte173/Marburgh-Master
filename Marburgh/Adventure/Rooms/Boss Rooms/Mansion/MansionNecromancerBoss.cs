@@ -16,22 +16,44 @@ public class MansionNecromancerBoss : Room
 
     internal override void Explore()
     {
-        UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 0,2,0,0,0,1,0,1 }, new List<string>
         {
-            "The Savage Orc bellows at you as he brandishes his weapon",
             "",
-            "There's no turning back now!",
+            Color.DEATH,Color.NAME,"You confront the ","Necromancer", " who has been terrorizing your ","town","",
+            "",
+            "You tell him the deaths end here",
+            "",
+            Color.DEATH,"The ","Necromancer ","eyes you, smiling",
+            "",
+            Color.SPEAK," ","'Let's see'","",
         });
-        Dungeon.Summon(Dungeon.necromancer);
+        Dungeon.Summon(Dungeon.necromancer1);
         Combat.Menu();
-        UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 0,1,0,0,0,0,0,0,0,3,0,1 }, new List<string>
         {
-            "The Savage Orc looks shocked as the life leaves his eyes",
             "",
-            "You have defeated your foes, saving your town forever!",
+            Color.DEATH,"The ","Necromancer ","lies dead in front of you",
             "",
-            "Triumphant, you make your way back to town"
+            "As you catch your breath, the corpse's appearance slowly changes",
+            "",
+            "When it is finished changing, itresembles a long dead towsperson you knew as a child",
+            "",
+            "You hear someone behind you",
+            "",
+            Color.SPEAK,Color.DEATH,Color.SPEAK," ","'Did you think it would be that easy? What part of Master of ","","Death",""," do you not understand?'","",
+            "",
+            Color.DEATH,"Now you will feel my true ","power ","",
+
         });
-        Utilities.ToTown();
+        Dungeon.Summon(Dungeon.necromancer2);
+        Combat.Menu();
+        UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
+        {
+            Color.DEATH,"You have beaten the ","Necromancer"," and for now, the game",
+            "",
+            Color.HEALTH,"","Check back soon","! As you read this I'm hard at work adding more dungeons, monsters and Items.",
+
+        });
+        Environment.Exit(0);
     }
 }

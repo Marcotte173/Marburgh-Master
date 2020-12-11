@@ -184,7 +184,6 @@ public class UIComponent
     {
         Console.SetCursorPosition(35, 27);
         Write.Line(Color.TIME, Color.TIME, Color.TIME, Color.TIME, "It is day ", $"{Time.day}", ", the ", $"{Time.weeks[Time.week]}", " week of ", $"{Time.months[Time.month]}", ", ", $"{Time.year}", "");
-        Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
     }
 
     internal static void BottomBar()

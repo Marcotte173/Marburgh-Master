@@ -30,6 +30,7 @@ public class Tavern
                 Color.SPEAK, "", "You enter a bustling tavern. More flavor will be added soon describing the place and what you can do.",""
             },
            tavernOptionList, tavernOptionButton);
+        Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "g")
             Gamble(Create.p);
@@ -113,7 +114,7 @@ public class Tavern
         Console.Clear();
         UI.Keypress(new List<int> { 1 }, new List<string>
         {
-            Color.SPEAK, "","The Bartender will have more to say once dungeoning has been implemented",""
+            Color.SPEAK, "","'Check back next week, I hear Marcotte is adding a lot to the town for the Dec 18th, 2020'",""
         });
     }
 

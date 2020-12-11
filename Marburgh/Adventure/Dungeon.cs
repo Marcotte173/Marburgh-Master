@@ -16,18 +16,21 @@ public class Dungeon
     public static Monster slime2 = new Slime(5, 2, 6, 2);
     public static Monster kobald1 = new Kobold(4, 3, 3, 1);
     public static Monster orc1 = new Orc(4, 3, 4, 1);
-    public static Monster orcTest = new Orc(2, 2, 2, 1);
     public static Monster orc2 = new Orc(5, 4, 5, 2);
-    public static Monster rat1 = new Rat(2, 2, 3, 1);
-    public static Monster savageOrc = new SavageOrc(5, 4, 5, 2);
-    public static Monster necromancer = new Necromancer(7, 7, 8, 4);
+    public static Monster rat2 = new Rat(3, 3, 4, 2);
+    public static Monster savageOrc = new SavageOrc(5, 4, 5, 3);
+    
+    public static Monster necromancerApprentice = new Necromancer(7, 7, 8, 4);
+    public static Monster necromancer1 = new Necromancer(10, 10, 13, 5);
+    public static Monster necromancer2 = new Necromancer(15, 15, 20, 6);
+
     public static Monster skeleton2 = new Skeleton(3, 3, 3, 2);
     public static Monster zombie3 = new Zombie(3, 3, 3, 3);
     public static Monster ghoul3 = new Ghoul(6, 5, 5, 3);
 
 
     public static List<Monster> dungeonSummon1 = new List<Monster> { goblin1, slime1, kobald1 };
-    public static List<Monster> dungeonSummon2 = new List<Monster> { orc2, rat1, slime2, skeleton2 };
+    public static List<Monster> dungeonSummon2 = new List<Monster> { orc2, rat2, slime2, skeleton2 };
 
     
 

@@ -10,6 +10,7 @@ public class Kobold : Monster
     : base(strength, agility, stamina, level)
     {
         name = "Kobald";
+        type = "Kobald";
         mitigation = 1;
         xp = 6;
         gold = 20;
@@ -17,7 +18,13 @@ public class Kobold : Monster
     }
     public override void Attack2(Player target)
     {
-        if (AttemptToHit(target, 0))
+        if (target.PersonalShield)
+        {
+            Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + $" throws a " + Color.DAMAGE + "candle" + Color.RESET + " at you but it cannot break through your " + Color.SHIELD + "shield");
+            target.Energy = (target.Energy - damage / 2 <= 0) ? 0 : target.Energy - damage / 2;
+            if (target.Energy == 0) target.Attack2(null);
+        }
+        else if (AttemptToHit(target, 0))
         {
             Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + " throws a candle at you, causing " + Color.DAMAGE + "4" + Color.RESET + " damage, and " + Color.BURNING + "igniting " + Color.RESET + "you!");
             if (target.Burning > 0) target.BurnDam += 2;

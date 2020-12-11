@@ -22,9 +22,9 @@ namespace MedievalRPG
             },
             new List<string> { "ew Game" }, new List<string> { Color.HEALTH + "N" + Color.RESET });
             string choice = Return.Option();
-            if (choice == "n") Family.Make();
-            //if (choice == "x") GameState.TestCombat(new List<Monster> {Dungeon.goblin1,Dungeon.necromancer,Dungeon.goblin1 });
-            if (choice == "c") GameState.Test();
+            if (choice == "n") Family.Name();
+            if (choice == "x") GameState.TestCombat(new List<Monster> { Dungeon.necromancer2});
+            //if (choice == "c") GameState.Test();
             else if (choice == "q") Environment.Exit(0);
             else Menu();
         }

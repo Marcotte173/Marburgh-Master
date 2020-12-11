@@ -46,14 +46,18 @@ public class Player : Creature
         if (bleed > 0)
         {
             text.Add(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
-            TakeDamage(bleedDam);
+            Monster g = new Goblin(1, 1, 1, 1);
+            g.Name = Color.BLOOD+ "Blood Loss"+ Color.RESET;
+            TakeDamage(bleedDam,g);
             bleed--;
             if (bleed <= 0 && status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
         }
         if (burning > 0)
         {
             text.Add(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
-            TakeDamage(burnDam);
+            Monster g = new Goblin(1, 1, 1, 1);
+            g.Name = Color.BURNING + "Third Degree Burns" + Color.RESET;
+            TakeDamage(burnDam,g);
             burning--;
             if (burning <= 0 && status.Contains(Color.BLOOD + "Burning" + Color.RESET)) status.Remove(Color.BLOOD + "Burning" + Color.RESET);
         }
@@ -296,8 +300,8 @@ public class Player : Creature
     }
     public virtual void Attack2(Creature target)
     {
-        tempMit = 2;
-        tempMit = 15;
+        tempMit = level;
+        tempDefence = 15;
         text.Add("You focus on protecting yourself, increasing your defence and mitigation");
     }
     public virtual void Attack3(Creature target)
@@ -350,7 +354,7 @@ public class Player : Creature
             if (target.Undead)
             {
                 text.Add($"The {Color.POTION + chosenItem.name + Color.RESET} splashes harmlessly at the feet of the {Color.MONSTER+ target.Name+ Color.RESET}");
-                if(target.Name == "Necromancer") text.Add(Color.SPEAK+"'You fool! I control Death!'");
+                if(target.Type == "Necromancer") text.Add(Color.SPEAK+"'You fool! I control Death!'");
                 else text.Add($"You can't kill something that is already dead!");
             }
             else

@@ -51,7 +51,7 @@ public class GameState
 
     internal static void TestCombat(List<Monster> monsters)
     {
-        Create.p = new Warrior(3,3,3,3);
+        Create.p = new Warrior(100,10,100,10);
         Create.p.Name = "Travis Marcotte";
         Create.p.AddDrop(DropList.potionOfDeath);
         foreach(Monster m in monsters)
@@ -63,15 +63,16 @@ public class GameState
 
     internal static void TestMansion()
     {
-        Create.p = new Warrior(3, 3, 3, 3);
+        Create.p = new Mage(3, 3, 3, 3);
         Explore.dungeon = Dungeon.MansionEntrance;
         Create.p.Name = "Travis Marcotte";
-        Dungeon.MansionEntrance.layout[1].room.Explore();
+        Cheat();
+        new MansionNecromancerBoss().Explore();
     }
 
     public static void Death()
     {
-        Create.p.TakeDamage(100, new Goblin(3,3,3,1));
+        Create.p.TakeDamage(100, Dungeon.goblin1);
     }
 
     public static void CraftCheat()

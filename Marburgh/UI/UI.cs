@@ -118,10 +118,12 @@ public class UI
 
     internal static string CreationBox()
     {
-        UIComponent.DisplayText(new List<int> { 0, 1 }, new List<string>
+        UIComponent.DisplayText(new List<int> { 0, 1 ,0,0}, new List<string>
         {
             "You are the oldest child of an old adventuring family",
-            Color.NAME, "What is your family " ,"name" , "?"
+            Color.NAME, "What is your family " ,"name" , "?",
+            "",
+            "(Minimum 3 letters)"
         });
         Write.SetY(15);
         UIComponent.BarBlank();

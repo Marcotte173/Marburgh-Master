@@ -11,6 +11,7 @@ public class Rat : Monster
     : base(strength, agility, stamina, level)
     {
         name = "Rat";
+        type = "Rat";
         mitigation = 1;
         xp = 6;
         gold = 22;

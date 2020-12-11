@@ -11,6 +11,7 @@ public class Zombie : Monster
     : base(strength, agility, stamina, level)
     {
         name = "Zombie";
+        type = "Zombie";
         mitigation = 1;
         xp = 6;
         gold = 22;

@@ -10,6 +10,7 @@ public class Slime : Monster
     : base(strength, agility, stamina, level)
     {
         name = "Slime";
+        type = "Slime";
         mitigation = 1;
         level = 1;
         xp = 6;

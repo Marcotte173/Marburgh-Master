@@ -11,6 +11,7 @@ public class Monster : Creature
     protected Drop drop;
     protected int dropRate;
     
+    
     static List<string> text = Combat.combatText;
     public virtual void Attack1(Player target)
     {
@@ -34,19 +35,19 @@ public class Monster : Creature
     {
 
     }
-    public virtual void Attack3(Creature target)
+    public virtual void Attack3(Player target)
     {
 
     }
-    public virtual void Attack4(Creature target)
+    public virtual void Attack4(Player target)
     {
 
     }
-    public virtual void Attack5(Creature target)
+    public virtual void Attack5(Player target)
     {
 
     }
-    public virtual void Attack6(Creature target)
+    public virtual void Attack6(Player target)
     {
 
     }
@@ -60,7 +61,23 @@ public class Monster : Creature
         else Declare2();
     }
 
+    public void Update()
+    {
+        damage = strength * 2;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+    }
+
     public virtual void Declare2()
+    {
+
+    }
+    public virtual void Declare3()
+    {
+
+    }
+    public virtual void Declare4()
     {
 
     }
@@ -123,5 +140,6 @@ public class Monster : Creature
         else return DropList.monsterTooth.Copy();
     }
 
+    
     public int Action { get { return action; } set { action = value; } }    
 }

@@ -10,19 +10,26 @@ public class Goblin : Monster
     : base(strength, agility, stamina, level)
     {
         name = "Goblin";
+        type = "Goblin";
         mitigation = 1;
         xp = 6;
         gold = 22;
         dropRate = 30;
     }
     public override void Attack2(Player target)
-    {        
-        if (AttemptToHit(target, 0))
+    {
+        if (target.PersonalShield)
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "goblin" + Color.RESET + $" rakes you for {Color.DAMAGE + Return.MitigatedDamage(damage,target.Mitigation) + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET);
+            Combat.combatText.Add($"The " + Color.MONSTER + "goblin" + Color.RESET + $" tries to " + Color.DAMAGE + "rake" + Color.RESET + " you but cannot break through your " + Color.SHIELD + "shield");
+            target.Energy = (target.Energy - damage / 2 <= 0) ? 0 : target.Energy - damage / 2;
+            if (target.Energy == 0) target.Attack2(null);
+        }
+        else if (AttemptToHit(target, 0))
+        {
+            Combat.combatText.Add($"The " + Color.MONSTER + "goblin" + Color.RESET + $" rakes you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET);
             target.Bleed = 2;
             target.BleedDam = 6;
-            target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation) , this);
+            target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }
         else Miss(target);
     }
