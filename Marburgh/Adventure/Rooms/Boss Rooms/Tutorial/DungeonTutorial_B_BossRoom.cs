@@ -9,6 +9,7 @@ public class DungeonTutorial_B_BossRoom : Room
     public DungeonTutorial_B_BossRoom()
     : base()
     {
+        resetable = false;
         name = "Savage Orc";
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the Savage Orc's Lair!" };
@@ -24,15 +25,30 @@ public class DungeonTutorial_B_BossRoom : Room
         });
         Dungeon.Summon(Dungeon.savageOrc);
         Combat.Menu();
-        UI.Keypress(new List<int> { 1, 0, 0, 0, 2 }, new List<string>
+
+        //Delete when ready to push
+        UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
         {
-            Color.BOSS,"The ","Savage Orc"," looks shocked as the life leaves his eyes",
+            Color.BOSS,"You have beaten the ","Savage Orc"," and for now, the game",
             "",
-            "You have defeated your foes, saving your town forever!",
-            "",
-            Color.XP,Color.TIME,"Exhausted, you return to you ","house"," and sleep for 3 ","days",""
+            Color.HEALTH,"","Check back soon","! As you read this I'm hard at work adding more dungeons, monsters and Items.",
+
         });
-        GameState.CanMakeBossWeapon();
-        Town.FakeMenu();        
+        Environment.Exit(0);
+
+
+
+        //UI.Keypress(new List<int> { 1, 0, 0, 0, 2 }, new List<string>
+        //{
+        //    Color.BOSS,"The ","Savage Orc"," looks shocked as the life leaves his eyes",
+        //    "",
+        //    "You have defeated your foes, saving your town forever!",
+        //    "",
+        //    Color.XP,Color.TIME,"Exhausted, you return to you ","house"," and sleep for 3 ","days",""
+        //});
+        //Time.Events[0].active = false;
+        //visited = true;
+        //GameState.CanMakeBossWeapon();
+        //Town.FakeMenu();        
     }
 }

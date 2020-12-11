@@ -9,6 +9,7 @@ public class Altar:Room
     public Altar()
     :base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found an old altar" };
         name = $"Altar";

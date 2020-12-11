@@ -9,6 +9,7 @@ public class Latrine : Room
     public Latrine()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the latrines" };
         name = $"Latrines";

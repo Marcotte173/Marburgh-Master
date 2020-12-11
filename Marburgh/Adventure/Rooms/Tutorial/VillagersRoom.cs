@@ -12,6 +12,7 @@ public class VillagersRoom : Room
     public VillagersRoom()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a prison cell!" };
         name = $"Cell";
@@ -40,8 +41,8 @@ public class VillagersRoom : Room
             "",
             "That is.... if you live"
         });
-        Tavern.tavernOptionButton[3] = Color.NAME + "S" + Color.RESET;
-        Tavern.tavernOptionList[3] = "peak to townsfolk";
+        Tavern.tavernOptionButton.Add(Color.NAME + "S" + Color.RESET);
+        Tavern.tavernOptionList.Add("peak to townsfolk");
         GameState.villagersSaved = Create.p.Name;
         visited = true;
     }

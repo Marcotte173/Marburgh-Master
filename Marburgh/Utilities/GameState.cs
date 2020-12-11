@@ -118,6 +118,8 @@ public class GameState
 
     internal static void DungeonTutorialB()
     {
+        Tavern.tavernOptionButton.Remove(Color.NAME + "S" + Color.RESET);
+        Tavern.tavernOptionList.Remove("peak to townsfolk");
         Buttons.adventureButton.Add(Color.MONSTER + "2" + Color.RESET);
         Buttons.adventureList.Add("Savage Orc's Lair");
         GameState.tutorialDungeon_B_available = true;

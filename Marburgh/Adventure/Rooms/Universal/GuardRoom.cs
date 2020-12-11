@@ -10,6 +10,7 @@ public class GuardRoom : Room
     public GuardRoom(Monster m)
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have stumbled upon a guard post" };
         name = $"Guard Post";

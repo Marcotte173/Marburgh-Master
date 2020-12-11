@@ -9,6 +9,7 @@ public class MansionEntrance:Room
     public MansionEntrance()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have returned to the foyer" };
         name = "Foyer";

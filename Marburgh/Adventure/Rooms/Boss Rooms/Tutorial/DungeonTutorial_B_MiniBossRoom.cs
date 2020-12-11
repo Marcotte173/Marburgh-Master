@@ -9,6 +9,7 @@ public class DungeonTutorial_B_MiniBossRoom : Room
     public DungeonTutorial_B_MiniBossRoom()
     : base()
     {
+        resetable = false;
         name = "Lieutenant";
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found an Orc Lieutenant!" };

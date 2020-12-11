@@ -9,6 +9,7 @@ public class MansionNecromancerBoss : Room
     public MansionNecromancerBoss()
     : base()
     {
+        resetable = false;
         name = "Necromancer";
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the Necromancer's quarters" };

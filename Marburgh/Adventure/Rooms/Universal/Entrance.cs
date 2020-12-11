@@ -8,6 +8,7 @@ public class Entrance:Room
     public Entrance()
     :base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You are at the entrance to the dungeon" };
         name = $"Entrance";

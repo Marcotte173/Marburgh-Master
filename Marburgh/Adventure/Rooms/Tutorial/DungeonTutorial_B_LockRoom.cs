@@ -9,6 +9,7 @@ public class DungeonTutorial_B_LockRoom:Room
     public DungeonTutorial_B_LockRoom()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a locked door" };
         name = $"Room";

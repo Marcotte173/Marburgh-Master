@@ -9,6 +9,7 @@ public class Library : Room
     public Library()
        : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a Library" };
         name = $"Library";

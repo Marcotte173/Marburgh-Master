@@ -9,6 +9,7 @@ public class ChestRoom : Room
     public ChestRoom()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a chest!" };
         name = $"Chest";

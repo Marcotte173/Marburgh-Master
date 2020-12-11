@@ -9,6 +9,7 @@ public class MansionMiniBossNecromancer : Room
     public MansionMiniBossNecromancer()
        : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the necromancer's apprentice!" };
         name = $"Apprentice";

@@ -9,6 +9,7 @@ public class DungeonTutorial_A_BossRoom : Room
     public DungeonTutorial_A_BossRoom()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found a secret Lair!" };
         name = "Lair";
@@ -37,6 +38,7 @@ public class DungeonTutorial_A_BossRoom : Room
             "",
             "Curious, you bring the machine home with you"
         }) ;
+        visited = true;
         Utilities.ToTown();
     }
 }

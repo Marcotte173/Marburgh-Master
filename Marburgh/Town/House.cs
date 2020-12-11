@@ -16,19 +16,19 @@ public class House
     {
         GameState.location = Location.House;
         Console.Clear();
-        if (houseOptionList.Count < 3)
+        if (GameState.canCraft)
+            UI.Choice(new List<int> { 1, 1 }, new List<string>
+            {
+                Color.SPEAK, "","You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.","",
+                Color.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","Now you just have to figure out how it works"
+            },
+            houseOptionList, houseOptionButton);
+        else 
             UI.Choice(new List<int> { 1 }, new List<string>
             {
                 Color.SPEAK, "", "You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.", "",
             },
-            houseOptionList, houseOptionButton);
-        else
-            UI.Choice(new List<int> { 1, 1 }, new List<string>
-            {
-                Color.SPEAK, "","You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.","",
-                Color.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","","Now you just have to figure out how it works"
-            },
-            houseOptionList, houseOptionButton);
+            houseOptionList, houseOptionButton);           
         Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();        
         if (choice == "0") Utilities.ToTown();

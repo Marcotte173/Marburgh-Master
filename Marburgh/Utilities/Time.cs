@@ -26,6 +26,10 @@ public class Time
     public static void DayChange(int amount)
     {
         day += amount;
+        foreach (Shell s in Dungeon.dungeon1a.layout) if(s!=null)if (s.room.resetable) s.room.visited = false;
+        foreach (Shell s in Dungeon.dungeon1b.layout) if (s != null) if (s.room.resetable) s.room.visited = false;
+        foreach (Shell s in Dungeon.MansionEast.layout) if (s != null) if (s.room.resetable) s.room.visited = false;
+        foreach (Shell s in Dungeon.MansionWest.layout) if (s != null) if (s.room.resetable) s.room.visited = false;
         Create.p.Refresh();
         Bank.bankRate = Bank.RateCalculate();
         if (Bank.term == 0 && Bank.investment > 0) Bank.InvestPay();

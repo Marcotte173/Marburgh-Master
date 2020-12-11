@@ -9,6 +9,7 @@ public class Kitchen : Room
     public Kitchen()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the kitchen" };
         name = $"Kitchen";

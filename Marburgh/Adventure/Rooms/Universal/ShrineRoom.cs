@@ -8,6 +8,7 @@ public class ShrineRoom : Room
     public ShrineRoom()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You find a shrine!" };
         name = $"Shrine";

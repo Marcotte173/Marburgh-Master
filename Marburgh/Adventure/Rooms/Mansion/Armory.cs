@@ -9,6 +9,7 @@ public class Armory : Room
     public Armory()
     : base()
     {
+        resetable = false;
         flavorColourArray = new List<int> { 0 };
         flavor = new List<string> { "You have found the Armory" };
         name = $"Armory";
