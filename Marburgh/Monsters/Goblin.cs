@@ -20,15 +20,15 @@ public class Goblin : Monster
     {
         if (target.PersonalShield)
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "goblin" + Color.RESET + $" tries to " + Color.DAMAGE + "rake" + Color.RESET + " you but cannot break through your " + Color.SHIELD + "shield");
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $" tries to " + Color.DAMAGE + "rake" + Color.RESET + " you but cannot break through your " + Color.SHIELD + "shield");
             target.Energy = (target.Energy - damage / 2 <= 0) ? 0 : target.Energy - damage / 2;
             if (target.Energy == 0) target.Attack2(null);
         }
         else if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "goblin" + Color.RESET + $" rakes you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET);
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $" rakes you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage, causing " + Color.BLOOD + "bleeding" + Color.RESET);
             target.Bleed = 2;
-            target.BleedDam = 6;
+            target.BleedDam = 3;
             target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }
         else Miss(target);

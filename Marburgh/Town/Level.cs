@@ -18,7 +18,16 @@ public class Level
                     Color.SPEAK, "",  "'Are you here to level up?'", ""
                 }))
             {
-                if (Create.p.XP < Create.p.XPNeeded[Create.p.Level])
+                if(Create.p.Level == 5)
+                {
+                    UI.Keypress(new List<int> { 1 }, new List<string>
+                        {
+                        
+                        Color.XP, "You are currently at"," MAX ","level",
+                        });
+                    Utilities.ToTown();
+                }
+                else if (Create.p.XP < Create.p.XPNeeded[Create.p.Level])
                 {
                     UI.Keypress(new List<int> { 0, 1, 1 }, new List<string>
                         {
@@ -45,73 +54,78 @@ public class Level
     private static void LevelUp(Player p)
     {
         Console.Clear();
-        p.MaxEnergy += p.LvlEnergy[p.Level];
-        p.MaxHealth += p.LvlHealth[p.Level];
-        p.Health = p.MaxHealth;
-        p.Energy = p.MaxEnergy;
-        p.PlayerDamage += p.LvlDamage[p.Level];
-        p.PlayerMitigation += p.LvlMitigation[p.Level];
-        p.PlayerHit += p.LvlHit[p.Level];
-        p.PlayerCrit += p.LvlCrit[p.Level];
-        p.PlayerDefence += p.LvlDefence[p.Level];
         p.XP -= p.XPNeeded[p.Level];
-        p.Level += 1;             
-        if (p.PlayerSpellpower > 0)
+        p.Level ++;
+        UI.Keypress(new List<int> {1,0,2,0,2,0,2,0,2 }, new List<string>
         {
-            p.PlayerSpellpower += p.LvlSpellpower[p.Level];
-            UI.Keypress(new List<int> { 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 0, 1 }, new List<string>
-            {
-                Color.XP, "Congrats! You are level ", $"{p.Level}", "!",
-                "",
-                Color.HEALTH, "Max health increased by ", $"{p.LvlHealth[p.Level-1]}", "!",
-                Color.ENERGY, "Max energy increased by ", $"{p.LvlEnergy[p.Level-1]}", "!",
-                "",
-                Color.DAMAGE, "Damage increased by ", $"{p.LvlDamage[p.Level-1]}", "!",
-                Color.HIT, "Hit increased by ", $"{p.LvlHit[p.Level-1]}", "!",
-                Color.CRIT, "Crit increased by ", $"{p.LvlCrit[p.Level-1]}", "!",
-                "",
-                Color.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation[p.Level-1]}", "!",
-                Color.DEFENCE, "Defence increased by ", $"{p.LvlDefence[p.Level-1]}", "!",
-                "",
-                Color.ABILITY, "Spellpower increased by ", $"{p.LvlSpellpower[p.Level-1]}", "!"
-            });            
-        }
-        else
-        {
-            UI.Keypress(new List<int> { 1, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1 }, new List<string>
-                {
-                    Color.XP, "Congrats! You are level ", $"{p.Level}", "!",
-                    "",
-                    Color.HEALTH, "Max health increased by ", $"{p.LvlHealth[p.Level-1]}", "!",
-                    Color.ENERGY, "Max energy increased by ", $"{p.LvlEnergy[p.Level-1]}", "!",
-                    "",
-                    Color.DAMAGE, "Damage increased by ", $"{p.LvlDamage[p.Level-1]}", "!",
-                    Color.HIT, "Hit increased by ", $"{p.LvlHit[p.Level-1]}", "!",
-                    Color.CRIT, "Crit increased by ", $"{p.LvlCrit[p.Level-1]}", "!",
-                    "",
-                    Color.MITIGATION, "Mitigation increased by ", $"{p.LvlMitigation[p.Level-1]}", "!",
-                    Color.DEFENCE, "Defence increased by ", $"{p.LvlDefence[p.Level-1]}", "!"
-                });
-        }
+            Color.XP, "Congrats! You are level ", $"{p.Level}", "!",
+            "",
+            Color.DAMAGE,Color.DAMAGE,"Your ","Strength"," is increased by ", $"{p.StrengthLvl[p.Level]}","",
+            "",
+            Color.HIT, Color.HIT,"Your ","Agility"," is increased by ", $"{p.AgilityLvl[p.Level]}","",
+            "",
+            Color.HEALTH,Color.HEALTH,"Your ","Stamina"," is increased by ", $"{p.StaminaLvl[p.Level]}","",
+            "",
+            Color.ENERGY,Color.ENERGY,"Your ","Intelligence"," is increased by ", $"{p.IntelligenceLvl[p.Level]}",""
+        }) ;
+        p.Strength += p.StrengthLvl[p.Level];
+        p.Agility += p.AgilityLvl[p.Level];
+        p.Stamina += p.StaminaLvl[p.Level];
+        p.Intelilgence += p.IntelligenceLvl[p.Level];
+        p.Update();
         if (p.Level == 2)
         {
-            p.CanAttack3 = true;
-            CombatUI.option.Add(Color.ABILITY + p.Option3 + Color.RESET);
-            CombatUI.button.Add("3");
-            UI.Keypress(new List<int> { 1}, new List<string>
+            if (p.pClass == PlayerClass.Mage)
+            {
+                Button.fireBlastButton.active = true;
+                UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Color.ABILITY, "You have learned ", $"{p.Option3}", "!",
+                    Color.BURNING, "You have learned ", "Fireblast", "!",
                 });
+            }
+            else if (p.pClass == PlayerClass.Rogue)
+            {
+                Button.stunButton.active = true;
+                UI.Keypress(new List<int> { 1 }, new List<string>
+                {
+                    Color.STUNNED, "You have learned ", "Stun", "!",
+                });
+            }
+            else if (p.pClass == PlayerClass.Warrior)
+            {
+                Button.rendButton.active = true;
+                UI.Keypress(new List<int> { 1 }, new List<string>
+                {
+                    Color.BLOOD, "You have learned ", "Rend", "!",
+                });
+            }
         }
         if (p.Level == 4)
         {
-            p.CanAttack4 = true;
-            CombatUI.option.Add(Color.ABILITY + p.Option4 + Color.RESET);
-            CombatUI.button.Add("4");
-            UI.Keypress(new List<int> { 1 }, new List<string>
+            if (p.pClass == PlayerClass.Mage)
+            {
+                Button.fireBlastButton.active = true;
+                UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Color.ABILITY, "You have learned ", $"{p.Option4}", "!",
+                    Color.ENERGY, "You have learned ", "Magic Missile", "!",
                 });
+            }
+            else if (p.pClass == PlayerClass.Rogue)
+            {
+                Button.stunButton.active = true;
+                UI.Keypress(new List<int> { 1 }, new List<string>
+                {
+                    Color.DAMAGE, "You have learned ", "Backstab", "!",
+                });
+            }
+            else if (p.pClass == PlayerClass.Warrior)
+            {
+                Button.rendButton.active = true;
+                UI.Keypress(new List<int> { 1 }, new List<string>
+                {
+                    Color.BLOOD, "You have learned ", "Cleave", "!",
+                });
+            }
         }
         Utilities.ToTown();
     }

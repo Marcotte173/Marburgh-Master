@@ -11,33 +11,94 @@ public class Dungeon
     public int howManyMonstersPerRoom;
     public int rewardMod;
 
+    //Goblin
     public static Monster goblin1 = new Goblin(4, 2, 3, 1);
+    public static Monster goblin2 = new Goblin(4, 2, 3, 1);
+    //Slime
     public static Monster slime1 = new Slime(4, 2, 4, 1);
     public static Monster slime2 = new Slime(5, 2, 6, 2);
+    //Kobald
     public static Monster kobald1 = new Kobold(4, 3, 3, 1);
+    public static Monster kobald2 = new Kobold(4, 3, 3, 1);
+    //Orc
     public static Monster orc1 = new Orc(4, 3, 4, 1);
     public static Monster orc2 = new Orc(5, 4, 5, 2);
+    //Rat
     public static Monster rat2 = new Rat(3, 3, 4, 2);
+    //SavageOrc
     public static Monster savageOrc = new SavageOrc(5, 4, 5, 3);
-    
+    //Necromancer
     public static Monster necromancerApprentice = new Necromancer(7, 7, 8, 4);
     public static Monster necromancer1 = new Necromancer(10, 10, 13, 5);
     public static Monster necromancer2 = new Necromancer(15, 15, 20, 6);
-
+    //Skeleton
     public static Monster skeleton2 = new Skeleton(3, 3, 3, 2);
+    //Zombie
     public static Monster zombie3 = new Zombie(3, 3, 3, 3);
+    //Ghoul
     public static Monster ghoul3 = new Ghoul(6, 5, 5, 3);
 
 
-    public static List<Monster> dungeonSummon1 = new List<Monster> { goblin1, slime1, kobald1 };
+    public static List<Monster> dungeonSummon1a = new List<Monster> { goblin1, slime1, kobald1 };
+    public static List<Monster> dungeonSummon1b = new List<Monster> { goblin1, slime1, kobald1 };
     public static List<Monster> dungeonSummon2 = new List<Monster> { orc2, rat2, slime2, skeleton2 };
+    public static List<Monster> forestSummon = new List<Monster> { goblin1, goblin2, slime1, slime2, kobald1, kobald2, orc1, orc2, rat2, skeleton2, zombie3, ghoul3 };
 
     
 
 
     public static void Summon(Monster monster)
     {
-        Create.p.combatMonsters.Add(monster.MonsterCopy());
+        bool haveA = false;
+        bool haveB = false;
+        bool haveC = false;
+        bool haveD = false;
+        bool haveE = false;
+        bool haveF = false;
+        if (Create.p.combatMonsters.Count == 0)
+        {
+            Monster m = monster;
+            m.Name = m.Name + " A";
+            Create.p.combatMonsters.Add(m.MonsterCopy());
+        }
+        else
+        {
+            if (Combat.outOfFight.Count > 0)
+            {
+                foreach (Monster mon in Combat.outOfFight)
+                {
+                    if (mon.Name == monster.Name + " A") haveA = true;
+                    if (mon.Name == monster.Name + " B") haveB = true;
+                    if (mon.Name == monster.Name + " C") haveC = true;
+                    if (mon.Name == monster.Name + " D") haveD = true;
+                    if (mon.Name == monster.Name + " E") haveE = true;
+                    if (mon.Name == monster.Name + " F") haveF = true;
+                }
+            }
+            foreach (Monster mon in Create.p.combatMonsters)
+            {
+                if (mon.Name == monster.Name + " A") haveA = true;
+                if (mon.Name == monster.Name + " B") haveB = true;
+                if (mon.Name == monster.Name + " C") haveC = true;
+                if (mon.Name == monster.Name + " D") haveD = true;
+                if (mon.Name == monster.Name + " E") haveE = true;
+                if (mon.Name == monster.Name + " F") haveF = true;
+            }
+            Monster m = monster.MonsterCopy();
+            if (!haveA) m.Name = m.Name + " A";
+            else if (!haveB) m.Name = m.Name + " B";
+            else if (!haveC) m.Name = m.Name + " C";
+            else if (!haveD) m.Name = m.Name + " D";
+            else if (!haveE) m.Name = m.Name + " E";
+            else if (!haveF) m.Name = m.Name + " F";
+            Create.p.combatMonsters.Add(m.MonsterCopy());
+        }
+    }
+    public static void Summon(Monster monster, string name)
+    {
+        Monster m = monster.MonsterCopy();
+        m.Name = name;
+        Create.p.combatMonsters.Add(m);
     }
 
     /// <summary>
@@ -59,7 +120,7 @@ public class Dungeon
             new Shell(0, 0, 0, 7 ,false, new VillagersRoom()),                                           //8
             new Shell(0, 7, 10, 0 ,false, new GuardRoom(goblin1)),            //9
             new Shell(0, 0, 5, 9 ,false, new DungeonTutorial_A_BossRoom())                                         //10
-        }, dungeonSummon1, 1,1);
+        }, dungeonSummon1a, 1,1);
 
     public static Dungeon dungeon1b = new Dungeon(
         new List<Shell>
@@ -80,7 +141,7 @@ public class Dungeon
 
             new Shell(0, 12, 10, 0  ,false, new Room(RoomType.Passage)),            //11
             new Shell(11, 0, 0,  0  ,false, new DungeonTutorial_B_BossRoom())                                         //12
-        }, dungeonSummon1, 2, 1);
+        }, dungeonSummon1b, 2, 1);
     ////////////////////////////////////
 
     /// <summary>

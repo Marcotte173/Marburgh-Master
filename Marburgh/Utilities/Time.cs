@@ -31,6 +31,7 @@ public class Time
         foreach (Shell s in Dungeon.MansionEast.layout) if (s != null) if (s.room.resetable) s.room.visited = false;
         foreach (Shell s in Dungeon.MansionWest.layout) if (s != null) if (s.room.resetable) s.room.visited = false;
         Create.p.Refresh();
+        GameState.NewDay();
         Bank.bankRate = Bank.RateCalculate();
         if (Bank.term == 0 && Bank.investment > 0) Bank.InvestPay();
         else if(Bank.term > 0)

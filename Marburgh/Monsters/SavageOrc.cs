@@ -22,13 +22,13 @@ public class SavageOrc : Monster
     {
         if (target.PersonalShield)
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "orc" + Color.RESET + $" charges at you but it cannot break through your " + Color.SHIELD + "shield");
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $" charges at you but it cannot break through your " + Color.SHIELD + "shield");
             target.Energy = (target.Energy - damage / 2 <= 0) ? 0 : target.Energy - damage / 2;
             if (target.Energy == 0) target.Attack2(null);
         }
         else if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "orc " + Color.RESET + $"charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $"charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
             target.Stun = level;
             target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }

@@ -23,32 +23,22 @@ public class DungeonTutorial_B_BossRoom : Room
             "",
             "There's no turning back now!",
         });
-        Dungeon.Summon(Dungeon.savageOrc);
+        Dungeon.Summon(Dungeon.savageOrc, "The Savage Orc");
         Combat.Menu();
 
-        //Delete when ready to push
-        UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
+        UI.Keypress(new List<int> { 1, 0, 0, 0, 2 }, new List<string>
         {
-            Color.BOSS,"You have beaten the ","Savage Orc"," and for now, the game",
+            Color.BOSS,"The ","Savage Orc"," looks shocked as the life leaves his eyes",
             "",
-            Color.HEALTH,"","Check back soon","! As you read this I'm hard at work adding more dungeons, monsters and Items.",
-
+            "You have defeated your foes, saving your town forever!",
+            "",
+            Color.XP,Color.TIME,"Exhausted, you return to you ","house"," and sleep for 3 ","days",""
         });
-        Environment.Exit(0);
-
-
-
-        //UI.Keypress(new List<int> { 1, 0, 0, 0, 2 }, new List<string>
-        //{
-        //    Color.BOSS,"The ","Savage Orc"," looks shocked as the life leaves his eyes",
-        //    "",
-        //    "You have defeated your foes, saving your town forever!",
-        //    "",
-        //    Color.XP,Color.TIME,"Exhausted, you return to you ","house"," and sleep for 3 ","days",""
-        //});
-        //Time.Events[0].active = false;
-        //visited = true;
-        //GameState.CanMakeBossWeapon();
-        //Town.FakeMenu();        
+        Time.Events[0].active = false;
+        visited = true;
+        GameState.Phase2A();
+        House.Sleep();
+        Time.DayChange(2);
+        House.Menu();
     }
 }

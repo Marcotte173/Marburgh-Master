@@ -2,8 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 
+public enum PlayerClass {Warrior,Rogue,Mage }
+
 public class Player : Creature
 {
+    public bool nonLethal;
+    public PlayerClass pClass;
     protected bool alive;
     public List<Drop> combatDropList = new List<Drop> { };
     public List<Monster> combatMonsters = new List<Monster> { };
@@ -11,17 +15,12 @@ public class Player : Creature
     protected Equipment mainHand;
     protected Equipment offHand;
     protected Equipment armor;
-    protected string pClass;
     protected int tempDefence;
     protected int tempMit;
-    protected int[] lvlSpellpower;
-    protected int[] lvlHealth;
-    protected int[] lvlDamage;
-    protected int[] lvlEnergy;
-    protected int[] lvlMitigation;
-    protected int[] lvlHit;
-    protected int[] lvlCrit;
-    protected int[] lvlPlayerDefence;
+    protected int[] strengthLvl;
+    protected int[] agilityLvl;
+    protected int[] staminaLvl;
+    protected int[] intelligenceLvl;
     protected int reputation;
     protected int playerSpellpower;
     protected int playerDefence;
@@ -29,12 +28,33 @@ public class Player : Creature
     protected int playerMitigation;
     protected int playerHit;
     protected int playerCrit;
-    protected bool canExplore;
-    protected string option3;
-    protected string option4;
+    protected bool dungeonExplore;
+    public bool forestExplore;
+    public bool forestCamp;
     protected int run;
     protected List<Drop> drops = new List<Drop> { };
     public static List<string> text = Combat.combatText;
+    public int tempStrength;
+    public int tempAgility;
+    public int tempStamina;
+    public int tempIntelligence;
+    public int drinks = 0;
+    public string[] drinkText = new string[] {null,"nice and warm","a little fuzzy","quite silly","sick","VERY SICK" };
+
+    public void ItemCheck()
+    {
+        bool potion = false;
+        foreach (Drop d in Create.p.Drops) 
+        {
+            if (d.rare == 2)
+            {
+                potion = true;
+                break;
+            }
+        }
+        if (potion) Button.potionButton.active = true;
+        else Button.potionButton.active = false;
+    }
 
     internal void AttackChoice()
     {        
@@ -76,10 +96,12 @@ public class Player : Creature
             Write.Position(0, 6);
             if (choice == "1") Attack1(GetTarget());
             else if (choice == "2") Attack2(null);
-            else if (choice == "3" && CanAttack3) Attack3(GetTarget());
-            else if (choice == "4" && CanAttack4) Attack4(GetTarget());
-            else if (choice == "5" && CanAttack5) Attack5(GetTarget());
-            else if (choice == "6" && HaveItems) Items();
+            else if (choice == "3" && (Button.fireBlastButton.active|| Button.rendButton.active || Button.backstabButton.active)) Attack3(GetTarget());
+            else if (choice == "4" && (Button.stunButton.active)) Attack4(GetTarget());
+            else if (choice == "4" && (Button.cleaveButton.active)) Attack4(GetTarget());
+            else if (choice == "4" && (Button.magicMissileButton.active)) Attack4(null);
+            //else if (choice == "5" && CanAttack5) Attack5(GetTarget());
+            else if (choice == "6" && Button.potionButton.active) Items();
             else if (choice == "h")
             {
                 DrinkPotion();
@@ -92,15 +114,29 @@ public class Player : Creature
             }
             else if (choice == "0")
             {
-                if (Return.RandomInt(1, 101) <= run)
+                if (nonLethal)
                 {
-                    Console.Clear();
-                    UI.Keypress(new List<int> { 0 }, new List<string> { "You succesfully run away... Coward" });
-                    combatMonsters.Clear();
-                    Explore.currentRoom = Explore.dungeon.layout[1];
-                    Explore.Menu();
+                    text.Add("You can't run away from combat in the "+Color.MONSTER+ "Arena");
                 }
-                else text.Add("You try to get away but can't!");
+                else
+                {
+                    if (Return.RandomInt(1, 101) <= run)
+                    {
+                        Console.Clear();
+                        UI.Keypress(new List<int> { 0 }, new List<string> { "You succesfully run away... Coward" });
+                        combatMonsters.Clear();
+                        if(GameState.location == Location.Forest)
+                        {
+                            Town.Menu();
+                        }
+                        else
+                        {
+                            Explore.currentRoom = Explore.dungeon.layout[1];
+                            Explore.Menu();
+                        }                        
+                    }
+                    else text.Add("You try to get away but can't!");
+                }                
             }
             else AttackChoice();
         }
@@ -112,11 +148,7 @@ public class Player : Creature
 
     Creature GetTarget()
     {
-        Monster target = null;
-        while (target == null)
-        {
-            target = CombatUI.Target();
-        }
+        Monster target = CombatUI.Target();
         Write.Position(0, 6);
         return target;
     }
@@ -129,14 +161,16 @@ public class Player : Creature
         alive = true;
         xpNeeded = new int[] { 0, 45, 100, 150, 250, 450, 800 };
         Energy = MaxEnergy = 1;
-        gold = 200;
+        gold = 0;
         potionSize = maxPotionSize = 15;
         playerMitigation = 1;
         level = 1;
         playerDamage = damage;
         playerHit = hit;
         playerCrit = crit;
-        canExplore = true;
+        dungeonExplore = true;
+        forestExplore = true;
+        forestCamp = true;
         canAct = true;
         xp = 0;
         attack3 = false;
@@ -149,33 +183,85 @@ public class Player : Creature
 
     internal void Equip(Equipment e)
     {
-        UI.Keypress(new List<int> { 1 }, new List<string>
-            {
-                Color.ITEM, "You equip the ",e.Name,""
-            });
-        armor = e.Copy();
-    }
-    internal void Equip(Equipment e, Equipment hand)
-    {
-        if (e.TwoHand)
+        if(e.Type == EquipmentType.Armor)
         {
-            UI.Keypress(new List<int> { 1 }, new List<string>
-            {
-                Color.ITEM, "You equip the ",e.Name,""
-            });
+            Shop.itemToSell = armor;
+            Shop.itemToSell2 = null;
+            UnequipBody(armor);
+            armor = e.Copy();            
+        }   
+        else if (e.Type == EquipmentType.Shield)
+        {
+            Shop.itemToSell = offHand;
+            Shop.itemToSell2 = null;
+            UnequipBody(offHand);
+            offHand = e.Copy();            
+        }
+        else if (e.Type == EquipmentType.TwoHand)
+        {
+            Shop.itemToSell = mainHand;
+            Shop.itemToSell2 = offHand;
+            UnequipBody(mainHand);
+            UnequipBody(offHand);
             mainHand = e.Copy();
-            offHand = Sword.twoHanded.Copy();
-            offHand.Name = e.Name;
+            offHand = Sword.twoHanded;            
         }
         else
         {
-            UI.Keypress(new List<int> { 1 }, new List<string>
+            if(UI.Hand(e) == mainHand)
             {
-                Color.ITEM, "You equip the ",e.Name,""
-            });
-            if (hand == MainHand) MainHand = e.Copy();
-            else if (hand == OffHand) OffHand = e.Copy();
+                if(mainHand.Type == EquipmentType.TwoHand)
+                {
+                    Shop.itemToSell = mainHand;
+                    Shop.itemToSell2 = null;
+                    UnequipBody(mainHand);
+                    UnequipBody(offHand);
+                    mainHand = e.Copy();
+                    
+                }
+                else
+                {
+                    Shop.itemToSell = mainHand;
+                    Shop.itemToSell2 = null;
+                    UnequipBody(mainHand);
+                    mainHand = e.Copy();                    
+                }
+            }
+            else
+            {
+                if (mainHand.Type == EquipmentType.TwoHand)
+                {
+                    Shop.itemToSell = mainHand;
+                    Shop.itemToSell2 = null;
+                    UnequipBody(mainHand);
+                    UnequipBody(offHand);
+                    offHand = e.Copy();                    
+                }
+                else
+                {
+                    Shop.itemToSell = offHand;
+                    Shop.itemToSell2 = null;
+                    UnequipBody(offHand);
+                    offHand = e.Copy();                    
+                }
+            }
         }
+        UI.Keypress(new List<int> { 1 }, new List<string>
+        {
+            Color.ITEM, "You equip the ",e.Name,""
+        });
+    }
+    internal void UnequipItem(Equipment item)
+    {
+        if(item.Name == mainHand.Name) mainHand = Equipment.bluntList[0];
+        else if (item.Name == offHand.Name) offHand = Equipment.bluntList[0];
+        else if (item.Name == armor.Name) armor = global::Equipment.armorList[0];
+    }
+    internal void UnequipBody(Equipment body)
+    {
+        if (body == mainHand) mainHand = Equipment.bluntList[0];
+        else if (body == offHand) offHand = Equipment.bluntList[0];
+        else if (body == armor) armor = global::Equipment.armorList[0];
     }
     public virtual void TakeDamage(int damage, Monster hitMe)
     {
@@ -190,7 +276,8 @@ public class Player : Creature
             {
                 Write.Line(0, n + i, Combat.combatText[i]);
             }
-            Console.WriteLine("\n\nYou have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!");
+            if (nonLethal) Console.WriteLine("\n\nYou have been " + Color.BOSS + "defeated" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!");
+            else Console.WriteLine("\n\nYou have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!");
             Utilities.Keypress(40, 22);
             Death(hitMe);
         }
@@ -230,36 +317,51 @@ public class Player : Creature
 
     public void Death(Monster hitMe)
     {
-        alive = false;
-        CombatUI.button = CombatUI.buttonBasic;
-        CombatUI.option = CombatUI.optionBasic;
-        Family.dead.Add(Family.alive[0]);
-        Family.cause.Add(hitMe.Name);
-        Family.timeOfDeath[0, 0] = Time.day;
-        Family.timeOfDeath[0, 1] = Time.week;
-        Family.timeOfDeath[0, 2] = Time.month;
-        Family.timeOfDeath[0, 3] = Time.year;
-        if (Family.dead.Count == 3)
+        if (nonLethal)
         {
-            UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
+            UI.Keypress(new List<int> { 1, 0, 0,0,2}, new List<string>
             {
-                Color.NAME, "You are the last of the ", Family.lastName+"","s",
+                Color.MONSTER, "Turns out ", CombatArena.currentGladiator.Name," is tougher than they look",
                 "",
-                "Your bloodline ends here"
-            });
-            Utilities.Quit();
+                "Who knew?",
+                "",
+                Color.XP,Color.HEALTH,"You're not sure who, but someone drags you to your ","house"," to sleep away the ","bruises",""
+            }) ;
+            nonLethal = false;
+            House.Sleep();
+            House.Menu();
         }
         else
         {
-            UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
+            alive = false;            
+            Family.dead.Add(Family.alive[0]);
+            Family.cause.Add(hitMe.Name);
+            Family.timeOfDeath[0, 0] = Time.day;
+            Family.timeOfDeath[0, 1] = Time.week;
+            Family.timeOfDeath[0, 2] = Time.month;
+            Family.timeOfDeath[0, 3] = Time.year;
+            if (Family.dead.Count == 3)
             {
-                 Color.BOSS ,"", "YOU DIED!","",
-                 "",
-                 "Hopefully one of your family members can carry on for you"
-            });
-            Time.DayChange(1);
-            Create.ChooseSibling();
-        }
+                UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
+                {
+                    Color.NAME, "You are the last of the ", Family.lastName+"","s",
+                    "",
+                    "Your bloodline ends here"
+                });
+                Utilities.Quit();
+            }
+            else
+            {
+                UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
+                {
+                     Color.BOSS ,"", "YOU DIED!","",
+                     "",
+                     "Hopefully one of your family members can carry on for you"
+                });
+                Time.DayChange(1);
+                Create.ChooseSibling();
+            }
+        }        
     }
 
     internal void DrinkPotion()
@@ -284,25 +386,40 @@ public class Player : Creature
 
     public virtual void Refresh()
     {
+        drinks = 0;
         health = MaxHealth;
         energy = MaxEnergy;
         potionSize = maxPotionSize;
-        canExplore = true;
+        dungeonExplore = true;
+        forestExplore = true;
+        forestCamp = true;
+        tempStrength = 0;
+        tempAgility = 0;
+        tempStamina = 0;
+        tempIntelligence = 0;
     }
     public virtual void Attack1(Creature target)
     {
-        if (AttemptToHit(target, 0) == false) Miss(target);
+        if (target != null)
+        {
+            if (AttemptToHit(target, 0) == false) Miss(target);
+            else
+            {
+                text.Add($"You attack " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(Damage, target.Mitigation) + Color.RESET + " damage");
+                target.TakeDamage(Return.MitigatedDamage(Damage, target.Mitigation));
+            }
+        }
         else
         {
-            text.Add($"You attack the " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(Damage, target.Mitigation) + Color.RESET + " damage");
-            target.TakeDamage(Return.MitigatedDamage(Damage, target.Mitigation));
+            Combat.DisplayCombatText();
+            AttackChoice();
         }
     }
     public virtual void Attack2(Creature target)
     {
-        tempMit = level;
-        tempDefence = 15;
-        text.Add("You focus on protecting yourself, increasing your defence and mitigation");
+        tempMit = level*2+1;
+        tempDefence = 25;
+        text.Add("You focus on protecting yourself, increasing your " + Color.DEFENCE + "defence" + Color.RESET + " and" + Color.MITIGATION + " mitigation");
     }
     public virtual void Attack3(Creature target)
     {
@@ -353,13 +470,13 @@ public class Player : Creature
             Creature target = GetTarget();
             if (target.Undead)
             {
-                text.Add($"The {Color.POTION + chosenItem.name + Color.RESET} splashes harmlessly at the feet of the {Color.MONSTER+ target.Name+ Color.RESET}");
+                text.Add($"The {Color.POTION + chosenItem.name + Color.RESET} splashes harmlessly at the feet of "+Color.MONSTER + target.Name + Color.RESET );
                 if(target.Type == "Necromancer") text.Add(Color.SPEAK+"'You fool! I control Death!'");
                 else text.Add($"You can't kill something that is already dead!");
             }
             else
             {
-                text.Add($"You throw the potion at the " + Color.MONSTER + target.Name + Color.RESET + ".");
+                text.Add($"You throw the potion at "+Color.MONSTER + target.Name + Color.RESET );
                 text.Add($"It doesn't even have time to react as it's life force is instantly snuffed out");
                 target.TakeDamage(100000);
             }            
@@ -382,47 +499,35 @@ public class Player : Creature
     }
 
     public int Reputation { get { return reputation; } set { reputation = value; } }
-    public string Rep => (reputation == 0)?"Kill on sight":(reputation <=10)?"Hated":(reputation <=20)?"Loathed":(reputation<=40)?"Disliked":(Reputation <=60)?"Neutral":(reputation <=80)?"Liked":(reputation <=90)?"Loved":"Exalted"; 
-    public int[] LvlCrit { get { return lvlCrit; } set { lvlCrit = value; } }
+    public string Rep => (reputation <=20)? "Hated" : (reputation<=40)?"Disliked":(Reputation <=60)?"Neutral":(reputation <=80)?"Liked":"Loved"; 
     public bool Alive { get { return alive; } set { alive = value; } }
-    public string Option3 { get { return option3; } set { option3 = value; } }
-    public string Option4 { get { return option4; } set { option4 = value; } }
-    public int[] LvlSpellpower { get { return lvlSpellpower; } set { lvlSpellpower = value; } }
-    public int[] LvlDamage { get { return lvlDamage; } set { lvlDamage = value; } }
-    public bool CanExplore { get { return canExplore; } set { canExplore = value; } }
-    public bool HaveItems
-    {
-        get
-        {
-            foreach (Drop d in Create.p.Drops) if (d.rare == 2)
-            {
-                return true;
-            }
-            return false;
-        }
-    }
-    public int[] LvlDefence { get { return lvlPlayerDefence; } set { lvlPlayerDefence = value; } }
-    public int[] LvlEnergy { get { return lvlEnergy; } set { lvlEnergy = value; } }
-    public int[] LvlHealth { get { return lvlHealth; } set { lvlHealth = value; } }
-    public int[] LvlHit { get { return lvlHit; } set { lvlHit = value; } }
-    public int[] LvlMitigation { get { return lvlMitigation; } set { lvlMitigation = value; } }
+    public bool CanExplore { get { return dungeonExplore; } set { dungeonExplore = value; } }    
+    public int[] StrengthLvl { get { return strengthLvl; } set { strengthLvl = value; } }
+    public int[] AgilityLvl { get { return agilityLvl; } set { agilityLvl = value; } }
+    public int[] StaminaLvl { get { return staminaLvl; } set { staminaLvl = value; } }
+    public int[] IntelligenceLvl { get { return intelligenceLvl; } set { intelligenceLvl = value; } }
     public List<Drop> Drops { get { return drops; } set { drops = value; } }
-    public Equipment Armour { get { return armor; } set { armor = value; } }
+    public Equipment Armor { get { return armor; } set { armor = value; } }
     public Equipment MainHand { get { return mainHand; } set { mainHand = value; } }
     public Equipment OffHand { get { return offHand; } set { offHand = value; } }
-    public string PClass { get { return pClass; } set { pClass = value; } }
-    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage / 3 + Armour.Damage; } }
-    public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armour.Hit; } }
-    public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armour.Crit; } }
+    public PlayerClass PClass { get { return pClass; } set { pClass = value; } }
+    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage *2/ 3 + Armor.Damage; } }
+    public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } }
+    public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; } }
     public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }
     public int PlayerDamage { get { return playerDamage; } set { playerDamage = value; } }
     public int PlayerMitigation { get { return playerMitigation; } set { playerMitigation = value; } }
     public int PlayerHit { get { return playerHit; } set { playerHit = value; } }
     public int PlayerCrit { get { return playerCrit; } set { playerCrit = value; } }
     public int PlayerSpellpower { get { return playerSpellpower; } set { playerSpellpower = value; } }
-    public override int Defence { get { return playerDefence + Armour.Defence + MainHand.Defence + OffHand.Defence + tempDefence; } }
-    public override int Mitigation { get { return playerMitigation + Armour.Mitigation + MainHand.Mitigation + OffHand.Mitigation + tempMit; } set { mitigation = value; } }
-    public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armour.SpellPower; } }
+    public int TotalStrength { get { return strength + tempStrength; } }
+    public int TotalStamina { get { return stamina + tempStamina; } }
+    public int TotalAgility { get { return agility + tempAgility; } }
+    public int TotalIntelligence { get { return intelligence + tempIntelligence; } }
+
+    public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence + tempDefence; } }
+    public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation + tempMit; } set { mitigation = value; } }
+    public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } }
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }
 }

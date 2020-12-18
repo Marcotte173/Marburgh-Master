@@ -26,7 +26,7 @@ public class Room
         flavorColourArray = new List<int> { 0 };
         name = (roomType == RoomType.Passage) ? "Passage" : (roomType == RoomType.Hallway) ? "Hallway" : (roomType == RoomType.SmallRoom) ? "Room" : (roomType == RoomType.LargeRoom) ? "Room" : "Store Room";
         flavor = (roomType == RoomType.Passage) ? new List<string> { "You have found a passageway. While tight, you are pretty sure you can squeeze through it." } :
-               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } :  (roomType == RoomType.SmallRoom) ? new List<string> { "You have found a small, non descript room." } : (roomType == RoomType.LargeRoom) ? new List<string> { "You have found a large rrom. Anything could be inside" } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
+               (roomType == RoomType.Hallway) ? new List<string> { "You have found a hallway, leading futher into the dungeon." } :  (roomType == RoomType.SmallRoom) ? new List<string> { "You have found a small, non descript room." } : (roomType == RoomType.LargeRoom) ? new List<string> { "You have found a large room. Anything could be inside" } : new List<string> { "You have found a store room. You will have to search it to see if there is anything of value" };
     }
 
     public Room(RoomType roomType)
@@ -141,7 +141,7 @@ public class Room
                 potion = true;
             }
         }        
-        foundString = (found == 0)?"Nothing": (found == 1) ? $"{stuffFound[0]}": (found == 1) ? $"{stuffFound[0]} and {stuffFound[1]}" : $"{stuffFound[0]}, {stuffFound[1]} and {stuffFound[2]}";
+        foundString = (found == 0)?"Nothing": (found == 1) ? $"{stuffFound[0]}": (found == 2) ? $"{stuffFound[0]} and {stuffFound[1]}" : $"{stuffFound[0]}, {stuffFound[1]} and {stuffFound[2]}";
         if (gold)
         {
             int goldFind = Return.RandomInt(3, 10) + Return.RandomInt(0, 12) * global::Explore.dungeon.rewardMod;

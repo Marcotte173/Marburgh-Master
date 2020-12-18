@@ -7,6 +7,7 @@ public class CharacterSheet
      internal static void Display()
     {
         Console.Clear();
+        Create.p.ItemCheck();
         Console.SetCursorPosition(0, 15);
         Console.WriteLine("+----------------------------+-----------------------------+-----------------------------+-----------------------------+");
         Console.WriteLine("|                            |                             |                             |                             |");
@@ -20,10 +21,10 @@ public class CharacterSheet
         Console.WriteLine("|                                    |                     |                             |                             |");
         Console.WriteLine("|                                    |                     |                             |                             |");      
         UIComponent.BarBlank();
-        Write.Line(41,21,Color.DAMAGE + "Strength: "+Color.RESET+ Create.p.Strength.ToString());
-        Write.Line(41,22,Color.HIT + "Agility: " +Color.RESET+ Create.p.Agility.ToString());
-        Write.Line(41,23,Color.HEALTH + "Stamina: " +Color.RESET+ Create.p.Stamina.ToString());
-        Write.Line(41,24,Color.ENERGY + "Intelligence: " + Color.RESET + Create.p.Intelilgence.ToString());
+        Write.Line(41,21,Color.DAMAGE + "Strength: "+Color.RESET+ Create.p.TotalStrength.ToString());
+        Write.Line(41,22,Color.HIT + "Agility: " +Color.RESET+ Create.p.TotalAgility.ToString());
+        Write.Line(41,23,Color.HEALTH + "Stamina: " +Color.RESET+ Create.p.TotalStamina.ToString());
+        Write.Line(41,24,Color.ENERGY + "Intelligence: " + Color.RESET + Create.p.TotalIntelligence.ToString());
         Console.SetCursorPosition(10 - Create.p.Name.Length / 2, 16);
         Write.Line(Color.NAME, "", "Name", $": {Create.p.Name}");
 
@@ -62,7 +63,7 @@ public class CharacterSheet
         Console.Write(Color.ITEM + "Off Hand" + Color.RESET + $": {Create.p.OffHand.Name}");
 
         Console.SetCursorPosition(2, 25);
-        Console.Write(Color.ITEM + "Armor" + Color.RESET + $": {Create.p.Armour.Name}");
+        Console.Write(Color.ITEM + "Armor" + Color.RESET + $": {Create.p.Armor.Name}");
 
         Console.SetCursorPosition(99, 19);
         Write.Line(Color.DAMAGE, "","Damage", $": {Create.p.Damage}");

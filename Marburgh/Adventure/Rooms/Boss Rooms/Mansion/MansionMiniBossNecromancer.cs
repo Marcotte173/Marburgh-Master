@@ -25,10 +25,9 @@ public class MansionMiniBossNecromancer : Room
             "",
             Color.MONSTER,Color.MONSTER,"The ", "Necromancer's apprentice ","snaps his fingers and two ","Zombies"," advance on you "
         });
-        Dungeon.Summon(Dungeon.necromancerApprentice);
+        Dungeon.Summon(Dungeon.necromancerApprentice, "The Necromancer's Apprentice");
         Dungeon.Summon(Dungeon.zombie3);
         Dungeon.Summon(Dungeon.zombie3);
-        Create.p.combatMonsters[0].Name = "Necromancer's Apprentice";
         Combat.Menu();
         UI.Keypress(new List<int> { 2, 0, 1, 0, 1,0,0 }, new List<string>
         {

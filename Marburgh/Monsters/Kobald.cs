@@ -20,13 +20,13 @@ public class Kobold : Monster
     {
         if (target.PersonalShield)
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + $" throws a " + Color.DAMAGE + "candle" + Color.RESET + " at you but it cannot break through your " + Color.SHIELD + "shield");
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $" throws a " + Color.DAMAGE + "candle" + Color.RESET + " at you but it cannot break through your " + Color.SHIELD + "shield");
             target.Energy = (target.Energy - damage / 2 <= 0) ? 0 : target.Energy - damage / 2;
             if (target.Energy == 0) target.Attack2(null);
         }
         else if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add($"The " + Color.MONSTER + "kobald" + Color.RESET + " throws a candle at you, causing " + Color.DAMAGE + "4" + Color.RESET + " damage, and " + Color.BURNING + "igniting " + Color.RESET + "you!");
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + " throws a candle at you, causing " + Color.DAMAGE + "4" + Color.RESET + " damage, and " + Color.BURNING + "igniting " + Color.RESET + "you!");
             if (target.Burning > 0) target.BurnDam += 2;
             else target.BurnDam = 4;
             target.Burning = 4;

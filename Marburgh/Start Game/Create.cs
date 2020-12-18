@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 public class Create
 {
-    internal static Warrior w = new Warrior(3, 3, 3, 2);
-    internal static Mage m = new Mage(3, 3, 2, 3);
+    internal static Warrior w = new Warrior(3, 2, 3, 2);
+    internal static Mage m = new Mage(3, 2, 2, 3);
     internal static Rogue r = new Rogue(3, 3, 3, 2);
     internal static Player p;
 
@@ -20,13 +20,13 @@ public class Create
         UIComponent.BarBlank();
         Write.Position(47, 22);
         Write.Line(Color.ENERGY, "Press any key to continue");
-        UIComponent.DisplayText(new List<int> { 1, 0, 3, 0, 0, 0, 0, 0, 1, 0, 1, 0, 0 }, new List<string>
+        UIComponent.DisplayText(new List<int> { 1,0,3,0,1,0,0,0,1,0,1,0,0}, new List<string>
             {
                Color.CLASS,"You come from a long line of ","adventurers","",
                "",
                Color.NAME, Color.CLASS, Color.MONSTER, "Your ","mother",", an ","adventurer ","herself, was murdered by ","Orcs",", as they ransacked your town",
                "",
-               "Many villagers died, and even more were captured. ",
+               Color.DAMAGE,"Many villagers ","died",", and even more were captured. ",
                "",
                "Until they are free, your town is but a shadow of its old self",
                "",
@@ -68,40 +68,46 @@ public class Create
         Write.Line(47, 22, "Please select a sibling");
         string choice = Return.Option();
         p = new Player(2, 2, 2, 2);
-        if (choice != "1" & choice != "2" && choice != "3") ChooseSibling();
-        else
+        if (choice == "1" && w.Alive)
         {
-            if (choice == "1" && w.Alive)
+            if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[0], ", correct?" })) ChooseSibling();
+            else
             {
-                if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[0], ", correct?" })) ChooseSibling();
-                else
-                {
-                    p = w;
-                    p.Name = Family.alive[0];
-                    Name(0);
-                }
-            }
-            else if (choice == "2" && r.Alive)
-            {
-                if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[1], ", correct?" })) ChooseSibling();
-                else
-                {
-                    p = r;
-                    p.Name = Family.alive[1];
-                    Name(1);
-                }
-            }
-            else if (choice == "3" && m.Alive)
-            {
-                if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[2], ", correct?" })) ChooseSibling();
-                else
-                {
-                    p = m;
-                    p.Name = Family.alive[2];
-                    Name(2);
-                }
+                p = w;
+                foreach (Button b in Button.listOfCombatOptions) b.active = false;
+                Button.attackButton.active = true;
+                Button.defendButton.active = true;
+                p.Name = Family.alive[0];
+                Name(0);
             }
         }
+        else if (choice == "2" && r.Alive)
+        {
+            if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[1], ", correct?" })) ChooseSibling();
+            else
+            {
+                p = r;
+                foreach (Button b in Button.listOfCombatOptions) b.active = false;
+                Button.attackButton.active = true;
+                Button.defendButton.active = true;
+                p.Name = Family.alive[1];
+                Name(1);
+            }
+        }
+        else if (choice == "3" && m.Alive)
+        {
+            if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[2], ", correct?" })) ChooseSibling();
+            else
+            {
+                p = m;
+                foreach (Button b in Button.listOfCombatOptions) b.active = false;
+                Button.attackButton.active = true;
+                Button.shieldButton.active = true;
+                p.Name = Family.alive[2];
+                Name(2);
+            }
+        }
+        else ChooseSibling();   
     }
 
     internal static void Name(int birthOrder)
@@ -110,17 +116,41 @@ public class Create
         string b = (birthOrder == 0) ? "You were by her side as she fell, and swore revenge." : (birthOrder == 1) ? "You have returned to Marburgh to pay your respects... and get revenge" : "You were never close, but you love Marburgh, and know that the Orcs mean the destruction of everything you known";
         string[] order = new string[] { "eldest", "middle", "youngest" };
         Console.Clear();
-        UI.KeypressNEW(new List<int> { 1, 1, 0, 0, 0, 0, 0 }, new List<string>
+        UI.KeypressNEW(new List<int> { 1,0,1,0,1,0,1,0,1 }, new List<string>
+        {
+            Color.NAME,  "Your name is ", p.Name ,"",
+            "",
+            Color.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
+            "",
+            Color.BOSS,"She was recently killed by an ","Orc", $". {b}.",
+            "",
+            Color.TIME,$"You are the ",order[birthOrder]," child.",
+            "",
+            Color.CLASS,"",a,""
+        });        
+        Console.Clear();
+        if (p.PClass == PlayerClass.Warrior) Help.Warrior();
+        else if (p.PClass == PlayerClass.Mage) Help.Mage();
+        else if (p.PClass == PlayerClass.Rogue) Help.Rogue();
+        Write.Line(94, 28, Color.TIME, "Press any key to continue");
+        Console.ReadKey(true);
+        if (Family.dead.Count >0)
+        {
+            int goldGet = (GameState.phase3) ? 1200 : (GameState.phase2b) ? 800 : (GameState.phase2b) ? 800 : (GameState.phase1b) ? 500 : (GameState.firstBossDead) ? 300 : 100;          
+            UI.KeypressNEW(new List<int> {0,0,0,0,0,0,0,0,1 }, new List<string>
             {
-               Color.NAME,  "Your name is ", p.Name ,"",
-               Color.NAME,  "Your Mother, ", $"Helen {Family.lastName}", " was an adventurer.",
-               $"She was recently killed by an Orc. {b}.",
-               "",
-               $"You are the {order[birthOrder]} child.",
-               "",
-               a
-            });
-        Sound.Stop();
+                "Seargeant Billiam approaches you as you enter town",
+                "",
+                "I'm glad I caught you. I'm so sorry to hear about you sibling. Were you close?",
+                "",
+                "Well, we're down a Hero and really hope you're able to step up",
+                "",
+                "We raised a little money to get you started. I know it's not much but but hopefully it'll help",
+                "",
+                Color.GOLD,"You receive " ,goldGet.ToString(), " gold"
+            }) ;
+            Create.p.Gold += goldGet;
+        }
         Utilities.ToTown();
     }
 

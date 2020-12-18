@@ -83,10 +83,6 @@ public class Creature
     public int Stamina { get { return stamina; } set { stamina = value; } }
     public int Intelilgence { get { return intelligence; } set { intelligence = value; } }
     public bool Defending { get { return defending; } set { defending = value; } }
-    public bool CanAttack3 { get { return attack3; } set { attack3 = value; } }
-    public bool CanAttack4 { get { return attack4; } set { attack4 = value; } }
-    public bool CanAttack5 { get { return attack5; } set { attack5 = value; } }
-    public bool CanAttack6 { get { return attack6; } set { attack6 = value; } }
 
     public virtual void TakeDamage(int damage)
     {
@@ -116,7 +112,7 @@ public class Creature
 
     public virtual void Miss(Creature target)
     {
-        Combat.combatText.Add("You miss the " + Color.MONSTER + target + Color.RESET + "!");
+        Combat.combatText.Add("You miss "+ Color.MONSTER + target.Name + Color.RESET + "!");
     }
 
     public virtual bool AttemptToHit(Creature target, int bonus)

@@ -25,8 +25,7 @@ public class GuardRoom : Room
             "",
             "He looks surprised but recovers quickly and attacks!",
         });
-        if (m == Dungeon.goblin1) Dungeon.Summon(Dungeon.goblin1);
-        Create.p.combatMonsters[0].Name = $"{Create.p.combatMonsters[0].Name} Guard";
+        if (m == Dungeon.goblin1) Dungeon.Summon(Dungeon.goblin1,"The Goblin Guard");
         Combat.Menu();
         UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
         {

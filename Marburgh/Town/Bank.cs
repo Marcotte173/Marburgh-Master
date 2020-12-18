@@ -7,19 +7,19 @@ public class Bank
     internal static int investment;
     internal static int term;
     public static double bankRate = 0.05;
-    public static List<string> bankButton = new List<string> { Color.GOLD + "D" + Color.RESET, Color.GOLD + "W" + Color.RESET, Color.GOLD + "I" + Color.RESET };
-    public static List<string> bankText = new List<string> { "eposit", "ithdraw", "nvest" };
+    
     public static void Menu()
     {
         GameState.location = Location.Bank;
         Console.Clear();
+        Utilities.Buttons(Button.listOfBankOptions);
         UI.BankChoice(new List<int> { 0, 0, 1 }, new List<string>
-            {
-                $"You enter a small but busy bank. One teller appears to be free. You walk up to him",
-                "",
-                Color.SPEAK,"", $"'Hello, how may I be of service?'",""
-            },
-            bankText, bankButton);
+        {
+            $"You enter a small but busy bank. One teller appears to be free. You walk up to him",
+            "",
+            Color.SPEAK,"", $"'Hello, how may I be of service?'",""
+        },
+        Button.list1, Button.button1);
         Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
         if (choice == "d")
@@ -85,8 +85,10 @@ public class Bank
                     Color.SPEAK,"", "'You don't have any money in the bank!'",""
                 });
         }
+        else if (choice == "a" && Button.bankJobButton.active) Job();
+        else if (choice == "t" && Button.bankRobberyButton.active) Robbery();
         else if (choice == "9") CharacterSheet.Display();
-        else if (choice == "i" && investment < 1)
+        else if (choice == "i" && Button.investButton.active)
         {
             if (Return.HaveGold(1))
             {
@@ -106,8 +108,7 @@ public class Bank
                         Color.GOLD,"You invest ", $"{invest} ","gold."
                     });
                     term = 3;
-                    bankButton.RemoveAt(2);
-                    bankText.RemoveAt(2);
+                    Button.investButton.active = false;
                 }
                 else
                     UI.Keypress(new List<int> { 1 }, new List<string>
@@ -123,7 +124,17 @@ public class Bank
         }
         else if (choice == "0") Utilities.ToTown();
         Menu();
-    }    
+    }
+
+    private static void Robbery()
+    {
+        
+    }
+
+    private static void Job()
+    {
+        
+    }
 
     public static void InvestPay()
     {
@@ -135,8 +146,7 @@ public class Bank
         });
         Create.p.Gold += investment;
         investment = 0;
-        bankButton.Add(Color.GOLD + "I" + Color.RESET);
-        bankText.Add("nvest");
+        Button.investButton.active = true;
     }
 
     internal static void InvestmentCalculate()

@@ -18,7 +18,7 @@ public class ShrineRoom : Room
         UI.Choice(new List<int> { 0, 1, 0, 1, 1, 1 }, new List<string>
         {
             "You approach the altar and find a rune, placed with great care and reverance. ",
-            Color.MONSTER,"You recognize it as belonging to one of the ","Orc ","gods, who they belive bring them strength and victory.",
+            Color.MONSTER,"You recognize it as belonging to one of the ","Orc ","gods, who they believe bring them strength and victory.",
             "They would be angry indeed if anything were to happen to it.",
             Color.ENERGY, "You could ", "study ", "the runes, trying to learn the secrets of the Orc gods",
             Color.DAMAGE, "You could ", "desecrate ", "the runes, angering the orcs but possibly interrupting their power source",
@@ -121,6 +121,7 @@ public class ShrineRoom : Room
                 desecrateList.Add("is reduced to ");
                 desecrateList.Add("1");
                 desecrateList.Add("!");
+                Create.p.Health = 1; 
             }
             ActionWait(desecrateColourArray, desecrateList, Color.ENERGY + "Desecrating" + Color.RESET, null);
         }

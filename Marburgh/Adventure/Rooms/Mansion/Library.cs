@@ -58,7 +58,7 @@ public class Library : Room
                     Color.ENERGY,"You lose 1 ","intelligence"," permanently!"
                 });
                 Create.p.Intelilgence--;
-                Create.p.Update();
+                Create.p.Update();                
             }
             else
             {
@@ -93,7 +93,7 @@ public class Library : Room
             CharacterSheet.Display();
             Explore();
         }
-        CharacterSheet.Display();
+        visited = true;
     }
 
     public override List<string> Flavor

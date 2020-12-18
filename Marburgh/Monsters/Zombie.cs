@@ -30,7 +30,7 @@ public class Zombie : Monster
         if (Create.p.combatMonsters.Count == 1) base.Death();
         else
         {
-            Combat.combatText.Add($"The {Color.MONSTER + Name + Color.RESET} falls to the ground. Finish the fight before it rises again!");
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET +" falls to the ground. Finish the fight before it rises again!");
             deadCount = 4;
             Combat.outOfFight.Add(this);
             Create.p.combatMonsters.Remove(this);
@@ -42,6 +42,6 @@ public class Zombie : Monster
         Combat.outOfFight.Remove(this);
         Create.p.combatMonsters.Add(this);
         health = maxHealth / 2;
-        Combat.combatText.Add($"The {Color.MONSTER + Name + Color.RESET} rises!");
+        Combat.combatText.Add(Color.MONSTER + name + Color.RESET +" rises!");
     }
 }

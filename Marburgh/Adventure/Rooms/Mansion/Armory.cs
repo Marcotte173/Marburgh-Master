@@ -35,11 +35,11 @@ public class Armory : Room
         {
             int weaponType = Return.RandomInt(0, 5);
             Equipment[] list = new Equipment[8];
-            if (weaponType == 0) list = Blunt.list;
-            else if (weaponType == 1) list = Dagger.list;
-            else if (weaponType == 2) list = Magic.list;
-            else if (weaponType == 3) list = Shield.list;
-            else list = Sword.list;
+            if (weaponType == 0) list = Equipment.bluntList;
+            else if (weaponType == 1) list = Equipment.daggerList;
+            else if (weaponType == 2) list = Equipment.magicList;
+            else if (weaponType == 3) list = Equipment.shieldList;
+            else list = Equipment.swordList;
             Equipment weapon = list[Return.RandomInt(global::Explore.dungeon.rewardMod, global::Explore.dungeon.rewardMod * 2)];
             if (UI.Confirm(new List<int> { 1, 1 }, new List<string>
                 {
@@ -47,14 +47,7 @@ public class Armory : Room
                     Color.SPEAK, "Would you like to", " equip ","it?",
                 }))
             {
-                if (Create.p.MainHand == UI.Hand(weapon))
-                {
-                    Create.p.Equip(weapon, Create.p.MainHand);
-                }
-                else
-                {
-                    Create.p.Equip(weapon, Create.p.OffHand);
-                }
+                Create.p.Equip(weapon);
             }
         }
         else if (choice == "9")
@@ -64,7 +57,7 @@ public class Armory : Room
         }
         else if (choice == "a")
         {
-            Armor armor = Armor.list[Return.RandomInt(global::Explore.dungeon.rewardMod, global::Explore.dungeon.rewardMod * 2)];
+            Armor armor = Equipment.armorList[Return.RandomInt(global::Explore.dungeon.rewardMod, global::Explore.dungeon.rewardMod * 2)];
             if (UI.Confirm(new List<int> { 1, 1 }, new List<string>
                 {
                     Color.ITEM, "You find some ", armor.Name, " armor!",
@@ -75,6 +68,7 @@ public class Armory : Room
             }
         }
         else Explore();
+        visited = true;
     }
 
     public override List<string> Flavor

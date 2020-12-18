@@ -88,6 +88,33 @@ public class Utilities
         }
     }
 
+    public static void Buttons(List<string> list, List<string> buttonString, List<Button> buttons)
+    {
+        list.Clear();
+        buttonString.Clear();
+        foreach (Button b in buttons)
+        {
+            if (b.active)
+            {
+                list.Add(b.text);
+                buttonString.Add(b.button);
+            }
+        }
+    }
+    public static void Buttons(List<Button> buttons)
+    {
+        Button.list1.Clear();
+        Button.button1.Clear();
+        foreach (Button b in buttons)
+        {
+            if (b.active)
+            {
+                Button.list1.Add(b.text);
+                Button.button1.Add(b.button);
+            }
+        }
+    }
+
     public static void Item()
     {
         Console.Clear();

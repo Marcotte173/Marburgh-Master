@@ -53,7 +53,7 @@ public class MansionDoorToBoss : Room
             }
             if (Create.p.Health <= 0)
             {
-                UI.Keypress(new List<int> { 0,1,0,1,0,1 }, new List<string>
+                UI.Keypress(new List<int> { 0, 1, 0, 1, 0, 1 }, new List<string>
                 {
                     "",
                     Color.DEATH,"You feel a slight ","tickle ","as the fog dances around you",
@@ -66,7 +66,7 @@ public class MansionDoorToBoss : Room
             }
             else if (hasNecklace)
             {
-                UI.Keypress(new List<int> { 0, 2, 0, 1, 0, 0}, new List<string>
+                UI.Keypress(new List<int> { 0, 2, 0, 1, 0, 0 }, new List<string>
                 {
                     "",
                     Color.DEATH,Color.CRIT,"You hear an ear shattering noise as the ","fog"," in the room starts to swirl around the ","necklace","",
@@ -79,14 +79,14 @@ public class MansionDoorToBoss : Room
             }
             else
             {
-                UI.Keypress(new List<int> { 1, 0,  1 }, new List<string>
+                UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
                 {
                     Color.DEATH,"You immediately start choking as you enter the ","fog","",
                     "",
                     Color.DEATH,"The last thing you hear before you die is the mocking laugh of ","Toliax",""
                 });
                 Monster g = new Goblin(3, 3, 3, 3);
-                g.Name = Color.DEATH + "Death Fog"+Color.RESET;
+                g.Name = Color.DEATH + "Death Fog" + Color.RESET;
                 Create.p.Death(g);
             }
         }
@@ -95,7 +95,11 @@ public class MansionDoorToBoss : Room
             CharacterSheet.Display();
             Explore();
         }
-        else if (choice == "r") global::Explore.dungeon.layout[1].room.Explore();
+        else if (choice == "r")
+        {
+            global::Explore.dungeon = Dungeon.MansionEntrance;
+            global::Explore.dungeon.layout[1].room.Explore();
+        }
         else GreenFog();
 
     }
@@ -118,7 +122,7 @@ public class MansionDoorToBoss : Room
             if (choice == "o")
             {
                 int hpLoss = Create.p.Health / 2 - 1;
-                UI.Keypress(new List<int> { 1,0,0,0,0,0,1 }, new List<string>
+                UI.Keypress(new List<int> { 1, 0, 0, 0, 0, 0, 1 }, new List<string>
                 {
                     Color.DAMAGE,"As the door opens, the door takes a giant ","BITE"," out of you arm!",
                     "",
@@ -132,7 +136,11 @@ public class MansionDoorToBoss : Room
                 open = true;
                 Explore();
             }
-            else if (choice == "r") global::Explore.dungeon.layout[1].room.Explore();
+            else if (choice == "r")
+            {
+                global::Explore.dungeon = Dungeon.MansionEntrance;
+                global::Explore.dungeon.layout[1].room.Explore();
+            }
             else Door();
         }
         else

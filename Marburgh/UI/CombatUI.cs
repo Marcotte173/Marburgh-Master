@@ -4,12 +4,8 @@ using System.Text;
 
 internal class CombatUI
 {
-    public static List<string> option = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
-    public static List<string> button = new List<string> { "1", "2" };
     public static List<string> stunOption = new List<string> { Color.STUNNED + " You are stunned. Press Any Key to continue" + Color.RESET };
     public static List<string> stunButton = new List<string> { "X" };
-    public static List<string> optionBasic = new List<string> { Color.DAMAGE + "Attack" + Color.RESET, Color.DEFENCE + "Defend" + Color.RESET };
-    public static List<string> buttonBasic = new List<string> { "1", "2" };
     public static List<string> targetOption = new List<string> {  };
     public static List<string> targetButton = new List<string> {  };
 
@@ -71,7 +67,9 @@ internal class CombatUI
 
     public static void AttackOptions()
     {
-        if (Create.p.CanAct) UIComponent.OptionsText(option, button,3);
+        if (Create.p.combatMonsters.Count < 2) Button.cleaveButton.active = false;
+        Utilities.Buttons(Button.listOfCombatOptions);        
+        if (Create.p.CanAct) UIComponent.OptionsText(Button.list1, Button.button1,3);
         else UIComponent.OptionsText(stunOption, stunButton,3);
     }
 
@@ -94,14 +92,16 @@ internal class CombatUI
             Write.Line(50, 10,"Please select a target");
             UIComponent.OptionsText(targetOption, targetButton,3);
             int choice = Return.Int();
-            if (choice > 0 && choice < 4)
+            if (choice >= 0 && choice < 4)
             {                
                 if (choice == 1) return Create.p.combatMonsters[0];
                 else if (choice == 2 && Create.p.combatMonsters.Count > 1) return Create.p.combatMonsters[1];
                 else if (choice == 3 && Create.p.combatMonsters.Count == 3) return Create.p.combatMonsters[2];
-                else return null;
+                else if (choice == 0) return null;
+                else Target();
             }
-            else return null;
+            else Target();
+            return null;
         }
         else return Create.p.combatMonsters[0];
     }

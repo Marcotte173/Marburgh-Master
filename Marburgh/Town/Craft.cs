@@ -5,19 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 public class Craft
-{
-    public static List<string> craftOptionButton = new List<string>
-    {
-        Color.ENHANCEMENT + "U" + Color.RESET
-    };
-    public static List<string> craftOptionList = new List<string>
-    {
-        "pgrade"
-    };
+{    
     public static void Menu()
     {
         GameState.location = Location.Craft;
         Console.Clear();
+        Utilities.Buttons(Button.listOfCraftOptions);
         UI.Choice(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
         {
             "You step closer to the elaborate machine",
@@ -26,10 +19,10 @@ public class Craft
             "",
             "But hopefully more will become apparent over time"
         },
-        craftOptionList, craftOptionButton);
+        Button.list1, Button.button1);
         string choice = Return.Option();
         if (choice == "u") Upgrade();
-        else if (choice == "c" && GameState.canCraftWeaponsFromBossDrops) BossWeapon();
+        else if (choice == "c" && Button.bossWeapons.active) BossWeapon();
         else if (choice == "0") Utilities.ToTown();
         else if (choice == "9") CharacterSheet.Display();
         else Menu();
@@ -56,14 +49,7 @@ public class Craft
                     "Savage Dagger",
                     "!"
                 });
-                if (Create.p.MainHand == UI.Hand(Dagger.savageDagger))
-                {
-                    Create.p.Equip(Dagger.savageDagger, Create.p.MainHand);
-                }
-                else
-                {
-                    Create.p.Equip(Dagger.savageDagger, Create.p.OffHand);
-                }
+                Create.p.Equip(Dagger.savageDagger);
                 for (int i = 0; i < Create.p.Drops.Count; i++)
                 {
                     if (Create.p.Drops[i].name == "Savage Orc Fang") Create.p.RemoveDrop(DropList.savageOrcFang, 1);
@@ -85,7 +71,7 @@ public class Craft
         List<Equipment> list = new List<Equipment> { };
         if (Create.p.MainHand.Upgraded == false && Create.p.MainHand.Level != 0) list.Add(Create.p.MainHand);
         if (Create.p.OffHand.Upgraded == false && Create.p.OffHand.Level != 0) list.Add(Create.p.OffHand);
-        if (Create.p.Armour.Upgraded == false && Create.p.Armour.Level != 0) list.Add(Create.p.Armour);
+        if (Create.p.Armor.Upgraded == false && Create.p.Armor.Level != 0) list.Add(Create.p.Armor);
         if (list.Count == 0)
         {
             UI.Keypress(new List<int> { 0 }, new List<string>

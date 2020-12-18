@@ -3,32 +3,26 @@ using System.Collections.Generic;
 
 public class House
 {
-    public static List<string> houseOptionButton = new List<string>
-    {
-        Color.NAME + "S" + Color.RESET
-    };
-    public static List<string> houseOptionList = new List<string>
-    {
-        "leep"
-    };
+    
     
     public static void Menu()
     {
+        Utilities.Buttons(Button.listOfHouseOptions);
         GameState.location = Location.House;
         Console.Clear();
-        if (GameState.canCraft)
+        if (Button.enhancementMachine.active)
             UI.Choice(new List<int> { 1, 1 }, new List<string>
             {
                 Color.SPEAK, "","You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.","",
                 Color.ENHANCEMENT, "In the center of the room you see your ", "crafting machine","Now you just have to figure out how it works"
             },
-            houseOptionList, houseOptionButton);
+            Button.list1, Button.button1);
         else 
             UI.Choice(new List<int> { 1 }, new List<string>
             {
                 Color.SPEAK, "", "You are in your house. It's not big, but it's clean and cozy. In the corner you see your bed.", "",
             },
-            houseOptionList, houseOptionButton);           
+            Button.list1, Button.button1);           
         Write.Line(104, 27, "[" + Color.BLOOD + "?" + Color.RESET + "] " + Color.BLOOD + "MORE INFO" + Color.RESET);
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();        
         if (choice == "0") Utilities.ToTown();
@@ -36,34 +30,37 @@ public class House
         else if (choice == "?") Info();
         else if (choice == "s")
         {
-            Console.Clear();            
+            Console.Clear();
             if (UI.Confirm(
-                new List<int> { 0, 2, 1 }, new List<string>
-                {
-                    "Would you like to sleep until morning?",
-                    Color.HEALTH,Color.ENERGY,"Your ", "Health " ,"and " ,"Energy " , "will be restored to maximum",
-                    Color.TIME, "Time will advance by ","one ","day",
-                }))
+            new List<int> { 0, 2, 1 }, new List<string>
             {
-                Console.Clear();
-                Time.DayChange(1);
-                UI.Keypress(new List<int> { 0, 0, 1, 1, 1, 0, 1 }, new List<string>
-                    {
-                        "You sleep until morning",
-                        "",
-                        Color.HEALTH, "", "Health " , "at Maximum ",
-                        Color.ENERGY , "", "Energy " ,  "at maximum",
-                        Color.HEALTH, "Your potion returns to " , "full " , "size",
-                        "",
-                        Color.MONSTER, "You can ","explore"," again"
-                    });
-            }
+                "Would you like to sleep until morning?",
+                Color.HEALTH,Color.ENERGY,"Your ", "Health " ,"and " ,"Energy " , "will be restored to maximum",
+                Color.TIME, "Time will advance by ","one ","day",
+            })) Sleep();
             else Menu();
         }
         //If you hit c and it's available, you get to choose how to craft
-        if (choice == "e" && GameState.canCraft) Craft.Menu();
+        if (choice == "e" && Button.enhancementMachine.active) Craft.Menu();
         Menu();
     }
+
+    internal static void Sleep()
+    {
+        Console.Clear();
+        Time.DayChange(1);
+        UI.Keypress(new List<int> { 0, 0, 1, 1, 1, 0, 1 }, new List<string>
+        {
+            "You sleep until morning",
+            "",
+            Color.HEALTH, "", "Health " , "at Maximum ",
+            Color.ENERGY , "", "Energy " ,  "at maximum",
+            Color.HEALTH, "Your potion returns to " , "full " , "size",
+            "",
+            Color.MONSTER, "You can ","explore"," again"
+        });
+    }
+
     static void Info()
     {
         Console.Clear();

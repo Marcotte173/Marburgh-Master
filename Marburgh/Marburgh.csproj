@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adventure\Dungeon.cs" />
+    <Compile Include="Adventure\Forest.cs" />
     <Compile Include="Adventure\Rooms\Boss Rooms\Mansion\MansionNecromancerBoss.cs" />
     <Compile Include="Adventure\Rooms\Mansion\Altar.cs" />
     <Compile Include="Adventure\Rooms\Mansion\Kitchen.cs" />
@@ -93,6 +94,12 @@
     <Compile Include="Monsters\Rat.cs" />
     <Compile Include="Monsters\Skeleton.cs" />
     <Compile Include="Monsters\Zombie.cs" />
+    <Compile Include="Monsters\GladiatorA.cs" />
+    <Compile Include="Town\CombatArena.cs" />
+    <Compile Include="Town\ExploreTown.cs" />
+    <Compile Include="Town\Tavern\Bartender.cs" />
+    <Compile Include="Town\Tavern\LocalGossip.cs" />
+    <Compile Include="Town\Tavern\NPC.cs" />
     <Compile Include="Utilities\GameState.cs" />
     <Compile Include="Items\Dagger.cs" />
     <Compile Include="Town\Craft.cs" />
@@ -122,7 +129,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Town\Help.cs" />
     <Compile Include="Town\House.cs" />
-    <Compile Include="Town\Other.cs" />
+    <Compile Include="Town\Graveyard.cs" />
     <Compile Include="Town\Bank.cs" />
     <Compile Include="Town\Tavern\BlackJackGame.cs" />
     <Compile Include="Town\Level.cs" />

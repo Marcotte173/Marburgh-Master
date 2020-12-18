@@ -123,6 +123,7 @@ public class Lab : Room
                 "",
                 "You have no choice but to press on"
             });
+            visited = true;
         }
         else if (choice == "w") { }
         else

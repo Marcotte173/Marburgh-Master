@@ -21,9 +21,16 @@ namespace MedievalRPG
                 Color.GOLD,  "", "                                        \\___/'       ",""
             },
             new List<string> { "ew Game" }, new List<string> { Color.HEALTH + "N" + Color.RESET });
+            Write.Line(95,0,Color.DEATH+"      `'::::.                ");
+            Write.Line(95,1,"        _____A_              ");
+            Write.Line(95,2,"       /      /\\             ");
+            Write.Line(95,3,"    __/__/\\__/  \\___         ");
+            Write.Line(95,4,"---/__|' '' '| /___/\\----    ");
+            Write.Line(95,5,"   |''|''||''| |' '||        ");
+            Write.Line(95,6,"   `'''''))'''`''''''        ");
             string choice = Return.Option();
             if (choice == "n") Family.Name();
-            //if (choice == "x") GameState.TestCombat(new List<Monster> { Dungeon.necromancer2});
+            if (choice == "x") GameState.TestCombat(new List<Monster> { Dungeon.zombie3,Dungeon.zombie3, Dungeon.zombie3 });
             //if (choice == "c") GameState.Test();
             else if (choice == "q") Environment.Exit(0);
             else Menu();

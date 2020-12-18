@@ -11,7 +11,7 @@ public class Explore
     public static Shell currentRoom;
     public static void Menu()
     {
-        GameState.location = Location.Exploring;
+        GameState.location = Location.Dungeon;
         Navigate();
         while (true)
         {        
@@ -27,6 +27,7 @@ public class Explore
     private static void Navigate()
     {
         Console.Clear();
+        Create.p.ItemCheck();
         NavigateUI(currentRoom.room.FlavorColourArray, currentRoom.room.Flavor, new int[] { currentRoom.North, currentRoom.South, currentRoom.East, currentRoom.West });
         string choice = Return.Option();
         if (choice == "n" && currentRoom.North > 0)
@@ -51,18 +52,18 @@ public class Explore
         }
         else if (choice == "9") CharacterSheet.Display();
         else if (choice == "h") Utilities.Heal();
-        else if (choice == "i" && Create.p.HaveItems) Utilities.Item();
+        else if (choice == "i" && Button.potionButton.active) Utilities.Item();
         else if (choice == "0" && currentRoom == dungeon.layout[1])
         {
             ResetRoom();
-            //Sound.Stop();
             Utilities.ToTown();
         }
         else if (choice == "0" && currentRoom != dungeon.layout[1])
         {
-            Console.Clear();
-            Console.WriteLine("You can only leave the dungeon from the entance");
-            Utilities.Keypress();
+            UI.Keypress(new List<int> { 0}, new List<string>
+            {
+                "You can only leave the dungeon from the entance",
+            });
         }
         else Navigate();
     }
@@ -131,7 +132,7 @@ public class Explore
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|        /                \\        |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("|xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|       /                  \\       |xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx|");
         Console.WriteLine("+-----------------------------------------+----------------------------------+-----------------------------------------+");        
-        if (Create.p.HaveItems)
+        if (Button.potionButton.active)
         {
             Write.Line(57, 22, Color.HEALTH, "[", "H", "]eal");
             Write.Line(57, 24, Color.POTION, "[", "I", "]tems");

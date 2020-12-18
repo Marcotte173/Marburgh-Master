@@ -37,7 +37,7 @@ public class Rat : Monster
             intention = "Frenzy";
             frenzy = true;
             damage += 1;
-            Combat.combatText.Add($"The "+Color.MONSTER+"rat "+Color.RESET +"senses your are injured and enters a frenzy, squealing at you and brandishing its teeth.  +1" + Color.DAMAGE+" Damage"+ Color.RESET);
+            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + "senses your are injured and enters a frenzy, squealing at you and brandishing its teeth.  +1" + Color.DAMAGE+" Damage"+ Color.RESET);
         }
     }
         

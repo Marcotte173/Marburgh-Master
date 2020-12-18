@@ -23,22 +23,36 @@ public class DungeonTutorial_A_BossRoom : Room
             "",
             Color.SPEAK, "","Heh, you thought you found da boss, eh?","",
             "",
-            Color.SPEAK, "","He's further inside not that it matters to you. Now you gonna die"," ",
+            Color.SPEAK, "","He's further inside, not that it matters to you. Now you gonna die"," ",
             "",
             "The Orc charges "
         });
-        Dungeon.Summon(Dungeon.orc1);
+        Dungeon.Summon(Dungeon.orc1,"The Large Orc");
         Combat.Menu();
-        GameState.CanCraft();        
-        UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
-        {
-            "You emerge vitorious!",
-            "",
-            "Searching the room you find a strange looking machine",
-            "",
-            "Curious, you bring the machine home with you"
-        }) ;
+        GameState.firstBossDead = true;  
         visited = true;
-        Utilities.ToTown();
+        if(GameState.villagersSaved != "")
+        {
+            UI.Keypress(new List<int> { 1, 0, 1, 0, 1 }, new List<string>
+            {
+                Color.HEALTH,"You emerge ","vitorious!","",
+                "",
+                Color.ENHANCEMENT,"Searching the room you find a strange looking ","machine","",
+                "",
+                Color.ENHANCEMENT,"Curious, you bring the ","machine"," home with you"
+            });
+            Utilities.ToTown();
+        }
+        else
+        {
+            UI.Keypress(new List<int> { 1, 0, 1, 0, 2 }, new List<string>
+            {
+                Color.HEALTH,"You emerge ","vitorious!","",
+                "",
+                Color.ENHANCEMENT,"Searching the room you find a strange looking ","machine","",
+                "",
+                Color.ENHANCEMENT,Color.NAME,"You make a note to bring the ","machine"," home when you are done finding the missing ","townspeople","" 
+            });
+        }        
     }
 }

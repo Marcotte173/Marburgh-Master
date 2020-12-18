@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public class Combat
 {
+    public static bool tutorial;
     public static bool desecrated;
     public static int xpReward;
     public static int goldReward;
@@ -18,15 +19,12 @@ public class Combat
         xpReward = 0;
         combatText.Clear();
         outOfFight.Clear();
-        GameState.location = Location.Combat;
-        if (Create.p == Create.m) CombatUI.option[1] = Color.SHIELD + "Shield" + Color.RESET;
-        else CombatUI.option[1] = Color.DEFENCE + "Defend" + Color.RESET;
         //Get intention and display to start, after that, do it at the end
         foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
         DisplayCombatText();
         while (Create.p.combatMonsters.Count > 0)
         {
-            ItemCheck();
+            Create.p.ItemCheck();
             Create.p.AttackChoice();
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
@@ -108,21 +106,17 @@ public class Combat
         Create.p.Stun = 0;
     }
 
-    private static void ItemCheck()
-    {
-        foreach (string s in CombatUI.option.ToList()) if (s == Color.POTION + "Items" + Color.RESET) CombatUI.option.Remove(s);
-        foreach (string s in CombatUI.button.ToList()) if (s == Color.POTION + "6" + Color.RESET)     CombatUI.button.Remove(s);
-        if (Create.p.HaveItems)
-        {
-            CombatUI.option.Add(Color.POTION + "Items" + Color.RESET);
-            CombatUI.button.Add("6");
-        }
-    }
-
     public static void DisplayCombatText()
     {
         Console.Clear();
         CombatUI.Box();
+        if (tutorial)
+        {
+            if(Create.p.Health <= Create.p.MaxHealth/2 && Create.p.PotionSize > 0)
+            {
+                Write.Line(35,14,Color.HEALTH + "YOU ARE LOW ON HEALTH. HIT H TO USE YOUR POTION");
+            }            
+        }
         Write.Position(0, 6);          
         int n = 6;
         for (int i = 0; i < combatText.Count; i++)

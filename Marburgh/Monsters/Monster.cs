@@ -18,7 +18,7 @@ public class Monster : Creature
         if (AttemptToHit(target, 0) == false) Miss(target);
         else
         {
-            text.Add($"The {Color.MONSTER + Name + Color.RESET} hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
+            text.Add(Color.MONSTER + name + Color.RESET + $" hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
             target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
         }
     }
@@ -90,14 +90,14 @@ public class Monster : Creature
     {
         if (bleed > 0)
         {
-            text.Add($"The " + Color.MONSTER + Name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
+            text.Add(Color.MONSTER + name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
             TakeDamage(bleedDam);
             bleed--;
             if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
         }
         if (burning > 0)
         {
-            text.Add($"The " + Color.MONSTER + Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
+            text.Add(Color.MONSTER + name + Color.BURNING+ " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
             TakeDamage(burnDam);
             burning--;
             if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
@@ -113,7 +113,7 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        text.Add($"You have killed the {Color.MONSTER + Name + Color.RESET}!");
+        text.Add($"You have killed "+Color.MONSTER + name + Color.RESET +"!");
         text.Add("");
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
@@ -123,7 +123,7 @@ public class Monster : Creature
 
     public override void Miss(Creature target)
     {
-        text.Add($"The {Color.MONSTER + Name + Color.RESET} misses you!");
+        text.Add(Color.MONSTER + name + Color.RESET +" misses you!");
     }
     public string Intention { get { return intention; } set { intention = value; } }
     public virtual void Drop()

@@ -19,7 +19,7 @@ public class Slime : Monster
     }
     public override void Attack2(Player target)
     {
-        Combat.combatText.Add($"The " + Color.MONSTER + "slime " + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
+        Combat.combatText.Add(Color.MONSTER + name + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
         MaxHealth = Health;
         Slime s = new Slime(2, 2, 3,1);
         s.Health = s.MaxHealth = MaxHealth;
