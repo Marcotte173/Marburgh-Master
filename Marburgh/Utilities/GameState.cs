@@ -29,27 +29,40 @@ public class GameState
     public static void Cheat()
     {
         Button.itemShopButton.active = true;
-        Phase2B();
-        Create.p.XP += 300;
+        Create.p.XP += 900;
         Create.p.Gold += 30000;
-        Create.p.PlayerDamage = 300;
-        Create.p.PlayerHit = 100;
-        Create.p.Health = 300;
-        Create.p.AddDrop(DropList.potionOfDeath);
+        Create.p.PlayerDamage = 30000;
+        Create.p.PlayerHit = 150;
+        Create.p.Health = 3000;
+        Button.levelMasterButton.active = true;
     }
 
-    internal static void TestCombat(List<Monster> monsters)
+    internal static void TestCombat()
     {
-        Create.p = new Warrior(100,10,100,10);
+        Create.p = new Warrior(3,2,3,2);
         Create.p.Name = "Travis Marcotte";
-        Create.p.AddDrop(DropList.potionOfDeath);
-        Button.cleaveButton.active = true;
-        Button.rendButton.active = true;
-        foreach(Monster m in monsters)
-        {
-            Dungeon.Summon(m.MonsterCopy());
-        }
-        Combat.Menu();
+        Create.p.MainHand = Equipment.bluntList[1];
+        Create.p.OffHand = Equipment.bluntList[0];
+        Create.p.Armor = Equipment.armorList[1];
+        Create.p.AddDrop(DropList.potionOfKnowledge);
+        Create.p.AddDrop(DropList.potionOfFire);
+        Create.p.AddDrop(DropList.potionOfPower);
+        Create.p.AddDrop(DropList.potionOfLife);
+        Create.p.AddDrop(DropList.potionOfProwess);
+        Create.p.AddDrop(DropList.potionOfLearning);
+        Create.p.XP = 1500;
+        //for (int i = 0; i < Dungeon.balanceList.Count-1; i++)
+        //{
+        //    Dungeon.Summon(Dungeon.balanceList[i].MonsterCopy());
+        //    Dungeon.Summon(Dungeon.balanceList[i+1].MonsterCopy());
+        //    Combat.Menu();
+        //}
+        //foreach(Monster m in Dungeon.balanceList)
+        //{
+        //    Dungeon.Summon(m.MonsterCopy());
+        //    Combat.Menu();
+        //}    
+        Town.Menu();
     }
 
     internal static void TestMansion()
@@ -75,17 +88,13 @@ public class GameState
 
     //Gamestates
     public static void Phase1B()
-    {
-        Shop.itemOffenceList.Clear();
-        Shop.itemDefenceList.Clear();
-        Shop.itemOffenceList.Add(Equipment.bluntList[0]);
-        Shop.itemOffenceList.Add(Equipment.bluntList[2]);
-        Shop.itemOffenceList.Add(Equipment.daggerList[2]);
-        Shop.itemOffenceList.Add(Equipment.magicList[2]);
-        Shop.itemOffenceList.Add(Equipment.swordList[2]);
-        Shop.itemDefenceList.Add(Equipment.armorList[0]);
-        Shop.itemDefenceList.Add(Equipment.armorList[2]);
-        Shop.itemDefenceList.Add(Equipment.shieldList[2]);
+    {        
+        Shop.itemOffenceList.Add(Equipment.bluntList[3]);
+        Shop.itemOffenceList.Add(Equipment.daggerList[3]);
+        Shop.itemOffenceList.Add(Equipment.magicList[3]);
+        Shop.itemOffenceList.Add(Equipment.swordList[3]);
+        Shop.itemDefenceList.Add(Equipment.armorList[3]);
+        Shop.itemDefenceList.Add(Equipment.shieldList[3]);
         Button.levelMasterButton.active = true;
         Button.enhancementMachine.active = true;
         Button.dungeon1bButton.active = true;
@@ -115,6 +124,10 @@ public class GameState
     //Things that change day to day
     public static void NewDay()
     {
+        List<Equipment> tempO = new List<Equipment> { };
+        List<Equipment> tempD = new List<Equipment> { };
+        foreach (Equipment e in Shop.itemOffenceList) tempO.Add(e);
+        foreach (Equipment e in Shop.itemDefenceList) tempD.Add(e);
         Button.bankJobButton.active = false;
         Shop.magicJob = false;
         Shop.weaponJob = false;
@@ -132,6 +145,29 @@ public class GameState
         {
             Shop.potionAvailableList.Add(Shop.potionList[Return.RandomInt(0, Shop.potionList.Count)]);
         }
+        //AvailableEquipment
+        int offensive = (phase3) ? 7 : (phase2b || phase2a) ? 7 : 5;
+        int defensive = (phase3) ? 7 : (phase2b || phase2a) ? 5 : 3;
+        Shop.itemOffenceAvailableList.Clear();
+        Shop.itemOffenceAvailableList.Add(Equipment.bluntList[0]);
+        for (int i = 0; i < offensive; i++)
+        {
+            Equipment e = tempO[Return.RandomInt(1, tempO.Count)];
+            Shop.itemOffenceAvailableList.Add(e);
+            tempO.Remove(e);
+        }
+        Utilities.SortDamage(Shop.itemOffenceAvailableList);
+        Shop.itemDefenceAvailableList.Clear();
+        Shop.itemDefenceAvailableList.Add(Equipment.armorList[0]);
+        for (int i = 0; i < defensive; i++)
+        {
+            
+            Equipment e = tempD[Return.RandomInt(1, tempD.Count)];
+            Shop.itemDefenceAvailableList.Add(e);
+            tempD.Remove(e);
+        }
+        Utilities.SortDefence(Shop.itemDefenceAvailableList);
+        //Jobs
         if (phase2b||phase3)
         {            
             //Bank Job

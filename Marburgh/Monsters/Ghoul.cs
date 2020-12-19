@@ -16,6 +16,27 @@ public class Ghoul:Monster
         gold = 22;
         dropRate = 30;
     }
+    public Ghoul(int level)
+    : base(level)
+    {        
+        this.level = level;
+        type = "Ghoul";
+        name = "Ghoul";
+        xp =  Balance.ghoulXp * level + Return.RandomInt(Balance.ghoulXp / 2, Balance.ghoulXp + Balance.ghoulXp / 2);
+        gold = Balance.ghoulGold * level + Return.RandomInt(Balance.ghoulGold/2, Balance.ghoulGold+ Balance.ghoulGold/2);
+        strength = Balance.ghoulStrength + Balance.ghoulStrength * level*2/3;
+        agility = Balance.ghoulAgility + Balance.ghoulAgility * level/2;
+        stamina = Balance.ghoulStamina + Balance.ghoulStamina * level / 2; 
+        defence = 2 * agility + agility - 1;
+        damage = strength;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level;
+        dropRate = 30;
+    }
+
+    
     public override void Attack2(Player target)
     {
         if (target.PersonalShield)

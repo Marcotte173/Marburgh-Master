@@ -4,8 +4,8 @@ using System.Text;
 
 public class Shield : Equipment
 {
-    int[] mitigationArray = new int[] { 0, 0, 1, 3, 5, 7 };
-    int[] defenceArray =    new int[] { 0, 10, 12, 14, 16, 20 };    
+    int[] mitigationArray = new int[] { 0, 0, 1, 2, 2, 7 };
+    int[] defenceArray =    new int[] { 0, 5, 7, 12, 16, 20 };    
 
     public Shield(string name, int mitigation, int defence, int level)
     : base()

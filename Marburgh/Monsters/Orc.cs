@@ -17,6 +17,26 @@ public class Orc : Monster
         gold = 19;
         stunAttempts = 1;
     }
+    public Orc(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Orc";
+        name = "Orc";
+        xp = Balance.orcXp * level + Return.RandomInt(Balance.orcXp / 2, Balance.orcXp + Balance.orcXp / 2);
+        gold = Balance.orcGold * level + Return.RandomInt(Balance.orcGold / 2, Balance.orcGold + Balance.orcGold / 2);
+        strength = Balance.orcStrength + Balance.orcStrength * level * 2 / 3;
+        agility = Balance.orcAgility + Balance.orcAgility * level / 2;
+        stamina = Balance.orcStamina + Balance.orcStamina * level / 2;
+        defence = 2 * agility + agility - 1;
+        damage = strength;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level;
+        dropRate = 30;
+    }
+
     public override void Attack2(Player target)
     {
         if (target.PersonalShield)

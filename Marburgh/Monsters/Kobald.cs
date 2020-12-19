@@ -16,6 +16,25 @@ public class Kobold : Monster
         gold = 20;
         dropRate = 30;
     }
+    public Kobold(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Kobold";
+        name = "Kobold";
+        xp = Balance.kobaldXp * level + Return.RandomInt(Balance.kobaldXp / 2, Balance.kobaldXp + Balance.kobaldXp / 2);
+        gold = Balance.kobaldGold * level + Return.RandomInt(Balance.kobaldGold / 2, Balance.kobaldGold + Balance.kobaldGold / 2);
+        strength = Balance.kobaldStrength + Balance.kobaldStrength * level * 2 / 3;
+        agility = Balance.kobaldAgility + Balance.kobaldAgility * level / 2;
+        stamina = Balance.kobaldStamina + Balance.kobaldStamina * level / 2;
+        defence = 2 * agility + agility - 1;
+        damage = strength ;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level;
+        dropRate = 30;
+    }
     public override void Attack2(Player target)
     {
         if (target.PersonalShield)

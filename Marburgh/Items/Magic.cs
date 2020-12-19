@@ -4,7 +4,7 @@ using System.Text;
 
 public class Magic : Equipment
 {
-    int[] damageBoost = new int[] { 0, 2, 5, 8, 16, 20, 28, 35 };
+    int[] damageBoost = new int[] { 0, 1, 2, 3, 3, 20, 28, 35 };
 
     public Magic(string name, int damage, int spellpower, int hit, int crit, bool twoHand, int level)
     : base()

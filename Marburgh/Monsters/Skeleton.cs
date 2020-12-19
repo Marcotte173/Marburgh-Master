@@ -17,6 +17,27 @@ public class Skeleton : Monster
         dropRate = 30;
         undead = true;
     }
+
+    public Skeleton(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Skeleton";
+        name = "Skeleton";
+        xp = Balance.skeletonXp * level + Return.RandomInt(Balance.skeletonXp / 2, Balance.skeletonXp + Balance.skeletonXp / 2);
+        gold = Balance.skeletonGold * level + Return.RandomInt(Balance.skeletonGold / 2, Balance.skeletonGold + Balance.skeletonGold / 2);
+        strength = Balance.skeletonStrength + Balance.skeletonStrength * level * 2 / 3;
+        agility = Balance.skeletonAgility + Balance.skeletonAgility * level / 2;
+        stamina = Balance.skeletonStamina + Balance.skeletonStamina * level / 2;
+        defence = agility + agility - 1;
+        damage = strength;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level * 3/2;
+        dropRate = 30;
+    }
+
     public override void Declare()
     {
         if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);

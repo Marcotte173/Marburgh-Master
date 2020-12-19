@@ -12,37 +12,57 @@ public class Dungeon
     public int rewardMod;
 
     //Goblin
-    public static Monster goblin1 = new Goblin(4, 2, 3, 1);
-    public static Monster goblin2 = new Goblin(4, 2, 3, 1);
+    public static Monster goblin1 = new Goblin(1);
+    public static Monster goblin2 = new Goblin(2);
+    public static Monster goblin3 = new Goblin(3);
+    public static Monster goblin4 = new Goblin(4);
     //Slime
-    public static Monster slime1 = new Slime(4, 2, 4, 1);
-    public static Monster slime2 = new Slime(5, 2, 6, 2);
+    public static Monster slime1 = new Slime(1);
+    public static Monster slime2 = new Slime(2);
+    public static Monster slime3 = new Slime(3);
+    public static Monster slime4 = new Slime(4);
     //Kobald
-    public static Monster kobald1 = new Kobold(4, 3, 3, 1);
-    public static Monster kobald2 = new Kobold(4, 3, 3, 1);
+    public static Monster kobald1 = new Kobold(1);
+    public static Monster kobald2 = new Kobold(2);
+    public static Monster kobald3 = new Kobold(3);
+    public static Monster kobald4 = new Kobold(4);
     //Orc
-    public static Monster orc1 = new Orc(4, 3, 4, 1);
-    public static Monster orc2 = new Orc(5, 4, 5, 2);
+    public static Monster orc1 = new Orc(1);
+    public static Monster orc2 = new Orc(2);
+    public static Monster orc3 = new Orc(3);
+    public static Monster orc4 = new Orc(4);
     //Rat
-    public static Monster rat2 = new Rat(3, 3, 4, 2);
+    public static Monster rat1 = new Rat(1);
+    public static Monster rat2 = new Rat(2);
+    public static Monster rat3 = new Rat(3);
+    public static Monster rat4 = new Rat(4);
     //SavageOrc
-    public static Monster savageOrc = new SavageOrc(5, 4, 5, 3);
+    public static Monster savageOrc = new SavageOrc(3);
     //Necromancer
-    public static Monster necromancerApprentice = new Necromancer(7, 7, 8, 4);
-    public static Monster necromancer1 = new Necromancer(10, 10, 13, 5);
-    public static Monster necromancer2 = new Necromancer(15, 15, 20, 6);
+    public static Monster necromancerApprentice = new Necromancer(3);
+    public static Monster necromancer5 = new Necromancer(5);
+    public static Monster necromancer6 = new Necromancer(6);
     //Skeleton
-    public static Monster skeleton2 = new Skeleton(3, 3, 3, 2);
+    public static Monster skeleton1 = new Skeleton(1);
+    public static Monster skeleton2 = new Skeleton(2);
+    public static Monster skeleton3 = new Skeleton(3);
+    public static Monster skeleton4 = new Skeleton(4);
     //Zombie
-    public static Monster zombie3 = new Zombie(3, 3, 3, 3);
+    public static Monster zombie1 = new Zombie(1);
+    public static Monster zombie2 = new Zombie(2);
+    public static Monster zombie3 = new Zombie(3);
+    public static Monster zombie4 = new Zombie(4);
     //Ghoul
-    public static Monster ghoul3 = new Ghoul(6, 5, 5, 3);
+    public static Monster ghoul1 = new Ghoul(1);
+    public static Monster ghoul2 = new Ghoul(2);
+    public static Monster ghoul3 = new Ghoul(3);
+    public static Monster ghoul4 = new Ghoul(4);
 
-
+    public static List<Monster> balanceList = new List<Monster> { goblin1, slime1, kobald1 };
     public static List<Monster> dungeonSummon1a = new List<Monster> { goblin1, slime1, kobald1 };
     public static List<Monster> dungeonSummon1b = new List<Monster> { goblin1, slime1, kobald1 };
-    public static List<Monster> dungeonSummon2 = new List<Monster> { orc2, rat2, slime2, skeleton2 };
-    public static List<Monster> forestSummon = new List<Monster> { goblin1, goblin2, slime1, slime2, kobald1, kobald2, orc1, orc2, rat2, skeleton2, zombie3, ghoul3 };
+    public static List<Monster> dungeonSummon2 = new List<Monster> { orc3, rat3, slime3, skeleton3 };
+    public static List<Monster> forestSummon = new List<Monster> { goblin1, goblin2, goblin3, slime1, slime2, slime3, kobald1, kobald2, kobald3, orc1, orc2, rat1,rat2, rat3, skeleton2, zombie2,zombie3, ghoul3 };
 
     
 
@@ -57,7 +77,7 @@ public class Dungeon
         bool haveF = false;
         if (Create.p.combatMonsters.Count == 0)
         {
-            Monster m = monster;
+            Monster m = monster.MonsterCopy();
             m.Name = m.Name + " A";
             Create.p.combatMonsters.Add(m.MonsterCopy());
         }
@@ -91,7 +111,7 @@ public class Dungeon
             else if (!haveD) m.Name = m.Name + " D";
             else if (!haveE) m.Name = m.Name + " E";
             else if (!haveF) m.Name = m.Name + " F";
-            Create.p.combatMonsters.Add(m.MonsterCopy());
+            Create.p.combatMonsters.Add(m);
         }
     }
     public static void Summon(Monster monster, string name)

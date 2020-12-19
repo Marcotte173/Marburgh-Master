@@ -17,6 +17,27 @@ public class Slime : Monster
         gold = 22;
         dropRate = 25;
     }
+
+    public Slime(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Slime";
+        name = "Slime";
+        xp = Balance.slimeXp * level + Return.RandomInt(Balance.slimeXp / 2, Balance.slimeXp + Balance.slimeXp / 2);
+        gold = Balance.slimeGold * level + Return.RandomInt(Balance.slimeGold / 2, Balance.slimeGold + Balance.slimeGold / 2);
+        strength = Balance.slimeStrength + Balance.slimeStrength * level /2;
+        agility = Balance.slimeAgility + Balance.slimeAgility * level / 2;
+        stamina = Balance.slimeStamina + Balance.slimeStamina * level / 2;
+        defence = agility + agility - 1;
+        damage = strength ;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level*2;
+        dropRate = 30;
+    }
+
     public override void Attack2(Player target)
     {
         Combat.combatText.Add(Color.MONSTER + name + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");

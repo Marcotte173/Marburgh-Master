@@ -28,7 +28,7 @@ public class MansionNecromancerBoss : Room
             "",
             Color.SPEAK," ","'Let's see'","",
         });
-        Dungeon.Summon(Dungeon.necromancer1, "The Necromancer");
+        Dungeon.Summon(Dungeon.necromancer5, "The Necromancer");
         Combat.Menu();
         UI.Keypress(new List<int> { 0,1,0,0,0,0,0,0,0,3,0,1 }, new List<string>
         {
@@ -46,7 +46,7 @@ public class MansionNecromancerBoss : Room
             Color.DEATH,"Now you will feel my true ","power ","",
 
         });
-        Dungeon.Summon(Dungeon.necromancer2,"The Necromancer");
+        Dungeon.Summon(Dungeon.necromancer6,"The Necromancer");
         Combat.Menu();
         UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
         {

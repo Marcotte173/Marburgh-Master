@@ -85,10 +85,10 @@ public class Level
             }
             else if (p.pClass == PlayerClass.Rogue)
             {
-                Button.stunButton.active = true;
+                Button.backstabButton.active = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Color.STUNNED, "You have learned ", "Stun", "!",
+                    Color.DAMAGE, "You have learned ", "Backstab", "!",
                 });
             }
             else if (p.pClass == PlayerClass.Warrior)
@@ -104,7 +104,7 @@ public class Level
         {
             if (p.pClass == PlayerClass.Mage)
             {
-                Button.fireBlastButton.active = true;
+                Button.magicMissileButton.active = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.ENERGY, "You have learned ", "Magic Missile", "!",
@@ -115,18 +115,18 @@ public class Level
                 Button.stunButton.active = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
-                    Color.DAMAGE, "You have learned ", "Backstab", "!",
+                    Color.STUNNED, "You have learned ", "Stun", "!",
                 });
             }
             else if (p.pClass == PlayerClass.Warrior)
             {
-                Button.rendButton.active = true;
+                Button.cleaveButton.active = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.BLOOD, "You have learned ", "Cleave", "!",
                 });
             }
         }
-        Utilities.ToTown();
+        //Utilities.ToTown();
     }
 }

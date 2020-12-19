@@ -50,6 +50,7 @@ public class Creature
         this.agility = agility;
         this.stamina = stamina;
     }
+    public Creature() { }
 
     public bool Undead { get { return undead; } set { undead = value; } }
     public List<string> Status { get { return status; } set { status = value; } }

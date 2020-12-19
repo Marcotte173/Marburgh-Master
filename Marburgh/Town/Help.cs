@@ -68,10 +68,14 @@ public class Help
         Console.ReadKey(true);
         Console.Clear();
         Write.Line(Color.CLASS, "MAGE ABILITIES\n\n");
-        Write.Line(Color.ABILITY, "\n1 - Fireblast\n");
-        Write.Line(Color.BURNING, "\nThe " + Color.CLASS + "Mage" + Color.RESET + " blasts his target with a burst of " + Color.BURNING + "fire" + Color.RESET + ", doing damage and causing ", "burning", "");
+        Write.Line(Color.ABILITY, "1 - Fireblast - Level 2\n");
+        Write.Line(Color.BURNING, "- The " + Color.CLASS + "Mage" + Color.RESET + " blasts his target with a burst of " + Color.BURNING + "fire" + Color.RESET + ", doing damage and causing ", "burning", "");
+        Write.Line(Color.ABILITY,"\n2 - Magic Missile - Level 4\n");
+        Console.WriteLine("- 3 bolts of pure " + Color.ENERGY + "Magic " + Color.RESET + "burst from the " + Color.CLASS + "Mage's" + Color.RESET + " hands.");
+        Console.WriteLine("  Each " + Color.ENERGY + "bolt " + Color.RESET + "hits an enemy doing " + Color.DAMAGE + "1/3 (Spellpower plus Player Level)" + Color.RESET + " damage");
         Write.Line(Color.BURNING, "\n\n", "BURNING", "\n");
         Console.WriteLine("When a creature burns, they take " + Color.BURNING + "3 " + Color.RESET + "damage over 2 turns, incremented by spellpower.");
+        
     }
 
     public static void Rogue()
@@ -87,9 +91,11 @@ public class Help
         Console.ReadKey(true);
         Console.Clear();
         Write.Line(Color.CLASS, "ROGUE ABILITIES\n\n");
-        Write.Line(Color.ABILITY, "\n1 - STUN");
-        Write.Line("\n\nThe " + Color.CLASS + "Rogue " + Color.RESET + "smacks his target with a sneaky strike, " + Color.DAMAGE + "damaging" + Color.RESET + " them and causing " + Color.STUNNED + "stun", "");
-        Write.Line(Color.STUNNED, "\n\n\n", "STUNNED", "\n");
+        Write.Line(Color.ABILITY, "1 - Backstab - Level 2");
+        Console.WriteLine("\n- The " + Color.CLASS + "Rogue" + Color.RESET + " sneaks behind the " + Color.MONSTER + "target" + Color.RESET + " and delivers a " + Color.DAMAGE + "crushing blow" + Color.RESET + ", dealing " + Color.DAMAGE + "double damage" + Color.RESET);
+        Write.Line(Color.ABILITY, "\n2 - STUN - Level 4");
+        Write.Line("\n- The " + Color.CLASS + "Rogue " + Color.RESET + "smacks his target with a sneaky strike, " + Color.DAMAGE + "damaging" + Color.RESET + " them and causing " + Color.STUNNED + "stun", "");
+        Write.Line(Color.STUNNED, "\n\n\n", "Stunned", "\n");
         Console.WriteLine("When a creature is " + Color.STUNNED + "stunned" + Color.RESET + ", they cannot take an action.");
     }
 
@@ -106,8 +112,10 @@ public class Help
         Console.ReadKey(true);
         Console.Clear();
         Write.Line(Color.CLASS, "WARRIOR ABILITIES\n\n");
-        Write.Line(Color.ABILITY, "\n1 - REND\n");
-        Write.Line(Color.BLOOD, "\nThe warrior slice his target with a mighty blow, doing damage and causing ", "bleeding", "");
+        Write.Line(Color.ABILITY, "-1 - Rend - Level 2\n");
+        Write.Line(Color.BLOOD, "- The warrior slices his target with a mighty blow, doing damage and causing ", "bleeding", "");
+        Write.Line(Color.ABILITY, "\n2 - Cleave - Level 4\n");
+        Write.Line("- The warrior smashes his" + Color.MONSTER + " target" + Color.RESET + " so hard he also hits an additional " + Color.MONSTER + "target." + Color.RESET );
         Write.Line(Color.BLOOD, "\n\n", "BLEEDING\n", "");
         Console.WriteLine("When a creature bleeds, they take " + Color.DAMAGE + "3 " + Color.RESET + "damage over 2 turns.");
     }

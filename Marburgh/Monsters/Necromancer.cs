@@ -19,6 +19,26 @@ public class Necromancer : Monster
         intelligence = level;
     }
 
+    public Necromancer(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Necromancer";
+        name = "Necromancer";
+        xp = Balance.necromancerXp * level + Return.RandomInt(Balance.necromancerXp / 2, Balance.necromancerXp + Balance.necromancerXp / 2);
+        gold = Balance.necromancerGold * level + Return.RandomInt(Balance.necromancerGold / 2, Balance.necromancerGold + Balance.necromancerGold / 2);
+        strength = Balance.necromancerStrength + Balance.necromancerStrength * level * 2 / 3;
+        agility = Balance.necromancerAgility + Balance.necromancerAgility * level / 2;
+        stamina = Balance.necromancerStamina + Balance.necromancerStamina * level / 2;
+        defence = 2 * agility + agility - 1;
+        damage = strength ;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level;
+        dropRate = 30;
+    }
+
     public override void Attack2(Player target)
     {
         Monster summon = (Return.RandomInt(0, 2) == 0) ? Dungeon.skeleton2 : Dungeon.zombie3;

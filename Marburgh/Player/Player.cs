@@ -21,6 +21,7 @@ public class Player : Creature
     protected int[] agilityLvl;
     protected int[] staminaLvl;
     protected int[] intelligenceLvl;
+    public float tempXp = 0;
     protected int reputation;
     protected int playerSpellpower;
     protected int playerDefence;
@@ -39,6 +40,7 @@ public class Player : Creature
     public int tempStamina;
     public int tempIntelligence;
     public int drinks = 0;
+    public bool showNumbers;
     public string[] drinkText = new string[] {null,"nice and warm","a little fuzzy","quite silly","sick","VERY SICK" };
 
     public void ItemCheck()
@@ -96,7 +98,7 @@ public class Player : Creature
             Write.Position(0, 6);
             if (choice == "1") Attack1(GetTarget());
             else if (choice == "2") Attack2(null);
-            else if (choice == "3" && (Button.fireBlastButton.active|| Button.rendButton.active || Button.backstabButton.active)) Attack3(GetTarget());
+            else if (choice == "3" && (Button.fireBlastButton.active || Button.rendButton.active || Button.backstabButton.active)) Attack3(GetTarget());
             else if (choice == "4" && (Button.stunButton.active)) Attack4(GetTarget());
             else if (choice == "4" && (Button.cleaveButton.active)) Attack4(GetTarget());
             else if (choice == "4" && (Button.magicMissileButton.active)) Attack4(null);
@@ -112,11 +114,16 @@ public class Player : Creature
                 CharacterSheet.Display();
                 AttackChoice();
             }
+            else if (choice == "x")
+            {
+                CombatToggle();
+                AttackChoice();
+            }
             else if (choice == "0")
             {
                 if (nonLethal)
                 {
-                    text.Add("You can't run away from combat in the "+Color.MONSTER+ "Arena");
+                    text.Add("You can't run away from combat in the " + Color.MONSTER + "Arena");
                 }
                 else
                 {
@@ -125,7 +132,7 @@ public class Player : Creature
                         Console.Clear();
                         UI.Keypress(new List<int> { 0 }, new List<string> { "You succesfully run away... Coward" });
                         combatMonsters.Clear();
-                        if(GameState.location == Location.Forest)
+                        if (GameState.location == Location.Forest)
                         {
                             Town.Menu();
                         }
@@ -133,10 +140,10 @@ public class Player : Creature
                         {
                             Explore.currentRoom = Explore.dungeon.layout[1];
                             Explore.Menu();
-                        }                        
+                        }
                     }
                     else text.Add("You try to get away but can't!");
-                }                
+                }
             }
             else AttackChoice();
         }
@@ -144,6 +151,12 @@ public class Player : Creature
         {
             Console.ReadKey(true);
         }
+    }
+
+    private void CombatToggle()
+    {
+        if (showNumbers) showNumbers = false;
+        if (!showNumbers) showNumbers = true;
     }
 
     Creature GetTarget()
@@ -396,6 +409,7 @@ public class Player : Creature
         tempStrength = 0;
         tempAgility = 0;
         tempStamina = 0;
+        tempXp = 0;
         tempIntelligence = 0;
     }
     public virtual void Attack1(Creature target)
@@ -481,6 +495,49 @@ public class Player : Creature
                 target.TakeDamage(100000);
             }            
         }
+        else if (chosenItem.name == "Potion Of Fire")
+        {
+            RemoveDrop(DropList.potionOfFire, 1);
+            Creature target = GetTarget();
+            text.Add($"You throw the potion at " + Color.MONSTER + target.Name + Color.RESET);
+            text.Add($"It screams as it starts " + Color.BURNING + "burning" + Color.RESET);
+            target.BurnDam = 6;
+            target.Burning = 3;
+            Combat.DisplayCombatText();
+            AttackChoice();
+        }
+        else if (chosenItem.name == "Potion Of Learning")
+        {
+            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
+            Combat.DisplayCombatText();
+            AttackChoice();
+        }
+        else if (chosenItem.name == "Potion Of Life")
+        {
+            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
+            Combat.DisplayCombatText();
+            AttackChoice();
+        }
+        else if (chosenItem.name == "Potion Of Power")
+        {
+            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
+            Combat.DisplayCombatText();
+            AttackChoice();
+        }
+        else if (chosenItem.name == "Potion Of Prowess")
+        {
+            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
+            Combat.DisplayCombatText();
+            AttackChoice();
+        }
+        else if (chosenItem.name == "Potion Of Knowledge")
+        {
+            RemoveDrop(DropList.potionOfKnowledge, 1);
+            text.Add($"You chug the " + Color.POTION + "potion" + Color.RESET + ". You feel " + Color.XP + "wiser" + Color.RESET + "...");
+            Combat.DisplayCombatText();
+            tempXp += .25f;
+            AttackChoice();
+        }
     }
 
     public override void HealStatement(int heal)
@@ -495,7 +552,13 @@ public class Player : Creature
 
     public override bool AttemptToHit(Creature target, int bonus)
     {
-        return (Return.RandomInt(1, 101) < Hit + bonus - target.Defence);
+        int attempt = Return.RandomInt(1, 101);
+        if (showNumbers)
+        {
+            text.Add($"Your hit is {Hit + bonus} and your targets defense is {target.Defence}");
+            text.Add($"You needed a {Hit + bonus - target.Defence}. You rolled {attempt}");
+        }
+        return (attempt < Hit + bonus - target.Defence);
     }
 
     public int Reputation { get { return reputation; } set { reputation = value; } }
@@ -524,7 +587,6 @@ public class Player : Creature
     public int TotalStamina { get { return stamina + tempStamina; } }
     public int TotalAgility { get { return agility + tempAgility; } }
     public int TotalIntelligence { get { return intelligence + tempIntelligence; } }
-
     public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence + tempDefence; } }
     public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation + tempMit; } set { mitigation = value; } }
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } }

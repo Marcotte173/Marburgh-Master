@@ -8,10 +8,10 @@ public class Warrior : Player
     public Warrior(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
-        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 3 };
-        agilityLvl = new int[]      { 0, 0, 1, 1, 2, 2 };
+        strengthLvl = new int[]     { 0, 0, 3, 2, 2, 3 };
+        agilityLvl = new int[]      { 0, 0, 1, 2, 2, 2 };
         staminaLvl = new int[]      { 0, 0, 2, 2, 2, 4 };
-        intelligenceLvl = new int[] { 0, 0, 0, 1, 2, 1 };
+        intelligenceLvl = new int[] { 0, 0, 1, 1, 2, 1 };
         Update();
         offHand = Equipment.shieldList[0];
         mainHand = Equipment.bluntList[0];
@@ -27,7 +27,7 @@ public class Warrior : Player
             Combat.combatText.Add($"You deliver a sturdy blow! "+Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(rendDamage, target.Mitigation) + Color.RESET + " damage and starts to " + Color.BLOOD + "bleed" + Color.RESET + "!");
             target.TakeDamage(rendDamage);
             target.Bleed = 2;
-            target.BleedDam = 3;
+            target.BleedDam = 4;
         }
         else
         {
@@ -62,8 +62,8 @@ public class Warrior : Player
 
     public override void Update()
     {
-        damage = playerDamage = TotalStrength * 2;
-        playerHit = 60 + TotalAgility * 3 + TotalAgility;
+        damage = playerDamage = TotalStrength;
+        playerHit = 75 + TotalAgility * 3 + TotalAgility / 2;
         playerCrit = TotalAgility * 3;
         health = maxHealth = 12 + 6 * TotalStamina;
         playerDefence = 3 * TotalAgility + TotalAgility-1;

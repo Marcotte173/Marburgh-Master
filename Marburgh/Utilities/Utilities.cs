@@ -88,6 +88,39 @@ public class Utilities
         }
     }
 
+    internal static void SortDamage(List<Equipment> list)
+    {
+        Equipment temp;
+        for (int j = 0; j <= list.Count - 2; j++)
+        {
+            for (int i = 0; i <= list.Count - 2; i++)
+            {
+                if (list[i].Damage > list[i + 1].Damage)
+                {
+                    temp = list[i + 1];
+                    list[i + 1] = list[i];
+                    list[i] = temp;
+                }
+            }
+        }
+    }
+    internal static void SortDefence(List<Equipment> list)
+    {
+        Equipment temp;
+        for (int j = 0; j <= list.Count - 2; j++)
+        {
+            for (int i = 0; i <= list.Count - 2; i++)
+            {
+                if (list[i].Defence > list[i + 1].Defence)
+                {
+                    temp = list[i + 1];
+                    list[i + 1] = list[i];
+                    list[i] = temp;
+                }
+            }
+        }
+    }
+
     public static void Buttons(List<string> list, List<string> buttonString, List<Button> buttons)
     {
         list.Clear();
@@ -182,7 +215,145 @@ public class Utilities
             desecrateList.Add("-10 ");
             desecrateList.Add("health!");
             Create.p.Health = -10;
-            Room.ActionWait(desecrateColourArray, desecrateList, Color.DEATH + "Drinking" + Color.RESET, null);
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
+        }
+        else if(chosenItem.name == "Potion Of Fire")
+        {
+            Create.p.RemoveDrop(DropList.potionOfFire, 1);
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.BURNING);
+            desecrateList.Add("You are on ");
+            desecrateList.Add("FIRE");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.DAMAGE);
+            desecrateList.Add("You lose ");
+            desecrateList.Add("half ");
+            desecrateList.Add("your health!");
+            Create.p.Health /=2;
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
+        }
+        else if (chosenItem.name == "Potion Of Learning")
+        {
+            Create.p.RemoveDrop(DropList.potionOfLearning, 1);
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.ENERGY);
+            desecrateList.Add("You feel ");
+            desecrateList.Add("smarter");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.ENERGY);
+            desecrateList.Add("You gain ");
+            desecrateList.Add("1 ");
+            desecrateList.Add("Intelligence until toy sleep");
+            Create.p.tempIntelligence += 1;
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
+        }
+        else if (chosenItem.name == "Potion Of Life")
+        {
+            Create.p.RemoveDrop(DropList.potionOfLife, 1);
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.HEALTH);
+            desecrateList.Add("You feel ");
+            desecrateList.Add("tougher");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.HEALTH);
+            desecrateList.Add("You gain ");
+            desecrateList.Add("1 ");
+            desecrateList.Add("Stamina until you sleep");
+            Create.p.tempStamina += 1;
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
+        }
+        else if (chosenItem.name == "Potion Of Power")
+        {
+            Create.p.RemoveDrop(DropList.potionOfPower, 1);
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.DAMAGE);
+            desecrateList.Add("You feel ");
+            desecrateList.Add("stronger");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.DAMAGE);
+            desecrateList.Add("You gain ");
+            desecrateList.Add("1 ");
+            desecrateList.Add("Strength until you sleep");
+            Create.p.tempStrength += 1;
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
+        }
+        else if (chosenItem.name == "Potion Of Prowess")
+        {
+            Create.p.RemoveDrop(DropList.potionOfProwess, 1);
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.CRIT);
+            desecrateList.Add("You feel more");
+            desecrateList.Add("agile");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.ENERGY);
+            desecrateList.Add("You gain ");
+            desecrateList.Add("1 ");
+            desecrateList.Add("Agility until you sleep");
+            Create.p.tempAgility += 1;
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
+        }
+        else if (chosenItem.name == "Potion Of Knowledge")
+        {
+            Create.p.RemoveDrop(DropList.potionOfKnowledge, 1);
+            Console.Clear();
+            List<int> desecrateColourArray = new List<int> { };
+            List<string> desecrateList = new List<string> { };
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.XP);
+            desecrateList.Add("You feel ");
+            desecrateList.Add("wiser");
+            desecrateList.Add(".");
+            desecrateColourArray.Add(0);
+            desecrateList.Add("");
+            desecrateColourArray.Add(1);
+            desecrateList.Add(Color.XP);
+            desecrateList.Add("You gain ");
+            desecrateList.Add("+25% ");
+            desecrateList.Add("experience until you sleep");
+            Create.p.tempXp += .25f;
+            Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
         }
     }
 }

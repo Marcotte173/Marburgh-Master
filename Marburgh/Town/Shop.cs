@@ -18,8 +18,10 @@ public class Shop
     static List<Equipment> magicList = new List<Equipment> { Equipment.magicList[0], Equipment.magicList[1], Equipment.magicList[2], Equipment.magicList[3], Equipment.magicList[4], Equipment.magicList[5], Equipment.magicList[6], Equipment.magicList[7] };
     public static List<Drop> potionList = new List<Drop> { DropList.potionOfFire, DropList.potionOfLearning, DropList.potionOfLife, DropList.potionOfPower, DropList.potionOfProwess, DropList.potionOfKnowledge };
     public static List<Drop> potionAvailableList = new List<Drop> { };
-    public static List<Equipment> itemOffenceList = new List<Equipment> { Equipment.bluntList[0], Equipment.magicList[1], Equipment.daggerList[1], Equipment.bluntList[1], Equipment.swordList[1]};
-    public static List<Equipment> itemDefenceList = new List<Equipment> { Equipment.armorList[0], Equipment.shieldList[1], Equipment.armorList[1] };
+    public static List<Equipment> itemOffenceList = new List<Equipment> { Equipment.bluntList[0], Equipment.magicList[1], Equipment.daggerList[1], Equipment.bluntList[1], Equipment.swordList[1], Equipment.magicList[2], Equipment.daggerList[2], Equipment.bluntList[2], Equipment.swordList[2] };
+    public static List<Equipment> itemOffenceAvailableList = new List<Equipment> {  };
+    public static List<Equipment> itemDefenceList = new List<Equipment> { Equipment.armorList[0], Equipment.shieldList[1], Equipment.armorList[1], Equipment.shieldList[2], Equipment.armorList[2] };
+    public static List<Equipment> itemDefenceAvailableList = new List<Equipment> {  };
     static int[] upgrade = new int[] { 1000, 3000, 10000, 20000, 35000 };
     static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
     static int current = 0;
@@ -72,19 +74,20 @@ public class Shop
         }
         else if (choice == "b" && shopKeep == itemNPC)
         {
-            UI.Choice(new List<int> { 1, 0, }, new List<string>
+            UI.Choice(new List<int> { 1,0,1, 0, }, new List<string>
             {
-                Color.SPEAK,"", $"'And what can I interest you in?'","",
+                Color.SPEAK,"","'Just so you know, I get new Equipment EVERYDAY!","",
                 "",
-
+                Color.SPEAK,"", $"And what can I interest you in?'","",
+                "",
             },
             new List<string> { "ffensive Items", "efensive Items" }, new List<string> { Color.ITEM + "O" + Color.RESET, Color.ITEM + "D" + Color.RESET,  });
             Write.Line(50, 11, Color.ITEM, "Main Hand:  ", $"{Create.p.MainHand.Name} ", "");
             Write.Line(50, 12, Color.ITEM, "Off Hand:   ", $"{Create.p.OffHand.Name} ", "");
             Write.Line(50, 13, Color.ITEM, "Armor:      ", $"{Create.p.Armor.Name}   ", "");
             string choice2 = Return.Option();
-            if (choice2 == "o") Buy(itemOffenceList, shopKeep);
-            else if (choice2 == "d") Buy(itemDefenceList, shopKeep);
+            if (choice2 == "o") Buy(itemOffenceAvailableList, shopKeep);
+            else if (choice2 == "d") Buy(itemDefenceAvailableList, shopKeep);
             else Menu(shopKeep);
         }
         else if (choice == "b" && shopKeep == armorNPC) Buy(armorList, shopKeep);

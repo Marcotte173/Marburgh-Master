@@ -8,9 +8,9 @@ public class Rogue : Player
     public Rogue(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
-        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 3 };
+        strengthLvl = new int[]     { 0, 0, 3, 2, 2, 3 };
         agilityLvl = new int[]      { 0, 0, 2, 2, 2, 4 };
-        staminaLvl = new int[]      { 0, 0, 1, 1, 2, 2 };
+        staminaLvl = new int[]      { 0, 0, 1, 2, 2, 2 };
         intelligenceLvl = new int[] { 0, 0, 0, 1, 2, 1 };
         Update();
         offHand = Equipment.daggerList[0];
@@ -56,8 +56,8 @@ public class Rogue : Player
 
     public override void Update()
     {
-        damage = playerDamage = TotalStrength + TotalAgility;
-        playerHit = 60 + TotalAgility * 4 + TotalAgility;
+        damage = playerDamage = TotalStrength/2 + TotalAgility/2;
+        playerHit = 78 + TotalAgility * 4 + TotalAgility / 2;
         playerCrit = TotalAgility * 4;
         playerDefence = 2 * TotalAgility;
         health = maxHealth = 12 + 4 * TotalAgility;

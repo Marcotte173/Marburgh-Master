@@ -51,14 +51,13 @@ public class Combat
                     z.Drop();
                 }
             }
-        }
-        
+        }        
         List<int> colours = new List<int> { };
         List<string> text = new List<string> { };
         int goldroll = Return.RandomInt(-2, 6);
         int xproll = Return.RandomInt(-1, 3);
         int gold =  goldReward + goldroll;
-        int xp =  xpReward + xproll;
+        int xp = (Create.p.tempXp > 0)?Convert.ToInt32((xpReward + xproll) * (1 + Create.p.tempXp)) :xpReward + xproll;
         colours.Add(0);
         text.Add("You have defeated your enemies");
         colours.Add(0);
@@ -86,6 +85,7 @@ public class Combat
             text.Add("");
             text.Add("YOU ARE ELIGIBLE FOR A LEVEL RAISE");
             text.Add("");
+            Button.levelMasterButton.active = true;
         }
         //Get the drops on the drop list
         foreach(Drop d in Create.p.combatDropList)

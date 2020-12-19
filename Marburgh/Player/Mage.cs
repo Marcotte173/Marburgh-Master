@@ -7,10 +7,10 @@ public class Mage : Player
     public Mage(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
-        strengthLvl = new int[]     { 0, 0, 1, 1, 2, 2 };
-        agilityLvl = new int[]      { 0, 0, 1, 1, 2, 2 };
+        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 2 };
+        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 2 };
         staminaLvl = new int[]      { 0, 0, 1, 2, 2, 3 };
-        intelligenceLvl = new int[] { 0, 0, 2, 2, 2, 4 };
+        intelligenceLvl = new int[] { 0, 0, 2, 2, 3, 4 };
         Update();
         potionSize = maxPotionSize += 5;
         offHand = Equipment.magicList[0];
@@ -39,7 +39,7 @@ public class Mage : Player
     public override void Attack3(Creature target)
     {
         int flameDamage = 2 + Spellpower;
-        if (Return.HaveEnergy(1))
+        if (Return.HaveEnergy(2))
         {
             Combat.combatText.Add(Color.BURNING + "Flames " + Color.RESET + "burst out of your hands, burning "+Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + flameDamage + Color.RESET + " damage and " + Color.BURNING + "igniting " + Color.RESET + "him!");
             target.TakeDamage(flameDamage);
@@ -58,7 +58,7 @@ public class Mage : Player
     {
         int bolts = (level > 3) ? 5 : 3;
         int missileDamage = (level + Spellpower)/3;
-        if (Return.HaveEnergy(2))
+        if (Return.HaveEnergy(3))
         {
             energy -= 2;
             Combat.combatText.Add($"{Color.ENERGY + bolts+ Color.RESET} bolts of pure "+Color.ENERGY + "Arcane Energy " + Color.RESET + "burst out of your hands");
@@ -82,8 +82,8 @@ public class Mage : Player
 
     public override void Update()
     {
-        damage = playerDamage = TotalStrength * 2;
-        playerHit = 60 + TotalAgility * 3 + TotalAgility;
+        damage = playerDamage = TotalStrength;
+        playerHit = 75 + TotalAgility * 3 + TotalAgility/2;
         playerCrit = TotalAgility * 3;
         playerDefence = 2 * TotalAgility+1;
         health = maxHealth = 12 + 3 * TotalStamina;

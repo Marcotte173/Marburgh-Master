@@ -29,7 +29,7 @@ public class Library : Room
 
         }, new List<string> { "egular book", "ecromancer's book", "alk away" }, new List<string> { Color.DAMAGE + "R" + Color.RESET, Color.HIT + "N" + Color.RESET, Color.DEFENCE + "W" + Color.RESET });
         string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
-        int xp = Return.RandomInt(15, 20);
+        int xp = (Create.p.tempXp > 0) ? Convert.ToInt32((Return.RandomInt(15, 20)) * (1 + Create.p.tempXp)) : Return.RandomInt(15, 20); 
         int xpRegular = Return.RandomInt(40, 50);
         if (choice == "n")
         {

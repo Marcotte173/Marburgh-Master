@@ -121,12 +121,12 @@ public class Button
     public static Button attackButton = new Button("1", " " + Color.DAMAGE + "Attack" + Color.RESET, true);
     public static Button defendButton = new Button("2", " " + Color.DEFENCE + "Defend" + Color.RESET, false);
     public static Button shieldButton = new Button("2", " " + Color.SHIELD + "Shield" + Color.RESET, false);
-    public static Button fireBlastButton = new Button("3", " " + Color.BURNING + "FireBlast" + Color.RESET, false);
-    public static Button rendButton = new Button("3", " " + Color.BLOOD + "Rend" + Color.RESET, false);
-    public static Button backstabButton = new Button("3", " " + Color.DAMAGE + "Backstab" + Color.RESET, false);
-    public static Button stunButton = new Button("4", " " + Color.STUNNED + "Stun" + Color.RESET, false);
-    public static Button magicMissileButton = new Button("4", " " + Color.ENERGY + "Magic Missile" + Color.RESET, false);    
-    public static Button cleaveButton = new Button("4", " " + Color.DAMAGE + "Cleave" + Color.RESET, false);
+    public static Button fireBlastButton = new Button("3", " " + Color.BURNING + "FireBlast - (" + Color.ENERGY + "2" + Color.RESET+")", false);
+    public static Button rendButton = new Button("3", " " + Color.BLOOD + "Rend - (" + Color.ENERGY + "1" + Color.RESET + ")", false);
+    public static Button backstabButton = new Button("3", " " + Color.DAMAGE + "Backstab - (" + Color.ENERGY + "1" + Color.RESET + ")", false);
+    public static Button stunButton = new Button("4", " " + Color.STUNNED + "Stun - (" + Color.ENERGY + "2" + Color.RESET + ")", false);
+    public static Button magicMissileButton = new Button("4", " " + Color.ENERGY + "Magic Missile - (" + Color.ENERGY + "3" + Color.RESET + ")", false);    
+    public static Button cleaveButton = new Button("4", " " + Color.DAMAGE + "Cleave - (" + Color.ENERGY + "2" + Color.RESET + ")", false);
     public static Button potionButton = new Button("6", " " + Color.POTION + "Potion" + Color.RESET, false);
     public static List<Button> listOfCombatOptions = new List<Button> { attackButton, defendButton, shieldButton, fireBlastButton, backstabButton, rendButton, stunButton, magicMissileButton, cleaveButton, potionButton };
 

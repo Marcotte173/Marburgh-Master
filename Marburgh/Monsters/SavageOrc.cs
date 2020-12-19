@@ -18,6 +18,26 @@ public class SavageOrc : Monster
         gold = 30;
         dropRate = 100;
     }
+
+    public SavageOrc(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Savage Orc";
+        name = "Savage Orc";
+        xp = Balance.savageOrcXp * level + Return.RandomInt(Balance.savageOrcXp / 2, Balance.savageOrcXp + Balance.savageOrcXp / 2);
+        gold = Balance.savageOrcGold * level + Return.RandomInt(Balance.savageOrcGold / 2, Balance.savageOrcGold + Balance.savageOrcGold / 2);
+        strength = Balance.savageOrcStrength + Balance.savageOrcStrength * level /2;
+        agility = Balance.savageOrcAgility + Balance.savageOrcAgility * level / 2;
+        stamina = Balance.savageOrcStamina + Balance.savageOrcStamina * level / 2;
+        defence = 2 * agility + agility - 1;
+        damage = strength;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+        mitigation = level;
+        dropRate = 30;
+    }
     public override void Attack2(Player target)
     {
         if (target.PersonalShield)

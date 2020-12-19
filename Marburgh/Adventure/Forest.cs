@@ -9,6 +9,7 @@ public class Forest
     static int depth = 0;
     static int savedDepth = 0;
     static int campDepth = 3;
+    static int clearingsFound=0;
     public static void Menu()
     {
         GameState.location = Location.Forest;

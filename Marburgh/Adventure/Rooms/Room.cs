@@ -184,7 +184,8 @@ public class Room
         }
         if (book)
         {
-            Create.p.XP += 10;
+            int xp = (Create.p.tempXp > 0) ? Convert.ToInt32((Return.RandomInt(8, 15)) * (1 + Create.p.tempXp)) : Return.RandomInt(8, 15);
+            Create.p.XP += xp;
             findColourArray.Add(1);
             findList.Add(Color.XP);
             findList.Add("You find a ");
@@ -193,10 +194,22 @@ public class Room
             findColourArray.Add(1);
             findList.Add(Color.XP);
             findList.Add("You gain ");
-            findList.Add($"10 ");
+            findList.Add(xp.ToString());
             findList.Add("experience");
             findColourArray.Add(0);
             findList.Add("");
+            if (Create.p.XP >= Create.p.XPNeeded[Create.p.Level])
+            {
+                findColourArray.Add(0);
+                findList.Add("");
+                findColourArray.Add(1);
+                findList.Add(Color.XP);
+                findList.Add("");
+                findList.Add("YOU ARE ELIGIBLE FOR A LEVEL RAISE");
+                findList.Add("");
+                Button.levelMasterButton.active = true;
+            }
+            Button.levelMasterButton.active = true;
         }
         ActionWait(findColourArray, findList, Color.RESET + "You find" + Color.RESET + Color.RESET, foundString);   
         visited = true;

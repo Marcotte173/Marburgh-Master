@@ -4,7 +4,7 @@ using System.Text;
 
 public class Blunt : Equipment
 {    
-    int[] damageBoost = new int[] { 0, 3, 5,  5,  6,  9, 10,  14 };   
+    int[] damageBoost = new int[] { 0, 2, 2,  2,  6,  9, 10,  14 };   
 
     public Blunt(string name, int damage, int hit, int crit,  bool twoHand,int level)
     : base()

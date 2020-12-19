@@ -31,6 +31,11 @@ public class Monster : Creature
         crit = agility * 4;
         health = maxHealth = 6 * stamina;
     }
+    public Monster(int level)
+    : base()
+    {
+        this.level = level;      
+    }
     public virtual void Attack2(Player target)
     {
 
@@ -140,6 +145,6 @@ public class Monster : Creature
         else return DropList.monsterTooth.Copy();
     }
 
-    
+    public int DropRate { get { return dropRate; } set { dropRate = value; } }
     public int Action { get { return action; } set { action = value; } }    
 }

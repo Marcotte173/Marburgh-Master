@@ -26,11 +26,11 @@ public class Equipment
     {
         new Sword("Fist",0,0,0,false,0),
 
-        new Sword("Short Sword",3,10,2,false,1),
+        new Sword("Short Sword",2,10,2,false,1),
+        new Sword("Arming Sword",4,14,2,false,2),
+        new Sword("Long Sword",6,12,3,false,3),
+        new Sword("Katana",8,16,5,false,4),
 
-        new Sword("Arming Sword",6,8,2,false,2),
-        new Sword("Long Sword",10,12,3,false,3),
-        new Sword("Katana",14,16,5,false,4),
         new Sword("Broad Sword",18,20,7,false,5),
         new Sword("Great Sword",46,24,8,false,6),
         new Sword("Claymore",58,30,10,false,7)
@@ -41,10 +41,10 @@ public class Equipment
         new Shield("Fist",0,0,0),
 
         new Shield("Buckler",0,10,1),
+        new Shield("Round Shield",0,15,2),
+        new Shield("Pavise",0,20,3),
+        new Shield("Targ",0,25,4),
 
-        new Shield("Round Shield",0,10,2),
-        new Shield("Pavise",0,15,3),
-        new Shield("Targ",0,20,4),
         new Shield("Heater Shield",0,25,5),
         new Shield("Kite Shield",0,30,6),
         new Shield("Teardrop Shield",0,40,7),
@@ -54,11 +54,11 @@ public class Equipment
     {
         new Magic("None",0,0,0,0,false,0),
 
-        new Magic("Walking stick",5,3,5,2,true,1),
+        new Magic("Walking stick",3,3,5,2,true,1),
+        new Magic("Staff",7,6,1,2,true,2),
+        new Magic("Book",5,9,4,4,false,3),
+        new Magic("Wand",7,12,6,6,false,4),
 
-        new Magic("Staff",12,7,1,2,true,2),
-        new Magic("Book",16,12,4,4,false,3),
-        new Magic("Wand",20,18,6,6,false,4),
         new Magic("Orb",26,25,11,10,false,5),
         new Magic("Ring",32,34,14,13,false,6),
         new Magic("Source",40,45,16,16,false,7)
@@ -68,11 +68,11 @@ public class Equipment
     {
         new Dagger("Fist",0,0,0,0),
 
-        new Dagger("Butcher's Knife",3,4,4,1),
+        new Dagger("Butcher's Knife",2,4,4,1),
+        new Dagger("Knife",4,2,8,2),
+        new Dagger("Push Dagger",6,3,12,3),
+        new Dagger("Stilleto",8,7,16,4),
 
-        new Dagger("Knife",6,2,8,2),
-        new Dagger("Push Dagger",9,3,12,3),
-        new Dagger("Stilleto",13,5,16,4),
         new Dagger("Dirk",17,7,20,5),
         new Dagger("Trench Knife",23,8,24,6),
         new Dagger("Baselard",29,20,30,7)
@@ -82,11 +82,11 @@ public class Equipment
     {
         new Blunt("Fist",0,0,0,false,0),
 
-        new Blunt("Club",4,0,0,false,1),
+        new Blunt("Club",2,0,0,false,1),
+        new Blunt("Hammer",4,1,1,false,2),
+        new Blunt("Shillelagh",6,3,3,false,3),
+        new Blunt("Flail",9,4,4,false,4),
 
-        new Blunt("Hammer",7,1,1,false,2),
-        new Blunt("Shillelagh",10,3,3,false,3),
-        new Blunt("Flail",14,4,4,false,4),
         new Blunt("Morning Star",18,5,5,false,5),
         new Blunt("War Hammer",45,8,8,false,6),
         new Blunt("Maul",60,8,8,false,7)
@@ -97,10 +97,10 @@ public class Equipment
         new Armor("None",0,0,0),
 
         new Armor("Cloth",1,5,1),
-
-        new Armor("Leather",1,9,2),
-        new Armor("Hardened Leather",2,8,3),
+        new Armor("Leather",2,6,2),
+        new Armor("Hardened Leather",3,5,3),
         new Armor("Mail",3,6,4),
+
         new Armor("Coat Of Plates",5,4,5),
         new Armor("Mail and Plate",7,2,6),
         new Armor("Articulated Plate",10,0,7),
@@ -112,7 +112,7 @@ public class Equipment
     }
     public void GetPrice()
     {
-        price = (level == 1) ? 50 : (level == 2) ? 500 : (level == 3) ? 900 : (level == 4) ? 1300 : (level == 5) ? 1600 : (level == 6) ? 2000 : (level == 7) ? 2500 : 0;
+        price = (level == 1) ? 50 : (level == 2) ? 150 : (level == 3) ? 400 : (level == 4) ? 700 : (level == 5) ? 1600 : (level == 6) ? 2000 : (level == 7) ? 2500 : 0;
         if (type == EquipmentType.TwoHand) price *= 2;
     }
 

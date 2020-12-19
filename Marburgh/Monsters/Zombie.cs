@@ -18,6 +18,24 @@ public class Zombie : Monster
         dropRate = 30;
         undead = true;
     }
+
+    public Zombie(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Zombie";
+        name = "Zombie";
+        xp = Balance.zombieXp * level + Return.RandomInt(Balance.zombieXp / 2, Balance.zombieXp + Balance.zombieXp / 2);
+        gold = Balance.zombieGold * level + Return.RandomInt(Balance.zombieGold / 2, Balance.zombieGold + Balance.zombieGold / 2);
+        strength = Balance.zombieStrength + Balance.zombieStrength * level * 2 / 3;
+        agility = Balance.zombieAgility + Balance.zombieAgility * level / 2;
+        stamina = Balance.zombieStamina + Balance.zombieStamina * level / 2;
+        defence = 3/2 * agility + agility - 1;
+        damage = strength ;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        health = maxHealth = 6 * stamina;
+    }
     public override void Declare()
     {
         canAct = true;

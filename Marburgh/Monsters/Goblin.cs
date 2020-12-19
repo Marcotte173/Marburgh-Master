@@ -16,6 +16,25 @@ public class Goblin : Monster
         gold = 22;
         dropRate = 30;
     }
+    public Goblin(int level)
+    : base(level)
+    {
+        this.level = level;
+        type = "Goblin";
+        name = "Goblin";
+        xp = Balance.goblinXp * level + Return.RandomInt(Balance.goblinXp / 2, Balance.goblinXp + Balance.goblinXp / 2);
+        gold = Balance.goblinGold * level + Return.RandomInt(Balance.goblinGold / 2, Balance.goblinGold + Balance.goblinGold / 2);
+        strength = Balance.goblinStrength + Balance.goblinStrength * level /2;
+        agility = Balance.goblinAgility + Balance.goblinAgility * level / 2;
+        stamina = Balance.goblinStamina + Balance.goblinStamina * level / 2;
+        defence = 2 * agility + agility - 1;
+        damage = strength;
+        hit = 65 + agility * 4;
+        crit = agility * 4;
+        mitigation = level;
+        dropRate = 30;
+        health = maxHealth = 6 * stamina;
+    }
     public override void Attack2(Player target)
     {
         if (target.PersonalShield)

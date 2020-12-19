@@ -4,8 +4,8 @@ using System.Text;
 
 public class Sword : Equipment
 {
-    int[] damageBoost = new int[] { 0, 2, 4, 4, 6, 6, 8, 10 };
-    int[] hitBoost = new int[]    { 0, 3, 2, 2, 2, 2, 3, 3  };
+    int[] damageBoost = new int[] { 0, 1, 2,2, 3, 6, 8, 10 };
+    int[] hitBoost = new int[]    { 0, 3, 5, 5, 7, 2, 3, 3  };
     public static Sword twoHanded = new Sword("Two Hand", 0, 0, 0, false, 0);     
 
     public Sword(string name, int damage, int hit, int crit, bool twoHand, int level)

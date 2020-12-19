@@ -100,6 +100,7 @@
     <Compile Include="Town\Tavern\Bartender.cs" />
     <Compile Include="Town\Tavern\LocalGossip.cs" />
     <Compile Include="Town\Tavern\NPC.cs" />
+    <Compile Include="Utilities\Balance.cs" />
     <Compile Include="Utilities\GameState.cs" />
     <Compile Include="Items\Dagger.cs" />
     <Compile Include="Town\Craft.cs" />

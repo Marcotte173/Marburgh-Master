@@ -204,7 +204,6 @@ public class Town
                 }
                 else if (choice == "3")
                 {
-
                     Forest.Menu();
                 }
                 else if (choice == "*")
@@ -225,7 +224,7 @@ public class Town
 
                     //Explore.dungeon = Dungeon.MansionEntrance;
                     //Explore.dungeon.layout[1].room.Explore();
-                    Explore.Menu();
+                    //Explore.Menu();
                 }                
             }
         }
