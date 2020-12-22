@@ -10,7 +10,7 @@ public class Name
         "Beth", "Bonnie", "Bailey","Beuford", "Barbara","Bernard", "Bill", "Bryce", "Belle","Barrie",
         "Carol", "Candice", "Cindy","Cole", "Charles","Chris","Chance", "Caleb","Caddie","Caitlyn", "Connor", "Carl","Conrad",
         "Donna", "Deborah","Doug",  "Don", "Dwight", "Dexter", "Daphne",
-        "Elaine", "Emily","Edward", "Eric",
+        "Elaine", "Emily","Edward", "Eric","Ethan",
         "Farrah","Fred","Frank", "Fran",
         "Gina", "George", "Gerald",
         "Heather",  "Harold","Hank",
@@ -25,7 +25,7 @@ public class Name
 
     internal static List<string> fanatsyList = new List<string>
     {
-        "Marley","Orion","Lela","Phoenix","Joresly","Shampa","Kinru","Minnow","Krean","Duvlet","Hampton"
+        "Marley","Orion","Lela","Phoenix","Joresly","Shampa","Kinru","Minnow","Krean","Duvlet","Hampton","Aba","Beltaine","Corsan","Entonly","Faz"
     };
 
     internal static List<string> raceList = new List<string>

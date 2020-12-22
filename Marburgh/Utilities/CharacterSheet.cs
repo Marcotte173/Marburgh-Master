@@ -65,16 +65,17 @@ public class CharacterSheet
         Console.SetCursorPosition(2, 25);
         Console.Write(Color.ITEM + "Armor" + Color.RESET + $": {Create.p.Armor.Name}");
 
-        Console.SetCursorPosition(99, 19);
-        Write.Line(Color.DAMAGE, "","Damage", $": {Create.p.Damage}");
-        Console.SetCursorPosition(99, 21);
+        Console.SetCursorPosition(95, 18);
+        Write.Line(Color.DAMAGE, "", "Main Hand Damage", $": {Create.p.DamageMain}");
+        if(Create.p.OffHand.Name != "Fist" && Create.p.OffHand.Type != EquipmentType.Shield && Create.p.MainHand.Type!=EquipmentType.TwoHand) Write.Line(95, 19,Color.DAMAGE, "","Off Hand Damage", $" : {Create.p.DamageOff}");
+        Console.SetCursorPosition(95, 21);
         Write.Line(Color.HIT, "","Hit", $": {Create.p.Hit}");
-        Console.SetCursorPosition(99, 22);
+        Console.SetCursorPosition(95, 22);
         Write.Line(Color.CRIT, "","Crit", $": {Create.p.Crit}");
 
-        Console.SetCursorPosition(99, 24);
+        Console.SetCursorPosition(95, 24);
         Write.Line(Color.MITIGATION, "","Mitigation", $": {Create.p.Mitigation}");
-        Console.SetCursorPosition(99, 25);
+        Console.SetCursorPosition(95, 25);
         Write.Line(Color.DEFENCE, "","Defence", $": {Create.p.Defence}");
 
         Console.SetCursorPosition(Console.WindowWidth / 2 - 12, 8);

@@ -6,18 +6,6 @@ using System.Threading.Tasks;
 
 public class Slime : Monster
 {    
-    public Slime(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Slime";
-        type = "Slime";
-        mitigation = 1;
-        level = 1;
-        xp = 6;
-        gold = 22;
-        dropRate = 25;
-    }
-
     public Slime(int level)
     : base(level)
     {
@@ -33,7 +21,7 @@ public class Slime : Monster
         damage = strength ;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
         mitigation = level*2;
         dropRate = 30;
     }
@@ -42,7 +30,7 @@ public class Slime : Monster
     {
         Combat.combatText.Add(Color.MONSTER + name + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
         MaxHealth = Health;
-        Slime s = new Slime(2, 2, 3,1);
+        Slime s = new Slime(level);
         s.Health = s.MaxHealth = MaxHealth;
         Create.p.combatMonsters.Add(s);
     }

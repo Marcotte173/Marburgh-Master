@@ -6,16 +6,6 @@ using System.Threading.Tasks;
 
 public class Kobold : Monster
 {
-    public Kobold(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Kobald";
-        type = "Kobald";
-        mitigation = 1;
-        xp = 6;
-        gold = 20;
-        dropRate = 30;
-    }
     public Kobold(int level)
     : base(level)
     {
@@ -31,7 +21,7 @@ public class Kobold : Monster
         damage = strength ;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
         mitigation = level;
         dropRate = 30;
     }

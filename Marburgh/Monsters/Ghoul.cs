@@ -6,16 +6,6 @@ using System.Threading.Tasks;
 
 public class Ghoul:Monster
 {
-    public Ghoul(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        type = "Ghoul";
-        name = "Ghoul";
-        mitigation = 1;
-        xp = 6;
-        gold = 22;
-        dropRate = 30;
-    }
     public Ghoul(int level)
     : base(level)
     {        
@@ -31,7 +21,7 @@ public class Ghoul:Monster
         damage = strength;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
         mitigation = level;
         dropRate = 30;
     }

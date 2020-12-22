@@ -7,10 +7,10 @@ public class Mage : Player
     public Mage(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
-        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 2 };
-        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 2 };
-        staminaLvl = new int[]      { 0, 0, 1, 2, 2, 3 };
-        intelligenceLvl = new int[] { 0, 0, 2, 2, 3, 4 };
+        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 2,2,2 };
+        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 2,3,2 };
+        staminaLvl = new int[]      { 0, 0, 1, 2, 2, 3,2,3 };
+        intelligenceLvl = new int[] { 0, 0, 2, 2, 3, 4, 3, 3 };
         Update();
         potionSize = maxPotionSize += 5;
         offHand = Equipment.magicList[0];
@@ -46,7 +46,7 @@ public class Mage : Player
             if (target.Burning > 0) target.BurnDam += 1;
             else target.BurnDam = 1;
             target.Burning = 3;
-            energy--;
+            energy-=2;
         }
         else
         {
@@ -56,11 +56,11 @@ public class Mage : Player
     }
     public override void Attack4(Creature target)
     {
-        int bolts = (level > 3) ? 5 : 3;
-        int missileDamage = (level + Spellpower)/3;
+        int bolts = (level > 5) ? 5 : 3;
+        int missileDamage = (level + Spellpower)/2;
         if (Return.HaveEnergy(3))
         {
-            energy -= 2;
+            energy -= 3;
             Combat.combatText.Add($"{Color.ENERGY + bolts+ Color.RESET} bolts of pure "+Color.ENERGY + "Arcane Energy " + Color.RESET + "burst out of your hands");
             for (int i = 0; i < bolts; i++)
             {
@@ -89,26 +89,5 @@ public class Mage : Player
         health = maxHealth = 12 + 3 * TotalStamina;
         maxEnergy = energy = TotalIntelligence*2-1;
         spellpower = TotalIntelligence;
-    }
-
-    public override void TakeDamage(int damage, Monster hitMe)
-    {
-        if (shield == false)
-        {
-            base.TakeDamage(damage, hitMe);
-        }
-        else
-        {
-            Player.text.Add("Your " + Color.SHIELD + "shield " + Color.RESET + $"absorbs {Color.SHIELD + energy + Color.RESET} damage!");
-            if (energy >= damage/2) energy -= damage/2;
-            else
-            {
-                damage -= energy*2;
-                energy = 0;
-                shield = false;
-                Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
-                base.TakeDamage(damage, hitMe);
-            }
-        }
     }
 }

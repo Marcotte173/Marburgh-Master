@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 public class Orc : Monster
 {
     int stunAttempts;
-    public Orc(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Orc";
-        type = "Orc";
-        mitigation = 1;
-        xp = 9;
-        gold = 19;
-        stunAttempts = 1;
-    }
     public Orc(int level)
     : base(level)
     {
@@ -32,7 +22,7 @@ public class Orc : Monster
         damage = strength;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
         mitigation = level;
         dropRate = 30;
     }

@@ -26,10 +26,10 @@ public class Equipment
     {
         new Sword("Fist",0,0,0,false,0),
 
-        new Sword("Short Sword",2,10,2,false,1),
-        new Sword("Arming Sword",4,14,2,false,2),
-        new Sword("Long Sword",6,12,3,false,3),
-        new Sword("Katana",8,16,5,false,4),
+        new Sword("Short Sword",3,10,2,false,1),
+        new Sword("Arming Sword",5,14,2,false,2),
+        new Sword("Long Sword",7,17,3,false,3),
+        new Sword("Katana",9,20,5,false,4),
 
         new Sword("Broad Sword",18,20,7,false,5),
         new Sword("Great Sword",46,24,8,false,6),
@@ -68,10 +68,10 @@ public class Equipment
     {
         new Dagger("Fist",0,0,0,0),
 
-        new Dagger("Butcher's Knife",2,4,4,1),
-        new Dagger("Knife",4,2,8,2),
-        new Dagger("Push Dagger",6,3,12,3),
-        new Dagger("Stilleto",8,7,16,4),
+        new Dagger("Butcher's Knife",3,2,5,1),
+        new Dagger("Knife",5,2,8,2),
+        new Dagger("Push Dagger",7,3,11,3),
+        new Dagger("Stilleto",9,6,14,4),
 
         new Dagger("Dirk",17,7,20,5),
         new Dagger("Trench Knife",23,8,24,6),
@@ -82,10 +82,10 @@ public class Equipment
     {
         new Blunt("Fist",0,0,0,false,0),
 
-        new Blunt("Club",2,0,0,false,1),
-        new Blunt("Hammer",4,1,1,false,2),
-        new Blunt("Shillelagh",6,3,3,false,3),
-        new Blunt("Flail",9,4,4,false,4),
+        new Blunt("Club",3,6,3,false,1),
+        new Blunt("Hammer",5,10,5,false,2),
+        new Blunt("Shillelagh",7,14,8,false,3),
+        new Blunt("Flail",9,15,10,false,4),
 
         new Blunt("Morning Star",18,5,5,false,5),
         new Blunt("War Hammer",45,8,8,false,6),

@@ -6,16 +6,6 @@ using System.Threading.Tasks;
 
 public class Goblin : Monster
 {
-    public Goblin(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Goblin";
-        type = "Goblin";
-        mitigation = 1;
-        xp = 6;
-        gold = 22;
-        dropRate = 30;
-    }
     public Goblin(int level)
     : base(level)
     {
@@ -33,7 +23,7 @@ public class Goblin : Monster
         crit = agility * 4;
         mitigation = level;
         dropRate = 30;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
     }
     public override void Attack2(Player target)
     {

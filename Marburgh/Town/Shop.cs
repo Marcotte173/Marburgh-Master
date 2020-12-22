@@ -28,6 +28,7 @@ public class Shop
     public static bool weaponJob;
     public static bool armorJob;
     public static bool magicJob;
+    public static bool itemJob;
     public static Equipment itemToSell;
     public static Equipment itemToSell2;
 
@@ -38,6 +39,14 @@ public class Shop
         if (shopKeep == magicNPC) Button.healthPotionBuyButton.active = true;
         if (shopKeep == itemNPC && (GameState.phase1b || GameState.phase2a || GameState.phase2b || GameState.phase3)) Button.potionBuyButton.active = true;
         else Button.healthPotionBuyButton.active = false;
+        if(GameState.currentJob != null)
+        {
+            if (shopKeep == itemNPC && GameState.currentJob.location == JobLocation.ItemShop) GameState.currentJob.ButtonCheck();
+            else if (shopKeep == weaponNPC && GameState.currentJob.location == JobLocation.WeaponShop) GameState.currentJob.ButtonCheck();
+            else if (shopKeep == armorNPC && GameState.currentJob.location == JobLocation.ArmorShop) GameState.currentJob.ButtonCheck();
+            else if (shopKeep == magicNPC && GameState.currentJob.location == JobLocation.MagicShop) GameState.currentJob.ButtonCheck();
+            else GameState.currentJob.ButtonsOff();
+        }
         Utilities.Buttons(Button.listOfShopOptions);
         UI.Choice(new List<int> { 1, 2, 0, 1,0, }, new List<string>
         {
@@ -94,10 +103,10 @@ public class Shop
         else if (choice == "b" && shopKeep == magicNPC) Buy(magicList, shopKeep);
         else if (choice == "h" && Button.healthPotionBuyButton.active) HealthPotion(shopKeep);
         else if (choice == "p" && Button.potionBuyButton.active) Potion(shopKeep);
-        else if (choice == "a" && Button.shopJobButton.active) Job();
-        else if (choice == "t" && Button.shopThiefButton.active) Thief();
-        else if (choice == "t" && Button.shopRobberyButton.active) Rob();
-        else if (choice == "q" && Button.shopQuestButton.active) Quest();
+        else if (choice == "a" && Button.jobButton.active) GameState.currentJob.Issue();
+        else if (choice == "1" && (Button.SortMailButton.active || Button.InventoryButton.active || Button.BalanceBookButton.active || Button.PaintButton.active)) GameState.currentJob.Finish();
+        else if (choice == "2" && (Button.turnInButton.active)) GameState.currentJob.Complete();
+        else if (choice == "t" && Button.thieveryButton.active) Thief();
         else if (choice == "9") CharacterSheet.Display();
         else if (choice == "0") Utilities.ToTown();
         else if (choice == "s") Sell(shopKeep);
@@ -276,8 +285,8 @@ public class Shop
                     {
                         Color.NAME,Color.ITEM, Color.GOLD, "Great! ",$"{ shopKeep.name} ","takes your ",$"{EquipmentList[sellChoice].Name} ", "and gives you ",$"{EquipmentList[sellChoice].Price / 2} ", "gold",
                     });
-                }
-                Create.p.UnequipItem(EquipmentList[sellChoice]);
+                    Create.p.UnequipItem(EquipmentList[sellChoice]);
+                }                
             }
         }
     }

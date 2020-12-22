@@ -58,7 +58,7 @@ public class Dungeon
     public static Monster ghoul3 = new Ghoul(3);
     public static Monster ghoul4 = new Ghoul(4);
 
-    public static List<Monster> balanceList = new List<Monster> { goblin1, slime1, kobald1 };
+    public static List<Monster> balanceList = new List<Monster> {  necromancer5,skeleton1,skeleton1 };
     public static List<Monster> dungeonSummon1a = new List<Monster> { goblin1, slime1, kobald1 };
     public static List<Monster> dungeonSummon1b = new List<Monster> { goblin1, slime1, kobald1 };
     public static List<Monster> dungeonSummon2 = new List<Monster> { orc3, rat3, slime3, skeleton3 };
@@ -69,6 +69,12 @@ public class Dungeon
 
     public static void Summon(Monster monster)
     {
+        Monster m = monster.MonsterCopy();
+        m.Stun = 0;
+        m.Bleed = 0;
+        m.BleedDam = 0;
+        m.Burning = 0;
+        m.Status.Clear();
         bool haveA = false;
         bool haveB = false;
         bool haveC = false;
@@ -77,7 +83,7 @@ public class Dungeon
         bool haveF = false;
         if (Create.p.combatMonsters.Count == 0)
         {
-            Monster m = monster.MonsterCopy();
+            
             m.Name = m.Name + " A";
             Create.p.combatMonsters.Add(m.MonsterCopy());
         }
@@ -87,24 +93,23 @@ public class Dungeon
             {
                 foreach (Monster mon in Combat.outOfFight)
                 {
-                    if (mon.Name == monster.Name + " A") haveA = true;
-                    if (mon.Name == monster.Name + " B") haveB = true;
-                    if (mon.Name == monster.Name + " C") haveC = true;
-                    if (mon.Name == monster.Name + " D") haveD = true;
-                    if (mon.Name == monster.Name + " E") haveE = true;
-                    if (mon.Name == monster.Name + " F") haveF = true;
+                    if (mon.Name == m.Name + " A") haveA = true;
+                    if (mon.Name == m.Name + " B") haveB = true;
+                    if (mon.Name == m.Name + " C") haveC = true;
+                    if (mon.Name == m.Name + " D") haveD = true;
+                    if (mon.Name == m.Name + " E") haveE = true;
+                    if (mon.Name == m.Name + " F") haveF = true;
                 }
             }
             foreach (Monster mon in Create.p.combatMonsters)
             {
-                if (mon.Name == monster.Name + " A") haveA = true;
-                if (mon.Name == monster.Name + " B") haveB = true;
-                if (mon.Name == monster.Name + " C") haveC = true;
-                if (mon.Name == monster.Name + " D") haveD = true;
-                if (mon.Name == monster.Name + " E") haveE = true;
-                if (mon.Name == monster.Name + " F") haveF = true;
+                if (mon.Name == m.Name + " A") haveA = true;
+                if (mon.Name == m.Name + " B") haveB = true;
+                if (mon.Name == m.Name + " C") haveC = true;
+                if (mon.Name == m.Name + " D") haveD = true;
+                if (mon.Name == m.Name + " E") haveE = true;
+                if (mon.Name == m.Name + " F") haveF = true;
             }
-            Monster m = monster.MonsterCopy();
             if (!haveA) m.Name = m.Name + " A";
             else if (!haveB) m.Name = m.Name + " B";
             else if (!haveC) m.Name = m.Name + " C";
@@ -117,6 +122,11 @@ public class Dungeon
     public static void Summon(Monster monster, string name)
     {
         Monster m = monster.MonsterCopy();
+        m.Stun = 0;
+        m.Bleed = 0;
+        m.BleedDam = 0;
+        m.Burning = 0;
+        m.Status.Clear();
         m.Name = name;
         Create.p.combatMonsters.Add(m);
     }

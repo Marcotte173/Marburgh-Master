@@ -8,10 +8,10 @@ public class Rogue : Player
     public Rogue(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
-        strengthLvl = new int[]     { 0, 0, 3, 2, 2, 3 };
-        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 4 };
-        staminaLvl = new int[]      { 0, 0, 1, 2, 2, 2 };
-        intelligenceLvl = new int[] { 0, 0, 0, 1, 2, 1 };
+        strengthLvl = new int[]     { 0, 0, 3, 2, 2, 3,3,3 };
+        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 4,3,3 };
+        staminaLvl = new int[]      { 0, 0, 1, 2, 2, 2,3,3 };
+        intelligenceLvl = new int[] { 0, 0, 0, 1, 2, 1, 1, 2 };
         Update();
         offHand = Equipment.daggerList[0];
         mainHand = Equipment.daggerList[0];
@@ -21,11 +21,12 @@ public class Rogue : Player
     }
     public override void Attack3(Creature target)
     {
-        int backstabDamage = Damage*2;
+        int backstabDamage = DamageMain*2 + DamageOff;
         if (Return.HaveEnergy(1))
         {
             Combat.combatText.Add($"You deliver a devastating blow that bypasses armor. " + Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + backstabDamage + Color.RESET + " damage!");
             target.TakeDamage(backstabDamage);
+            Energy -= 1;
         }
         else
         {
@@ -36,12 +37,13 @@ public class Rogue : Player
     }
     public override void Attack4(Creature target)
     {
-        int stunDamage = Damage / 2;
+        int stunDamage = DamageMain * level/2;
         if (Return.HaveEnergy(2))
         {
             Combat.combatText.Add($"You deliver a tricky blow. " + Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(stunDamage, target.Mitigation) + Color.RESET + " damage and is " + Color.STUNNED + "stunned" + Color.RESET + "!");
             target.TakeDamage(stunDamage);
             target.Stun = 2;
+            Energy -= 2;
         }
         else
         {
@@ -63,5 +65,5 @@ public class Rogue : Player
         health = maxHealth = 12 + 4 * TotalAgility;
         maxEnergy = energy = TotalIntelligence;
     }
-    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage + Armor.Damage; } }
+    public override int DamageOff => playerDamage + OffHand.Damage + Armor.Damage / 2;
 }

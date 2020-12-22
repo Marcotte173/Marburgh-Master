@@ -136,7 +136,7 @@ public class Tavern
         {
             Console.Clear();
             if (GameState.firstBossDead)
-            {
+            {                
                 UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
                 {
                     "The townspeople thank you, one by one, relief on all of their faces",
@@ -147,31 +147,67 @@ public class Tavern
                 {
                     UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
                     {
-                         Color.SPEAK,"","'Thank the gods you were able to save us all'","",
+                        Color.SPEAK,"","'Thank the gods you were able to save us all'","",
                         "",
                         Color.SPEAK, "", "'We will start rebuilding immediately'","",
-
                     });
                 }
                 else
                 {
                     UI.Keypress(new List<int> { 1, 0, 1 }, new List<string>
                     {
-                         Color.SPEAK,"",$"'Thank you so much for saving us all. We owe everything to you and your family, especially {GameState.villagersSaved}","",
+                        Color.SPEAK,"",$"'Thank you so much for saving us all. We owe everything to you and your family, especially {GameState.villagersSaved}","",
                         "",
                         Color.SPEAK, "", "'We will start rebuilding immediately'","",
-
                     });
                 }
                 UI.Keypress(new List<int> { 1, 0, 1, 0, 1 }, new List<string>
                 {
                     Color.SPEAK, "",$"'I am worried, however'","",
                     "",
-                        Color.SPEAK,"","'The Savage Orc is still out there, raising an army'","",
+                    Color.SPEAK,"","'The Savage Orc is still out there, raising an army'","",
                     "",
                     Color.SPEAK, "", "'Take this map, we found it when we were prisoner. It may lead you to his real location''","",
                 });
-                GameState.Phase1B();
+                if (GameState.demo)
+                {
+                    UI.Keypress(new List<int> { 1, 0, 2 }, new List<string>
+                    {
+                        Color.HEALTH,"Thank you for playing the Marbugh ","demo","",
+                        "",
+                        Color.GOLD,Color.GOLD,"The full game is only ","4.99,"," or ","3.99"," to you lucky early accessers"
+                    });
+                    UI.Keypress(new List<int> { 0, 0, 4, 0, 1, 0, 3, 0, 3, 0, 3, 0, 2, 0, 2 }, new List<string>
+                    {
+                        "Buying the game gives you access to...",
+                        "",
+                        Color.GOLD,Color.ITEM,Color.ITEM,Color.ITEM,"Several ","shops"," in town, with useful ","items",", ","potions"," and ","equipment ","",
+                        "",
+                        Color.NAME,"","Helpful townsfolk to befriend, help, seduce, rob and generally run amok with","",
+                        "",
+                        Color.MONSTER,Color.MONSTER,Color.ABILITY,"4 more ","dungeons"," with tons of ","monsters", ", each with their own special ","abilities","",
+                        "",
+                        Color.DAMAGE,Color.MONSTER,Color.ABILITY,"Tactical ","combat"," with multiple ","enemies",", as well as new ","abilities"," for each class",
+                        "",
+                        Color.HEALTH,Color.MONSTER,Color.XP,"An enchanted ","forest",", full of ","creatures"," and strange ","encounters","",
+                        "",
+                        Color.XP,Color.MONSTER,"A ","tavern"," to drink your cares away, complete with wily old men who will take your money in a variety of ","gambling"," games",
+                        "",
+                        Color.CLASS,Color.ENHANCEMENT,"","Item Crafting"," and ","Item Improvement",""
+                    });
+                    UI.Keypress(new List<int> { 1, 0, 0, 0, 1, 0, 1 }, new List<string>
+                    {
+                        Color.BOSS,"Man, this is beginning to feel like an old ","shareware"," pitch...",
+                        "",
+                        "I'll leave you to it",
+                        "",
+                        Color.HEALTH,"","Thanks again for playing,","",
+                        "",
+                        Color.NAME,"","Marcotte",""
+                    });
+                    Environment.Exit(0);
+                }
+                else GameState.Phase1B();               
             }
             else
             {

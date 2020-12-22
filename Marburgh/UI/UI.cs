@@ -27,7 +27,11 @@ public class UI
         UIComponent.OptionsText(options, optionButton,20);
         Write.Position(55,26);
         Write.Line(Color.DAMAGE, "[", "Q", "]uit");
-        Write.Line(51,14,Color.GOLD, "","0.55  December 10, 2020 ", "");
+        if (GameState.demo)
+        {
+            Write.Line(51, 14, Color.GOLD, "", "Demo December 19, 2020 ", "");
+        }
+        else Write.Line(51,14,Color.GOLD, "","       1.0 ", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)

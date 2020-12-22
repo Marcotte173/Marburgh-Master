@@ -182,10 +182,14 @@ public class UIComponent
     }
     public static void TimeDisplay()
     {
-        Console.SetCursorPosition(35, 27);
-        Write.Line(Color.TIME, Color.TIME, Color.TIME, Color.TIME, "It is day ", $"{Time.day}", ", the ", $"{Time.weeks[Time.week]}", " week of ", $"{Time.months[Time.month]}", ", ", $"{Time.year}", "");
+        string a = $"It is day {Color.TIME+Time.day+Color.RESET}, the {Color.TIME + Time.weeks[Time.week] + Color.RESET} week of {Color.TIME + Time.months[Time.month] + Color.RESET}, {Color.TIME + Time.year + Color.RESET}";
+        if (Time.Events[0].active && Time.week == 2)
+        {
+            a += $" - {Color.BLOOD + (5 - Time.day) } days remaining" + Color.RESET;
+            Write.Line(20, 27, a);
+        }
+        else Write.Line(35, 27, a);
     }
-
     internal static void BottomBar()
     {
         for (int i = 0; i < Console.WindowWidth; i++)

@@ -18,6 +18,10 @@ public class GameState
     internal static bool phase2a;
     internal static bool phase2b;
     internal static bool phase3;
+    internal static bool demo;
+    internal static Job currentJob;
+    internal static Job findJob = new Find(JobLocation.ArmorShop);
+    internal static Job protectJob = new Protect(JobLocation.Bank);
 
     //Testing And Cheating
     public static void Test()
@@ -28,7 +32,9 @@ public class GameState
 
     public static void Cheat()
     {
-        Button.itemShopButton.active = true;
+        Phase1B();
+        Phase2B();
+        Create.p.Intelilgence = 1000;
         Create.p.XP += 900;
         Create.p.Gold += 30000;
         Create.p.PlayerDamage = 30000;
@@ -39,11 +45,12 @@ public class GameState
 
     internal static void TestCombat()
     {
-        Create.p = new Warrior(3,2,3,2);
+        Create.p = new Mage(3,2,3,2);
+        Button.shieldButton.active = true;
         Create.p.Name = "Travis Marcotte";
-        Create.p.MainHand = Equipment.bluntList[1];
-        Create.p.OffHand = Equipment.bluntList[0];
-        Create.p.Armor = Equipment.armorList[1];
+        Create.p.MainHand = Equipment.daggerList[3];
+        Create.p.OffHand = Equipment.daggerList[3];
+        Create.p.Armor = Equipment.armorList[2];
         Create.p.AddDrop(DropList.potionOfKnowledge);
         Create.p.AddDrop(DropList.potionOfFire);
         Create.p.AddDrop(DropList.potionOfPower);
@@ -51,18 +58,25 @@ public class GameState
         Create.p.AddDrop(DropList.potionOfProwess);
         Create.p.AddDrop(DropList.potionOfLearning);
         Create.p.XP = 1500;
-        //for (int i = 0; i < Dungeon.balanceList.Count-1; i++)
-        //{
-        //    Dungeon.Summon(Dungeon.balanceList[i].MonsterCopy());
-        //    Dungeon.Summon(Dungeon.balanceList[i+1].MonsterCopy());
-        //    Combat.Menu();
-        //}
+        Level.Menu();
+        Level.Menu();
+        Level.Menu();
+        for (int i = 0; i < Dungeon.balanceList.Count-2; i++)
+        {
+            Dungeon.Summon(Dungeon.balanceList[i].MonsterCopy());
+            Dungeon.Summon(Dungeon.balanceList[i + 1].MonsterCopy());
+            Dungeon.Summon(Dungeon.balanceList[i + 2].MonsterCopy());
+            Combat.Menu();
+            Create.p.Health = Create.p.MaxHealth;
+            Create.p.PotionSize = Create.p.MaxPotionSize;
+            Create.p.Energy = Create.p.MaxEnergy;
+        }        
         //foreach(Monster m in Dungeon.balanceList)
         //{
         //    Dungeon.Summon(m.MonsterCopy());
         //    Combat.Menu();
         //}    
-        Town.Menu();
+        //Town.Menu();
     }
 
     internal static void TestMansion()
@@ -81,9 +95,25 @@ public class GameState
 
     public static void CraftCheat()
     {
-        Create.p.AddDrop(DropList.monsterEye.Copy());
-        Create.p.AddDrop(DropList.monsterTooth.Copy());
-        Craft.Menu();
+        Create.p = new Warrior(3, 3, 3, 3);
+        Create.p.Name = "Travis Marcotte";
+        Create.p.MainHand = Equipment.swordList[2];
+        Create.p.OffHand = Equipment.swordList[1];
+        Create.p.Armor = Equipment.armorList[0];
+        Create.p.AddDrop(DropList.monsterEye);
+        Create.p.AddDrop(DropList.monsterTooth);
+        Create.p.AddDrop(DropList.monsterEye);
+        Create.p.AddDrop(DropList.monsterTooth);
+        Create.p.AddDrop(DropList.monsterEye);
+        Create.p.AddDrop(DropList.monsterTooth);
+        Create.p.AddDrop(DropList.monsterEye);
+        Create.p.AddDrop(DropList.monsterTooth);
+        Create.p.AddDrop(DropList.savageOrcFang);
+        Create.p.AddDrop(DropList.slime);
+        Create.p.AddDrop(DropList.slime);
+        Button.bossWeapons.active = true;
+        Button.enhancementMachine.active = true;
+        Town.Menu();
     }
 
     //Gamestates
@@ -98,7 +128,9 @@ public class GameState
         Button.levelMasterButton.active = true;
         Button.enhancementMachine.active = true;
         Button.dungeon1bButton.active = true;
-        Button.townspeopleButton.active = false;        
+        Button.townspeopleButton.active = false;
+        Button.chatUpBartenderButton.active = true;
+        Button.localGossipButton.active = true;
         phase1b = true;
     }
 
@@ -110,13 +142,13 @@ public class GameState
 
     public static void Phase2B()
     {
+        Button.gambleButton.active = true;
         Button.bankButton.active = true;
         Button.weaponShopButton.active = true;
         Button.armorShopButton.active = true;
         Button.magicShopButton.active = true;
         Button.dungeon2Button.active = true;
         Button.dungeonForestButton.active = true;
-        Button.localGossipButton.active = true;
         Button.gambleButton.active = true;
         phase2b = true;
     }
@@ -128,10 +160,6 @@ public class GameState
         List<Equipment> tempD = new List<Equipment> { };
         foreach (Equipment e in Shop.itemOffenceList) tempO.Add(e);
         foreach (Equipment e in Shop.itemDefenceList) tempD.Add(e);
-        Button.bankJobButton.active = false;
-        Shop.magicJob = false;
-        Shop.weaponJob = false;
-        Shop.armorJob = false;
         //Bartender
         int who = Return.RandomInt(0, 6);
         if (who == 0) currentBartender = bartender3;
@@ -169,22 +197,72 @@ public class GameState
         Utilities.SortDefence(Shop.itemDefenceAvailableList);
         //Jobs
         if (phase2b||phase3)
-        {            
-            //Bank Job
+        {   
             int job = Return.RandomInt(1, 101);
-            if (job < 30) Button.bankJobButton.active = true;
-            //Shop Job
-            int job2 = Return.RandomInt(1, 101);
-            if (job2 < 36)
+            if (job < 36)
             {
-                int job3 = Return.RandomInt(0, 3);
-                if (job3 == 0) Shop.magicJob = true;
-                else if (job3 == 1) Shop.weaponJob = true;
-                else Shop.armorJob = true;
+                int job2 = Return.RandomInt(0, 6);
+                if (job2 == 0)
+                {
+                    if (Create.p.Reputation > 80 && findJob.status!=JobStatus.Complete)
+                    {
+                        findJob.location = JobLocation.ArmorShop;
+                        currentJob = findJob;
+                    }
+                    else
+                    {
+                        currentJob = new Job(JobLocation.ArmorShop, Return.RandomInt(0, 4));
+                    }
+                }
+                else if (job2 == 1)
+                {
+                    if (Create.p.Reputation > 80 && findJob.status != JobStatus.Complete)
+                    {
+                        findJob.location = JobLocation.WeaponShop;
+                        currentJob = findJob;
+                    }
+                    else
+                    {
+                        currentJob = new Job(JobLocation.WeaponShop, Return.RandomInt(0, 4));
+                    }
+                }
+                else if (job2 == 2)
+                {
+                    if (Create.p.Reputation > 80 && findJob.status != JobStatus.Complete)
+                    {
+                        findJob.location = JobLocation.MagicShop;
+                        currentJob = findJob;
+                    }
+                    else
+                    {
+                        currentJob = new Job(JobLocation.MagicShop, Return.RandomInt(0, 4));
+                    }
+                }
+                else if (job2 == 4)
+                {
+                    if (Create.p.Reputation > 80 && findJob.status != JobStatus.Complete)
+                    {
+                        findJob.location = JobLocation.ItemShop;
+                        currentJob = findJob;
+                    }
+                    else
+                    {
+                        currentJob = new Job(JobLocation.ItemShop, Return.RandomInt(0, 4));
+                    }
+                }
+                else
+                {
+                    if (Create.p.Reputation > 80 && protectJob.status != JobStatus.Complete)
+                    {
+                        currentJob = protectJob;
+                    }
+                    else
+                    {
+                        currentJob = new Job(JobLocation.Bank,Return.RandomInt(0,4));
+                    }
+                }
             }
-            //Tavern Job
-            int job4 = Return.RandomInt(1, 101);
-            if (job4 < 35) Button.tavernJobButton.active = true;
+            else currentJob = null;
         }        
     }
 }

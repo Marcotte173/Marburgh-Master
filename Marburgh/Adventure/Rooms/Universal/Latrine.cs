@@ -28,9 +28,9 @@ public class Latrine : Room
 
     private void Decision()
     {
-        UI.Choice(new List<int> { 0, 0, 0 }, new List<string>
+        UI.Choice(new List<int> { 1, 0, 0 }, new List<string>
         {
-            "If you were so inclined, you COULD search the latrines.",
+            Color.DEATH, "If you were so inclined, you COULD search the ","latrines.","",
             "",
             "Or you could move on."
         }, new List<string> { "earch", "eep going" }, new List<string> { Color.ENERGY + "S" + Color.RESET, Color.MITIGATION + "K" + Color.RESET });
@@ -40,9 +40,9 @@ public class Latrine : Room
             if (Return.RandomInt(0,101) < 60)
             {
                 int teeth = Return.RandomInt(1, 3);
-                UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+                UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
                 {
-                    $"Searching through the muck you find {teeth} monster teeth!",
+                    Color.DROP,$"Searching through the muck you find ",$"{teeth}"," monster teeth!",
                     "",
                     "A lucky find! Almost worth it!",
                 });
@@ -50,9 +50,9 @@ public class Latrine : Room
             }
             else
             {
-                UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+                UI.Keypress(new List<int> { 2, 0, 0 }, new List<string>
                 {
-                    $"You smell them before you see them, but you have discovered the latrines",
+                    Color.DEATH,Color.DEATH,$"You ","smell"," them before you see them, but you have discovered the ","latrines","",
                     "",
                     "Lucky there's no one around.",
                 });
@@ -60,11 +60,11 @@ public class Latrine : Room
         }
         else if (choice == "k")
         {
-            UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+            UI.Keypress(new List<int> { 0, 0, 1 }, new List<string>
             {
                 $"Probably for the best",
                 "",
-                "That place stinks!",
+                Color.DEATH,"That place ,","stinks","!",
             });
         }
         else if (choice == "9")

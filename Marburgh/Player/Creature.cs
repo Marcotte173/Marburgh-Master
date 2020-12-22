@@ -84,6 +84,9 @@ public class Creature
     public int Stamina { get { return stamina; } set { stamina = value; } }
     public int Intelilgence { get { return intelligence; } set { intelligence = value; } }
     public bool Defending { get { return defending; } set { defending = value; } }
+    public virtual int DamageMain => 0;
+    public virtual int DamageOff => 0;
+    public virtual int DamageTH => 0;
 
     public virtual void TakeDamage(int damage)
     {

@@ -92,7 +92,7 @@ public class Help
         Console.Clear();
         Write.Line(Color.CLASS, "ROGUE ABILITIES\n\n");
         Write.Line(Color.ABILITY, "1 - Backstab - Level 2");
-        Console.WriteLine("\n- The " + Color.CLASS + "Rogue" + Color.RESET + " sneaks behind the " + Color.MONSTER + "target" + Color.RESET + " and delivers a " + Color.DAMAGE + "crushing blow" + Color.RESET + ", dealing " + Color.DAMAGE + "double damage" + Color.RESET);
+        Console.WriteLine("\n- The " + Color.CLASS + "Rogue" + Color.RESET + " sneaks behind the " + Color.MONSTER + "target" + Color.RESET + " and delivers a " + Color.DAMAGE + "crushing blow" + Color.RESET + ", dealing " + Color.DAMAGE + "extra damage" + Color.RESET);
         Write.Line(Color.ABILITY, "\n2 - STUN - Level 4");
         Write.Line("\n- The " + Color.CLASS + "Rogue " + Color.RESET + "smacks his target with a sneaky strike, " + Color.DAMAGE + "damaging" + Color.RESET + " them and causing " + Color.STUNNED + "stun", "");
         Write.Line(Color.STUNNED, "\n\n\n", "Stunned", "\n");
@@ -117,6 +117,6 @@ public class Help
         Write.Line(Color.ABILITY, "\n2 - Cleave - Level 4\n");
         Write.Line("- The warrior smashes his" + Color.MONSTER + " target" + Color.RESET + " so hard he also hits an additional " + Color.MONSTER + "target." + Color.RESET );
         Write.Line(Color.BLOOD, "\n\n", "BLEEDING\n", "");
-        Console.WriteLine("When a creature bleeds, they take " + Color.DAMAGE + "3 " + Color.RESET + "damage over 2 turns.");
+        Console.WriteLine("When a creature bleeds, they take " + Color.DAMAGE + "4+(level+1)/2 " + Color.RESET + "damage over " + Color.TIME + "1+level/2" + Color.RESET + " turns.");
     }
 }

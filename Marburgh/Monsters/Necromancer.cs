@@ -6,19 +6,6 @@ using System.Threading.Tasks;
 
 public class Necromancer : Monster
 {
-    public Necromancer(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Necromancer";
-        type = "Necromancer";
-        mitigation = 1;
-        xp = 6;
-        gold = 22;
-        dropRate = 30;
-        undead = true;
-        intelligence = level;
-    }
-
     public Necromancer(int level)
     : base(level)
     {
@@ -34,7 +21,7 @@ public class Necromancer : Monster
         damage = strength ;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
         mitigation = level;
         dropRate = 30;
     }
@@ -42,9 +29,9 @@ public class Necromancer : Monster
     public override void Attack2(Player target)
     {
         Monster summon = (Return.RandomInt(0, 2) == 0) ? Dungeon.skeleton2 : Dungeon.zombie3;
-        Combat.combatText.Add(Color.DEATH + name + Color.RESET + Color.RESET + "mumbles something you can't quite hear ");
+        Combat.combatText.Add(Color.DEATH + name + Color.RESET + Color.RESET + " mumbles something you can't quite hear ");
         Combat.combatText.Add($"The ground in front of him moves ");
-        Combat.combatText.Add(Color.MONSTER + name + Color.RESET +" crawls out of the ground");
+        Combat.combatText.Add(Color.MONSTER + summon.Name + Color.RESET +" crawls out of the ground");
         Dungeon.Summon(summon);
     }
     public override void Attack3(Player target)
@@ -189,27 +176,7 @@ public class Necromancer : Monster
         }        
     }
     public override void MakeAttack()
-    {
-        if (bleed > 0)
-        {
-            Combat.combatText.Add(Color.MONSTER + name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
-            TakeDamage(bleedDam);
-            bleed--;
-            if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
-        }
-        if (burning > 0)
-        {
-            Combat.combatText.Add(Color.MONSTER + name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
-            TakeDamage(burnDam);
-            burning--;
-            if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
-        }
-        if (stun > 0)
-        {
-            canAct = false;
-            stun--;
-            if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
-        }
+    {        
         if (action == 2) Attack2(Create.p);
         else if (action == 3) Attack3(Create.p);
         else if (action == 4) Attack4(Create.p);

@@ -19,17 +19,17 @@ public class GuardRoom : Room
 
     internal override void Explore()
     {
-        UI.Keypress(new List<int> { 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
         {
-            $"Standing at his post is a {m.Name}",
+            Color.MONSTER,$"Standing at his post is a ",$"{m.Name}","",
             "",
             "He looks surprised but recovers quickly and attacks!",
         });
         if (m == Dungeon.goblin1) Dungeon.Summon(Dungeon.goblin1,"The Goblin Guard");
         Combat.Menu();
-        UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
+        UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
         {
-            "You have defeated the guard",
+            Color.MONSTER,"You have defeated the ","guard","",
             "",
             "Hopefully there aren't many more",
         });

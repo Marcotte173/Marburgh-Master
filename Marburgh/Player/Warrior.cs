@@ -8,10 +8,10 @@ public class Warrior : Player
     public Warrior(int strength, int agility, int stamina, int intelligence)
     : base(strength, agility, stamina, intelligence)
     {
-        strengthLvl = new int[]     { 0, 0, 3, 2, 2, 3 };
-        agilityLvl = new int[]      { 0, 0, 1, 2, 2, 2 };
-        staminaLvl = new int[]      { 0, 0, 2, 2, 2, 4 };
-        intelligenceLvl = new int[] { 0, 0, 1, 1, 2, 1 };
+        strengthLvl = new int[]     { 0, 0, 2, 2, 2, 3,3,3 };
+        agilityLvl = new int[]      { 0, 0, 1, 2, 2, 2,3,3 };
+        staminaLvl = new int[]      { 0, 0, 2, 2, 2, 4,3,3 };
+        intelligenceLvl = new int[] { 0, 0, 1, 1, 2, 1,1,2 };
         Update();
         offHand = Equipment.shieldList[0];
         mainHand = Equipment.bluntList[0];
@@ -21,13 +21,14 @@ public class Warrior : Player
     }
     public override void Attack3(Creature target)
     {
-        int rendDamage = Damage / 2;
+        int rendDamage = DamageMain / 2;
         if (Return.HaveEnergy(1))
         {
             Combat.combatText.Add($"You deliver a sturdy blow! "+Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(rendDamage, target.Mitigation) + Color.RESET + " damage and starts to " + Color.BLOOD + "bleed" + Color.RESET + "!");
             target.TakeDamage(rendDamage);
-            target.Bleed = 2;
-            target.BleedDam = 4;
+            target.Bleed = 1+level/2;
+            target.BleedDam = 4 + (level+1)/2;
+            Energy -= 1;
         }
         else
         {
@@ -37,17 +38,18 @@ public class Warrior : Player
     }
     public override void Attack4(Creature target)
     {
-        int cleaveDam = Damage * 2 / 3;
-        if (Return.HaveEnergy(1))
+        int cleaveDam = DamageMain * 2 / 3;
+        if (Return.HaveEnergy(2))
         {
             List<Creature> possible = new List<Creature> { };
             foreach (Creature c in Create.p.combatMonsters) possible.Add(c);
             possible.Remove(target);
-            text.Add($"You slam " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(Damage, target.Mitigation) + Color.RESET + " damage");
+            text.Add($"You slam " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
             Creature monster = possible[Return.RandomInt(0, possible.Count)];
             text.Add($"Additionally, you also hit " + Color.MONSTER + monster.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(cleaveDam, target.Mitigation) + Color.RESET + " damage");
-            target.TakeDamage(Return.MitigatedDamage(Damage, target.Mitigation));
+            target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
             monster.TakeDamage(Return.MitigatedDamage(cleaveDam, target.Mitigation));
+            Energy -= 2;
         }
         else
         {

@@ -26,14 +26,14 @@ public class VillagersRoom : Room
             "",
             "He pulls out his weapon and charges!",
         });
-        Dungeon.Summon(Dungeon.orc1);
+        Dungeon.Summon(Dungeon.orc1, "The Jailer");
         Combat.Menu();
         Button.townspeopleButton.active = true;
         GameState.villagersSaved = Create.p.Name;
         visited = true;
         if (GameState.firstBossDead)
         {
-            UI.Keypress(new List<int> { 0,0,0,0,1,0,1,0,0,0,0 }, new List<string>
+            UI.Keypress(new List<int> { 0,0,0,0,1,0,1,0,0,0,2 }, new List<string>
             {
             "You see several townsfolk huddling for warmth, obviously scared.",
             "",
@@ -45,15 +45,16 @@ public class VillagersRoom : Room
             "",
             "You untie them and point the way out.",
             "",
-            "You gather the strange machine from the Orc's lair and head home",
+            Color.ENHANCEMENT,Color.BOSS,"You gather the ","strange machine"," from the ","Orc's"," lair and head home",
             });
+            Button.enhancementMachine.active = true;
             Utilities.ToTown();
         }
         else
         {
-            UI.Keypress(new List<int> {0,0,0,0,1,0,1,0,0,0,0,0,0  }, new List<string>
+            UI.Keypress(new List<int> {1,0,0,0,1,0,1,0,0,0,2,0,0  }, new List<string>
             {
-            "You see several townsfolk huddling for warmth, obviously scared.",
+            Color.NAME,"You see several ","townsfolk"," huddling for warmth, obviously scared",
             "",
             "One comes up to you to speak",
             "",
@@ -63,7 +64,7 @@ public class VillagersRoom : Room
             "",
             "You untie them and point the way out.",
             "",
-            "Be sure to meet them in the tavern afterwards to claim your reward.",
+            Color.XP,Color.GOLD,"Be sure to meet them in the ","tavern"," afterwards to claim your ","reward",".",
             "",
             "That is.... if you live"
             });

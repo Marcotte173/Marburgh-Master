@@ -165,7 +165,7 @@ public class Town
         else if (choice == "b" && Button.bankButton.active) Bank.Menu();
         else if (choice == "x") GameState.Cheat();
         //else if (choice == "z") GameState.Death();
-        //else if (choice == "c") GameState.CraftCheat();
+        //else if (choice == "z") GameState.CraftCheat();
         else if (choice == "1" && Button.dungeon1aButton.active || (choice == "2" && Button.dungeon1bButton.active) || (choice == "*" && Button.dungeonCaveButton.active) || choice == "3" && Button.dungeonForestButton.active || choice == "4" && Button.dungeon2Button.active || choice == "5" && Button.dungeon3Button.active)
         {
             //If no, go home

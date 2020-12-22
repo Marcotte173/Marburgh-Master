@@ -10,19 +10,19 @@ public class Balance
     public static int ghoulGold = 13;
     public static int ghoulStrength = 4;
     public static int ghoulAgility = 3;
-    public static int ghoulStamina = 3;
+    public static int ghoulStamina = 4;
 
     public static int goblinXp = 5;
     public static int goblinGold = 10;
     public static int goblinStrength = 4;
     public static int goblinAgility = 3;
-    public static int goblinStamina = 3;
+    public static int goblinStamina = 4;
 
     public static int kobaldXp = 5;
     public static int kobaldGold = 10;
     public static int kobaldStrength = 4;
     public static int kobaldAgility = 3;
-    public static int kobaldStamina = 2;
+    public static int kobaldStamina = 3;
 
     public static int necromancerXp = 5;
     public static int necromancerGold = 10;
@@ -34,7 +34,7 @@ public class Balance
     public static int orcGold = 12;
     public static int orcStrength = 6;
     public static int orcAgility = 3;
-    public static int orcStamina = 3;
+    public static int orcStamina = 4;
 
     public static int ratXp = 4;
     public static int ratGold = 8;
@@ -55,10 +55,10 @@ public class Balance
     public static int skeletonStamina = 4;
 
     public static int slimeXp = 5;
-    public static int slimeGold = 12;
+    public static int slimeGold = 8;
     public static int slimeStrength = 4;
     public static int slimeAgility = 2;
-    public static int slimeStamina = 3;
+    public static int slimeStamina = 4;
 
     public static int zombieXp = 5;
     public static int zombieGold = 10;

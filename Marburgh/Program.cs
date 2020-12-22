@@ -13,6 +13,7 @@ namespace MedievalRPG
         static void Main(string[] args)
         {            
             Color.SetupConsole();
+            //GameState.demo = true;
             GameState.NewDay();
             GameStart.Menu();
         }     

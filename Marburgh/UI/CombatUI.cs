@@ -146,6 +146,6 @@ internal class CombatUI
         Console.SetCursorPosition(Return.Width(88), 16);
         Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Run");
         Console.SetCursorPosition(20, 27);
-        foreach (string s in Create.p.Status) Console.Write(s);
+        foreach (string s in Create.p.Status) Console.Write(s+ " ");
     }
 }

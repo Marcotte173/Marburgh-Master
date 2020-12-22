@@ -7,18 +7,7 @@ using System.Threading.Tasks;
 public class Zombie : Monster
 {
     public int deadCount;
-    public Zombie(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Zombie";
-        type = "Zombie";
-        mitigation = 1;
-        xp = 6;
-        gold = 22;
-        dropRate = 30;
-        undead = true;
-    }
-
+    
     public Zombie(int level)
     : base(level)
     {
@@ -34,7 +23,7 @@ public class Zombie : Monster
         damage = strength ;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
     }
     public override void Declare()
     {
@@ -58,6 +47,11 @@ public class Zombie : Monster
     internal void Revive()
     {
         Combat.outOfFight.Remove(this);
+        Stun = 0;
+        Bleed = 0;
+        BleedDam = 0;
+        Burning = 0;
+        Status.Clear();
         Create.p.combatMonsters.Add(this);
         health = maxHealth / 2;
         Combat.combatText.Add(Color.MONSTER + name + Color.RESET +" rises!");

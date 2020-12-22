@@ -7,16 +7,6 @@ using System.Threading.Tasks;
 public class Rat : Monster
 {
     bool frenzy;
-    public Rat(int strength, int agility, int stamina, int level)
-    : base(strength, agility, stamina, level)
-    {
-        name = "Rat";
-        type = "Rat";
-        mitigation = 1;
-        xp = 6;
-        gold = 22;
-        dropRate = 30;
-    }
     public Rat(int level)
     : base(level)
     {
@@ -32,7 +22,7 @@ public class Rat : Monster
         damage = strength;
         hit = 65 + agility * 4;
         crit = agility * 4;
-        health = maxHealth = 6 * stamina;
+        health = maxHealth = 5 * stamina;
         mitigation = level;
         dropRate = 30;
     }

@@ -12,6 +12,11 @@ public class Bank
     {
         GameState.location = Location.Bank;
         Console.Clear();
+        if (GameState.currentJob != null)
+        {
+            if (GameState.currentJob.location == JobLocation.Bank) GameState.currentJob.ButtonCheck();
+            else GameState.currentJob.ButtonsOff();
+        }
         Utilities.Buttons(Button.listOfBankOptions);
         UI.BankChoice(new List<int> { 0, 0, 1 }, new List<string>
         {
@@ -85,8 +90,10 @@ public class Bank
                     Color.SPEAK,"", "'You don't have any money in the bank!'",""
                 });
         }
-        else if (choice == "a" && Button.bankJobButton.active) Job();
-        else if (choice == "t" && Button.bankRobberyButton.active) Robbery();
+        else if (choice == "a" && Button.jobButton.active) GameState.currentJob.Issue();
+        else if (choice == "1" && (Button.SortMailButton.active|| Button.InventoryButton.active|| Button.BalanceBookButton.active|| Button.PaintButton.active)) GameState.currentJob.Finish();
+        else if (choice == "2" && (Button.turnInButton.active)) GameState.currentJob.Complete();
+        else if (choice == "t" && Button.robberyButton.active) Robbery();
         else if (choice == "9") CharacterSheet.Display();
         else if (choice == "i" && Button.investButton.active)
         {

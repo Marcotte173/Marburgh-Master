@@ -33,6 +33,7 @@ public class Player : Creature
     public bool forestExplore;
     public bool forestCamp;
     protected int run;
+    public bool flirted;
     protected List<Drop> drops = new List<Drop> { };
     public static List<string> text = Combat.combatText;
     public int tempStrength;
@@ -68,7 +69,7 @@ public class Player : Creature
         if (bleed > 0)
         {
             text.Add(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
-            Monster g = new Goblin(1, 1, 1, 1);
+            Monster g = new Goblin(1);
             g.Name = Color.BLOOD+ "Blood Loss"+ Color.RESET;
             TakeDamage(bleedDam,g);
             bleed--;
@@ -77,7 +78,7 @@ public class Player : Creature
         if (burning > 0)
         {
             text.Add(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
-            Monster g = new Goblin(1, 1, 1, 1);
+            Monster g = new Goblin(1);
             g.Name = Color.BURNING + "Third Degree Burns" + Color.RESET;
             TakeDamage(burnDam,g);
             burning--;
@@ -103,6 +104,13 @@ public class Player : Creature
             else if (choice == "4" && (Button.cleaveButton.active)) Attack4(GetTarget());
             else if (choice == "4" && (Button.magicMissileButton.active)) Attack4(null);
             //else if (choice == "5" && CanAttack5) Attack5(GetTarget());
+            //else if (choice == "x")
+            //{
+            //    foreach(Monster m in combatMonsters.ToList())
+            //    {
+            //        m.TakeDamage(1000000);
+            //    }
+            //}
             else if (choice == "6" && Button.potionButton.active) Items();
             else if (choice == "h")
             {
@@ -114,11 +122,11 @@ public class Player : Creature
                 CharacterSheet.Display();
                 AttackChoice();
             }
-            else if (choice == "x")
-            {
-                CombatToggle();
-                AttackChoice();
-            }
+            //else if (choice == "x")
+            //{
+            //    CombatToggle();
+            //    AttackChoice();
+            //}
             else if (choice == "0")
             {
                 if (nonLethal)
@@ -313,7 +321,7 @@ public class Player : Creature
                 break;
             }
         }
-        if (exists == false) Drops.Add(d);
+        if (exists == false) Drops.Add(d.Copy()); ;
     }
 
     public void RemoveDrop(Drop d,int amount)
@@ -346,7 +354,8 @@ public class Player : Creature
         }
         else
         {
-            alive = false;            
+            alive = false;
+            Forest.depth = 0;
             Family.dead.Add(Family.alive[0]);
             Family.cause.Add(hitMe.Name);
             Family.timeOfDeath[0, 0] = Time.day;
@@ -399,9 +408,12 @@ public class Player : Creature
 
     public virtual void Refresh()
     {
+        if (GameState.findJob.status != JobStatus.Complete) GameState.findJob.status = JobStatus.Available;
+        if (GameState.protectJob.status != JobStatus.Complete) GameState.protectJob.status = JobStatus.Available;
         drinks = 0;
         health = MaxHealth;
         energy = MaxEnergy;
+        flirted = false;
         potionSize = maxPotionSize;
         dungeonExplore = true;
         forestExplore = true;
@@ -416,12 +428,36 @@ public class Player : Creature
     {
         if (target != null)
         {
-            if (AttemptToHit(target, 0) == false) Miss(target);
+            if(mainHand.Name == "Fist" && offHand.Name == "Fist")
+            {
+                if (AttemptToHit(target, 0) == false) Miss(target);
+                else
+                {
+                    text.Add($"You punch " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
+                    target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
+                }
+            }            
             else
             {
-                text.Add($"You attack " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(Damage, target.Mitigation) + Color.RESET + " damage");
-                target.TakeDamage(Return.MitigatedDamage(Damage, target.Mitigation));
-            }
+                if (mainHand.Name != "Fist")
+                {
+                    if (AttemptToHit(target, 0) == false) Miss(target);
+                    else
+                    {
+                        text.Add($"Your " + Color.ITEM + MainHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
+                        target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
+                    }
+                }
+                if (offHand.Name != "Fist"&& mainHand.Type != EquipmentType.Shield && offHand.Type != EquipmentType.Shield && target.Health>0)
+                {
+                    if (AttemptToHit(target, 0) == false) Miss(target);
+                    else
+                    {
+                        text.Add($"Your " + Color.ITEM + OffHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageOff, target.Mitigation) + Color.RESET + " damage");
+                        target.TakeDamage(Return.MitigatedDamage(DamageOff, target.Mitigation));
+                    }
+                }
+            }            
         }
         else
         {
@@ -561,6 +597,11 @@ public class Player : Creature
         return (attempt < Hit + bonus - target.Defence);
     }
 
+
+    public void RepAdd(int rep) 
+    {
+        reputation = (reputation + rep >= 100) ? 100 : (reputation + rep <= 0) ? 0 : reputation + rep;
+    }
     public int Reputation { get { return reputation; } set { reputation = value; } }
     public string Rep => (reputation <=20)? "Hated" : (reputation<=40)?"Disliked":(Reputation <=60)?"Neutral":(reputation <=80)?"Liked":"Loved"; 
     public bool Alive { get { return alive; } set { alive = value; } }
@@ -573,10 +614,9 @@ public class Player : Creature
     public Equipment Armor { get { return armor; } set { armor = value; } }
     public Equipment MainHand { get { return mainHand; } set { mainHand = value; } }
     public Equipment OffHand { get { return offHand; } set { offHand = value; } }
-    public PlayerClass PClass { get { return pClass; } set { pClass = value; } }
-    public override int Damage { get { return playerDamage + MainHand.Damage + OffHand.Damage *2/ 3 + Armor.Damage; } }
-    public override int Hit { get { return playerHit + MainHand.Hit + OffHand.Hit + Armor.Hit; } }
-    public override int Crit { get { return playerCrit + MainHand.Crit + OffHand.Crit + Armor.Crit; } }
+    public PlayerClass PClass { get { return pClass; } set { pClass = value; } }    
+    public override int Hit { get { return playerHit + MainHand.Hit/2 + OffHand.Hit/2 + Armor.Hit; } }
+    public override int Crit { get { return playerCrit + MainHand.Crit/2 + OffHand.Crit/2 + Armor.Crit; } }
     public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }
     public int PlayerDamage { get { return playerDamage; } set { playerDamage = value; } }
     public int PlayerMitigation { get { return playerMitigation; } set { playerMitigation = value; } }
@@ -592,4 +632,8 @@ public class Player : Creature
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } }
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }
+    public override int DamageMain => playerDamage + MainHand.Damage + Armor.Damage;
+    public override int DamageOff => playerDamage + OffHand.Damage * 2 / 3 + Armor.Damage / 2;
+    public override int DamageTH => playerDamage + MainHand.Damage + Armor.Damage;
+
 }

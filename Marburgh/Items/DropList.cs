@@ -18,6 +18,7 @@ public class DropList
     public static Drop potionOfPower       = new Drop("Potion Of Power", 1, 2, 500, "+1 " + Color.DAMAGE + "Strength" + Color.RESET + "." + Color.POTION + " Wears off overnight" + Color.RESET);
     public static Drop potionOfProwess     = new Drop("Potion Of Prowess", 1, 2, 500, "+1" + Color.HIT + " Agility" + Color.RESET + ". " + Color.POTION + "Wears off overnight" + Color.RESET);
     public static Drop potionOfKnowledge   = new Drop("Potion Of Knowledge", 1, 2, 500, "+1 " + Color.ENERGY + "Knowledge" + Color.RESET + ". " + Color.POTION + "Wears off overnight" + Color.RESET);
+    public static Drop potionOfInvisibility = new Drop("Potion Of Invisibility", 1, 2, 500, "Makes the user " + Color.ENERGY + "invisible"+ Color.RESET);
     public static Drop purePotionOfLife = new Drop("Pure potion Of Life", 1, 2);
     public static Drop purePotionOfPower = new Drop("Pure potion Of Power", 1, 2);
     public static Drop purePotionOfProwess = new Drop("Pure potion Of Prowess", 1, 2);

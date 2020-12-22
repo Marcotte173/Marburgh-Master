@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 public class Combat
 {
@@ -28,8 +28,36 @@ public class Combat
             Create.p.AttackChoice();
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
-                if (m.Stun > 0) m.CanAct = false;
-                else m.CanAct = true;
+                if (m.Bleed > 0)
+                {
+                    combatText.Add(Color.MONSTER + m.Name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + m.BleedDam + Color.RESET + " damage!");
+                    m.TakeDamage(m.BleedDam);
+                    m.Bleed--;                    
+                }
+                else
+                {
+                    if (m.Status.Contains("Bleeding")) m.Status.Remove("Bleeding");
+                }
+                if (m.Burning > 0)
+                {
+                    Combat.combatText.Add(Color.MONSTER + m.Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + m.BurnDam + Color.RESET + " damage!");
+                    m.TakeDamage(m.BurnDam);
+                    m.Burning--;                    
+                }
+                else
+                {
+                    if (m.Status.Contains("Burning")) m.Status.Remove("Stunned");
+                }
+                if (m.Stun > 0)
+                {
+                    m.CanAct = false;
+                    m.Stun--;                    
+                }
+                else
+                {
+                    m.CanAct = true;
+                    if (m.Status.Contains("Stunned")) m.Status.Remove("Stunned");
+                }
                 if (m.CanAct) m.MakeAttack();
                 else combatText.Add($"The {Color.MONSTER + m.Name+Color.RESET} is "+Color.STUNNED+ "stunned "+Color.RESET+"and cannot act!");
             }
@@ -37,7 +65,7 @@ public class Combat
             foreach (Zombie z in outOfFight.ToList())
             {
                 z.deadCount--;
-                if (z.deadCount <= 0) z.Revive();
+                if (z.deadCount <= 0 && Create.p.combatMonsters.Count<3) z.Revive();
             }
             DisplayCombatText();
             if(Create.p.combatMonsters.Count ==0)
@@ -106,6 +134,11 @@ public class Combat
         Create.p.Stun = 0;
     }
 
+    public static void AddCombatText(string text)
+    {
+        combatText.Add(text);
+    }
+
     public static void DisplayCombatText()
     {
         Console.Clear();
@@ -122,6 +155,7 @@ public class Combat
         for (int i = 0; i < combatText.Count; i++)
         {
             Write.Line(0, n + i, combatText[i]);
+            Thread.Sleep(500);
         }
         combatText.Clear();
     }

@@ -21,17 +21,31 @@ namespace MedievalRPG
                 Color.GOLD,  "", "                                        \\___/'       ",""
             },
             new List<string> { "ew Game" }, new List<string> { Color.HEALTH + "N" + Color.RESET });
-            Write.Line(95,0,Color.DEATH+"      `'::::.                ");
-            Write.Line(95,1,"        _____A_              ");
-            Write.Line(95,2,"       /      /\\             ");
-            Write.Line(95,3,"    __/__/\\__/  \\___         ");
-            Write.Line(95,4,"---/__|' '' '| /___/\\----    ");
-            Write.Line(95,5,"   |''|''||''| |' '||        ");
-            Write.Line(95,6,"   `'''''))'''`''''''        ");
+            Write.Line(95,0,Color.MITIGATION+"      `'::::.                ");
+            Write.Line(95,1, "      " + Color.DEATH + "  _____A_              ");
+            Write.Line(95,2, "      " + Color.DEATH + " /      /\\             ");
+            Write.Line(95,3, "   " + Color.DEATH + " __/__/\\__/  " + Color.DEATH + "\\___         ");
+            Write.Line(95,4, "---" + Color.DEATH + "/__|" + Color.DAMAGE + "' '' '| " + Color.DEATH + "/___/\\" + Color.RESET + "----    ");
+            Write.Line(95,5, "   " + Color.DAMAGE + "|''|''||''| |' '||        ");
+            Write.Line(95,6, "  " + Color.HEALTH + " `'''''))'''`''''''        ");
+            Write.Line(0, 9, "  " + Color.HEALTH + " ^   /\\      ");
+            Write.Line(0, 10, " " + Color.HEALTH + " /*\\ /**\\     ");
+            Write.Line(0, 11, "" + Color.HEALTH + " /***\\****\\ /\\   ");
+            Write.Line(0, 12, "" + Color.HEALTH + "/*****\\----/**\\   ");
+            Write.Line(0, 13, "" + Color.HEALTH + "-------" + Color.DEATH + "| | " + Color.HEALTH + "----" + Color.RESET + "");
+            Write.Line(0,14, "  " + Color.DEATH + "| |  | |  | |" + Color.RESET + " ");
+            Write.Line(93,8,"            /\\");
+            Write.Line(93,9,"           /**\\");
+            Write.Line(93,10,"          /****\\    /\\");
+            Write.Line(93,11,"   /\\    /      \\  /**\\");
+            Write.Line(93,12, "  /  \\  /   " + Color.DEATH + "/^^\\" + Color.RESET + " \\/    \\");
+            Write.Line(93,13, " /    \\/    " + Color.DEATH + "|  |" + Color.RESET + " /      \\");
+            Write.Line(93,14,"/     /     "+Color.DEATH + "|  |" + Color.RESET + "/        \\");
+
             string choice = Return.Option();
             if (choice == "n") Family.Name();
-            //if (choice == "x") GameState.TestCombat();
-            //if (choice == "c") GameState.Test();
+            if (choice == "x") GameState.TestCombat();
+            //if (choice == "c") GameState.CraftCheat();
             else if (choice == "q") Environment.Exit(0);
             else Menu();
         }

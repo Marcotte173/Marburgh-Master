@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Skeleton : Monster
+public class Thug:Monster
 {
-    public Skeleton(int level)
+    public Thug(int level)
     : base(level)
     {
         this.level = level;
@@ -22,7 +22,7 @@ public class Skeleton : Monster
         hit = 65 + agility * 4;
         crit = agility * 4;
         health = maxHealth = 5 * stamina;
-        mitigation = level * 3/2;
+        mitigation = level * 3 / 2;
         dropRate = 30;
     }
 

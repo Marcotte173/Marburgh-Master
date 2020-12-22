@@ -18,8 +18,30 @@ public class Monster : Creature
         if (AttemptToHit(target, 0) == false) Miss(target);
         else
         {
-            text.Add(Color.MONSTER + name + Color.RESET + $" hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
-            target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
+            if(target.pClass == PlayerClass.Mage && target.PersonalShield)
+            {
+                text.Add(Color.MONSTER + name + Color.RESET + $" hits you");                
+                if (target.Energy >= damage / 2)
+                {
+                    target.Energy -= damage / 2;
+                    text.Add("Your " + Color.SHIELD + "shield " + Color.RESET + $"absorbs the damage!");
+                }
+                else
+                {
+                    damage -= target.Energy * 2;
+                    text.Add("Your " + Color.SHIELD + "shield " + Color.RESET + $"absorbs {Color.SHIELD + target.Energy * 2 + Color.RESET} damage!");
+                    text.Add($"You take {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
+                    energy = 0;
+                    shield = false;
+                    Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
+                    target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
+                }
+            }
+            else
+            {
+                text.Add(Color.MONSTER + name + Color.RESET + $" hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
+                target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
+            }            
         }
     }
     public Monster(int strength, int agility, int stamina, int level)
@@ -93,26 +115,6 @@ public class Monster : Creature
 
     public virtual void MakeAttack()
     {
-        if (bleed > 0)
-        {
-            text.Add(Color.MONSTER + name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
-            TakeDamage(bleedDam);
-            bleed--;
-            if (bleed <= 0 && status.Contains("Bleeding")) status.Remove("Bleeding");
-        }
-        if (burning > 0)
-        {
-            text.Add(Color.MONSTER + name + Color.BURNING+ " burns " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
-            TakeDamage(burnDam);
-            burning--;
-            if (burning <= 0 && status.Contains("Burning")) status.Remove("Burning");
-        }
-        if (stun > 0)
-        {
-            canAct = false;
-            stun--;
-            if (stun <= 0 && status.Contains("Stunned")) status.Remove("Stunned");
-        }
         if (action == 0) Attack2(Create.p);
         else Attack1(Create.p);
     }
