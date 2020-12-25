@@ -22,7 +22,7 @@ public class DungeonTutorial_B_MiniBossRoom : Room
             "",
             "He pulls out his weapon and charges!",
         });
-        Dungeon.Summon(Dungeon.orc2,"The Orc Lieutenant");
+        Dungeon.Summon(new Orc(2),"The Orc Lieutenant");
         Combat.Menu();
         UI.Keypress(new List<int> { 0, 0, 0,0,0 }, new List<string>
         {

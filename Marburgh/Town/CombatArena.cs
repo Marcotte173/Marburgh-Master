@@ -21,15 +21,6 @@ public class CombatArena
             },
             Button.list1, Button.button1);
         }
-        else if (GameState.phase3)
-        {
-            Utilities.Buttons(Button.listOfCombatArenaOptions);
-            UI.Choice(new List<int> { }, new List<string>
-            {
-
-            },
-            Button.list1, Button.button1);
-        }
         else if (GameState.phase2b)
         {
             Utilities.Buttons(Button.listOfCombatArenaOptions);
@@ -147,7 +138,7 @@ public class CombatArena
     private static void FirstFight()
     {
         Create.p.nonLethal = true;
-        Combat.tutorial = true;
+        Create.p.tutorial = true;
         round = 0;
         string adviceOne = (Create.p.PClass != PlayerClass.Mage) ? "defensive technique" : "shield";
         string adviceTwo = (Create.p.PClass != PlayerClass.Mage) ? "You don't do any damage, but you take less damage and you are much harder to hit":"While your shield is active, it will prevent offensive special techniques from harming you. That will cost energy";
@@ -199,28 +190,57 @@ public class CombatArena
             Color.SPEAK,Color.HEALTH,Color.SPEAK,"","You can use it at any time to restore ","","health","","'",""
         });
         Create.p.combatMonsters.Clear();
-        Dungeon.Summon(currentGladiator,"Rudiger");        
+        Dungeon.Summon(currentGladiator,"Rudiger");
         //Get intention and display to start, after that, do it at the end
         foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
-        Combat.DisplayCombatText();
+        Console.Clear();
+        CombatUI.Box();
         while (Create.p.combatMonsters.Count > 0)
         {
-            round++;
-            Create.p.AttackChoice();
+            Create.p.ItemCheck();
+            Create.p.AttackChoice();            
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
-                if (m.Stun > 0) m.CanAct = false;
-                else m.CanAct = true;
+                if (m.Bleed > 0)
+                {
+                    Combat.AddCombatText(Color.MONSTER + m.Name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + m.BleedDam + Color.RESET + " damage!");
+                    m.TakeDamage(m.BleedDam);
+                    m.Bleed--;
+                }
+                else
+                {
+                    if (m.Status.Contains("Bleeding")) m.Status.Remove("Bleeding");
+                }
+                if (m.Burning > 0)
+                {
+                    Combat.AddCombatText(Color.MONSTER + m.Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + m.BurnDam + Color.RESET + " damage!");
+                    m.TakeDamage(m.BurnDam);
+                    m.Burning--;
+                }
+                else
+                {
+                    if (m.Status.Contains("Burning")) m.Status.Remove("Stunned");
+                }
+                if (m.Stun > 0)
+                {
+                    m.CanAct = false;
+                    m.Stun--;
+                }
+                else
+                {
+                    m.CanAct = true;
+                    if (m.Status.Contains("Stunned")) m.Status.Remove("Stunned");
+                }
                 if (m.CanAct) m.MakeAttack();
-                else Combat.combatText.Add($"The {Color.MONSTER + m.Name + Color.RESET} is " + Color.STUNNED + "stunned " + Color.RESET + "and cannot act!");
+                else Combat.AddCombatText($"The {Color.MONSTER + m.Name + Color.RESET} is " + Color.STUNNED + "stunned " + Color.RESET + "and cannot act!");
             }
             foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
-            Combat.DisplayCombatText();
             if (Create.p.combatMonsters.Count == 0)
             {
                 Console.WriteLine("\n\nPress any Key to continue");
                 Console.ReadKey(true);
             }
+            Combat.combatText.Clear();
         }
         Create.p.nonLethal = false;
         UI.Keypress(new List<int> { 0 }, new List<string>
@@ -247,7 +267,7 @@ public class CombatArena
         Button.dungeon1aButton.active = true;
         Button.itemShopButton.active = true;
         Button.challengeOpponentButton.active = false;
-        Combat.tutorial = false;
+        Create.p.tutorial = false;
     }
 
     static void Info()

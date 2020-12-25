@@ -37,15 +37,19 @@ namespace MedievalRPG
             Write.Line(93,8,"            /\\");
             Write.Line(93,9,"           /**\\");
             Write.Line(93,10,"          /****\\    /\\");
-            Write.Line(93,11,"   /\\    /      \\  /**\\");
-            Write.Line(93,12, "  /  \\  /   " + Color.DEATH + "/^^\\" + Color.RESET + " \\/    \\");
-            Write.Line(93,13, " /    \\/    " + Color.DEATH + "|  |" + Color.RESET + " /      \\");
-            Write.Line(93,14,"/     /     "+Color.DEATH + "|  |" + Color.RESET + "/        \\");
-
+            Write.Line(93,11, Color.MITIGATION + "   /\\    /      \\ " + Color.RESET + " /**\\");
+            Write.Line(93,12, Color.MITIGATION + "  /  \\  /  " + Color.DEATH + "/^^^\\" + Color.MITIGATION + " \\/    \\");
+            Write.Line(93,13, Color.MITIGATION + " /    \\/   " + Color.DEATH + "|   |" +  Color.MITIGATION + " /      \\");
+            Write.Line(93,14, Color.MITIGATION + "/     /    "  +Color.DEATH + "|   |" +   Color.MITIGATION + "/        \\");
             string choice = Return.Option();
             if (choice == "n") Family.Name();
             if (choice == "x") GameState.TestCombat();
-            //if (choice == "c") GameState.CraftCheat();
+            if (choice == "c")
+            {
+                Create.p = new Warrior(15, 15, 30, 15);
+                Create.p.Name = "Travis Marcotte";
+                GameState.TestCombat();
+            }
             else if (choice == "q") Environment.Exit(0);
             else Menu();
         }

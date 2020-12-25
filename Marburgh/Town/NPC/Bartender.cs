@@ -79,11 +79,7 @@ public class Bartender:NPC
 
     private void Help()
     {
-        if (GameState.phase3)
-        {
-
-        }
-        else if (GameState.phase2b&& Create.p.Level <4)
+        if (GameState.phase2b&& Create.p.Level <4)
         {
             UI.Keypress(new List<int> { 3,0,2,0,3 }, new List<string>
             {
@@ -394,7 +390,7 @@ public class Bartender:NPC
     private void MakeOwn()
     {
         Console.Clear();
-        if (GameState.phase2b || GameState.phase3)
+        if (GameState.phase2b)
         {
             Utilities.Buttons(Button.ListOfBuyDrinkOptions);
             UI.Choice(new List<int> { 0, 2, 0, 0, 0, 1, 0, 0, 0, 1 }, new List<string>

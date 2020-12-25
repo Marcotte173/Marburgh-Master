@@ -31,7 +31,7 @@ public class Kitchen : Room
             "",
             "With a bellow, he charges!"
         });
-        Dungeon.Summon(Dungeon.orc2);
+        Dungeon.Summon(new Orc(2));
         Create.p.combatMonsters[0].Name = "Butcher";
         Combat.Menu();
         UI.Keypress(new List<int> { 1,0,1,0,0 }, new List<string>

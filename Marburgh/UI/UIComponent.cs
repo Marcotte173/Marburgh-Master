@@ -25,22 +25,6 @@ public class UIComponent
             }
         }
     }
-    public static void DisplayTextWait(List<int> colourArray, List<string> descriptions)
-    {
-        int colourArrayCheck = 0;
-        for (int i = 0; i < descriptions.Count; i++)
-        {
-            Thread.Sleep(400);
-            Console.SetCursorPosition(0, (8 - colourArray.Count / 2) + i);
-            if (colourArray[i] == 0) Write.CenterText(descriptions[colourArrayCheck]);
-            else if (colourArray[i] == 1) Write.CenterColourText(descriptions[colourArrayCheck], descriptions[colourArrayCheck + 1], descriptions[colourArrayCheck + 2], descriptions[colourArrayCheck + 3]);
-            else if (colourArray[i] == 2) Write.CenterColourText(descriptions[colourArrayCheck], descriptions[colourArrayCheck + 1], descriptions[colourArrayCheck + 2], descriptions[colourArrayCheck + 3], descriptions[colourArrayCheck + 4], descriptions[colourArrayCheck + 5], descriptions[colourArrayCheck + 6]);
-            else if (colourArray[i] == 3) Write.CenterColourText(descriptions[colourArrayCheck], descriptions[colourArrayCheck + 1], descriptions[colourArrayCheck + 2], descriptions[colourArrayCheck + 3], descriptions[colourArrayCheck + 4], descriptions[colourArrayCheck + 5], descriptions[colourArrayCheck + 6], descriptions[colourArrayCheck + 7], descriptions[colourArrayCheck + 8], descriptions[colourArrayCheck + 9]);
-            else if (colourArray[i] == 4) Write.CenterColourText(descriptions[colourArrayCheck], descriptions[colourArrayCheck + 1], descriptions[colourArrayCheck + 2], descriptions[colourArrayCheck + 3], descriptions[colourArrayCheck + 4], descriptions[colourArrayCheck + 5], descriptions[colourArrayCheck + 6], descriptions[colourArrayCheck + 7], descriptions[colourArrayCheck + 8], descriptions[colourArrayCheck + 9], descriptions[colourArrayCheck + 10], descriptions[colourArrayCheck + 11], descriptions[colourArrayCheck + 12]);
-            colourArrayCheck += (colourArray[i] == 0) ? 1 : colourArray[i] == 1 ? 4 : colourArray[i] == 2 ? 7 : colourArray[i] == 3 ? 10 : 13;
-            if (colourArrayCheck >= descriptions.Count) break;
-        }
-    }
     internal static void OptionsText(List<string> options, List<string> optionButton, int x)
     {
         int height = 22;

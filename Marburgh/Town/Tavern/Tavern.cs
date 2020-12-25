@@ -13,11 +13,7 @@ public class Tavern
         GameState.location = Location.Tavern;
         Console.Clear();
         Utilities.Buttons(Button.listOfTavernOptions);
-        if (GameState.phase3)
-        {
-
-        }
-        else if (GameState.phase2b)
+        if (GameState.phase2b)
         {
             UI.Choice(new List<int> { 1, 0, 1, 0, 1 }, new List<string>
             {
@@ -111,17 +107,15 @@ public class Tavern
                     "",
                     Color.SPEAK,Color.POTION,Color.SPEAK,"","If it's the end times, what are people going to do but ","","drink","","?",""
                  });
-                UI.Keypress(new List<int> {1,0,1,0,2,0,2,0,3 }, new List<string>
+                UI.Keypress(new List<int> {1,0,1,0,2,0,2 }, new List<string>
                 {
                     Color.SPEAK,"","One last thing","",
                     "",
-                    Color.SPEAK,"","My family had a necklace. It is an heirloom passed down through the years ","",
+                    Color.SPEAK,"","My family had a necklace. It is an heirloom that was passed down through the years before it was stolen","",
                     "",
                     Color.SPEAK,Color.DEATH,"","It has mystical powers and is said to be able to absorb ","","death","",
                     "",
-                    Color.SPEAK,Color.DEATH,"","It may come in handy working through his ","","mansion","",
-                    "",
-                    Color.SPEAK,Color.DEATH,Color.SPEAK,"","If you could return it to me when you have defeated the ","","Necromancer",""," I would be eternally grateful'","",
+                    Color.SPEAK,Color.DEATH,"","It may come in handy if you can find it in his ","","mansion","",
                  });
                 GameState.Phase2B();
             }            
@@ -265,13 +259,13 @@ public class Tavern
     {
         Console.Clear();
         wager = UI.HowMuch(new List<int> { 1, 0, 0, 0, 0 }, new List<string>
-                {
-                    Color.GOLD, "You have ", $"{p.Gold}", " gold",
-                    "",
-                    "How much would you like to wager?",
-                    "",
-                    "[0] Return"
-                });
+        {
+            Color.GOLD, "You have ", $"{p.Gold}", " gold",
+            "",
+            "How much would you like to wager?",
+            "",
+            "[0] Return"
+        });
         if (wager == 0) Menu();
         else if (wager > 150 * p.Level)
         {

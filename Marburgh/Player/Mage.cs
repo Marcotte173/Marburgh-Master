@@ -32,7 +32,6 @@ public class Mage : Player
             shield = false;
             Status.Remove(Color.SHIELD + "Shielded" + Color.RESET);
         }
-        Combat.DisplayCombatText();
         AttackChoice();
     }
 
@@ -41,7 +40,7 @@ public class Mage : Player
         int flameDamage = 2 + Spellpower;
         if (Return.HaveEnergy(2))
         {
-            Combat.combatText.Add(Color.BURNING + "Flames " + Color.RESET + "burst out of your hands, burning "+Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + flameDamage + Color.RESET + " damage and " + Color.BURNING + "igniting " + Color.RESET + "him!");
+            Combat.AddCombatText(Color.BURNING + "Flames " + Color.RESET + "burst out of your hands, burning "+Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + flameDamage + Color.RESET + " damage and " + Color.BURNING + "igniting " + Color.RESET + "him!");
             target.TakeDamage(flameDamage);
             if (target.Burning > 0) target.BurnDam += 1;
             else target.BurnDam = 1;
@@ -61,11 +60,11 @@ public class Mage : Player
         if (Return.HaveEnergy(3))
         {
             energy -= 3;
-            Combat.combatText.Add($"{Color.ENERGY + bolts+ Color.RESET} bolts of pure "+Color.ENERGY + "Arcane Energy " + Color.RESET + "burst out of your hands");
+            Combat.AddCombatText($"{Color.ENERGY + bolts+ Color.RESET} bolts of pure "+Color.ENERGY + "Arcane Energy " + Color.RESET + "burst out of your hands");
             for (int i = 0; i < bolts; i++)
             {
                 Monster m = combatMonsters[Return.RandomInt(0,combatMonsters.Count)];
-                Combat.combatText.Add("A "+Color.ENERGY+"bolt"+Color.RESET+$" strikes {Color.MONSTER +m.Name+Color.RESET} doing {Color.DAMAGE + missileDamage + Color.RESET} damage!");
+                Combat.AddCombatText("A "+Color.ENERGY+"bolt"+Color.RESET+$" strikes {Color.MONSTER +m.Name+Color.RESET} doing {Color.DAMAGE + missileDamage + Color.RESET} damage!");
                 m.TakeDamage(missileDamage);
             }            
         }
@@ -83,7 +82,7 @@ public class Mage : Player
     public override void Update()
     {
         damage = playerDamage = TotalStrength;
-        playerHit = 75 + TotalAgility * 3 + TotalAgility/2;
+        playerHit = 75 + TotalAgility * 3 + TotalIntelligence / 2;
         playerCrit = TotalAgility * 3;
         playerDefence = 2 * TotalAgility+1;
         health = maxHealth = 12 + 3 * TotalStamina;

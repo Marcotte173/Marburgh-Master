@@ -26,7 +26,7 @@ public class VillagersRoom : Room
             "",
             "He pulls out his weapon and charges!",
         });
-        Dungeon.Summon(Dungeon.orc1, "The Jailer");
+        Dungeon.Summon(new Orc(1), "The Jailer");
         Combat.Menu();
         Button.townspeopleButton.active = true;
         GameState.villagersSaved = Create.p.Name;

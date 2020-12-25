@@ -22,6 +22,8 @@ public class Equipment
     protected int monsterEye ;
     protected int monsterTooth ;
 
+    internal static List<Equipment[]> LISTS = new List<Equipment[]> {swordList,daggerList,bluntList, shieldList,armorList, magicList };
+
     internal static Sword[] swordList = new Sword[]
     {
         new Sword("Fist",0,0,0,false,0),

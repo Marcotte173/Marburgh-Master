@@ -13,11 +13,7 @@ public class Town
         Utilities.Buttons(Button.list3, Button.button3, Button.listOfServices);
         Utilities.Buttons(Button.list4, Button.button4, Button.listOfOther);
 
-        if (GameState.phase3)
-        {
-
-        }
-        else if (GameState.phase2b && Create.p.Level < 4)
+        if (GameState.phase2b && Create.p.Level < 4)
         {
             UI.Town(new List<int> {1,0,0,0,1,0,1,0,1,0,1 },
             new List<string>
@@ -37,7 +33,7 @@ public class Town
         }
         else if (GameState.phase2b)
         {
-            UI.Town(new List<int> { 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 0 },
+            UI.Town(new List<int> { 1, 0, 0, 0, 1, 0, 1, 0, 1, 0, 1 },
             new List<string>
             {
                 Color.SPEAK,"You are in the town of ","Marburgh", "",
@@ -50,7 +46,7 @@ public class Town
                 "",
                 Color.DEATH,"At the top of the hill is the ","Necromancer's"," Mansion",
                 "",
-                "It's time to kick some ass"
+                Color.BOSS,"It's time to ","kick some ass",""
             }, Button.list1, Button.list2, Button.list3, Button.list4, Button.button1, Button.button2, Button.button3, Button.button4);
         }
         else if (GameState.phase2a)
@@ -157,15 +153,12 @@ public class Town
         else if (choice == "i" && Button.itemShopButton.active) Shop.Menu(Shop.itemNPC);
         else if (choice == "l" && Button.levelMasterButton.active) Level.Menu();
         else if (choice == "c" && Button.combatArenaButton.active) CombatArena.Menu();
-        else if (choice == "e" && Button.exploreTownButton.active) ExploreTown.Menu();
         else if (choice == "t") Tavern.Menu();
         else if (choice == "?") Help.Menu();
         else if (choice == "g") Graveyard.Menu();
         else if (choice == "y") House.Menu();
         else if (choice == "b" && Button.bankButton.active) Bank.Menu();
         else if (choice == "x") GameState.Cheat();
-        //else if (choice == "z") GameState.Death();
-        //else if (choice == "z") GameState.CraftCheat();
         else if (choice == "1" && Button.dungeon1aButton.active || (choice == "2" && Button.dungeon1bButton.active) || (choice == "*" && Button.dungeonCaveButton.active) || choice == "3" && Button.dungeonForestButton.active || choice == "4" && Button.dungeon2Button.active || choice == "5" && Button.dungeon3Button.active)
         {
             //If no, go home

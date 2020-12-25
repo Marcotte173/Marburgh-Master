@@ -16,57 +16,64 @@ internal class CombatUI
         Console.ReadKey(true);
     }
 
-    private static void Monster1()
+    private static void Monster(Monster mon)
     {
-        int x = (Create.p.combatMonsters.Count == 1) ? 60 : 35; 
-        Monster a = Create.p.combatMonsters[0];
-        Write.SetX(x - a.Name.Length/2);
-        Console.WriteLine(Color.MONSTER + a.Name + Color.RESET);
-        Write.Position(x-1, 2);
-        Console.WriteLine(Color.HEALTH + a.Health + Color.RESET);
-        Write.Position(x - a.Name.Length / 2, 1);
-        Console.WriteLine(Color.ABILITY + a.Intention + Color.RESET);
-        for (int i = 0; i < a.Status.Count; i++)
+        int x = 0;
+        if (mon == Create.p.combatMonsters[0])
         {
-            Write.Position(x - a.Name.Length / 2, 3+i);
-            Console.WriteLine($"{a.Status[i]} ");
+            if (Create.p.combatMonsters.Count == 1) x = 59 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 2) x = 39 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 3) x = 29 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 4) x = 23 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 5) x = 19 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 6) x = 10 - mon.Name.Length / 2;
         }
-    }
-
-    private static void Monster2()
-    {
-        Monster b = Create.p.combatMonsters[1];
-        Write.Position(90 - b.Name.Length / 2, 0);
-        Console.WriteLine(Color.MONSTER + b.Name + Color.RESET);
-        Write.Position(89, 2);
-        Console.WriteLine(Color.HEALTH + b.Health + Color.RESET);
-        Write.Position(90 - b.Name.Length / 2, 1);
-        Console.WriteLine(Color.ABILITY + b.Intention + Color.RESET);
-        for (int i = 0; i < b.Status.Count; i++)
+        else if (mon == Create.p.combatMonsters[1])
         {
-            Write.Position(90 - b.Name.Length / 2, 3 + i);
-            Console.WriteLine(b.Status[i]);
+            if (Create.p.combatMonsters.Count == 2) x = 79 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 3) x = 59 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 4) x = 47 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 5) x = 39 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 6) x = 30 - mon.Name.Length / 2;
         }
-    }
-
-    private static void Monster3()
-    {
-        Monster b = Create.p.combatMonsters[2];
-        Write.Position(60 - b.Name.Length / 2, 0);
-        Console.WriteLine(Color.MONSTER + b.Name + Color.RESET);
-        Write.Position(60, 2);
-        Console.WriteLine(Color.HEALTH + b.Health + Color.RESET);
-        Write.Position(60 - b.Name.Length / 2, 1);
-        Console.WriteLine(Color.ABILITY + b.Intention + Color.RESET);
-        for (int i = 0; i < b.Status.Count; i++)
+        else if (mon == Create.p.combatMonsters[2])
         {
-            Write.Position(60 - b.Name.Length / 2, 3 + i);
-            Console.WriteLine(b.Status[i]);
-        }        
+            if (Create.p.combatMonsters.Count == 3) x = 89 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 4) x = 71 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 5) x = 59 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 6) x = 51 - mon.Name.Length / 2;
+        }
+        else if (mon == Create.p.combatMonsters[3])
+        {
+            if (Create.p.combatMonsters.Count == 4) x = 95 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 5) x = 79 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 6) x = 70 - mon.Name.Length / 2;
+        }
+        else if (mon == Create.p.combatMonsters[4])
+        {
+            if (Create.p.combatMonsters.Count == 5) x = 99 - mon.Name.Length / 2;
+            else if (Create.p.combatMonsters.Count == 6) x = 90 - mon.Name.Length / 2;
+        }
+        else if (mon == Create.p.combatMonsters[5])
+        {
+             x = 110 - mon.Name.Length / 2;
+        }
+        Write.Line(x, 0, Color.MONSTER + mon.Name + Color.RESET);
+        Write.Line(x, 2, Color.HEALTH + mon.Health + Color.RESET);
+        Write.Line(x, 1, Color.ABILITY + mon.Intention + Color.RESET);
+        for (int i = 0; i < mon.Status.Count; i++)
+        {
+            Write.Position(x - mon.Name.Length / 2, 3+i);
+            Console.WriteLine($"{mon.Status[i]} ");
+        }
     }
 
     public static void AttackOptions()
     {
+        if (Create.p.tutorial && Create.p.Health <= Create.p.MaxHealth / 2 && Create.p.PotionSize > 0)
+        {
+            Write.Line(35, 14, Color.HEALTH + "YOU ARE LOW ON HEALTH. HIT H TO USE YOUR POTION");
+        }
         if (Create.p.combatMonsters.Count < 2) Button.cleaveButton.active = false;
         Utilities.Buttons(Button.listOfCombatOptions);        
         if (Create.p.CanAct) UIComponent.OptionsText(Button.list1, Button.button1,3);
@@ -83,20 +90,39 @@ internal class CombatUI
             targetButton.Add("1");
             targetOption.Add(Color.MONSTER + Create.p.combatMonsters[1].Name + Color.RESET);
             targetButton.Add("2");
-            if (Create.p.combatMonsters.Count == 3)
+            if (Create.p.combatMonsters.Count >2)
             {
                 targetOption.Add(Color.MONSTER+ Create.p.combatMonsters[2].Name + Color.RESET);
                 targetButton.Add("3");
+            }
+            if (Create.p.combatMonsters.Count > 3)
+            {
+                targetOption.Add(Color.MONSTER + Create.p.combatMonsters[3].Name + Color.RESET);
+                targetButton.Add("4");
+            }
+            if (Create.p.combatMonsters.Count > 4)
+            {
+                targetOption.Add(Color.MONSTER + Create.p.combatMonsters[4].Name + Color.RESET);
+                targetButton.Add("5");
+            }
+            if (Create.p.combatMonsters.Count > 5)
+            {
+                targetOption.Add(Color.MONSTER + Create.p.combatMonsters[4].Name + Color.RESET);
+                targetButton.Add("6");
             }
             Box();
             Write.Line(50, 10,"Please select a target");
             UIComponent.OptionsText(targetOption, targetButton,3);
             int choice = Return.Int();
             if (choice >= 0 && choice < 4)
-            {                
+            {
+                Console.Clear();
+                CombatUI.Box();
                 if (choice == 1) return Create.p.combatMonsters[0];
                 else if (choice == 2 && Create.p.combatMonsters.Count > 1) return Create.p.combatMonsters[1];
                 else if (choice == 3 && Create.p.combatMonsters.Count == 3) return Create.p.combatMonsters[2];
+                else if (choice == 3 && Create.p.combatMonsters.Count == 4) return Create.p.combatMonsters[3];
+                else if (choice == 3 && Create.p.combatMonsters.Count == 5) return Create.p.combatMonsters[4];
                 else if (choice == 0) return null;
                 else Target();
             }
@@ -109,11 +135,12 @@ internal class CombatUI
     internal static void Box()
     {
         Console.Clear();
-        if (Create.p.combatMonsters.Count > 0) Monster1();
-        if (Create.p.combatMonsters.Count > 1) Monster2();
-        if (Create.p.combatMonsters.Count > 2) Monster3();
-        Write.SetY(5);
-        Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
+        if (Create.p.combatMonsters.Count > 0) Monster(Create.p.combatMonsters[0]);
+        if (Create.p.combatMonsters.Count > 1) Monster(Create.p.combatMonsters[1]);
+        if (Create.p.combatMonsters.Count > 2) Monster(Create.p.combatMonsters[2]);
+        if (Create.p.combatMonsters.Count > 3) Monster(Create.p.combatMonsters[3]);
+        if (Create.p.combatMonsters.Count > 4) Monster(Create.p.combatMonsters[4]);
+        if (Create.p.combatMonsters.Count > 5) Monster(Create.p.combatMonsters[5]);
         Console.SetCursorPosition(0, 15);
         Console.WriteLine("------------------------------------------------------------------------------------------------------------------------");
         Console.WriteLine("|                       |                       |                       |                       |                      |");
@@ -147,5 +174,6 @@ internal class CombatUI
         Console.WriteLine("[" + Color.MITIGATION + "0" + Color.RESET + "]Run");
         Console.SetCursorPosition(20, 27);
         foreach (string s in Create.p.Status) Console.Write(s+ " ");
+        Write.Line( 0, 5, "------------------------------------------------------------------------------------------------------------------------");
     }
 }

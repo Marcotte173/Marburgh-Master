@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
 public class Shop 
 {
@@ -22,22 +22,22 @@ public class Shop
     public static List<Equipment> itemOffenceAvailableList = new List<Equipment> {  };
     public static List<Equipment> itemDefenceList = new List<Equipment> { Equipment.armorList[0], Equipment.shieldList[1], Equipment.armorList[1], Equipment.shieldList[2], Equipment.armorList[2] };
     public static List<Equipment> itemDefenceAvailableList = new List<Equipment> {  };
-    static int[] upgrade = new int[] { 1000, 3000, 10000, 20000, 35000 };
-    static int[] healAdd = new int[] { 3, 5, 7, 10, 15 };
+    static int[] upgrade = new int[] { 600, 800, 1300, 2000, 3000 };
+    static int[] healAdd = new int[] { 5, 8, 13, 20, 30 };
     static int current = 0;
     public static bool weaponJob;
     public static bool armorJob;
     public static bool magicJob;
     public static bool itemJob;
     public static Equipment itemToSell;
-    public static Equipment itemToSell2;
+    public static Equipment itemToSell2;    
 
     public static void Menu(NPC shopKeep)
     {
         GameState.location = Location.Shop;
         Console.Clear();
         if (shopKeep == magicNPC) Button.healthPotionBuyButton.active = true;
-        if (shopKeep == itemNPC && (GameState.phase1b || GameState.phase2a || GameState.phase2b || GameState.phase3)) Button.potionBuyButton.active = true;
+        if (shopKeep == itemNPC && (GameState.phase1b || GameState.phase2a || GameState.phase2b )) Button.potionBuyButton.active = true;
         else Button.healthPotionBuyButton.active = false;
         if(GameState.currentJob != null)
         {
@@ -83,14 +83,14 @@ public class Shop
         }
         else if (choice == "b" && shopKeep == itemNPC)
         {
-            UI.Choice(new List<int> { 1,0,1, 0, }, new List<string>
+            UI.Choice(new List<int> { 1, 0, 1, 0, }, new List<string>
             {
                 Color.SPEAK,"","'Just so you know, I get new Equipment EVERYDAY!","",
                 "",
                 Color.SPEAK,"", $"And what can I interest you in?'","",
                 "",
             },
-            new List<string> { "ffensive Items", "efensive Items" }, new List<string> { Color.ITEM + "O" + Color.RESET, Color.ITEM + "D" + Color.RESET,  });
+            new List<string> { "ffensive Items", "efensive Items" }, new List<string> { Color.ITEM + "O" + Color.RESET, Color.ITEM + "D" + Color.RESET, });
             Write.Line(50, 11, Color.ITEM, "Main Hand:  ", $"{Create.p.MainHand.Name} ", "");
             Write.Line(50, 12, Color.ITEM, "Off Hand:   ", $"{Create.p.OffHand.Name} ", "");
             Write.Line(50, 13, Color.ITEM, "Armor:      ", $"{Create.p.Armor.Name}   ", "");
@@ -102,11 +102,21 @@ public class Shop
         else if (choice == "b" && shopKeep == armorNPC) Buy(armorList, shopKeep);
         else if (choice == "b" && shopKeep == magicNPC) Buy(magicList, shopKeep);
         else if (choice == "h" && Button.healthPotionBuyButton.active) HealthPotion(shopKeep);
-        else if (choice == "p" && Button.potionBuyButton.active) Potion(shopKeep);
+        else if (choice == "p" && Button.potionBuyButton.active)
+        {
+            if (Return.RoomForPotions()) Potion(shopKeep);
+            else
+            {
+                UI.Keypress(new List<int> { 1 }, new List<string>
+                {
+                    Color.POTION,"You don't have room for any more ","potions",""
+                });
+            }
+        }
         else if (choice == "a" && Button.jobButton.active) GameState.currentJob.Issue();
         else if (choice == "1" && (Button.SortMailButton.active || Button.InventoryButton.active || Button.BalanceBookButton.active || Button.PaintButton.active)) GameState.currentJob.Finish();
         else if (choice == "2" && (Button.turnInButton.active)) GameState.currentJob.Complete();
-        else if (choice == "t" && Button.thieveryButton.active) Thief();
+        else if (choice == "t" && Button.thieveryButton.active) Thief(shopKeep);
         else if (choice == "9") CharacterSheet.Display();
         else if (choice == "0") Utilities.ToTown();
         else if (choice == "s") Sell(shopKeep);
@@ -151,9 +161,9 @@ public class Shop
                 if (Create.p.Gold < potionAvailableList[choice].value)
                 {
                     UI.Keypress(new List<int> { 0 }, new List<string>
-                {
-                    "You don't have enough gold!",
-                });
+                    {
+                        "You don't have enough gold!",
+                    });
                 }
                 else if (UI.Confirm(new List<int> { 1 }, new List<string> { Color.POTION, "Would you like to buy the ", $"{potionAvailableList[choice].name}", "?" }))
                 {
@@ -170,24 +180,69 @@ public class Shop
         }        
     }
 
-    private static void Quest()
+    public static void Thief(NPC shopkeep)
     {
-
-    }
-
-    private static void Rob()
-    {
-        
-    }
-
-    private static void Thief()
-    {
-        
-    }
-
-    private static void Job()
-    {
-        
+        string c = (shopkeep == itemNPC) ? Color.POTION : Color.ITEM;
+        string t = (shopkeep == itemNPC) ? "potion" : (shopkeep == weaponNPC) ? "weapon" : (shopkeep == armorNPC) ? "piece of armor" : "weapon";
+        UI.Keypress(new List<int> { 1,0,1 }, new List<string>
+        {
+            Color.NAME,"You wait until you can tell that ",shopkeep.name," isn't paying attention",
+            "",
+            c,"Sensing your opportunity you grab a ",t," and head for the door"
+        });
+        Console.Clear();
+        Write.SetY(15);
+        UI.StandardBoxBlank();
+        Write.Line(53, 7, Color.SPEAK, "Thieving");
+        Thread.Sleep(500);
+        Write.Line(61, 7, ".");
+        Thread.Sleep(500);
+        Write.Line(62, 7, ".");
+        Thread.Sleep(500);
+        Write.Line(63, 7, ".");
+        Thread.Sleep(500);        
+        if (Return.StatCheck(Create.p.TotalAgility, 4 + Create.p.suspicion))
+        {            
+            UI.Keypress(new List<int> { 1, 0, 1,0, 1}, new List<string>
+            {
+                Color.HEALTH,"","Sucess!","",
+                "",
+                Color.NAME,"You make it outside the shop, with ",shopkeep.name," none the wiser",
+                "",
+                Color.MONSTER,"","Excited, you take a look at what you grabbed",""
+            });
+            if (shopkeep == itemNPC) Return.RewardPotion();
+            else if (shopkeep == weaponNPC) Return.RewardEquipment(Equipment.LISTS[Return.RandomInt(0,4)],Create.p.Level);
+            else if (shopkeep == armorNPC) Return.RewardEquipment(Equipment.armorList, Create.p.Level);
+            else if (shopkeep == magicNPC) Return.RewardEquipment(Equipment.magicList, Create.p.Level);
+        }
+        else
+        {
+            UI.Keypress(new List<int> { 1, 0, 1, 0,1 }, new List<string>
+            {
+                Color.DAMAGE,"","You Fail!","",
+                "",
+                Color.NAME,"You feel ",$"{ shopkeep.name}'s"," hand on your shoulder",
+                "",
+                Color.SPEAK,"","Just what do you think you're doing?",""
+            });
+            UI.Keypress(new List<int> {1,0,0,0,1,0,1,0,1 }, new List<string>
+            {
+                Color.DAMAGE,"You wake up at home covered in ","bruises","",
+                "",
+                "That was not a good idea",
+                "",
+                Color.NAME,"The last thing you remember is ",shopkeep.name," promising to keep an eye on you from now on",
+                "",
+                Color.DAMAGE,"You are at ","1"," health",
+                "",
+                Color.HIT,"You lose ","10"," reputation"
+            });
+            Create.p.RepAdd(-10);
+            Time.DayChange(1);
+            Create.p.Health = 1;
+            House.Menu();
+        }
     }
 
     public static void Buy(List<Equipment> list, NPC shopKeep)

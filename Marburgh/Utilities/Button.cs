@@ -54,8 +54,7 @@ public class Button
     public static Button houseButton = new Button(Color.XP + "Y" + Color.RESET, "our House", true);
     public static Button graveyardButton = new Button(Color.XP + "G" + Color.RESET, "raveyard", true);
     public static Button combatArenaButton = new Button(Color.MONSTER + "C" + Color.RESET, "ombat Arena", true);
-    public static Button exploreTownButton = new Button(Color.XP + "E" + Color.RESET, "xplore Town", false);
-    public static List<Button> listOfOther = new List<Button> { houseButton, graveyardButton, exploreTownButton,nullButton,combatArenaButton };
+    public static List<Button> listOfOther = new List<Button> { houseButton, graveyardButton, nullButton,combatArenaButton };
 
     //HOUSE
     public static Button sleep = new Button(Color.NAME + "S" + Color.RESET, "leep", true);

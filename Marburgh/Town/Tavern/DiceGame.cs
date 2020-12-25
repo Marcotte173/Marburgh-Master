@@ -10,7 +10,6 @@ public class DiceGame
         Console.Clear();
         Write.SetY(15);
         UI.StandardBoxBlank();
-        //Sound.PlayOnce("Other/dice");
         Console.SetCursorPosition(0, 7);
         Write.CenterColourText(Color.GOLD, "Confident, you set ", $"{wager}", " gold on the table");
         Console.SetCursorPosition(Console.WindowWidth / 2 - 16, 9);

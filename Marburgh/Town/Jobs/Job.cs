@@ -23,7 +23,6 @@ public class Job
 
     public virtual void Issue()
     {
-
         if (Create.p.CanExplore)
         {
             if (whichJob == 0)
@@ -114,13 +113,13 @@ public class Job
     public virtual void Finish()
     {
         int bonus = (whichJob == 0) ? Create.p.TotalStrength : (whichJob == 1) ? Create.p.TotalAgility : (whichJob == 2) ? Create.p.TotalStamina : Create.p.TotalIntelligence;
-        int successCheck = Return.RandomInt(0, 101) - bonus*5;
-        if (successCheck <=5)
+        int successCheck = Return.RandomInt(0, bonus);
+        if (successCheck <=9)
         {
             int gold = Return.RandomInt(25, 35) * Create.p.Level;
             if (location == JobLocation.ArmorShop)
             {
-                UI.Keypress(new List<int> { 1,0,1,0,3,0,3,0,3}, new List<string>
+                UI.Keypress(new List<int> { 1,0,1,0,3,0,3,}, new List<string>
                 {
                     Color.HEALTH,"You do an ","amazing Job! ","",
                     "",
@@ -129,22 +128,12 @@ public class Job
                     Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
                     "",
                     Color.SPEAK,Color.ITEM,Color.SPEAK,"","And ","","something",""," for your troubles'","",
-                     "",
-                    Color.GOLD,Color.HIT,Color.ITEM,"You receive ", gold.ToString() ,", ","5 ","reputation and ", Equipment.armorList[Create.p.Level].Name , ""
                 });
-                Create.p.Gold += gold;
-                Create.p.RepAdd(5);
-                if (UI.Confirm(new List<int> { 1 }, new List<string>
-                {
-                    Color.ITEM, "Would you like to equip the ", Equipment.armorList[Create.p.Level].Name, "?",
-                }))
-                {
-                    Create.p.Equip(Equipment.armorList[Create.p.Level]);
-                }
+                Return.RewardEquipment(25,35,5,Equipment.armorList,Create.p.Level);
             }
             else if (location == JobLocation.WeaponShop)
             {
-                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3, 0, 3 }, new List<string>
+                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3 }, new List<string>
                 {
                     Color.HEALTH,"You do an ","amazing Job! ","",
                     "",
@@ -153,22 +142,12 @@ public class Job
                     Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
                     "",
                     Color.SPEAK,Color.ITEM,Color.SPEAK,"","And ","","something",""," for your troubles'","",
-                     "",
-                    Color.GOLD,Color.HIT,Color.ITEM,"You receive ", gold.ToString() ,", ","5 ","reputation and ", Equipment.swordList[Create.p.Level].Name , ""
                 });
-                Create.p.Gold += gold;
-                Create.p.RepAdd(5);
-                if (UI.Confirm(new List<int> { 1 }, new List<string>
-                {
-                    Color.ITEM, "Would you like to equip the ", Equipment.swordList[Create.p.Level].Name, "?",
-                }))
-                {
-                    Create.p.Equip(Equipment.swordList[Create.p.Level]);
-                }
+                Return.RewardEquipment(25, 35, 5, Equipment.LISTS[Return.RandomInt(0,4)], Create.p.Level);
             }
             else if (location == JobLocation.MagicShop)
             {
-                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3, 0, 3 }, new List<string>
+                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3 }, new List<string>
                 {
                     Color.HEALTH,"You do an ","amazing Job! ","",
                     "",
@@ -177,48 +156,43 @@ public class Job
                     Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
                     "",
                     Color.SPEAK,Color.ITEM,Color.SPEAK,"","And ","","something",""," for your troubles'","",
-                     "",
-                    Color.GOLD,Color.HIT,Color.ITEM,"You receive ", gold.ToString() ,", ","5 ","reputation and ", Equipment.magicList[Create.p.Level].Name , ""
                 });
-                Create.p.Gold += gold;
-                Create.p.RepAdd(5);
-                if (UI.Confirm(new List<int> { 1}, new List<string>
-                {
-                    Color.ITEM, "Would you like to equip the ", Equipment.magicList[Create.p.Level].Name, "?",
-                }))
-                {
-                    Create.p.Equip(Equipment.magicList[Create.p.Level]);
-                }
+                Return.RewardEquipment(25, 35, 5, Equipment.magicList, Create.p.Level);
             }
             else if (location == JobLocation.ItemShop)
             {
-                Drop potion = Shop.potionList[Return.RandomInt(0, Shop.potionList.Count)];
-                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3, 0, 3 }, new List<string>
+                if (Return.RoomForPotions())
                 {
-                    Color.HEALTH,"You do an ","amazing Job! ","",
-                    "",
-                    Color.SPEAK,"","'That's amazing! I'm going to tell everyone What a great job you did ","",
-                    "",
-                    Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
-                    "",
-                    Color.SPEAK,Color.POTION,Color.SPEAK,"","And ","","something",""," for your troubles'","",
-                     "",
-                    Color.GOLD,Color.HIT,Color.POTION,"You receive ", gold.ToString() ,", ","5 ","reputation and ", potion.name , ""
-                });
-                Create.p.Gold += gold;
-                Create.p.RepAdd(5);
-                if (UI.Confirm(new List<int> { 1 }, new List<string>
-                {
-                    Color.ITEM, "Would you like to equip the ", potion.name, "?",
-                }))
-                {
-                    Create.p.AddDrop(potion);
+                    UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3 }, new List<string>
+                    {
+                        Color.HEALTH,"You do an ","amazing Job! ","",
+                        "",
+                        Color.SPEAK,"","'That's amazing! I'm going to tell everyone What a great job you did ","",
+                        "",
+                        Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
+                        "",
+                        Color.SPEAK,Color.POTION,Color.SPEAK,"","And ","","something",""," for your troubles'","",
+                    });
+                    Return.RewardPotion(25, 35, 5);
                 }
+                else
+                {
+                    UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3 }, new List<string>
+                    {
+                        Color.HEALTH,"You do an ","amazing Job! ","",
+                        "",
+                        Color.SPEAK,"","'That's amazing! I'm going to tell everyone What a great job you did ","",
+                        "",
+                        Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
+                        "",
+                        Color.SPEAK,Color.GOLD,Color.SPEAK,"","And ","","some more",""," for your troubles'","",
+                    });
+                    Return.RewardGold(25, 35, 5);
+                }                
             }
             else
-            {
-                gold += Return.RandomInt(10, 20 * Create.p.Level);
-                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3, 0, 2 }, new List<string>
+            {                
+                UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3}, new List<string>
                 {
                     Color.HEALTH,"You do an ","amazing Job! ","",
                     "",
@@ -226,15 +200,12 @@ public class Job
                     "",
                     Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
                     "",
-                    Color.SPEAK,Color.GOLD,Color.SPEAK,"","And ","","some more",""," for your troubles'","",
-                     "",
-                    Color.GOLD,Color.HIT,"You receive ", gold.ToString() ,"and ","5"," reputation"
+                    Color.SPEAK,Color.GOLD,Color.SPEAK,"","And ","","some more",""," for your troubles'","",                    
                 });
-                Create.p.Gold += gold;
-                Create.p.RepAdd(5);
+                Return.RewardGold(25, 35, 5);
             }
         }
-        else if (successCheck <= 10)
+        else if (successCheck <= 5)
         {
             int gold = Return.RandomInt(25, 35) * Create.p.Level;
             UI.Keypress(new List<int> { 1,0,1,0,3,0,2 }, new List<string>

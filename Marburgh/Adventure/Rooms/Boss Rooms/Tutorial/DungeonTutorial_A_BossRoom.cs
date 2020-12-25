@@ -27,7 +27,7 @@ public class DungeonTutorial_A_BossRoom : Room
             "",
             Color.MONSTER,"The ","Orc"," charges "
         });
-        Dungeon.Summon(Dungeon.orc1,"The Large Orc");
+        Dungeon.Summon(new Orc(1), "The Large Orc");
         Combat.Menu();        
         GameState.firstBossDead = true;
         visited = true;

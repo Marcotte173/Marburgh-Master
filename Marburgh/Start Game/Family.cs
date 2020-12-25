@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 public class Family
 {
+    internal static bool cursed;
     internal static List<string> alive = new List<string> { };
     internal static List<string> dead = new List<string> { };
     internal static List<string> cause = new List<string> { };

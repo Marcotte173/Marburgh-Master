@@ -23,7 +23,7 @@ public class DungeonTutorial_B_BossRoom : Room
             "",
             "There's no turning back now!",
         });
-        Dungeon.Summon(Dungeon.savageOrc, "The Savage Orc");
+        Dungeon.Summon(new SavageOrc(3), "The Savage Orc");
         Combat.Menu();
 
         UI.Keypress(new List<int> { 1, 0, 0, 0, 2 }, new List<string>

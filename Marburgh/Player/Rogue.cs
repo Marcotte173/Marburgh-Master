@@ -24,7 +24,7 @@ public class Rogue : Player
         int backstabDamage = DamageMain*2 + DamageOff;
         if (Return.HaveEnergy(1))
         {
-            Combat.combatText.Add($"You deliver a devastating blow that bypasses armor. " + Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + backstabDamage + Color.RESET + " damage!");
+            Combat.AddCombatText($"You deliver a devastating blow that bypasses armor. " + Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + backstabDamage + Color.RESET + " damage!");
             target.TakeDamage(backstabDamage);
             Energy -= 1;
         }
@@ -40,7 +40,7 @@ public class Rogue : Player
         int stunDamage = DamageMain * level/2;
         if (Return.HaveEnergy(2))
         {
-            Combat.combatText.Add($"You deliver a tricky blow. " + Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(stunDamage, target.Mitigation) + Color.RESET + " damage and is " + Color.STUNNED + "stunned" + Color.RESET + "!");
+            Combat.AddCombatText($"You deliver a tricky blow. " + Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(stunDamage, target.Mitigation) + Color.RESET + " damage and is " + Color.STUNNED + "stunned" + Color.RESET + "!");
             target.TakeDamage(stunDamage);
             target.Stun = 2;
             Energy -= 2;
@@ -59,7 +59,7 @@ public class Rogue : Player
     public override void Update()
     {
         damage = playerDamage = TotalStrength/2 + TotalAgility/2;
-        playerHit = 78 + TotalAgility * 4 + TotalAgility / 2;
+        playerHit = 78 + TotalAgility * 4 + TotalIntelligence / 2;
         playerCrit = TotalAgility * 4;
         playerDefence = 2 * TotalAgility;
         health = maxHealth = 12 + 4 * TotalAgility;

@@ -103,6 +103,6 @@ public class CharacterSheet
             Write.Position(47, 22);
             Write.Line(Color.ENERGY, "Press any key to continue");
             Console.ReadKey(true);          
-        }       
-    }
+        }
+     }
 }

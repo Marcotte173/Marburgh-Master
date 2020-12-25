@@ -17,7 +17,6 @@ public class GameState
     internal static bool phase1b;
     internal static bool phase2a;
     internal static bool phase2b;
-    internal static bool phase3;
     internal static bool demo;
     internal static Job currentJob;
     internal static Job findJob = new Find(JobLocation.ArmorShop);
@@ -45,11 +44,11 @@ public class GameState
 
     internal static void TestCombat()
     {
-        Create.p = new Mage(3,2,3,2);
+        Create.p = new Warrior(3,2,3,2);
         Button.shieldButton.active = true;
         Create.p.Name = "Travis Marcotte";
         Create.p.MainHand = Equipment.daggerList[3];
-        Create.p.OffHand = Equipment.daggerList[3];
+        Create.p.OffHand = Equipment.daggerList[0];
         Create.p.Armor = Equipment.armorList[2];
         Create.p.AddDrop(DropList.potionOfKnowledge);
         Create.p.AddDrop(DropList.potionOfFire);
@@ -58,25 +57,9 @@ public class GameState
         Create.p.AddDrop(DropList.potionOfProwess);
         Create.p.AddDrop(DropList.potionOfLearning);
         Create.p.XP = 1500;
-        Level.Menu();
-        Level.Menu();
-        Level.Menu();
-        for (int i = 0; i < Dungeon.balanceList.Count-2; i++)
-        {
-            Dungeon.Summon(Dungeon.balanceList[i].MonsterCopy());
-            Dungeon.Summon(Dungeon.balanceList[i + 1].MonsterCopy());
-            Dungeon.Summon(Dungeon.balanceList[i + 2].MonsterCopy());
-            Combat.Menu();
-            Create.p.Health = Create.p.MaxHealth;
-            Create.p.PotionSize = Create.p.MaxPotionSize;
-            Create.p.Energy = Create.p.MaxEnergy;
-        }        
-        //foreach(Monster m in Dungeon.balanceList)
-        //{
-        //    Dungeon.Summon(m.MonsterCopy());
-        //    Combat.Menu();
-        //}    
-        //Town.Menu();
+        Create.p.Level += 2;
+        Dungeon.Summon(Dungeon.balanceList[0].MonsterCopy());
+        Combat.Menu();
     }
 
     internal static void TestMansion()
@@ -90,7 +73,7 @@ public class GameState
 
     public static void Death()
     {
-        Create.p.TakeDamage(100, Dungeon.goblin1);
+        Create.p.TakeDamage(100, new Goblin(1));
     }
 
     public static void CraftCheat()
@@ -156,6 +139,13 @@ public class GameState
     //Things that change day to day
     public static void NewDay()
     {
+        Equipment.LISTS.Clear();
+        Equipment.LISTS.Add(Equipment.swordList);
+        Equipment.LISTS.Add(Equipment.daggerList);
+        Equipment.LISTS.Add(Equipment.bluntList);
+        Equipment.LISTS.Add(Equipment.shieldList);
+        Equipment.LISTS.Add(Equipment.armorList);
+        Equipment.LISTS.Add(Equipment.magicList);
         List<Equipment> tempO = new List<Equipment> { };
         List<Equipment> tempD = new List<Equipment> { };
         foreach (Equipment e in Shop.itemOffenceList) tempO.Add(e);
@@ -166,7 +156,7 @@ public class GameState
         else if (who == 1 || who == 2) currentBartender = bartender2;
         else currentBartender = bartender1;
         //Available Potions
-        int pot = (phase3) ? 3 : (phase2b || phase2a) ? 2 : 1;
+        int pot = (phase2b || phase2a) ? 2 : 1;
         Shop.potionAvailableList.Clear();
         Shop.potionAvailableList.Add(null);
         for (int i = 0; i < pot; i++)
@@ -174,8 +164,8 @@ public class GameState
             Shop.potionAvailableList.Add(Shop.potionList[Return.RandomInt(0, Shop.potionList.Count)]);
         }
         //AvailableEquipment
-        int offensive = (phase3) ? 7 : (phase2b || phase2a) ? 7 : 5;
-        int defensive = (phase3) ? 7 : (phase2b || phase2a) ? 5 : 3;
+        int offensive = (phase2b || phase2a) ? 7 : 5;
+        int defensive = (phase2b || phase2a) ? 5 : 3;
         Shop.itemOffenceAvailableList.Clear();
         Shop.itemOffenceAvailableList.Add(Equipment.bluntList[0]);
         for (int i = 0; i < offensive; i++)
@@ -196,7 +186,7 @@ public class GameState
         }
         Utilities.SortDefence(Shop.itemDefenceAvailableList);
         //Jobs
-        if (phase2b||phase3)
+        if (phase2b)
         {   
             int job = Return.RandomInt(1, 101);
             if (job < 36)

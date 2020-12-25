@@ -24,7 +24,7 @@ public class Warrior : Player
         int rendDamage = DamageMain / 2;
         if (Return.HaveEnergy(1))
         {
-            Combat.combatText.Add($"You deliver a sturdy blow! "+Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(rendDamage, target.Mitigation) + Color.RESET + " damage and starts to " + Color.BLOOD + "bleed" + Color.RESET + "!");
+            Combat.AddCombatText($"You deliver a sturdy blow! "+Color.MONSTER + target.Name + Color.RESET + " takes " + Color.DAMAGE + Return.MitigatedDamage(rendDamage, target.Mitigation) + Color.RESET + " damage and starts to " + Color.BLOOD + "bleed" + Color.RESET + "!");
             target.TakeDamage(rendDamage);
             target.Bleed = 1+level/2;
             target.BleedDam = 4 + (level+1)/2;
@@ -44,9 +44,9 @@ public class Warrior : Player
             List<Creature> possible = new List<Creature> { };
             foreach (Creature c in Create.p.combatMonsters) possible.Add(c);
             possible.Remove(target);
-            text.Add($"You slam " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
+            Combat.AddCombatText($"You slam " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
             Creature monster = possible[Return.RandomInt(0, possible.Count)];
-            text.Add($"Additionally, you also hit " + Color.MONSTER + monster.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(cleaveDam, target.Mitigation) + Color.RESET + " damage");
+            Combat.AddCombatText($"Additionally, you also hit " + Color.MONSTER + monster.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(cleaveDam, target.Mitigation) + Color.RESET + " damage");
             target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
             monster.TakeDamage(Return.MitigatedDamage(cleaveDam, target.Mitigation));
             Energy -= 2;
@@ -65,7 +65,7 @@ public class Warrior : Player
     public override void Update()
     {
         damage = playerDamage = TotalStrength;
-        playerHit = 75 + TotalAgility * 3 + TotalAgility / 2;
+        playerHit = 75 + TotalAgility * 3 + TotalIntelligence / 2;
         playerCrit = TotalAgility * 3;
         health = maxHealth = 12 + 6 * TotalStamina;
         playerDefence = 3 * TotalAgility + TotalAgility-1;

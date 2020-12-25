@@ -78,6 +78,7 @@ public class Create
                 Button.attackButton.active = true;
                 Button.defendButton.active = true;
                 p.Name = Family.alive[0];
+                if (Family.cursed) p.Intelilgence -= 1;
                 Name(0);
             }
         }
@@ -91,6 +92,7 @@ public class Create
                 Button.attackButton.active = true;
                 Button.defendButton.active = true;
                 p.Name = Family.alive[1];
+                if (Family.cursed) p.Intelilgence -= 1;
                 Name(1);
             }
         }
@@ -104,6 +106,7 @@ public class Create
                 Button.attackButton.active = true;
                 Button.shieldButton.active = true;
                 p.Name = Family.alive[2];
+                if (Family.cursed) p.Agility -= 1;
                 Name(2);
             }
         }
@@ -136,7 +139,7 @@ public class Create
         Console.ReadKey(true);
         if (Family.dead.Count >0)
         {
-            int goldGet = (GameState.phase3) ? 1200 : (GameState.phase2b) ? 800 : (GameState.phase2b) ? 800 : (GameState.phase1b) ? 500 : (GameState.firstBossDead) ? 300 : 100;          
+            int goldGet = (GameState.phase2b) ? 800 : (GameState.phase2b) ? 800 : (GameState.phase1b) ? 500 : (GameState.firstBossDead) ? 300 : 100;          
             UI.KeypressNEW(new List<int> {0,0,0,0,0,0,0,0,1 }, new List<string>
             {
                 "Seargeant Billiam approaches you as you enter town",

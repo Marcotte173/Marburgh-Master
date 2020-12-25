@@ -92,7 +92,10 @@ public class Creature
     {
         health -= damage;
         health = (health < 0) ? 0 : health;
-        if (health <= 0) Death();
+        if (health <= 0)
+        {            
+            Death();
+        }
     }
 
     public virtual void AddHealth(int heal)
@@ -116,7 +119,7 @@ public class Creature
 
     public virtual void Miss(Creature target)
     {
-        Combat.combatText.Add("You miss "+ Color.MONSTER + target.Name + Color.RESET + "!");
+        Combat.AddCombatText("You miss "+ Color.MONSTER + target.Name + Color.RESET + "!");
     }
 
     public virtual bool AttemptToHit(Creature target, int bonus)

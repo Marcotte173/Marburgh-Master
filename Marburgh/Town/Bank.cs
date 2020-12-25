@@ -135,12 +135,32 @@ public class Bank
 
     private static void Robbery()
     {
-        
-    }
-
-    private static void Job()
-    {
-        
+        UI.Keypress(new List<int> { 1, 0, 1,0,1 }, new List<string>
+        {
+            Color.NAME,"The ","teller's"," eyes go wide",
+            "",
+            Color.SPEAK,"","'Guards! Guards! Help!'","",
+            "",
+            Color.ITEM,"3 armed guards rush in, ","weapons"," drawn"
+        });
+        Dungeon.Summon(new Guard(3));
+        Dungeon.Summon(new Guard(3));
+        Dungeon.Summon(new Guard(3));
+        Combat.Menu();
+        int gold= Return.RandomInt(800, 1400);
+        Create.p.RepAdd(-40) ;
+        Create.p.Gold += gold;
+        Button.robberyButton.active = false;
+        UI.Keypress(new List<int> { 2,0,1,0,1,0,1 }, new List<string>
+        {
+            Color.MONSTER,Color.GOLD,"The ","guards"," lay dead and the ","money"," is there for the taking",
+            "",
+            Color.CLASS,"Way to go, ","hero","",
+            "",
+            Color.GOLD,"You receive ",gold.ToString()," gold",
+            "",
+            Color.HIT,"You lose ","40"," reuputation"
+        });        
     }
 
     public static void InvestPay()

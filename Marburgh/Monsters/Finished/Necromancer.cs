@@ -17,6 +17,7 @@ public class Necromancer : Monster
         strength = Balance.necromancerStrength + Balance.necromancerStrength * level * 2 / 3;
         agility = Balance.necromancerAgility + Balance.necromancerAgility * level / 2;
         stamina = Balance.necromancerStamina + Balance.necromancerStamina * level / 2;
+        intelligence = Balance.necromancerIntelligence + Balance.necromancerIntelligence * level / 2;
         defence = 2 * agility + agility - 1;
         damage = strength ;
         hit = 65 + agility * 4;
@@ -28,10 +29,12 @@ public class Necromancer : Monster
 
     public override void Attack2(Player target)
     {
-        Monster summon = (Return.RandomInt(0, 2) == 0) ? Dungeon.skeleton2 : Dungeon.zombie3;
-        Combat.combatText.Add(Color.DEATH + name + Color.RESET + Color.RESET + " mumbles something you can't quite hear ");
-        Combat.combatText.Add($"The ground in front of him moves ");
-        Combat.combatText.Add(Color.MONSTER + summon.Name + Color.RESET +" crawls out of the ground");
+        Monster skeleton = new Skeleton(4);
+        Monster zombie = new Zombie(4);
+        Monster summon = (Return.RandomInt(0, 2) == 0) ? skeleton :zombie;
+        Combat.AddCombatText(Color.DEATH + name + Color.RESET + Color.RESET + " mumbles something you can't quite hear ");
+        Combat.AddCombatText($"The ground in front of him moves ");
+        Combat.AddCombatText(Color.MONSTER + summon.Name + Color.RESET +" crawls out of the ground");
         Dungeon.Summon(summon);
     }
     public override void Attack3(Player target)
@@ -69,28 +72,40 @@ public class Necromancer : Monster
                 else if (b == null) b = m;
             }
         }
-        Combat.combatText.Add(Color.DEATH + name + Color.RESET + Color.RESET + "whispers a word of "+Color.DEATH+"power "+Color.RESET);
-        if(a==null) Combat.combatText.Add($"But nothing happens!");
-        if (a!=null)Combat.combatText.Add(Color.MONSTER + name + Color.RESET +$" is filled with a {aGlow} glow");
-        if(b != null)Combat.combatText.Add(Color.MONSTER + name + Color.RESET +$" is filled with a {bGlow} glow");
+        Combat.AddCombatText(Color.DEATH + name + Color.RESET + Color.RESET + " whispers a word of "+Color.DEATH+"power "+Color.RESET);
+        if(a==null) Combat.AddCombatText($"But nothing happens!");
+        if (a!=null)Combat.AddCombatText(Color.MONSTER + name + Color.RESET +$" is filled with a {aGlow} glow");
+        if(b != null)Combat.AddCombatText(Color.MONSTER + name + Color.RESET +$" is filled with a {bGlow} glow");
 
     }
     public override void Attack4(Player target)
     {
-        Combat.combatText.Add(Color.DEATH + name + Color.RESET + "whispers a word of " + Color.DEATH + "power " + Color.RESET);
-        Combat.combatText.Add($"You feel a stabbing pain in your chest. "+Color.DEATH+"Green"+Color.RESET+ " fog comes out of your chest and flows into "+Color.DEATH + name + Color.RESET + "'s mouth");
-        Combat.combatText.Add($"You take {Color.DAMAGE + (intelligence * 4 + intelligence) + Color.RESET} damage and "+ Color.DEATH + name + Color.RESET + " heals himself");
-        target.TakeDamage(intelligence * 4 + intelligence, this);
-        AddHealth((intelligence * 4 + intelligence)/2);
+        Combat.AddCombatText(Color.DEATH + name + Color.RESET + " whispers a word of " + Color.DEATH + "power " + Color.RESET);
+
+        int spellDamage = intelligence * 4 + intelligence;
+        if (target.PersonalShield)
+        {
+            target.Energy = (target.Energy - spellDamage / 2 <= 0) ? 0 : target.Energy - spellDamage / 2;
+            Combat.AddCombatText("A " + Color.HEALTH + "green" + Color.RESET + " light flows from the " + Color.DEATH + "Necromancer" + Color.RESET + " to you but is interupted by your" + Color.ENERGY + " shield" + Color.RESET );
+        }
+        else
+        {
+            target.TakeDamage(spellDamage, this);
+            AddHealth((spellDamage / 2));
+            Combat.AddCombatText($"You feel a stabbing pain in your chest. " + Color.HEALTH + "Green" + Color.RESET + " fog comes out of your chest and flows into " + Color.DEATH + name + Color.RESET + "'s mouth");
+            Combat.AddCombatText($"You take {Color.DAMAGE + spellDamage + Color.RESET} damage and " + Color.DEATH + name + Color.RESET + " heals himself");            
+        }       
     }
     public override void Attack5(Player target)
     {
         while(Create.p.combatMonsters.Count < 3)
         {
-            Monster summon = (Return.RandomInt(0, 2) == 0) ? Dungeon.skeleton2 : Dungeon.zombie3;
-            Combat.combatText.Add(Color.DEATH + name + Color.RESET + "mumbles something you can't quite hear ");
-            Combat.combatText.Add($"The ground in front of him moves ");
-            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + " crawls out of the ground");
+            Monster skeleton = new Skeleton(4);
+            Monster zombie = new Zombie(4);
+            Monster summon = (Return.RandomInt(0, 2) == 0) ? skeleton : zombie;
+            Combat.AddCombatText(Color.DEATH + name + Color.RESET + "mumbles something you can't quite hear ");
+            Combat.AddCombatText($"The ground in front of him moves ");
+            Combat.AddCombatText(Color.MONSTER + name + Color.RESET + " crawls out of the ground");
             Dungeon.Summon(summon);
         }        
     }

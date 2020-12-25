@@ -6,7 +6,6 @@ using System.Threading;
 
 public class Combat
 {
-    public static bool tutorial;
     public static bool desecrated;
     public static int xpReward;
     public static int goldReward;
@@ -21,16 +20,17 @@ public class Combat
         outOfFight.Clear();
         //Get intention and display to start, after that, do it at the end
         foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
-        DisplayCombatText();
+        Console.Clear();
+        CombatUI.Box();
         while (Create.p.combatMonsters.Count > 0)
-        {
+        {            
             Create.p.ItemCheck();
             Create.p.AttackChoice();
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
                 if (m.Bleed > 0)
                 {
-                    combatText.Add(Color.MONSTER + m.Name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + m.BleedDam + Color.RESET + " damage!");
+                    AddCombatText(Color.MONSTER + m.Name + Color.BLOOD + " bleeds " + Color.RESET + "for " + Color.DAMAGE + m.BleedDam + Color.RESET + " damage!");
                     m.TakeDamage(m.BleedDam);
                     m.Bleed--;                    
                 }
@@ -40,7 +40,7 @@ public class Combat
                 }
                 if (m.Burning > 0)
                 {
-                    Combat.combatText.Add(Color.MONSTER + m.Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + m.BurnDam + Color.RESET + " damage!");
+                    Combat.AddCombatText(Color.MONSTER + m.Name + Color.BURNING + " burns " + Color.RESET + "for " + Color.DAMAGE + m.BurnDam + Color.RESET + " damage!");
                     m.TakeDamage(m.BurnDam);
                     m.Burning--;                    
                 }
@@ -58,8 +58,8 @@ public class Combat
                     m.CanAct = true;
                     if (m.Status.Contains("Stunned")) m.Status.Remove("Stunned");
                 }
-                if (m.CanAct) m.MakeAttack();
-                else combatText.Add($"The {Color.MONSTER + m.Name+Color.RESET} is "+Color.STUNNED+ "stunned "+Color.RESET+"and cannot act!");
+                if (m.CanAct && Create.p.Health>0) m.MakeAttack();
+                else if (!m.CanAct)AddCombatText($"The {Color.MONSTER + m.Name+Color.RESET} is "+Color.STUNNED+ "stunned "+Color.RESET+"and cannot act!");
             }
             foreach (Monster m in Create.p.combatMonsters.ToList()) m.Declare();
             foreach (Zombie z in outOfFight.ToList())
@@ -67,18 +67,45 @@ public class Combat
                 z.deadCount--;
                 if (z.deadCount <= 0 && Create.p.combatMonsters.Count<3) z.Revive();
             }
-            DisplayCombatText();
             if(Create.p.combatMonsters.Count ==0)
             {
-                Console.WriteLine("\n\nPress any Key to continue");
+                Console.Clear();
+                CombatUI.Box();
+                for (int i = 0; i < Combat.combatText.Count; i++)
+                {
+                    Write.Line(0, 6 + i, Combat.combatText[i]);
+                }
+                Write.Line(46, 22, Color.DAMAGE + "Press any key to continue");
                 Console.ReadKey(true);
-                foreach(Zombie z in outOfFight)
+                foreach (Zombie z in outOfFight)
                 {
                     goldReward += z.Gold;
                     xpReward += z.XP;
                     z.Drop();
                 }
             }
+            if (Create.p.Health == 0)
+            {
+                Console.Clear();
+                CombatUI.Box();
+                int n = 6;
+                for (int i = 0; i < Combat.combatText.Count; i++)
+                {
+                    Write.Line(0, n + i, Combat.combatText[i]);
+                }
+                if (Create.p.nonLethal) Combat.AddCombatText("You have been " + Color.BOSS + "defeated" + Color.RESET + " by the " + Color.MONSTER + Create.p.lastHit.Name + Color.RESET + "!");
+                else Combat.AddCombatText("You have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + Create.p.lastHit.Name + Color.RESET + "!");
+                Console.Clear();
+                CombatUI.Box();
+                for (int i = 0; i < Combat.combatText.Count; i++)
+                {
+                    Write.Line(0, 6 + i, Combat.combatText[i]);
+                }
+                Write.Line(46, 22, Color.DAMAGE + "Press any key to continue");
+                Console.ReadKey(true);
+                Create.p.Death(Create.p.lastHit);
+            }
+            combatText.Clear();
         }        
         List<int> colours = new List<int> { };
         List<string> text = new List<string> { };
@@ -137,26 +164,23 @@ public class Combat
     public static void AddCombatText(string text)
     {
         combatText.Add(text);
-    }
-
-    public static void DisplayCombatText()
-    {
         Console.Clear();
         CombatUI.Box();
-        if (tutorial)
+        CombatUI.AttackOptions();
+        if (combatText.Count > 9)
         {
-            if(Create.p.Health <= Create.p.MaxHealth/2 && Create.p.PotionSize > 0)
+            combatText.RemoveAt(0);
+            int n = 6;
+            for (int i = 0; i < combatText.Count; i++)
             {
-                Write.Line(35,14,Color.HEALTH + "YOU ARE LOW ON HEALTH. HIT H TO USE YOUR POTION");
-            }            
+                Write.Line(0, n + i, combatText[i]);
+            }
         }
-        Write.Position(0, 6);          
-        int n = 6;
+        int x = 6;
         for (int i = 0; i < combatText.Count; i++)
         {
-            Write.Line(0, n + i, combatText[i]);
-            Thread.Sleep(500);
+            Write.Line(0, x + i, combatText[i]);
         }
-        combatText.Clear();
+        Thread.Sleep(200);
     }
 }

@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public class Thug:Monster
+public class Guard : Monster
 {
-    public Thug(int level)
+    public Guard(int level)
     : base(level)
     {
         this.level = level;
-        type = "Skeleton";
-        name = "Skeleton";
-        xp = Balance.skeletonXp * level + Return.RandomInt(Balance.skeletonXp / 2, Balance.skeletonXp + Balance.skeletonXp / 2);
-        gold = Balance.skeletonGold * level + Return.RandomInt(Balance.skeletonGold / 2, Balance.skeletonGold + Balance.skeletonGold / 2);
-        strength = Balance.skeletonStrength + Balance.skeletonStrength * level * 2 / 3;
-        agility = Balance.skeletonAgility + Balance.skeletonAgility * level / 2;
-        stamina = Balance.skeletonStamina + Balance.skeletonStamina * level / 2;
+        type = "Guard";
+        name = "Guard";
+        xp = Balance.guardXp * level + Return.RandomInt(Balance.guardXp / 2, Balance.guardXp + Balance.guardXp / 2);
+        gold = Balance.guardGold * level + Return.RandomInt(Balance.guardGold / 2, Balance.guardGold + Balance.guardGold / 2);
+        strength = Balance.guardStrength + Balance.guardStrength * level * 2 / 3;
+        agility = Balance.guardAgility + Balance.guardAgility * level / 2;
+        stamina = Balance.guardStamina + Balance.guardStamina * level / 2;
         defence = agility + agility - 1;
         damage = strength;
         hit = 65 + agility * 4;

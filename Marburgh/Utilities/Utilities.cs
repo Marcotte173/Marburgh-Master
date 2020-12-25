@@ -259,7 +259,7 @@ public class Utilities
             desecrateList.Add(Color.ENERGY);
             desecrateList.Add("You gain ");
             desecrateList.Add("1 ");
-            desecrateList.Add("Intelligence until toy sleep");
+            desecrateList.Add("Intelligence until you sleep");
             Create.p.tempIntelligence += 1;
             Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
         }

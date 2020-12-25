@@ -47,7 +47,7 @@ public class Find:Job
         {
             Color.SPEAK,"","'You found him! ","",
             "",
-            Color.SPEAK,"","'That's amazing! I'm going to tell everyone What a great job you did ","",
+            Color.SPEAK,"","'That's amazing! I'm going to tell everyone what a great job you did ","",
             "",
             Color.SPEAK,Color.GOLD,Color.SPEAK,"","Here's the ","","money",""," I owe you","",
             "",

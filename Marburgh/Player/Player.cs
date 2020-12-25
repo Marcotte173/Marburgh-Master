@@ -5,23 +5,27 @@ using System.Linq;
 public enum PlayerClass {Warrior,Rogue,Mage }
 
 public class Player : Creature
-{
-    public bool nonLethal;
-    public PlayerClass pClass;
-    protected bool alive;
-    public List<Drop> combatDropList = new List<Drop> { };
-    public List<Monster> combatMonsters = new List<Monster> { };
-    protected int spellpower;
+{    
+    /// <summary>
+    /// Variables
+    /// </summary> 
+    
+    //Player Equipment
     protected Equipment mainHand;
     protected Equipment offHand;
     protected Equipment armor;
-    protected int tempDefence;
-    protected int tempMit;
+    
+    //How much Attributes go up when you level
     protected int[] strengthLvl;
     protected int[] agilityLvl;
     protected int[] staminaLvl;
     protected int[] intelligenceLvl;
-    public float tempXp = 0;
+
+    //Basic Player Info
+    protected bool alive;
+    public PlayerClass pClass;
+    protected List<Drop> drops = new List<Drop> { };
+    protected int spellpower;
     protected int reputation;
     protected int playerSpellpower;
     protected int playerDefence;
@@ -29,20 +33,37 @@ public class Player : Creature
     protected int playerMitigation;
     protected int playerHit;
     protected int playerCrit;
-    protected bool dungeonExplore;
-    public bool forestExplore;
+    protected bool canExplore;
     public bool forestCamp;
     protected int run;
+    public int suspicion;
+
+    //Tavern
     public bool flirted;
-    protected List<Drop> drops = new List<Drop> { };
-    public static List<string> text = Combat.combatText;
+    public string[] drinkText = new string[] { null, "nice and warm", "a little fuzzy", "quite silly", "sick", "VERY SICK" };    
+
+    //Temporary bonuses
     public int tempStrength;
     public int tempAgility;
     public int tempStamina;
     public int tempIntelligence;
+    public int tempHit;
+    public int tempCrit;
+    public int tempDefence;
+    public int tempMit;
+    public float tempXp = 0;
+    public int tempDamage = 0;
     public int drinks = 0;
+
+    //Combat
+    public Monster lastHit;
+    public bool tutorial;
+    public bool nonLethal;
+    public List<Drop> combatDropList = new List<Drop> { };
+    public List<Monster> combatMonsters = new List<Monster> { };
+
+    //Debug
     public bool showNumbers;
-    public string[] drinkText = new string[] {null,"nice and warm","a little fuzzy","quite silly","sick","VERY SICK" };
 
     public void ItemCheck()
     {
@@ -68,7 +89,7 @@ public class Player : Creature
         if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
         if (bleed > 0)
         {
-            text.Add(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
+            Combat.AddCombatText(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
             Monster g = new Goblin(1);
             g.Name = Color.BLOOD+ "Blood Loss"+ Color.RESET;
             TakeDamage(bleedDam,g);
@@ -77,7 +98,7 @@ public class Player : Creature
         }
         if (burning > 0)
         {
-            text.Add(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
+            Combat.AddCombatText(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
             Monster g = new Goblin(1);
             g.Name = Color.BURNING + "Third Degree Burns" + Color.RESET;
             TakeDamage(burnDam,g);
@@ -89,13 +110,14 @@ public class Player : Creature
             Create.p.CanAct = false;
             Create.p.Stun--;
             if (Create.p.Stun <= 0 && Create.p.Status.Contains("Stunned")) Create.p.Status.Remove("Stunned");
-            Combat.combatText.Add(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!");
+            Combat.AddCombatText(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!");
         }
         CombatUI.AttackOptions();
         if (canAct)
-        {
-                    
+        {                   
             string choice = Return.Option();
+            Console.Clear();
+            CombatUI.Box();
             Write.Position(0, 6);
             if (choice == "1") Attack1(GetTarget());
             else if (choice == "2") Attack2(null);
@@ -120,9 +142,11 @@ public class Player : Creature
             else if (choice == "9")
             {
                 CharacterSheet.Display();
+                Console.Clear();
+                CombatUI.Box();
                 AttackChoice();
             }
-            //else if (choice == "x")
+            //else if (choice == "c")
             //{
             //    CombatToggle();
             //    AttackChoice();
@@ -131,7 +155,7 @@ public class Player : Creature
             {
                 if (nonLethal)
                 {
-                    text.Add("You can't run away from combat in the " + Color.MONSTER + "Arena");
+                    Combat.AddCombatText("You can't run away from combat in the " + Color.MONSTER + "Arena");
                 }
                 else
                 {
@@ -150,7 +174,7 @@ public class Player : Creature
                             Explore.Menu();
                         }
                     }
-                    else text.Add("You try to get away but can't!");
+                    else Combat.AddCombatText("You try to get away but can't!");
                 }
             }
             else AttackChoice();
@@ -189,8 +213,7 @@ public class Player : Creature
         playerDamage = damage;
         playerHit = hit;
         playerCrit = crit;
-        dungeonExplore = true;
-        forestExplore = true;
+        CanExplore = true;
         forestCamp = true;
         canAct = true;
         xp = 0;
@@ -288,20 +311,7 @@ public class Player : Creature
     {
         health -= damage;
         health = (health < 0) ? 0 : health;
-        if (health == 0)
-        {
-            Console.Clear();
-            CombatUI.Box();
-            int n = 6;
-            for (int i = 0; i < Combat.combatText.Count; i++)
-            {
-                Write.Line(0, n + i, Combat.combatText[i]);
-            }
-            if (nonLethal) Console.WriteLine("\n\nYou have been " + Color.BOSS + "defeated" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!");
-            else Console.WriteLine("\n\nYou have been " + Color.BOSS + "killed" + Color.RESET + " by the " + Color.MONSTER + hitMe.Name + Color.RESET + "!");
-            Utilities.Keypress(40, 22);
-            Death(hitMe);
-        }
+        lastHit = hitMe;
     }
 
     public virtual void Update()
@@ -355,7 +365,7 @@ public class Player : Creature
         else
         {
             alive = false;
-            Forest.depth = 0;
+            Forest.progress = 0;
             Family.dead.Add(Family.alive[0]);
             Family.cause.Add(hitMe.Name);
             Family.timeOfDeath[0, 0] = Time.day;
@@ -391,7 +401,7 @@ public class Player : Creature
         if (MaxHealth == Health) DontNeedHeal();
         else
         {
-            if (PotionSize == 0) text.Add("Your " + Color.HEALTH + "potion" + Color.RESET + " is empty!");
+            if (PotionSize == 0) Combat.AddCombatText("Your " + Color.HEALTH + "potion" + Color.RESET + " is empty!");
             else if ((MaxHealth - Health) > PotionSize)
             {
                 AddHealth(PotionSize);
@@ -403,7 +413,7 @@ public class Player : Creature
                 AddHealth(MaxHealth - Health);
             }
         }
-        Combat.DisplayCombatText();
+        Combat.combatText.Clear();
     }
 
     public virtual void Refresh()
@@ -415,13 +425,13 @@ public class Player : Creature
         energy = MaxEnergy;
         flirted = false;
         potionSize = maxPotionSize;
-        dungeonExplore = true;
-        forestExplore = true;
+        CanExplore = true;
         forestCamp = true;
         tempStrength = 0;
         tempAgility = 0;
         tempStamina = 0;
         tempXp = 0;
+        tempDamage = 0;
         tempIntelligence = 0;
     }
     public virtual void Attack1(Creature target)
@@ -433,7 +443,7 @@ public class Player : Creature
                 if (AttemptToHit(target, 0) == false) Miss(target);
                 else
                 {
-                    text.Add($"You punch " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
+                    Combat.AddCombatText($"You punch " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
                     target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
                 }
             }            
@@ -444,7 +454,7 @@ public class Player : Creature
                     if (AttemptToHit(target, 0) == false) Miss(target);
                     else
                     {
-                        text.Add($"Your " + Color.ITEM + MainHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
+                        Combat.AddCombatText($"Your " + Color.ITEM + MainHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
                         target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
                     }
                 }
@@ -453,7 +463,7 @@ public class Player : Creature
                     if (AttemptToHit(target, 0) == false) Miss(target);
                     else
                     {
-                        text.Add($"Your " + Color.ITEM + OffHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageOff, target.Mitigation) + Color.RESET + " damage");
+                        Combat.AddCombatText($"Your " + Color.ITEM + OffHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageOff, target.Mitigation) + Color.RESET + " damage");
                         target.TakeDamage(Return.MitigatedDamage(DamageOff, target.Mitigation));
                     }
                 }
@@ -461,7 +471,6 @@ public class Player : Creature
         }
         else
         {
-            Combat.DisplayCombatText();
             AttackChoice();
         }
     }
@@ -469,7 +478,7 @@ public class Player : Creature
     {
         tempMit = level*2+1;
         tempDefence = 25;
-        text.Add("You focus on protecting yourself, increasing your " + Color.DEFENCE + "defence" + Color.RESET + " and" + Color.MITIGATION + " mitigation");
+        Combat.AddCombatText("You focus on protecting yourself, increasing your " + Color.DEFENCE + "defence" + Color.RESET + " and" + Color.MITIGATION + " mitigation");
     }
     public virtual void Attack3(Creature target)
     {
@@ -509,7 +518,7 @@ public class Player : Creature
             string choice = Console.ReadKey(true).KeyChar.ToString().ToLower();
             if (choice == "y") ItemUse(chosenItem);
         }
-        else AttackChoice();
+        else Items();
     }
 
     private void ItemUse(Drop chosenItem)
@@ -520,14 +529,14 @@ public class Player : Creature
             Creature target = GetTarget();
             if (target.Undead)
             {
-                text.Add($"The {Color.POTION + chosenItem.name + Color.RESET} splashes harmlessly at the feet of "+Color.MONSTER + target.Name + Color.RESET );
-                if(target.Type == "Necromancer") text.Add(Color.SPEAK+"'You fool! I control Death!'");
-                else text.Add($"You can't kill something that is already dead!");
+                Combat.AddCombatText($"The {Color.POTION + chosenItem.name + Color.RESET} splashes harmlessly at the feet of "+Color.MONSTER + target.Name + Color.RESET );
+                if(target.Type == "Necromancer") Combat.AddCombatText(Color.SPEAK+"'You fool! I control Death!'");
+                else Combat.AddCombatText($"You can't kill something that is already dead!");
             }
             else
             {
-                text.Add($"You throw the potion at "+Color.MONSTER + target.Name + Color.RESET );
-                text.Add($"It doesn't even have time to react as it's life force is instantly snuffed out");
+                Combat.AddCombatText($"You throw the potion at "+Color.MONSTER + target.Name + Color.RESET );
+                Combat.AddCombatText($"It doesn't even have time to react as it's life force is instantly snuffed out");
                 target.TakeDamage(100000);
             }            
         }
@@ -535,55 +544,50 @@ public class Player : Creature
         {
             RemoveDrop(DropList.potionOfFire, 1);
             Creature target = GetTarget();
-            text.Add($"You throw the potion at " + Color.MONSTER + target.Name + Color.RESET);
-            text.Add($"It screams as it starts " + Color.BURNING + "burning" + Color.RESET);
+            Combat.AddCombatText($"You throw the potion at " + Color.MONSTER + target.Name + Color.RESET);
+            Combat.AddCombatText($"It screams as it starts " + Color.BURNING + "burning" + Color.RESET);
             target.BurnDam = 6;
             target.Burning = 3;
-            Combat.DisplayCombatText();
             AttackChoice();
         }
         else if (chosenItem.name == "Potion Of Learning")
         {
-            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
-            Combat.DisplayCombatText();
+            Combat.AddCombatText($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
             AttackChoice();
         }
         else if (chosenItem.name == "Potion Of Life")
         {
-            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
-            Combat.DisplayCombatText();
+            Combat.AddCombatText($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
             AttackChoice();
         }
         else if (chosenItem.name == "Potion Of Power")
         {
-            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
-            Combat.DisplayCombatText();
+            Combat.AddCombatText($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
             AttackChoice();
         }
         else if (chosenItem.name == "Potion Of Prowess")
         {
-            text.Add($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
-            Combat.DisplayCombatText();
+            Combat.AddCombatText($"You start to open the " + Color.POTION + "potion" + Color.RESET + " then think better of it, realizing it's unlikely to do anything useful here");
             AttackChoice();
         }
         else if (chosenItem.name == "Potion Of Knowledge")
         {
             RemoveDrop(DropList.potionOfKnowledge, 1);
-            text.Add($"You chug the " + Color.POTION + "potion" + Color.RESET + ". You feel " + Color.XP + "wiser" + Color.RESET + "...");
-            Combat.DisplayCombatText();
+            Combat.AddCombatText($"You chug the " + Color.POTION + "potion" + Color.RESET + ". You feel " + Color.XP + "wiser" + Color.RESET + "...");
             tempXp += .25f;
             AttackChoice();
         }
+        Combat.combatText.Clear();
     }
 
     public override void HealStatement(int heal)
     {
-        text.Add("You " + Color.HEALTH + "heal " + Color.RESET + "yourself for " + Color.HEALTH + heal + Color.RESET + " hit points");
+        Combat.AddCombatText("You " + Color.HEALTH + "heal " + Color.RESET + "yourself for " + Color.HEALTH + heal + Color.RESET + " hit points");
     }
 
     public override void DontNeedHeal()
     {
-        text.Add("You don't need " + Color.HEALTH + "healing" + Color.RESET + "!");
+        Combat.AddCombatText("You don't need " + Color.HEALTH + "healing" + Color.RESET + "!");
     }
 
     public override bool AttemptToHit(Creature target, int bonus)
@@ -591,8 +595,8 @@ public class Player : Creature
         int attempt = Return.RandomInt(1, 101);
         if (showNumbers)
         {
-            text.Add($"Your hit is {Hit + bonus} and your targets defense is {target.Defence}");
-            text.Add($"You needed a {Hit + bonus - target.Defence}. You rolled {attempt}");
+            Combat.AddCombatText($"Your hit is {Hit + bonus} and your targets defense is {target.Defence}");
+            Combat.AddCombatText($"You needed a {Hit + bonus - target.Defence}. You rolled {attempt}");
         }
         return (attempt < Hit + bonus - target.Defence);
     }
@@ -605,7 +609,7 @@ public class Player : Creature
     public int Reputation { get { return reputation; } set { reputation = value; } }
     public string Rep => (reputation <=20)? "Hated" : (reputation<=40)?"Disliked":(Reputation <=60)?"Neutral":(reputation <=80)?"Liked":"Loved"; 
     public bool Alive { get { return alive; } set { alive = value; } }
-    public bool CanExplore { get { return dungeonExplore; } set { dungeonExplore = value; } }    
+    public bool CanExplore { get { return canExplore; } set { canExplore = value; } }    
     public int[] StrengthLvl { get { return strengthLvl; } set { strengthLvl = value; } }
     public int[] AgilityLvl { get { return agilityLvl; } set { agilityLvl = value; } }
     public int[] StaminaLvl { get { return staminaLvl; } set { staminaLvl = value; } }
@@ -615,13 +619,13 @@ public class Player : Creature
     public Equipment MainHand { get { return mainHand; } set { mainHand = value; } }
     public Equipment OffHand { get { return offHand; } set { offHand = value; } }
     public PlayerClass PClass { get { return pClass; } set { pClass = value; } }    
-    public override int Hit { get { return playerHit + MainHand.Hit/2 + OffHand.Hit/2 + Armor.Hit; } }
-    public override int Crit { get { return playerCrit + MainHand.Crit/2 + OffHand.Crit/2 + Armor.Crit; } }
+    public override int Hit { get { return playerHit + MainHand.Hit/2 + OffHand.Hit/2 + Armor.Hit + tempHit; } }
+    public override int Crit { get { return playerCrit + MainHand.Crit/2 + OffHand.Crit/2 + Armor.Crit + tempCrit; } }
     public int PlayerDefence { get { return playerDefence; } set { playerDefence = value; } }
     public int PlayerDamage { get { return playerDamage; } set { playerDamage = value; } }
     public int PlayerMitigation { get { return playerMitigation; } set { playerMitigation = value; } }
     public int PlayerHit { get { return playerHit; } set { playerHit = value; } }
-    public int PlayerCrit { get { return playerCrit; } set { playerCrit = value; } }
+    public int PlayerCrit { get { return playerCrit ; } set { playerCrit = value; } }
     public int PlayerSpellpower { get { return playerSpellpower; } set { playerSpellpower = value; } }
     public int TotalStrength { get { return strength + tempStrength; } }
     public int TotalStamina { get { return stamina + tempStamina; } }
@@ -632,8 +636,8 @@ public class Player : Creature
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } }
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }
-    public override int DamageMain => playerDamage + MainHand.Damage + Armor.Damage;
-    public override int DamageOff => playerDamage + OffHand.Damage * 2 / 3 + Armor.Damage / 2;
-    public override int DamageTH => playerDamage + MainHand.Damage + Armor.Damage;
+    public override int DamageMain => playerDamage + MainHand.Damage + Armor.Damage + tempDamage;
+    public override int DamageOff => playerDamage + OffHand.Damage * 2 / 3 + Armor.Damage / 2 + tempDamage;
+    public override int DamageTH => playerDamage + MainHand.Damage + Armor.Damage + tempDamage*2;
 
 }

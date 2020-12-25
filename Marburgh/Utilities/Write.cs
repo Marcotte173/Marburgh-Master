@@ -19,17 +19,6 @@ public class Write
     {
         Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2)) + "}", text));
     }
-
-    public static void CenterText(string text, string text2)
-    {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 3) + (text.Length / 2)) + "}{1," + ((Console.WindowWidth / 3) + (text2.Length / 2) - (text.Length / 2)) + "}", text, text2));
-    }
-
-    public static void CenterText(string text, string text2, string text3)
-    {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 4) + (text.Length / 2)) + "}{1," + ((Console.WindowWidth / 4) + (text2.Length / 2) - (text.Length / 2)) + "}" +
-            "{2," + ((Console.WindowWidth / 4) + (text3.Length / 2) - (text2.Length / 2)) + "}", text, text2, text3));
-    }
     public static void CenterColourText(string colour, string text, string text2, string text3)
     {
         Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + ((text.Length + text2.Length + text3.Length) / 2) + ((colour.Length + Color.RESET.Length))) + "}", $"{text}{colour}{text2}{Color.RESET}{text3}"));
@@ -48,22 +37,6 @@ public class Write
     public static void CenterColourText(string colour, string colour2, string colour3, string colour4, string text, string text2, string text3, string text4, string text5, string text6, string text7, string text8, string text9)
     {
         Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + ((text.Length + text2.Length + text3.Length + text4.Length + text5.Length + text6.Length + text7.Length + text8.Length + text9.Length) / 2) + ((colour.Length + colour2.Length + colour3.Length + colour4.Length + Color.RESET.Length * 4))) + "}", text + colour + text2 + Color.RESET + text3 + colour2 + text4 + Color.RESET + text5 + colour3 + text6 + Color.RESET + text7 + colour4 + text8 + Color.RESET + text9));
-    }
-
-    public static void CombatText(string colour, string text)
-    {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 2) + (text.Length / 2) + (colour.Length)) + "}", colour + text));
-    }
-
-    public static void CombatText(string colour, string colour2, string text, string text2)
-    {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 3) + (text.Length / 2) + (colour.Length)) + "}{1," + ((Console.WindowWidth / 3) + (text2.Length / 2) - (text.Length / 2) + (colour2.Length)) + "}", colour + text, colour2 + text2));
-    }
-
-    public static void CombatText(string colour, string colour2, string colour3, string text, string text2, string text3)
-    {
-        Console.WriteLine(string.Format("{0," + ((Console.WindowWidth / 4) + (text.Length / 2) + (colour.Length)) + "}{1," + ((Console.WindowWidth / 4) + (text2.Length / 2) - (text.Length / 2) + (colour2.Length)) + "}" +
-            "{2," + ((Console.WindowWidth / 4) + (text3.Length / 2) - (text2.Length / 2) + (colour3.Length)) + "}", colour + text, colour2 + text2, colour3 + text3));
     }
 
     public static void DotDotDot()

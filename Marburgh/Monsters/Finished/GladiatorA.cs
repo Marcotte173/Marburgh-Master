@@ -16,26 +16,29 @@ public class GladiatorA : Monster
     {
         this.name = name;
     }
+
     public override void Attack2(Player target)
     {
-        int newDamage = damage * 2;
-        if (target.PersonalShield)
+        if (AttemptToHit(target, 0))
         {
-            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $" takes a "+Color.ABILITY+ "BIG CUT "+Color.RESET+"but it is absorbed by your" + Color.SHIELD + "shield");
-            target.Energy = (target.Energy - newDamage / 2 <= 0) ? 0 : target.Energy - newDamage / 2;
-            if (target.Energy == 0) target.Attack2(null);
-        }
-        else if (AttemptToHit(target, 0))
-        {
-            Combat.combatText.Add(Color.MONSTER + name + Color.RESET + $" takes a " + Color.ABILITY + "BIG CUT" + Color.RESET + $" and hits you for {Color.DAMAGE + Return.MitigatedDamage(newDamage, target.Mitigation) + Color.RESET} damage!");
-            target.TakeDamage(Return.MitigatedDamage(newDamage, target.Mitigation), this);
+            int newDamage = damage * 2;
+            if (target.PersonalShield)
+            {
+                target.Energy = (target.Energy - newDamage / 2 <= 0) ? 0 : target.Energy - newDamage / 2;
+                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" takes a " + Color.ABILITY + "BIG CUT " + Color.RESET + "but it is absorbed by your" + Color.SHIELD + "shield");
+            }
+            else
+            {
+                target.TakeDamage(Return.MitigatedDamage(newDamage, target.Mitigation), this);
+                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" takes a " + Color.ABILITY + "BIG CUT" + Color.RESET + $" and hits you for {Color.DAMAGE + Return.MitigatedDamage(newDamage, target.Mitigation) + Color.RESET} damage!");
+            }
         }
         else Miss(target);
     }
     public override void Death()
     {
-        Combat.combatText.Add($"You have defeated {Color.MONSTER + Name + Color.RESET}!");
-        Combat.combatText.Add("");
+        Combat.AddCombatText($"You have defeated {Color.MONSTER + Name + Color.RESET}!");
+        Combat.AddCombatText("");
         Create.p.combatMonsters.Remove(this);
     }
     public override void Declare2()
