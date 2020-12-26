@@ -92,6 +92,12 @@ public class GameState
         Create.p.AddDrop(DropList.monsterEye);
         Create.p.AddDrop(DropList.monsterTooth);
         Create.p.AddDrop(DropList.savageOrcFang);
+        Create.p.AddDrop(DropList.batBrain);
+        Create.p.AddDrop(DropList.batBrain);
+        Create.p.AddDrop(DropList.necromancerBrain);
+        Create.p.AddDrop(DropList.spiderEgg);
+        Create.p.AddDrop(DropList.ghoulFang);
+        Create.p.AddDrop(DropList.bone);
         Create.p.AddDrop(DropList.slime);
         Create.p.AddDrop(DropList.slime);
         Button.bossWeapons.active = true;

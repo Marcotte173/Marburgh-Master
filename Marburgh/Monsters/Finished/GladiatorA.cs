@@ -46,10 +46,6 @@ public class GladiatorA : Monster
         if(name == "Rudiger") intention = "Big Cut <- His next move will be his special! Use your Defence!";
         else intention = "Big Cut";
     }
-    public override Drop ChooseDrop()
-    {
-        return DropList.savageOrcFang;
-    }
     public override void Declare()
     {
         if (CombatArena.round>1 && CombatArena.round % 3 ==0)

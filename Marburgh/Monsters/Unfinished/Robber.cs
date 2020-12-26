@@ -33,8 +33,4 @@ public class Robber:Monster
         action = 1;
         intention = "Ready";
     }
-    public override Drop ChooseDrop()
-    {
-        return DropList.savageOrcFang;
-    }
 }

@@ -50,4 +50,9 @@ public class Ghoul:Monster
     {
         intention = "Chomp";
     }
+    public override Drop ChooseDrop()
+    {
+        if (Return.RandomInt(0, 4) == 0) return DropList.ghoulFang;
+        else return DropList.monsterEye.Copy();
+    }
 }

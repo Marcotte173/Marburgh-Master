@@ -64,7 +64,7 @@ public class Button
 
     public static Button upgradeWeapons = new Button(Color.ENHANCEMENT + "U" + Color.RESET, "pgrade", true);
     public static Button bossWeapons = new Button(Color.ENHANCEMENT + "C" + Color.RESET, "raft Weapon", false);    
-    public static List<Button> listOfCraftOptions = new List<Button> { upgradeWeapons, bossWeapons };
+    public static List<Button> listOfUpgradeOptions = new List<Button> { upgradeWeapons, bossWeapons };
 
     public static Button mateInfoButton = new Button(Color.MONSTER + "W" + Color.RESET, "hat should I be Doing?", true);
     public static Button drinkButton1 = new Button(Color.GOLD + "A" + Color.RESET, "sk for a drink", true);
@@ -147,4 +147,13 @@ public class Button
     public static Button shotsButton = new Button(Color.HEALTH + "D" + Color.RESET, "rink 8 shots", true);
     public static Button languageButton = new Button(Color.ENERGY + "R" + Color.RESET, "ecite a poem in Elven", true);
     internal static List<Button> listOfFlirtOptions = new List<Button> { flexButton, sleightOfHand, shotsButton, languageButton };
+
+    // CRAFT
+    public static Button savageDaggerButton = new Button(Color.CRIT + "1" + Color.RESET, " Savage Dagger", false);
+    public static Button savageWandButton = new Button(Color.CRIT + "2" + Color.RESET, " Savage Wand", false);
+    public static Button maulButton = new Button(Color.CRIT + "3" + Color.RESET, " Maul of Hope", false);
+    public static Button swordButton = new Button(Color.CRIT + "4" + Color.RESET, " Sword Of Knowledge", false);
+    public static Button orbButton = new Button(Color.CRIT + "5" + Color.RESET, " Orb of Zorb", false);
+    public static Button cleaverButton = new Button(Color.CRIT + "6" + Color.RESET, " Haunted Cleaver", false);
+    internal static List<Button> listOfCraftOptions = new List<Button> { savageDaggerButton, savageWandButton, maulButton, swordButton, orbButton , cleaverButton };
 }

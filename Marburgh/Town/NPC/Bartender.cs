@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using System.Threading;
 
+public enum Ingredient{None,EyeOfNewt,WormTail,Milk,SnakeTongue }
 public class Bartender:NPC
 {
     public NPC npc;
@@ -12,6 +13,8 @@ public class Bartender:NPC
     static List<string> unfriendly = new List<string> {"'Oh. It's you. What do you want?'" };
     static string reactionToBartender;
     public int fallingForYou = 0;
+    Ingredient ing1;
+    Ingredient ing2;
 
     public Bartender(string job)
     :base(job)
@@ -175,12 +178,12 @@ public class Bartender:NPC
                 else
                 {
                     UI.Choice(new List<int> { 0, 1, 0, 1 }, new List<string>
-                {
-                    "",
-                    Color.SPEAK,"","'Go ahead","",
-                    "",
-                    Color.SPEAK,"","Impress Me'","",
-                },
+                    {
+                        "",
+                        Color.SPEAK,"","'Go ahead","",
+                        "",
+                        Color.SPEAK,"","Impress Me'","",
+                    },
                     Button.list1, Button.button1);
                 }
             }
@@ -300,9 +303,9 @@ public class Bartender:NPC
                 else
                 {
                     UI.Keypress(new List<int> { 0 }, new List<string>
-                {
-                    "You don't have the money!"
-                });
+                    {
+                        "You don't have the money!"
+                    });
                 }
             }
         }
@@ -352,13 +355,13 @@ public class Bartender:NPC
         if (Create.p.drinks > 4)
         {
             UI.Keypress(new List<int> { 1, 0, 1, 0, 3 }, new List<string>
-                {
-                    Color.BLOOD,"","Uh Oh",", that was one too many",
-                    "",
-                    Color.DEATH,"You feel the room ","spinning"," as you slump back in your stool",
-                    "",
-                    Color.BLOOD,Color.XP,Color.HEALTH,"Your last thought as you ","pass out", " is that you hope someone can help you get ","home"," to your nice warm ","bed",""
-                });
+            {
+                Color.BLOOD,"","Uh Oh",", that was one too many",
+                "",
+                Color.DEATH,"You feel the room ","spinning"," as you slump back in your stool",
+                "",
+                Color.BLOOD,Color.XP,Color.HEALTH,"Your last thought as you ","pass out", " is that you hope someone can help you get ","home"," to your nice warm ","bed",""
+            });
             House.Sleep();
             House.Menu();
         }
@@ -389,15 +392,90 @@ public class Bartender:NPC
 
     private void MakeOwn()
     {
+        
         Console.Clear();
         if (GameState.phase2b)
         {
-            Utilities.Buttons(Button.ListOfBuyDrinkOptions);
-            UI.Choice(new List<int> { 0, 2, 0, 0, 0, 1, 0, 0, 0, 1 }, new List<string>
+            if (Return.HaveGold(100))
             {
+                if (UI.Confirm(new List<int> { 1, 0, 0 }, new List<string>
+                {
+                    Color.HEALTH,"You mix your ","ingredients"," and then gulp em down",
+                    "",
+                    "You take a second to figure out how you feel"
+                }))
+                    Create.p.Gold -= 100;
+                {
+                    Ingredient1();
+                    Ingredient2();
+                    UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
+                {
+                    Color.HEALTH,"You mix your ","ingredients"," and then gulp em down",
+                    "",
+                    "You take a second to figure out how you feel"
+                });
+                    Console.Clear();
+                    Write.SetY(15);
+                    UI.StandardBoxBlank();
+                    Write.Line(44, 7, Color.SPEAK, "You feel");
+                    Thread.Sleep(300);
+                    Write.Line(51, 7, ".");
+                    Thread.Sleep(300);
+                    Write.Line(52, 7, ".");
+                    Thread.Sleep(300);
+                    Write.Line(53, 7, ".");
+                    Thread.Sleep(300);
+                    if (ing1 == ing2)
+                    {
 
-            },
-            Button.list1, Button.button1);
+                    }
+                    else if (ing1 == Ingredient.EyeOfNewt && ing2 == Ingredient.WormTail)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.WormTail && ing2 == Ingredient.Milk)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.Milk && ing2 == Ingredient.SnakeTongue)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.SnakeTongue && ing2 == Ingredient.EyeOfNewt)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.EyeOfNewt && ing2 == Ingredient.SnakeTongue)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.WormTail && ing2 == Ingredient.EyeOfNewt)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.Milk && ing2 == Ingredient.WormTail)
+                    {
+
+                    }
+                    else if (ing1 == Ingredient.SnakeTongue && ing2 == Ingredient.Milk)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                    Write.Line(46, 22, Color.SHIELD + "Press any key to continue");
+                    Console.ReadKey(true);
+                }
+            }
+            else
+            {
+                UI.Keypress(new List<int> { 0 }, new List<string>
+                {
+                    "You don't have the money!"
+                });
+            }         
         }
         else
         {
@@ -408,7 +486,51 @@ public class Bartender:NPC
                 "",
                 Color.SPEAK,"", "If you make a mistake, my whole bar could go up. Maybe Later'", ""
             });
+        }        
+    }
+
+    private void Ingredient1()
+    {
+        UI.Choice(new List<int> {1,0,0 }, new List<string>
+        {
+            Color.HEALTH,"What would you like your as your first ","ingredient?","",
+            "",
+            "[0] to return"
+        },
+        new List<string> { " Eye Of Newt", " Wormtail", " Milk", " Snake Tongue", }, new List<string> { Color.DAMAGE + "1" + Color.RESET, Color.HIT + "2" + Color.RESET, Color.HEALTH + "3" + Color.RESET, Color.ENERGY + "4" + Color.RESET });
+        string choice = Return.Option();
+        if (choice == "0") Menu();
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Ingredient1();
         }
-        
+        else if (choice == "1") ing1 = Ingredient.EyeOfNewt;
+        else if (choice == "2") ing1 = Ingredient.WormTail;
+        else if (choice == "3") ing1 = Ingredient.Milk;
+        else if (choice == "4") ing1 = Ingredient.SnakeTongue;
+        else Ingredient1();
+    }
+    private void Ingredient2()
+    {
+        UI.Choice(new List<int> { 1, 0, 0 }, new List<string>
+        {
+            Color.HEALTH,"What would you like your as your second ","ingredient?","",
+            "",
+            "[0] to return"
+        },
+        new List<string> { " Eye Of Newt", " Wormtail", " Milk", " Snake Tongue", }, new List<string> { Color.DAMAGE + "1" + Color.RESET, Color.HIT + "2" + Color.RESET, Color.HEALTH + "3" + Color.RESET, Color.ENERGY + "4" + Color.RESET });
+        string choice = Return.Option();
+        if (choice == "0") Menu();
+        else if (choice == "9")
+        {
+            CharacterSheet.Display();
+            Ingredient2();
+        }
+        else if (choice == "1") ing2 = Ingredient.EyeOfNewt;
+        else if (choice == "2") ing2 = Ingredient.WormTail;
+        else if (choice == "3") ing2 = Ingredient.Milk;
+        else if (choice == "4") ing2 = Ingredient.SnakeTongue;
+        else Ingredient2();
     }
 }

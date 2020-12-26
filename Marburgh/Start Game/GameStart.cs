@@ -50,7 +50,7 @@ namespace MedievalRPG
                 Create.p.Damage = 1000;
                 Create.p.Health = 3000;
                 Create.p.Name = "Travis Marcotte";
-                GameState.TestCombat();
+                GameState.CraftCheat();
             }
             else if (choice == "q") Environment.Exit(0);
             else Menu();

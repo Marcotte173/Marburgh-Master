@@ -24,6 +24,13 @@ public class Equipment
     protected int monsterEye ;
     protected int monsterTooth ;
 
+    public static Dagger savageDagger = new Dagger("Savage Dagger", 5, 3, 6, 2);
+    public static Magic savageWand = new Magic("Savage Wand", 5, 5, 3, 6,false, 2);
+    public static Blunt maul = new Blunt("Maul of Hope", 5,  3, 6, false, 2);
+    public static Sword sword = new Sword("Sword of Knowledge", 5, 3, 6, false, 2);
+    public static Magic orb = new Magic("Orb of Zorb", 5, 5, 3, 6, false, 2);
+    public static Sword cleaver = new Sword("Haunted Cleaver", 5, 5, 6, false, 2);
+
     internal static List<Equipment[]> LISTS = new List<Equipment[]> {swordList,daggerList,bluntList, shieldList,armorList, magicList };
 
     internal static Sword[] swordList = new Sword[]

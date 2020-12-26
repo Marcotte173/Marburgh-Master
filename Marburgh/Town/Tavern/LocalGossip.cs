@@ -265,6 +265,7 @@ public class LocalGossip
         });
         if(Create.p.Reputation > 80 && !caveTold)
         {
+
             caveTold = true;
             Tavern.Menu();
         }
@@ -273,10 +274,24 @@ public class LocalGossip
             int gossip = Return.RandomInt(0, 4);
             if(gossip == 0 && !toldPotionDeath)
             {
+                UI.Keypress(new List<int> {4,0,1,0,3  }, new List<string>
+                {
+                   Color.SPEAK,Color.DEATH,Color.SPEAK,Color.DEATH,"","I hear the ","","Necromancer's",""," Chambers are guarded by a ","","death fog","",
+                   "",
+                   Color.SPEAK,"Nothing alive can pass",
+                   "",
+                   Color.SPEAK,Color.DEATH,Color.SPEAK,"","The ","","dead",""," on the other hand....",""
+                });
                 Tavern.Menu();
             }
             else if(gossip == 1 && !toldBartenderPreference)
             {
+                string color = (GameState.bartender1.favored == FavoredTrait.Agility) ? Color.HIT : (GameState.bartender1.favored == FavoredTrait.Stamina) ? Color.HEALTH : (GameState.bartender1.favored == FavoredTrait.Intelligence) ? Color.ENERGY : Color.DAMAGE;
+                UI.Keypress(new List<int> { 4, 0, 1, 0, 3 }, new List<string>
+                {
+                   Color.SPEAK,Color.NAME,Color.SPEAK,color,"","I hear that ","",GameState.bartender1.name,""," is attracted to someone with high ","",GameState.bartender1.favored.ToString(),""
+                   
+                });
                 Tavern.Menu();
             }            
         }

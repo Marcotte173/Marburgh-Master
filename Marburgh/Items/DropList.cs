@@ -27,4 +27,8 @@ public class DropList
     public static Drop brokenCleaver = new Drop("Broken Cleaver", 1, 1);
     public static Drop spiderEgg = new Drop("Spider Egg", 1, 1);
     public static Drop batBrain = new Drop("Bat Brain", 1, 1);
+    public static Drop bone = new Drop("Old Bone", 1, 1);
+    public static Drop ghoulFang = new Drop("Ghoul Fang", 1, 1);
+    public static Drop bearPaw = new Drop("Bear Paw", 1, 1);
+    public static Drop mguffin = new Drop("Mguffin", 1, 1);
 }                 

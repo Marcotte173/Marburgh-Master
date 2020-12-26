@@ -80,6 +80,11 @@ public class Bear : Monster
         Create.p.tempHit += lowerHit;
         Drop();
     }
+    public override Drop ChooseDrop()
+    {
+        if (Return.RandomInt(0, 4) == 0) return DropList.bearPaw;
+        else return DropList.monsterEye.Copy();
+    }
 
     public override void Declare()
     {

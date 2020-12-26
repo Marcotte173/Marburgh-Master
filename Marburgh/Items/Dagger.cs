@@ -5,9 +5,7 @@ using System.Text;
 public class Dagger : Equipment
 {
     int[] damageBoost = new int[] { 0, 1, 2, 2, 6, 7, 8, 10 };
-    int[] critBoost = new int[]   { 0, 3, 2, 2, 2, 2, 3, 3};
-
-    public static Dagger savageDagger = new Dagger("Savage Dagger",5,3,6,2);    
+    int[] critBoost = new int[]   { 0, 3, 2, 2, 2, 2, 3, 3};   
 
     public Dagger(string name, int damage, int hit, int crit, int level)
     : base()
