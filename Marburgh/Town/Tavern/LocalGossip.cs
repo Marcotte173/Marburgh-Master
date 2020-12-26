@@ -8,14 +8,23 @@ public class LocalGossip
 {
     public static bool startedFight;
     public static bool firstSong = true;
-    private static int giveSpeech = 0;
+    public static int giveSpeech = 0;
+    public static int listenBard = 0;
     public static bool toldPotionDeath;
     public static bool toldBartenderPreference;
     public static bool caveTold;
+    public static bool bardFound;
 
     public static void Menu()
     {
         Console.Clear();
+        if (GameState.phase2b && giveSpeech == 0 && Create.p.Reputation > 60) Button.giveSpeechButton.active = true;
+        else Button.giveSpeechButton.active = false;
+        if ((GameState.phase1b||GameState.phase2b) && Create.p.Reputation > 49) Button.gossipButton.active = true;
+        else Button.gossipButton.active = false;
+        if ((GameState.phase1b || GameState.phase2b) && listenBard>0&& bardFound) Button.bardButton.active = true;
+        else Button.bardButton.active = false;
+
         Utilities.Buttons(Button.listOfLocalsOptions);
         if(Create.p.Reputation < 50)
         {
@@ -41,9 +50,9 @@ public class LocalGossip
         if (Create.p.Reputation < 50 && Return.RandomInt(0, 5) < 2) LocalStartsFight();
         else
             {
-            if (choice == "s" && Button.startFightButton.active && giveSpeech==0) Fight();
+            if (choice == "s" && Button.startFightButton.active) Fight();
             else if (choice == "t" && Button.gossipButton.active) Gossip();
-            else if (choice == "g" && Button.giveSpeechButton.active && Create.p.Reputation>60) Speech();
+            else if (choice == "g" && Button.giveSpeechButton.active) Speech();
             else if (choice == "l" && Button.bardButton.active) Bard();
             else if (choice == "9") CharacterSheet.Display();
             else if (choice == "0") Tavern.Menu();
@@ -150,6 +159,7 @@ public class LocalGossip
 
     public static void Song()
     {
+        listenBard = 3;
         UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
         {
             Color.NAME,"","Roderic"," begins performing",

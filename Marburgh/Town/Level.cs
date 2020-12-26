@@ -77,7 +77,7 @@ public class Level
         {
             if (p.pClass == PlayerClass.Mage)
             {
-                Button.fireBlastButton.active = true;
+                CombatUI.fireBlast = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.BURNING, "You have learned ", "Fireblast", "!",
@@ -85,7 +85,7 @@ public class Level
             }
             else if (p.pClass == PlayerClass.Rogue)
             {
-                Button.backstabButton.active = true;
+                CombatUI.backstab = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.DAMAGE, "You have learned ", "Backstab", "!",
@@ -93,7 +93,7 @@ public class Level
             }
             else if (p.pClass == PlayerClass.Warrior)
             {
-                Button.rendButton.active = true;
+                CombatUI.rend = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.BLOOD, "You have learned ", "Rend", "!",
@@ -104,7 +104,7 @@ public class Level
         {
             if (p.pClass == PlayerClass.Mage)
             {
-                Button.magicMissileButton.active = true;
+                CombatUI.magicMissile = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.ENERGY, "You have learned ", "Magic Missile", "!",
@@ -112,7 +112,7 @@ public class Level
             }
             else if (p.pClass == PlayerClass.Rogue)
             {
-                Button.stunButton.active = true;
+                CombatUI.stunMonster = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.STUNNED, "You have learned ", "Stun", "!",
@@ -120,7 +120,7 @@ public class Level
             }
             else if (p.pClass == PlayerClass.Warrior)
             {
-                Button.cleaveButton.active = true;
+                CombatUI.cleave = true;
                 UI.Keypress(new List<int> { 1 }, new List<string>
                 {
                     Color.BLOOD, "You have learned ", "Cleave", "!",

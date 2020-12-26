@@ -44,7 +44,7 @@ public class Slime : Monster
 
     public override void Attack2(Player target)
     {
-        Combat.AddCombatText(Color.MONSTER + name + Color.RESET + "splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
+        Combat.AddCombatText(Color.MONSTER + name + Color.RESET + " splits in two! Now there are TWO " + Color.MONSTER + "slimes" + Color.RESET + "!");
         MaxHealth = Health;
         Slime s = new Slime(level);
         s.Health = s.MaxHealth = MaxHealth;
@@ -105,8 +105,9 @@ public class Slime : Monster
 
     public override void Declare()
     {
-        if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
-        if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
+        if (burning > 0 && !Status.Contains(Color.BURNING + "Burning" + Color.RESET)) Status.Add(Color.BURNING + "Burning" + Color.RESET);
+        if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
+        if (stun > 0 && !Status.Contains(Color.STUNNED + "Stunned" + Color.RESET)) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
         if (health < maxHealth / 2 && Create.p.combatMonsters.Count < 3)
         {
             action = 0;

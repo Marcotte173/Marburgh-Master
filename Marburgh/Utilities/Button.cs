@@ -125,7 +125,7 @@ public class Button
 
     //COMBAT
     public static Button attackButton = new Button("1", " " + Color.DAMAGE + "Attack" + Color.RESET, true);
-    public static Button defendButton = new Button("2", " " + Color.DEFENCE + "Defend" + Color.RESET, false);
+    public static Button defenceButton = new Button("2", " " + Color.DEFENCE + "Defend" + Color.RESET, false);
     public static Button shieldButton = new Button("2", " " + Color.SHIELD + "Shield" + Color.RESET, false);
     public static Button fireBlastButton = new Button("3", " " + Color.BURNING + "FireBlast " + Color.RESET + "(" + Color.ENERGY + "2" + Color.RESET+")", false);
     public static Button rendButton = new Button("3", " " + Color.BLOOD + "Rend " + Color.RESET + "(" + Color.ENERGY + "1" + Color.RESET + ")", false);
@@ -134,7 +134,8 @@ public class Button
     public static Button magicMissileButton = new Button("4", " " + Color.ENERGY + "Magic Missile " + Color.RESET + "(" + Color.ENERGY + "3" + Color.RESET + ")", false);    
     public static Button cleaveButton = new Button("4", " " + Color.DAMAGE + "Cleave " + Color.RESET + "(" + Color.ENERGY + "2" + Color.RESET + ")", false);
     public static Button potionButton = new Button("6", " " + Color.POTION + "Potion" + Color.RESET, false);
-    public static List<Button> listOfCombatOptions = new List<Button> { attackButton, defendButton, shieldButton, fireBlastButton, backstabButton, rendButton, stunButton, magicMissileButton, cleaveButton, potionButton };
+    public static Button stunnedButton = new Button(Color.MITIGATION + "X" + Color.RESET, " " + Color.MITIGATION + "You are stunned. Press any key to continue" + Color.RESET, false);
+    public static List<Button> listOfCombatOptions = new List<Button> { attackButton, defenceButton, shieldButton, fireBlastButton, backstabButton, rendButton, stunButton, magicMissileButton, cleaveButton, stunnedButton,potionButton };
 
     //FOREST
     public static Button deeperButton = new Button(Color.MONSTER + "G" + Color.RESET, "o deeper into the Forest", true);

@@ -118,11 +118,6 @@ public class Player : Creature
                 CombatUI.Box();
                 AttackChoice();
             }
-            //else if (choice == "c")
-            //{
-            //    CombatToggle();
-            //    AttackChoice();
-            //}
             else if (choice == "0")
             {
                 if (nonLethal)
@@ -170,11 +165,10 @@ public class Player : Creature
         return target;
     }
 
-    public Player(int strength, int agility, int stamina, int intelligence)
-    : base(strength, agility, stamina)
+    public Player()
+    : base()
     {
-        reputation = 50;
-        this.intelligence = intelligence;
+        reputation = 50;        
         alive = true;
         xpNeeded = new int[] { 0, 45, 100, 150, 250, 450, 800 };
         Energy = MaxEnergy = 1;
@@ -432,7 +426,7 @@ public class Player : Creature
                         target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
                     }
                 }
-                if (offHand.Name != "Fist"&& mainHand.Type != EquipmentType.Shield && offHand.Type != EquipmentType.Shield && target.Health>0)
+                if (offHand.Name != "Fist"&& mainHand.Type != EquipmentType.Shield && offHand.Type != EquipmentType.TwoHand && target.Health>0)
                 {
                     if (AttemptToHit(target, 0) == false) Miss(target);
                     else
@@ -611,7 +605,7 @@ public class Player : Creature
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }
     public override int DamageMain => playerDamage + MainHand.Damage + Armor.Damage + tempDamage;
-    public override int DamageOff => playerDamage + OffHand.Damage * 2 / 3 + Armor.Damage / 2 + tempDamage;
+    public override int DamageOff => (playerDamage + OffHand.Damage + Armor.Damage / 2 + tempDamage) *2/3;
     public override int DamageTH => playerDamage + MainHand.Damage + Armor.Damage + tempDamage*2;
 
 }

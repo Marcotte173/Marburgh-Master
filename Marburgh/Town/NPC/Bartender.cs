@@ -391,79 +391,110 @@ public class Bartender:NPC
     }
 
     private void MakeOwn()
-    {
-        
+    {        
         Console.Clear();
         if (GameState.phase2b)
         {
             if (Return.HaveGold(100))
             {
-                if (UI.Confirm(new List<int> { 1, 0, 0 }, new List<string>
+                if (UI.Confirm(new List<int> { 1 }, new List<string> { Color.GOLD, "Would you like to make your own drink for ", $"100", " gold?" }))
                 {
-                    Color.HEALTH,"You mix your ","ingredients"," and then gulp em down",
-                    "",
-                    "You take a second to figure out how you feel"
-                }))
                     Create.p.Gold -= 100;
-                {
                     Ingredient1();
                     Ingredient2();
                     UI.Keypress(new List<int> { 1, 0, 0 }, new List<string>
-                {
-                    Color.HEALTH,"You mix your ","ingredients"," and then gulp em down",
-                    "",
-                    "You take a second to figure out how you feel"
-                });
+                    {
+                        Color.HEALTH,"You mix your ","ingredients"," and then gulp em down",
+                        "",
+                        "You take a second to figure out how you feel"
+                    });
                     Console.Clear();
                     Write.SetY(15);
                     UI.StandardBoxBlank();
                     Write.Line(44, 7, Color.SPEAK, "You feel");
                     Thread.Sleep(300);
-                    Write.Line(51, 7, ".");
-                    Thread.Sleep(300);
                     Write.Line(52, 7, ".");
                     Thread.Sleep(300);
                     Write.Line(53, 7, ".");
                     Thread.Sleep(300);
+                    Write.Line(54, 7, ".");
+                    Thread.Sleep(300);
                     if (ing1 == ing2)
                     {
-
+                        Write.Line(56, 7, Color.DEATH + "Sick");
+                        Write.Line(44, 9, Color.DEATH,"You rush home before you start ","throwing"," up");
+                        Write.Line(46, 22, Color.SHIELD + "Press any key to continue");
+                        Console.ReadKey(true);
+                        House.Menu();
                     }
                     else if (ing1 == Ingredient.EyeOfNewt && ing2 == Ingredient.WormTail)
                     {
-
+                        Create.p.tempStrength += 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.DAMAGE + "Stronger");
+                        Write.Line(44, 9, Color.DAMAGE,"You gain"," 1 ","Strength");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.WormTail && ing2 == Ingredient.Milk)
                     {
-
+                        Create.p.tempAgility += 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.HIT + "More Agile");
+                        Write.Line(44, 9, Color.HIT, "You gain", " 1 ", "Agility");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.Milk && ing2 == Ingredient.SnakeTongue)
                     {
-
+                        Create.p.tempStamina += 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.HEALTH + "Tougher");
+                        Write.Line(44, 9, Color.HEALTH, "You gain", " 1 ", "Stamina");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.SnakeTongue && ing2 == Ingredient.EyeOfNewt)
                     {
-
+                        Create.p.tempIntelligence += 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.ENERGY + "Smarter");
+                        Write.Line(44, 9, Color.ENERGY, "You gain", " 1 ", "Intelligence");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.EyeOfNewt && ing2 == Ingredient.SnakeTongue)
                     {
-
+                        Create.p.tempStrength -= 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.DAMAGE + "Weaker");
+                        Write.Line(44, 9, Color.DAMAGE, "You lose", " 1 ", "Strength");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.WormTail && ing2 == Ingredient.EyeOfNewt)
                     {
-
+                        Create.p.tempAgility -= 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.HIT + "Clumsy");
+                        Write.Line(44, 9, Color.HIT, "You lose", " 1 ", "Agility");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.Milk && ing2 == Ingredient.WormTail)
                     {
-
+                        Create.p.tempStamina -= 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.HEALTH + "Fragile");
+                        Write.Line(44, 9, Color.HEALTH, "You lose", " 1 ", "Stamina");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else if (ing1 == Ingredient.SnakeTongue && ing2 == Ingredient.Milk)
                     {
-
+                        Create.p.tempIntelligence -= 1;
+                        Create.p.Update();
+                        Write.Line(56, 7, Color.ENERGY + "Cloudy");
+                        Write.Line(44, 9, Color.ENERGY, "You lose", " 1 ", "Intelligence");
+                        Write.Line(44, 11, Color.SHIELD, "This will last until you", " sleep ", "");
                     }
                     else
                     {
-
+                        Write.Line(56, 7, Color.SPEAK + "Fine");
+                        Write.Line(44, 9, "Nothing happens... Kind of a waste, really");
                     }
                     Write.Line(46, 22, Color.SHIELD + "Press any key to continue");
                     Console.ReadKey(true);
@@ -491,21 +522,13 @@ public class Bartender:NPC
 
     private void Ingredient1()
     {
-        UI.Choice(new List<int> {1,0,0 }, new List<string>
+        UI.Choice(new List<int> {1 }, new List<string>
         {
             Color.HEALTH,"What would you like your as your first ","ingredient?","",
-            "",
-            "[0] to return"
         },
         new List<string> { " Eye Of Newt", " Wormtail", " Milk", " Snake Tongue", }, new List<string> { Color.DAMAGE + "1" + Color.RESET, Color.HIT + "2" + Color.RESET, Color.HEALTH + "3" + Color.RESET, Color.ENERGY + "4" + Color.RESET });
         string choice = Return.Option();
-        if (choice == "0") Menu();
-        else if (choice == "9")
-        {
-            CharacterSheet.Display();
-            Ingredient1();
-        }
-        else if (choice == "1") ing1 = Ingredient.EyeOfNewt;
+        if (choice == "1") ing1 = Ingredient.EyeOfNewt;
         else if (choice == "2") ing1 = Ingredient.WormTail;
         else if (choice == "3") ing1 = Ingredient.Milk;
         else if (choice == "4") ing1 = Ingredient.SnakeTongue;
@@ -513,21 +536,16 @@ public class Bartender:NPC
     }
     private void Ingredient2()
     {
-        UI.Choice(new List<int> { 1, 0, 0 }, new List<string>
+        string ingred = (ing1 == Ingredient.EyeOfNewt) ? "Eye Of Newt" : (ing1 == Ingredient.WormTail) ? "Wormtail" : (ing1 == Ingredient.Milk) ? "Milk" : "Eye Of Newt";
+        UI.Choice(new List<int> { 1, 0, 1 }, new List<string>
         {
             Color.HEALTH,"What would you like your as your second ","ingredient?","",
             "",
-            "[0] to return"
+            Color.CRIT,"First Ingredient: ",ingred,""
         },
         new List<string> { " Eye Of Newt", " Wormtail", " Milk", " Snake Tongue", }, new List<string> { Color.DAMAGE + "1" + Color.RESET, Color.HIT + "2" + Color.RESET, Color.HEALTH + "3" + Color.RESET, Color.ENERGY + "4" + Color.RESET });
         string choice = Return.Option();
-        if (choice == "0") Menu();
-        else if (choice == "9")
-        {
-            CharacterSheet.Display();
-            Ingredient2();
-        }
-        else if (choice == "1") ing2 = Ingredient.EyeOfNewt;
+        if (choice == "1") ing2 = Ingredient.EyeOfNewt;
         else if (choice == "2") ing2 = Ingredient.WormTail;
         else if (choice == "3") ing2 = Ingredient.Milk;
         else if (choice == "4") ing2 = Ingredient.SnakeTongue;

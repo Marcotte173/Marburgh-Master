@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 public class Create
 {
-    internal static Warrior w = new Warrior(3, 2, 3, 2);
-    internal static Mage m = new Mage(3, 2, 2, 3);
-    internal static Rogue r = new Rogue(3, 3, 3, 2);
+    internal static Warrior w = new Warrior();
+    internal static Mage m = new Mage();
+    internal static Rogue r = new Rogue();
     internal static Player p;
 
     public static void Story()
@@ -67,7 +67,7 @@ public class Create
         }
         Write.Line(47, 22, "Please select a sibling");
         string choice = Return.Option();
-        p = new Player(2, 2, 2, 2);
+        p = new Player();
         if (choice == "1" && w.Alive)
         {
             if (!UI.ConfirmNEW(new List<int> { 1 }, new List<string> { Color.NAME, "You have chosen ", Family.alive[0], ", correct?" })) ChooseSibling();
@@ -76,7 +76,14 @@ public class Create
                 p = w;
                 foreach (Button b in Button.listOfCombatOptions) b.active = false;
                 Button.attackButton.active = true;
-                Button.defendButton.active = true;
+                CombatUI.defence = true;
+                CombatUI.shield = false;
+                CombatUI.rend = false;
+                CombatUI.fireBlast = false;
+                CombatUI.backstab = false;
+                CombatUI.magicMissile = false;
+                CombatUI.cleave = false;
+                CombatUI.stunMonster = false;
                 p.Name = Family.alive[0];
                 if (Family.cursed) p.Intelilgence -= 1;
                 Name(0);
@@ -90,7 +97,14 @@ public class Create
                 p = r;
                 foreach (Button b in Button.listOfCombatOptions) b.active = false;
                 Button.attackButton.active = true;
-                Button.defendButton.active = true;
+                CombatUI.defence = true;
+                CombatUI.shield = false;
+                CombatUI.rend = false;
+                CombatUI.fireBlast = false;
+                CombatUI.backstab = false;
+                CombatUI.magicMissile = false;
+                CombatUI.cleave = false;
+                CombatUI.stunMonster = false;
                 p.Name = Family.alive[1];
                 if (Family.cursed) p.Intelilgence -= 1;
                 Name(1);
@@ -104,7 +118,14 @@ public class Create
                 p = m;
                 foreach (Button b in Button.listOfCombatOptions) b.active = false;
                 Button.attackButton.active = true;
-                Button.shieldButton.active = true;
+                CombatUI.shield = true;
+                CombatUI.defence = false;
+                CombatUI.rend = false;
+                CombatUI.fireBlast = false;
+                CombatUI.backstab = false;
+                CombatUI.magicMissile = false;
+                CombatUI.cleave = false;
+                CombatUI.stunMonster = false;
                 p.Name = Family.alive[2];
                 if (Family.cursed) p.Agility -= 1;
                 Name(2);

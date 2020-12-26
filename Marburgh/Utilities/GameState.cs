@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-public enum Location{Town, Level, Shop, House, Craft, Bank, Graveyard, Help, Tavern, Dungeon, Combat, CombatArena, ExploreTown, Forest}
+public enum Location{Town, Level, Shop, House, Craft, Bank, Graveyard, Help, Tavern, Dungeon,  CombatArena, Forest}
 public class GameState
 {
     public static Bartender bartender1 = new Bartender("bartender");
@@ -25,7 +25,7 @@ public class GameState
     //Testing And Cheating
     public static void Test()
     {
-        Create.p = new Warrior(3, 3, 3, 3);
+        Create.p = new Warrior();
         Create.p.Name = "Travis Marcotte";
     }
 
@@ -44,27 +44,33 @@ public class GameState
 
     internal static void TestCombat()
     {
-        Create.p = new Warrior(300,200,300,200);
+        Create.p = new Mage();
         Button.shieldButton.active = true;
         Create.p.Name = "Travis Marcotte";
-        Create.p.MainHand = Equipment.daggerList[3];
-        Create.p.OffHand = Equipment.daggerList[0];
+        Create.p.MainHand = Equipment.daggerList[2];
+        Create.p.OffHand = Equipment.daggerList[2];
         Create.p.Armor = Equipment.armorList[2];
-        Create.p.AddDrop(DropList.potionOfKnowledge);
-        Create.p.AddDrop(DropList.potionOfFire);
-        Create.p.AddDrop(DropList.potionOfPower);
-        Create.p.AddDrop(DropList.potionOfLife);
-        Create.p.AddDrop(DropList.potionOfProwess);
-        Create.p.AddDrop(DropList.potionOfLearning);
         Create.p.XP = 1500;
-        Create.p.Level += 2;
-        Dungeon.Summon(Dungeon.balanceList[0].MonsterCopy());
-        Combat.Menu();
+        Level.Menu();
+        Level.Menu();
+        Level.Menu();
+        Level.Menu();
+        Phase1B();
+        Phase2B();
+        Town.Menu();
+        //Dungeon.Summon(Dungeon.dungeon1b.bestiary[Return.RandomInt(0, Dungeon.dungeon1b.bestiary.Count)].MonsterCopy());
+        //Combat.Menu();
+        //Dungeon.Summon(Dungeon.dungeon1b.bestiary[Return.RandomInt(0, Dungeon.dungeon1b.bestiary.Count)].MonsterCopy());
+        //Dungeon.Summon(Dungeon.dungeon1b.bestiary[Return.RandomInt(0, Dungeon.dungeon1b.bestiary.Count)].MonsterCopy());
+        //Combat.Menu();
+        //Dungeon.Summon(Dungeon.dungeon1b.bestiary[Return.RandomInt(0, Dungeon.dungeon1b.bestiary.Count)].MonsterCopy());
+        //Dungeon.Summon(Dungeon.dungeon1b.bestiary[Return.RandomInt(0, Dungeon.dungeon1b.bestiary.Count)].MonsterCopy());
+        //Combat.Menu();
     }
 
     internal static void TestMansion()
     {
-        Create.p = new Mage(3, 3, 3, 3);
+        Create.p = new Mage();
         Explore.dungeon = Dungeon.MansionEntrance;
         Create.p.Name = "Travis Marcotte";
         Cheat();
@@ -78,7 +84,7 @@ public class GameState
 
     public static void CraftCheat()
     {
-        Create.p = new Warrior(3, 3, 3, 3);
+        Create.p = new Warrior();
         Create.p.Name = "Travis Marcotte";
         Create.p.MainHand = Equipment.swordList[2];
         Create.p.OffHand = Equipment.swordList[1];
@@ -97,6 +103,7 @@ public class GameState
         Create.p.AddDrop(DropList.necromancerBrain);
         Create.p.AddDrop(DropList.spiderEgg);
         Create.p.AddDrop(DropList.ghoulFang);
+        Create.p.AddDrop(DropList.potionOfDeath);
         Create.p.AddDrop(DropList.bone);
         Create.p.AddDrop(DropList.slime);
         Create.p.AddDrop(DropList.slime);
@@ -131,20 +138,20 @@ public class GameState
 
     public static void Phase2B()
     {
-        Button.gambleButton.active = true;
-        Button.bankButton.active = true;
+        Button.dungeon2Button.active = true;
+        Button.dungeonForestButton.active = true;
         Button.weaponShopButton.active = true;
         Button.armorShopButton.active = true;
         Button.magicShopButton.active = true;
-        Button.dungeon2Button.active = true;
-        Button.dungeonForestButton.active = true;
-        Button.gambleButton.active = true;
+        Button.bankButton.active = true;
         phase2b = true;
     }
 
     //Things that change day to day
     public static void NewDay()
     {
+        if (LocalGossip.listenBard > 0) LocalGossip.listenBard--;
+        if (LocalGossip.giveSpeech > 0) LocalGossip.giveSpeech--;
         Equipment.LISTS.Clear();
         Equipment.LISTS.Add(Equipment.swordList);
         Equipment.LISTS.Add(Equipment.daggerList);

@@ -41,10 +41,9 @@ public class Equipment
         new Sword("Arming Sword",5,14,2,false,2),
         new Sword("Long Sword",7,17,3,false,3),
         new Sword("Katana",9,20,5,false,4),
-
-        new Sword("Broad Sword",18,20,7,false,5),
-        new Sword("Great Sword",46,24,8,false,6),
-        new Sword("Claymore",58,30,10,false,7)
+        new Sword("Broad Sword",24,25,7,true,5),
+        new Sword("Great Sword",30,30,8,true,6),
+        new Sword("Claymore",36,35,10,true,7)
     };
 
     internal static Shield[] shieldList = new Shield[]
@@ -54,11 +53,10 @@ public class Equipment
         new Shield("Buckler",0,10,1),
         new Shield("Round Shield",0,15,2),
         new Shield("Pavise",0,20,3),
-        new Shield("Targ",0,25,4),
-
-        new Shield("Heater Shield",0,25,5),
-        new Shield("Kite Shield",0,30,6),
-        new Shield("Teardrop Shield",0,40,7),
+        new Shield("Targ",1,25,4),
+        new Shield("Heater Shield",1,30,5),
+        new Shield("Kite Shield",2,35,6),
+        new Shield("Teardrop Shield",3,40,7),
     };
 
     internal static Magic[] magicList = new Magic[]
@@ -69,10 +67,9 @@ public class Equipment
         new Magic("Staff",7,6,1,2,true,2),
         new Magic("Book",5,9,4,4,false,3),
         new Magic("Wand",7,12,6,6,false,4),
-
-        new Magic("Orb",26,25,11,10,false,5),
-        new Magic("Ring",32,34,14,13,false,6),
-        new Magic("Source",40,45,16,16,false,7)
+        new Magic("Orb",9,15,8,8,false,5),
+        new Magic("Ring",11,18,10,10,false,6),
+        new Magic("Source",13,21,12,12,false,7)
     };
 
     internal static Dagger[] daggerList = new Dagger[]
@@ -83,10 +80,9 @@ public class Equipment
         new Dagger("Knife",5,2,8,2),
         new Dagger("Push Dagger",7,3,11,3),
         new Dagger("Stilleto",9,6,14,4),
-
-        new Dagger("Dirk",17,7,20,5),
-        new Dagger("Trench Knife",23,8,24,6),
-        new Dagger("Baselard",29,20,30,7)
+        new Dagger("Dirk",12,7,20,5),
+        new Dagger("Trench Knife",15,8,24,6),
+        new Dagger("Baselard",18,20,30,7)
     };
 
     internal static Blunt[] bluntList = new Blunt[]
@@ -97,10 +93,9 @@ public class Equipment
         new Blunt("Hammer",5,10,5,false,2),
         new Blunt("Shillelagh",7,14,8,false,3),
         new Blunt("Flail",9,15,10,false,4),
-
-        new Blunt("Morning Star",18,5,5,false,5),
-        new Blunt("War Hammer",45,8,8,false,6),
-        new Blunt("Maul",60,8,8,false,7)
+        new Blunt("Morning Star",12,5,5,false,5),
+        new Blunt("War Hammer",30,8,8,true,6),
+        new Blunt("Maul",37,8,8,true,7)
     };
 
     internal static Armor[] armorList = new Armor[]
@@ -111,7 +106,6 @@ public class Equipment
         new Armor("Leather",2,6,2),
         new Armor("Hardened Leather",3,5,3),
         new Armor("Mail",3,6,4),
-
         new Armor("Coat Of Plates",5,4,5),
         new Armor("Mail and Plate",7,2,6),
         new Armor("Articulated Plate",10,0,7),

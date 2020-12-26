@@ -5,9 +5,13 @@ using System.Text;
 public class Rogue : Player
 {
 
-    public Rogue(int strength, int agility, int stamina, int intelligence)
-    : base(strength, agility, stamina, intelligence)
+    public Rogue()
+    : base()
     {
+        strength = 3;
+        agility = 3;
+        stamina = 3;
+        intelligence = 2;
         strengthLvl = new int[]     { 0, 0, 3, 2, 2, 3,3,3 };
         agilityLvl = new int[]      { 0, 0, 2, 2, 2, 4,3,3 };
         staminaLvl = new int[]      { 0, 0, 1, 2, 2, 2,3,3 };
@@ -58,7 +62,7 @@ public class Rogue : Player
 
     public override void Update()
     {
-        damage = playerDamage = TotalStrength/2 + TotalAgility/2;
+        damage = playerDamage = TotalStrength + TotalAgility;
         playerHit = 78 + TotalAgility * 4 + TotalIntelligence / 2;
         playerCrit = TotalAgility * 4;
         playerDefence = 2 * TotalAgility;

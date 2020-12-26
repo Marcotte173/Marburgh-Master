@@ -43,15 +43,15 @@ namespace MedievalRPG
             Write.Line(93,14, Color.MITIGATION + "/     /    "  +Color.DEATH + "|   |" +   Color.MITIGATION + "/        \\");
             string choice = Return.Option();
             if (choice == "n") Family.Name();
-            if (choice == "x") GameState.TestCombat();
-            if (choice == "c")
-            {
-                Create.p = new Warrior(15, 15, 30, 15);
-                Create.p.Damage = 1000;
-                Create.p.Health = 3000;
-                Create.p.Name = "Travis Marcotte";
-                GameState.CraftCheat();
-            }
+            //if (choice == "x") GameState.TestCombat();
+            //if (choice == "c")
+            //{
+            //    Create.p = new Warrior();
+            //    Create.p.Damage = 1000;
+            //    Create.p.Health = 3000;
+            //    Create.p.Name = "Travis Marcotte";
+            //    Forest.OldManGuess();
+            //}
             else if (choice == "q") Environment.Exit(0);
             else Menu();
         }

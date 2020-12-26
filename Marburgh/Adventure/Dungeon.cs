@@ -79,6 +79,7 @@ public class Dungeon
     /// <summary>
     /// TUTORIAL DUNGEON 1A
     /// </summary>
+    public static List<Monster> dungeonSummon1a = new List<Monster> { new Goblin(1) , new Kobold(1) , new Slime(1) };
     public static Dungeon dungeon1a = new Dungeon(
         new List<Shell>
         {
@@ -97,13 +98,14 @@ public class Dungeon
             new Shell(0, 0, 5, 9 ,false, new DungeonTutorial_A_BossRoom())                                         //10
         }, dungeonSummon1a, 1,1);
 
-    public static List<Monster> dungeonSummon1a = new List<Monster> { new Goblin(1) , new Kobold(1) , new Slime(1) };
+
     /////////////////////////////////////////////////////////
 
 
     /// <summary>
     /// TUTORIAL DUNGEON 1B
     /// </summary>
+    public static List<Monster> dungeonSummon1b = new List<Monster> { new Goblin(1), new Kobold(1), new Slime(1) };
     public static Dungeon dungeon1b = new Dungeon(
         new List<Shell>
         {
@@ -125,12 +127,13 @@ public class Dungeon
             new Shell(11, 0, 0,  0  ,false, new DungeonTutorial_B_BossRoom())                                         //12
         }, dungeonSummon1b, 2, 1);
 
-    public static List<Monster> dungeonSummon1b = new List<Monster> { new Goblin(1), new Kobold(1), new Slime(1) };
+
     ////////////////////////////////////
 
     /// <summary>
     /// Necromancer Mansion
     /// </summary>
+    public static List<Monster> mansionSummon = new List<Monster> { new Orc(4), new Rat(3), new Slime(4), new Skeleton(4) };
     public static Dungeon MansionEntrance =
         new Dungeon(
         new List<Shell>
@@ -155,19 +158,20 @@ public class Dungeon
     public static Dungeon MansionEast = new Dungeon(MansionLayoutEast, mansionSummon, 3, 2);
     public static Dungeon MansionWest = new Dungeon(MansionLayoutWest, mansionSummon, 3, 2);
 
-    public static List<Monster> mansionSummon = new List<Monster> { new Orc(4),new Rat(3),new Slime(4),new Skeleton(4) };    
+
     ///////////////////////////////////
 
     /// <summary>
     /// THE CAVE
     /// </summary>
+    public static List<Monster> caveSummon = new List<Monster> { new Slime(4), new Bear(4), new Bat(4), new Rat(4), new Spider(4) };
     public static Shell caveEntrance = new Shell(0,0,0,0,true,new CaveEntrance());
     public static List<Room> caveSpecialRooms = new List<Room> { new ChestRoom(), new GuardRoom(new Goblin(5)), new DungPile(),new BigHole(),new AncestorLetter(), new Well(),new MguffinRoom(),new CaveSpiderQueenBoss() };
     public static List<int> cavePlacement = new List<int> { Return.RandomInt(3, 5), Return.RandomInt(5, 7), Return.RandomInt(7, 10), Return.RandomInt(10,12), Return.RandomInt(12,14), Return.RandomInt(14,17), Return.RandomInt(17, 19), Return.RandomInt(19, 20) };
     public static List<Shell> caveLayout = new AreaCreation(EnterFrom.South, 20, caveEntrance, caveSpecialRooms, cavePlacement).MonsterCopy().builtDungeon;
     public static Dungeon cave = new Dungeon(caveLayout, caveSummon, 4, 3);
     
-    public static List<Monster> caveSummon = new List<Monster> { new Slime(4),new Bear(4),new Bat(4),new Rat(4),new Spider(4) };
+    
     /////////////////////////////////////
 
     /// <summary>

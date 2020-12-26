@@ -9,6 +9,15 @@ internal class CombatUI
     public static List<string> targetOption = new List<string> { };
     public static List<string> targetButton = new List<string> { };
 
+    public static bool shield;
+    public static bool defence;
+    public static bool rend;
+    public static bool fireBlast;
+    public static bool backstab;
+    public static bool magicMissile;
+    public static bool cleave;
+    public static bool stunMonster;
+
     internal static void Stunned()
     {
         Box();
@@ -64,7 +73,7 @@ internal class CombatUI
         Write.Line(x, 1, Color.ABILITY + mon.Intention + Color.RESET);
         for (int i = 0; i < mon.Status.Count; i++)
         {
-            Write.Position(x - mon.Name.Length / 2, 3+i);
+            Write.Position(x, 3+i);
             Console.WriteLine($"{mon.Status[i]} ");
         }
     }
@@ -76,9 +85,23 @@ internal class CombatUI
             Write.Line(35, 14, Color.HEALTH + "YOU ARE LOW ON HEALTH. HIT H TO USE YOUR POTION");
         }
         if (Create.p.combatMonsters.Count < 2) Button.cleaveButton.active = false;
-        Utilities.Buttons(Button.listOfCombatOptions);        
-        if (Create.p.CanAct) UIComponent.OptionsText(Button.list1, Button.button1,3);
-        else UIComponent.OptionsText(stunOption, stunButton,3);
+        foreach (Button b in Button.listOfCombatOptions) b.active = false;
+        if (Create.p.CanAct)
+        {
+            Button.attackButton.active = true;
+            if (shield) Button.shieldButton.active = true;
+            if (defence)         Button.defenceButton.active = true;
+            if (rend)            Button.rendButton.active = true;
+            if (fireBlast)       Button.fireBlastButton.active = true;
+            if (backstab)        Button.backstabButton.active = true;
+            if (magicMissile)    Button.magicMissileButton.active = true;
+            if (cleave)          Button.cleaveButton.active = true;
+            if (stunMonster) Button.stunButton.active = true;
+            Button.stunnedButton.active = false;
+        }
+        else Button.stunnedButton.active = true;
+        Utilities.Buttons(Button.listOfCombatOptions);
+        UIComponent.OptionsText(Button.list1, Button.button1, 3);
     }
 
     internal static Monster Target()

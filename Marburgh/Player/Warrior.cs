@@ -5,9 +5,14 @@ using System.Text;
 public class Warrior : Player
 {
 
-    public Warrior(int strength, int agility, int stamina, int intelligence)
-    : base(strength, agility, stamina, intelligence)
+    public Warrior()
+    : base()
     {
+        strength = 3;
+        agility = 2;
+        stamina = 3;
+        intelligence = 2;
+
         strengthLvl = new int[]     { 0, 0, 2, 2, 2, 3,3,3 };
         agilityLvl = new int[]      { 0, 0, 1, 2, 2, 2,3,3 };
         staminaLvl = new int[]      { 0, 0, 2, 2, 2, 4,3,3 };
@@ -64,7 +69,7 @@ public class Warrior : Player
 
     public override void Update()
     {
-        damage = playerDamage = TotalStrength;
+        damage = playerDamage = TotalStrength *  2;
         playerHit = 75 + TotalAgility * 3 + TotalIntelligence / 2;
         playerCrit = TotalAgility * 3;
         health = maxHealth = 12 + 6 * TotalStamina;

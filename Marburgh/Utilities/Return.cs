@@ -87,6 +87,20 @@ public class Return
         }
     }
 
+    public static bool HavePotions()
+    {
+        bool potion = false;
+        foreach (Drop d in Create.p.Drops)
+        {
+            if (d.rare == 2)
+            {
+                potion = true;
+                break;
+            }
+        }
+        return potion;
+    }
+
     internal static void RewardEquipment(int min, int max, int rep, Equipment[] list, int level)
     {
         int gold = RandomInt(min, max) * level * (1 + Create.p.MainHand.gold);

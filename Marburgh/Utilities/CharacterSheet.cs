@@ -84,9 +84,12 @@ public class CharacterSheet
         Console.SetCursorPosition(92, 27);
         Write.Line(Color.CRIT+ "Reputation" +Color.RESET+ ": "+Create.p.Reputation+$" ({Color.CRIT + Create.p.Rep+Color.RESET})");
 
+        if(Return.HavePotions())Write.Line(20,27,"[" + Color.POTION + "P" + Color.RESET + "]otions");
+
         Console.SetCursorPosition(54, 27);
         Write.Line("["+ Color.RAREDROP+ "I" + Color.RESET+"]nventory");
         string choice = Return.Option();
+        if (choice == "p"&& Return.HavePotions()) Utilities.Item();
         if (choice == "i")
         {
             Console.Clear();

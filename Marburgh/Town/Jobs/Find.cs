@@ -16,11 +16,13 @@ public class Find:Job
     {
         if (Create.p.CanExplore)
         {
-            UI.Keypress(new List<int> { 3,0,3,0,3 }, new List<string>
+            UI.Keypress(new List<int> { 3,0,3,0,2,0,3 }, new List<string>
             {
                 Color.SPEAK,Color.NAME, Color.SPEAK,"","'Thank god you're here! ","","Roderick","","is missing!","",
                 "",
                 Color.SPEAK,Color.HEALTH, Color.SPEAK,"","He went wandering into the ","","forest",""," and he never returned!","",
+                "",
+                Color.NAME,Color.MONSTER,"Please help ","him","","find his way"," home",
                 "",
                 Color.SPEAK,Color.GOLD,Color.SPEAK,"","I'll ","","pay","",", of course'","",
             });
@@ -58,6 +60,9 @@ public class Find:Job
             Color.NAME,Color.XP,"","Roderick", "is now at the ","tavern",", singing for the patrons!"
 
         });
+        LocalGossip.bardFound = true;
+        status = JobStatus.Complete;
+        ButtonCheck();
         Create.p.Gold += gold;
         Create.p.RepAdd(10);
         Create.p.AddDrop(DropList.potionOfInvisibility);

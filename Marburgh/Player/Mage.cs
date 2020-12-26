@@ -4,9 +4,13 @@ using System.Text;
 
 public class Mage : Player
 {
-    public Mage(int strength, int agility, int stamina, int intelligence)
-    : base(strength, agility, stamina, intelligence)
+    public Mage()
+    : base()
     {
+        strength = 3;
+        agility = 2;
+        stamina = 3;
+        intelligence = 3;
         strengthLvl = new int[]     { 0, 0, 1, 2, 2, 2,2,2 };
         agilityLvl = new int[]      { 0, 0, 2, 2, 2, 2,3,2 };
         staminaLvl = new int[]      { 0, 0, 1, 2, 2, 3,2,3 };
@@ -81,7 +85,7 @@ public class Mage : Player
 
     public override void Update()
     {
-        damage = playerDamage = TotalStrength;
+        damage = playerDamage = TotalStrength *2;
         playerHit = 75 + TotalAgility * 3 + TotalIntelligence / 2;
         playerCrit = TotalAgility * 3;
         playerDefence = 2 * TotalAgility+1;

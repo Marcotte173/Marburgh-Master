@@ -4,8 +4,20 @@ using System.Text;
 
 public class Town
 {
+    public static bool itemBan;
+    public static bool weaponBan;
+    public static bool armorBan;
+    public static bool magicBan;
     public static void Menu()
     {
+        //if (GameState.phase2b && !itemBan) Button.itemShopButton.active = true;
+        //else Button.itemShopButton.active = false;
+        //if (GameState.phase2b && !weaponBan) Button.weaponShopButton.active = true;
+        //else Button.weaponShopButton.active = false;
+        //if (GameState.phase2b && !armorBan) Button.armorShopButton.active = true;
+        //else Button.armorShopButton.active = false;
+        //if (GameState.phase2b && !magicBan) Button.magicShopButton.active = true;
+        //else Button.magicShopButton.active = false;
         GameState.location = Location.Town;
         Console.Clear();
         Utilities.Buttons(Button.list1, Button.button1, Button.listOfDungeons);
@@ -158,7 +170,7 @@ public class Town
         else if (choice == "g") Graveyard.Menu();
         else if (choice == "y") House.Menu();
         else if (choice == "b" && Button.bankButton.active) Bank.Menu();
-        else if (choice == "x") GameState.Cheat();
+        //else if (choice == "x") GameState.Cheat();
         else if (choice == "1" && Button.dungeon1aButton.active || (choice == "2" && Button.dungeon1bButton.active) || (choice == "*" && Button.dungeonCaveButton.active) || choice == "3" && Button.dungeonForestButton.active || choice == "4" && Button.dungeon2Button.active || choice == "5" && Button.dungeon3Button.active)
         {
             //If no, go home

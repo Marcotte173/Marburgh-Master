@@ -29,13 +29,16 @@ public class Combat
             Create.p.defBonus = 0;
             Create.p.CanAct = true;
             if (Create.p.Bleed > 0 && !Create.p.Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Create.p.Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
-            if (Create.p.Burning > 0 && !Create.p.Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Create.p.Status.Add(Color.BLOOD + "Burning" + Color.RESET);
+            if (Create.p.Burning > 0 && !Create.p.Status.Contains(Color.BURNING + "Burning" + Color.RESET)) Create.p.Status.Add(Color.BURNING + "Burning" + Color.RESET);
             if (Create.p.Stun > 0 && !Create.p.Status.Contains(Color.STUNNED + "Immobilized" + Color.RESET)) Create.p.Status.Add(Color.STUNNED + "Immobilized" + Color.RESET);
             if (Create.p.Stun > 0)
             {
                 Create.p.CanAct = false;
                 Create.p.Stun--;
-                if (Create.p.Stun <= 0 && Create.p.Status.Contains(Color.STUNNED + "Immobilized" + Color.RESET)) Create.p.Status.Remove(Color.STUNNED + "Immobilized" + Color.RESET);
+                if (Create.p.Stun <= 0 && Create.p.Status.Contains(Color.STUNNED + "Immobilized" + Color.RESET))
+                {
+                    Create.p.Status.Remove(Color.STUNNED + "Immobilized" + Color.RESET);
+                }
                 Combat.AddCombatText(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "immobilized" + Color.RESET + "!");
             }
             Create.p.AttackChoice();
@@ -55,7 +58,7 @@ public class Combat
                 g.Name = Color.BURNING + "Third Degree Burns" + Color.RESET;
                 Create.p.TakeDamage(Create.p.BurnDam, g);
                 Create.p.Burning--;
-                if (Create.p.Burning <= 0 && Create.p.Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Create.p.Status.Remove(Color.BLOOD + "Burning" + Color.RESET);
+                if (Create.p.Burning <= 0 && Create.p.Status.Contains(Color.BURNING + "Burning" + Color.RESET)) Create.p.Status.Remove(Color.BURNING + "Burning" + Color.RESET);
             }
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
@@ -67,7 +70,7 @@ public class Combat
                 }
                 else
                 {
-                    if (m.Status.Contains("Bleeding")) m.Status.Remove("Bleeding");
+                    if (m.Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) m.Status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
                 }
                 if (m.Burning > 0)
                 {
@@ -77,7 +80,7 @@ public class Combat
                 }
                 else
                 {
-                    if (m.Status.Contains("Burning")) m.Status.Remove("Burning");
+                    if (m.Status.Contains(Color.BURNING + "Burning" + Color.RESET)) m.Status.Remove(Color.BURNING + "Burning" + Color.RESET);
                 }
                 if (m.Stun > 0)
                 {
@@ -87,7 +90,7 @@ public class Combat
                 else
                 {
                     m.CanAct = true;
-                    if (m.Status.Contains("Stunned")) m.Status.Remove("Stunned");
+                    if (m.Status.Contains(Color.STUNNED + "Stunned" + Color.RESET)) m.Status.Remove(Color.STUNNED + "Stunned" + Color.RESET);
                 }
                 if (m.CanAct && Create.p.Health>0) m.MakeAttack();
                 else if (!m.CanAct)AddCombatText($"The {Color.MONSTER + m.Name+Color.RESET} is "+Color.STUNNED+ "stunned "+Color.RESET+"and cannot act!");

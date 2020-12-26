@@ -261,6 +261,7 @@ public class Utilities
             desecrateList.Add("1 ");
             desecrateList.Add("Intelligence until you sleep");
             Create.p.tempIntelligence += 1;
+            Create.p.Update();
             Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
         }
         else if (chosenItem.name == "Potion Of Life")
@@ -284,6 +285,7 @@ public class Utilities
             desecrateList.Add("1 ");
             desecrateList.Add("Stamina until you sleep");
             Create.p.tempStamina += 1;
+            Create.p.Update();
             Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
         }
         else if (chosenItem.name == "Potion Of Power")
@@ -307,6 +309,7 @@ public class Utilities
             desecrateList.Add("1 ");
             desecrateList.Add("Strength until you sleep");
             Create.p.tempStrength += 1;
+            Create.p.Update();
             Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
         }
         else if (chosenItem.name == "Potion Of Prowess")
@@ -330,6 +333,7 @@ public class Utilities
             desecrateList.Add("1 ");
             desecrateList.Add("Agility until you sleep");
             Create.p.tempAgility += 1;
+            Create.p.Update();
             Room.ActionWait(desecrateColourArray, desecrateList, Color.POTION + "Drinking" + Color.RESET, null);
         }
         else if (chosenItem.name == "Potion Of Knowledge")

@@ -76,7 +76,7 @@ public class Forest
 
     private static void Camp()
     {
-        UI.Keypress(new List<int> { 0, 0, 1, 1, 1, 0, 1 }, new List<string>
+        UI.Keypress(new List<int> { 0, 0, 1, 1, 1, 0, 2 }, new List<string>
         {
             "You make camp and rest for several hours",
             "",
@@ -794,14 +794,16 @@ public class Forest
 
     public static void Reward()
     {
-        UI.Keypress(new List<int> {  }, new List<string>
+        int xpGain = Return.RandomInt(8 * depth, 20 * depth);
+        UI.Keypress(new List<int> {2,0,2,0,1 }, new List<string>
         {
             Color.MONSTER,Color.HEALTH,"You have reached a new ","Depth Layer"," of ","Forest","!",
             "",
             Color.MONSTER,Color.HEALTH,"You will now start here every time you go to ","explore"," the ","Forest","",
             "",
-            Color.XP,"You gain ",""," experience"
+            Color.XP,"You gain ",xpGain.ToString()," experience"
         });
+        Create.p.XP += xpGain;
         progress = 0;
         depth++;
         firstTime = true;

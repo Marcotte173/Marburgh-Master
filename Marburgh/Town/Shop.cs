@@ -238,6 +238,7 @@ public class Shop
                 "",
                 Color.HIT,"You lose ","10"," reputation"
             });
+            Create.p.suspicion += 10;
             Create.p.RepAdd(-10);
             Time.DayChange(1);
             Create.p.Health = 1;
