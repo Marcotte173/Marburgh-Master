@@ -149,7 +149,7 @@ public class Bank
         Combat.Menu();
         int gold= Return.RandomInt(800, 1400);
         Create.p.RepAdd(-40) ;
-        Create.p.Gold += gold;
+        Create.p.Gold += gold * (1 + Create.p.MainHand.gold);
         Button.robberyButton.active = false;
         UI.Keypress(new List<int> { 2,0,1,0,1,0,1 }, new List<string>
         {

@@ -23,7 +23,7 @@ public class Robber:Monster
         crit = agility * 4;
         health = maxHealth = 5 * stamina;
         mitigation = level * 3 / 2;
-        dropRate = 30;
+        dropRate = 100;
     }
 
     public override void Declare()
@@ -32,5 +32,9 @@ public class Robber:Monster
         if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
         action = 1;
         intention = "Ready";
+    }
+    public override Drop ChooseDrop()
+    {
+        return DropList.savageOrcFang;
     }
 }

@@ -25,4 +25,6 @@ public class DropList
     public static Drop purePotionOfKnowledge = new Drop("Pure potion Of Knowledge", 1, 2);
     public static Drop mansionMedalion = new Drop("Necromancer's Medallion", 1, 3);
     public static Drop brokenCleaver = new Drop("Broken Cleaver", 1, 1);
+    public static Drop spiderEgg = new Drop("Spider Egg", 1, 1);
+    public static Drop batBrain = new Drop("Bat Brain", 1, 1);
 }                 

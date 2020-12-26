@@ -39,7 +39,7 @@ public class Slime : Monster
         crit = agility * 4;
         health = maxHealth = 5 * stamina;
         mitigation = level*2;
-        dropRate = 30;
+        dropRate = 45;
     }
 
     public override void Attack2(Player target)
@@ -48,7 +48,7 @@ public class Slime : Monster
         MaxHealth = Health;
         Slime s = new Slime(level);
         s.Health = s.MaxHealth = MaxHealth;
-        Create.p.combatMonsters.Add(s);
+        Dungeon.Summon(s);
     }
 
     public override void Attack3(Player target)
@@ -86,7 +86,7 @@ public class Slime : Monster
     {
         if (action == 0) Attack2(Create.p);
         else if (action == 1) Attack3(Create.p);
-        else Attack1(Create.p);
+        else if (action == 2) Attack1(Create.p);
     }
 
     public override void Declare2()
@@ -115,12 +115,16 @@ public class Slime : Monster
         else
         {
             action = Return.RandomInt(1, 4);
-            if(action == 1)
+            if (action == 1 && (type == "Red Slime" || (type == "Green Slime" && health < maxHealth)))
             {
                 action = 1;
                 Declare3();
             }
-            else intention = "Ready";
+            else
+            {
+                action = 2;
+                intention = "Ready";
+            }
         }
     }
 }

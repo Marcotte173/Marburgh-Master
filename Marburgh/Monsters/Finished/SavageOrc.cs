@@ -24,7 +24,7 @@ public class SavageOrc : Monster
         crit = agility * 4;
         health = maxHealth = 5 * stamina;
         mitigation = level;
-        dropRate = 30;
+        dropRate = 100;
         stunAttempts = level;
     }
     public override void Attack2(Player target)
@@ -34,13 +34,13 @@ public class SavageOrc : Monster
             if (target.PersonalShield)
             {
                 target.Energy = (target.Energy - damage / 2 <= 0) ? 0 : target.Energy - damage / 2;
-                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" charges at you but it cannot break through your " + Color.SHIELD + "shield");
+                Combat.AddCombatText(Color.BOSS + name + Color.RESET + $" charges at you but it cannot break through your " + Color.SHIELD + "shield");
             }
             else
             {
                 target.Stun = level;
                 target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
-                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $"charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
+                Combat.AddCombatText(Color.BOSS + name + Color.RESET + $"charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
             }
         }
         else Miss(target);

@@ -41,7 +41,7 @@ public class Orc : Monster
             {
                 target.Stun = level;
                 target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
-                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $"charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
+                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" charges at you, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
             }            
         }
         else Miss(target);

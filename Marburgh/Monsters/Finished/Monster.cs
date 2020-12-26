@@ -19,7 +19,8 @@ public class Monster : Creature
         {
             if(target.PersonalShield)
             {
-                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" hits you");                
+                if (type == "Spider Queen" ||type == "Necromancer" || type == "Fenton" ||type == "Savage Orc") Combat.AddCombatText(Color.BOSS + name + Color.RESET + $" hits you");
+                else Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" hits you");                
                 if (target.Energy >= damage / 2)
                 {
                     target.Energy -= damage / 2;
@@ -39,7 +40,8 @@ public class Monster : Creature
             else
             {                
                 target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
-                Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
+                if (type == "Spider Queen" || type == "Necromancer" || type == "Fenton" || type == "Savage Orc") Combat.AddCombatText(Color.BOSS + name + Color.RESET + $" hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
+                else Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $" hits you for {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage");
             }            
         }
     }
@@ -119,7 +121,8 @@ public class Monster : Creature
     }
     public override void Death()
     {
-        Combat.AddCombatText($"You have killed " + Color.MONSTER + name + Color.RESET + "!");              
+        if (type == "Spider Queen" || type == "Necromancer" || type == "Fenton" || type == "Savage Orc") Combat.AddCombatText($"You have killed " + Color.BOSS + name + Color.RESET + "!");
+        else     Combat.AddCombatText($"You have killed " + Color.MONSTER + name + Color.RESET + "!");              
         Create.p.combatMonsters.Remove(this);
         Combat.goldReward += gold;
         Combat.xpReward += xp;
@@ -128,7 +131,8 @@ public class Monster : Creature
 
     public override void Miss(Creature target)
     {
-        Combat.AddCombatText(Color.MONSTER + name + Color.RESET +" misses you!");
+        if (type == "Spider Queen" || type == "Necromancer" || type == "Fenton" || type == "Savage Orc") Combat.AddCombatText(Color.BOSS + name + Color.RESET + " misses you!");
+        else    Combat.AddCombatText(Color.MONSTER + name + Color.RESET +" misses you!");
     }
     public string Intention { get { return intention; } set { intention = value; } }
     public virtual void Drop()

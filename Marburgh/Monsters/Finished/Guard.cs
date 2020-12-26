@@ -26,11 +26,30 @@ public class Guard : Monster
         dropRate = 30;
     }
 
+    public override void Attack2(Player target)
+    {
+        Dungeon.Summon(new Guard(level));
+        Combat.AddCombatText(Color.MONSTER + name + Color.RESET + " yells for help! Another " + Color.MONSTER + name + Color.RESET+ " joins in!");        
+    }
+
+    public override void Declare2()
+    {
+        intention = "Yelling";
+    }
+
     public override void Declare()
     {
         if (bleed > 0 && !Status.Contains("Bleeding")) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
         if (stun > 0 && !Status.Contains("Stunned")) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
-        action = 1;
-        intention = "Ready";
+        if (health < maxHealth / 2 && Create.p.combatMonsters.Count < 4 && Return.RandomInt(1,11)<3)
+        {
+            action = 0;
+            Declare2();
+        }
+        else
+        {
+            action = 1;
+            intention = "Ready";
+        }        
     }
 }

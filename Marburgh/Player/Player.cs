@@ -51,6 +51,8 @@ public class Player : Creature
     public int tempCrit;
     public int tempDefence;
     public int tempMit;
+    public int mitBonus;
+    public int defBonus;
     public float tempXp = 0;
     public int tempDamage = 0;
     public int drinks = 0;
@@ -81,37 +83,7 @@ public class Player : Creature
     }
 
     internal void AttackChoice()
-    {        
-        tempMit = 0;
-        tempDefence = 0;
-        canAct = true;
-        if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
-        if (burning > 0 && !Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Status.Add(Color.BLOOD + "Burning" + Color.RESET);
-        if (bleed > 0)
-        {
-            Combat.AddCombatText(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + bleedDam + Color.RESET + " damage!");
-            Monster g = new Goblin(1);
-            g.Name = Color.BLOOD+ "Blood Loss"+ Color.RESET;
-            TakeDamage(bleedDam,g);
-            bleed--;
-            if (bleed <= 0 && status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
-        }
-        if (burning > 0)
-        {
-            Combat.AddCombatText(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + burnDam + Color.RESET + " damage!");
-            Monster g = new Goblin(1);
-            g.Name = Color.BURNING + "Third Degree Burns" + Color.RESET;
-            TakeDamage(burnDam,g);
-            burning--;
-            if (burning <= 0 && status.Contains(Color.BLOOD + "Burning" + Color.RESET)) status.Remove(Color.BLOOD + "Burning" + Color.RESET);
-        }
-        if (stun > 0)
-        {
-            Create.p.CanAct = false;
-            Create.p.Stun--;
-            if (Create.p.Stun <= 0 && Create.p.Status.Contains("Stunned")) Create.p.Status.Remove("Stunned");
-            Combat.AddCombatText(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "stunned" + Color.RESET + "!");
-        }
+    {                
         CombatUI.AttackOptions();
         if (canAct)
         {                   
@@ -404,8 +376,10 @@ public class Player : Creature
             if (PotionSize == 0) Combat.AddCombatText("Your " + Color.HEALTH + "potion" + Color.RESET + " is empty!");
             else if ((MaxHealth - Health) > PotionSize)
             {
-                AddHealth(PotionSize);
+                int healthGain = PotionSize;
                 PotionSize = 0;
+                AddHealth(healthGain);
+                
             }
             else
             {
@@ -476,8 +450,8 @@ public class Player : Creature
     }
     public virtual void Attack2(Creature target)
     {
-        tempMit = level*2+1;
-        tempDefence = 25;
+        mitBonus = level*2+1;
+        defBonus = 25;
         Combat.AddCombatText("You focus on protecting yourself, increasing your " + Color.DEFENCE + "defence" + Color.RESET + " and" + Color.MITIGATION + " mitigation");
     }
     public virtual void Attack3(Creature target)
@@ -631,8 +605,8 @@ public class Player : Creature
     public int TotalStamina { get { return stamina + tempStamina; } }
     public int TotalAgility { get { return agility + tempAgility; } }
     public int TotalIntelligence { get { return intelligence + tempIntelligence; } }
-    public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence + tempDefence; } }
-    public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation + tempMit; } set { mitigation = value; } }
+    public override int Defence { get { return playerDefence + Armor.Defence + MainHand.Defence + OffHand.Defence + tempDefence+defBonus; } }
+    public override int Mitigation { get { return playerMitigation + Armor.Mitigation + MainHand.Mitigation + OffHand.Mitigation + tempMit + mitBonus; } set { mitigation = value; } }
     public int Spellpower { get { return spellpower + MainHand.SpellPower + OffHand.SpellPower + Armor.SpellPower; } }
     public override int Health { get { return health; } set { health = value; } }
     public override int Energy { get { return energy; } set { energy = value; } }

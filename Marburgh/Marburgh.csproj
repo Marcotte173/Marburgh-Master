@@ -99,13 +99,15 @@
     <Compile Include="Monsters\Finished\Bat.cs" />
     <Compile Include="Monsters\Finished\Bear.cs" />
     <Compile Include="Monsters\Finished\Ghoul.cs" />
-    <Compile Include="Monsters\Unfinished\Guard.cs" />
-    <Compile Include="Monsters\Finished\Necromancer.cs" />
+    <Compile Include="Monsters\Finished\Guard.cs" />
+    <Compile Include="Monsters\Finished\Necromancer.cs">
+      <CustomToolNamespace> </CustomToolNamespace>
+    </Compile>
     <Compile Include="Monsters\Finished\Rat.cs" />
     <Compile Include="Monsters\Unfinished\Robber.cs" />
     <Compile Include="Monsters\Finished\Skeleton.cs" />
-    <Compile Include="Monsters\Unfinished\Spider.cs" />
-    <Compile Include="Monsters\Unfinished\Thug.cs" />
+    <Compile Include="Monsters\Finished\Spider.cs" />
+    <Compile Include="Monsters\Finished\Thug.cs" />
     <Compile Include="Monsters\Finished\Zombie.cs" />
     <Compile Include="Monsters\Finished\GladiatorA.cs" />
     <Compile Include="Town\CombatArena.cs" />

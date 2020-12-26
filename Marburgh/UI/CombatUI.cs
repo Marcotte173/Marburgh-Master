@@ -6,13 +6,13 @@ internal class CombatUI
 {
     public static List<string> stunOption = new List<string> { Color.STUNNED + " You are stunned. Press Any Key to continue" + Color.RESET };
     public static List<string> stunButton = new List<string> { "X" };
-    public static List<string> targetOption = new List<string> {  };
-    public static List<string> targetButton = new List<string> {  };
+    public static List<string> targetOption = new List<string> { };
+    public static List<string> targetButton = new List<string> { };
 
     internal static void Stunned()
     {
         Box();
-        Write.Line(50, 20,"You are " + Color.STUNNED + "stunned"+ Color.RESET);
+        Write.Line(50, 20, "You are " + Color.STUNNED + "stunned" + Color.RESET);
         Console.ReadKey(true);
     }
 
@@ -56,9 +56,10 @@ internal class CombatUI
         }
         else if (mon == Create.p.combatMonsters[5])
         {
-             x = 110 - mon.Name.Length / 2;
+            x = 110 - mon.Name.Length / 2;
         }
-        Write.Line(x, 0, Color.MONSTER + mon.Name + Color.RESET);
+        if (mon.Type == "Spider Queen"|| mon.Type == "Necromancer"|| mon.Type == "Fenton"|| mon.Type == "Savage Orc") Write.Line(x, 0, Color.BOSS + mon.Name + Color.RESET);
+        else Write.Line(x, 0, Color.MONSTER + mon.Name + Color.RESET);
         Write.Line(x, 2, Color.HEALTH + mon.Health + Color.RESET);
         Write.Line(x, 1, Color.ABILITY + mon.Intention + Color.RESET);
         for (int i = 0; i < mon.Status.Count; i++)
@@ -86,28 +87,34 @@ internal class CombatUI
         targetOption.Clear();
         if (Create.p.combatMonsters.Count != 1)
         {
-            targetOption.Add(Color.MONSTER + Create.p.combatMonsters[0].Name + Color.RESET);
+            if(Create.p.combatMonsters[0].Type =="Savage Orc"|| Create.p.combatMonsters[0].Type == "Necromancer"|| Create.p.combatMonsters[0].Type == "Spider Queen"|| Create.p.combatMonsters[0].Type == "Fenton") targetOption.Add(Color.BOSS + Create.p.combatMonsters[0].Name + Color.RESET);
+            else targetOption.Add(Color.MONSTER + Create.p.combatMonsters[0].Name + Color.RESET);
             targetButton.Add("1");
-            targetOption.Add(Color.MONSTER + Create.p.combatMonsters[1].Name + Color.RESET);
+            if (Create.p.combatMonsters[1].Type == "Savage Orc" || Create.p.combatMonsters[1].Type == "Necromancer" || Create.p.combatMonsters[1].Type == "Spider Queen" || Create.p.combatMonsters[1].Type == "Fenton") targetOption.Add(Color.BOSS + Create.p.combatMonsters[1].Name + Color.RESET);
+            else targetOption.Add(Color.MONSTER + Create.p.combatMonsters[1].Name + Color.RESET);
             targetButton.Add("2");
             if (Create.p.combatMonsters.Count >2)
             {
-                targetOption.Add(Color.MONSTER+ Create.p.combatMonsters[2].Name + Color.RESET);
+                if (Create.p.combatMonsters[2].Type == "Savage Orc" || Create.p.combatMonsters[2].Type == "Necromancer" || Create.p.combatMonsters[2].Type == "Spider Queen" || Create.p.combatMonsters[2].Type == "Fenton") targetOption.Add(Color.BOSS + Create.p.combatMonsters[2].Name + Color.RESET);
+                else targetOption.Add(Color.MONSTER+ Create.p.combatMonsters[2].Name + Color.RESET);
                 targetButton.Add("3");
             }
             if (Create.p.combatMonsters.Count > 3)
             {
-                targetOption.Add(Color.MONSTER + Create.p.combatMonsters[3].Name + Color.RESET);
+                if (Create.p.combatMonsters[3].Type == "Savage Orc" || Create.p.combatMonsters[3].Type == "Necromancer" || Create.p.combatMonsters[3].Type == "Spider Queen" || Create.p.combatMonsters[3].Type == "Fenton") targetOption.Add(Color.BOSS + Create.p.combatMonsters[3].Name + Color.RESET);
+                else targetOption.Add(Color.MONSTER + Create.p.combatMonsters[3].Name + Color.RESET);
                 targetButton.Add("4");
             }
             if (Create.p.combatMonsters.Count > 4)
             {
-                targetOption.Add(Color.MONSTER + Create.p.combatMonsters[4].Name + Color.RESET);
+                if (Create.p.combatMonsters[4].Type == "Savage Orc" || Create.p.combatMonsters[4].Type == "Necromancer" || Create.p.combatMonsters[4].Type == "Spider Queen" || Create.p.combatMonsters[4].Type == "Fenton") targetOption.Add(Color.BOSS + Create.p.combatMonsters[4].Name + Color.RESET);
+                else targetOption.Add(Color.MONSTER + Create.p.combatMonsters[4].Name + Color.RESET);
                 targetButton.Add("5");
             }
             if (Create.p.combatMonsters.Count > 5)
             {
-                targetOption.Add(Color.MONSTER + Create.p.combatMonsters[4].Name + Color.RESET);
+                if (Create.p.combatMonsters[5].Type == "Savage Orc" || Create.p.combatMonsters[5].Type == "Necromancer" || Create.p.combatMonsters[5].Type == "Spider Queen" || Create.p.combatMonsters[5].Type == "Fenton") targetOption.Add(Color.BOSS + Create.p.combatMonsters[5].Name + Color.RESET);
+                else targetOption.Add(Color.MONSTER + Create.p.combatMonsters[5].Name + Color.RESET);
                 targetButton.Add("6");
             }
             Box();

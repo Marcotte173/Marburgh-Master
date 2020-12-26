@@ -166,7 +166,7 @@ public class ChestRoom : Room
         int treasure = Return.RandomInt(0, 3);
         if(treasure == 0)
         {
-            int goldAdd = Return.RandomInt(60, 90) + Return.RandomInt(20, 40) * global::Explore.dungeon.rewardMod;
+            int goldAdd = Return.RandomInt(60, 90) + Return.RandomInt(20, 40) * global::Explore.dungeon.rewardMod * (1 + Create.p.MainHand.gold);
             UI.Keypress(new List<int> { 1 }, new List<string>
             {
                 Color.GOLD, "You find ", goldAdd.ToString(), " gold!"

@@ -89,7 +89,7 @@ public class Return
 
     internal static void RewardEquipment(int min, int max, int rep, Equipment[] list, int level)
     {
-        int gold = RandomInt(min, max) * level;
+        int gold = RandomInt(min, max) * level * (1 + Create.p.MainHand.gold);
         UI.Keypress(new List<int> {3}, new List<string>
         {
             Color.GOLD,Color.ITEM,Color.HIT,"You receive ", gold.ToString() ," gold, a ", list[level].Name," and your reputation is increased by ", rep.ToString() , ""
@@ -107,7 +107,7 @@ public class Return
     internal static void RewardPotion(int min, int max, int rep)
     {
         Drop potion = Shop.potionList[RandomInt(0, Shop.potionList.Count)];
-        int gold = RandomInt(min, max) * Create.p.Level;
+        int gold = RandomInt(min, max) * Create.p.Level * (1 + Create.p.MainHand.gold);
         UI.Keypress(new List<int> { 3 }, new List<string>
         {
             Color.GOLD,Color.POTION,Color.HIT,"You receive ", gold.ToString() ," gold, a ", potion.name," and your reputation is increased by ", rep.ToString() , ""
@@ -139,7 +139,7 @@ public class Return
     }
     internal static void RewardGold(int min, int max, int rep)
     {
-        int gold = RandomInt(min, max) * RandomInt(10, 20)*Create.p.Level;
+        int gold = (RandomInt(min, max) * RandomInt(10, 20)*Create.p.Level) * (1 + Create.p.MainHand.gold);
         UI.Keypress(new List<int> {2 }, new List<string>
         {
             Color.GOLD,Color.HIT,"You receive ", gold.ToString() ," gold and your reputation is increased by ",rep.ToString(),""

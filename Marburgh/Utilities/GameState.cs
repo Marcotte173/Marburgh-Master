@@ -44,7 +44,7 @@ public class GameState
 
     internal static void TestCombat()
     {
-        Create.p = new Warrior(3,2,3,2);
+        Create.p = new Warrior(300,200,300,200);
         Button.shieldButton.active = true;
         Create.p.Name = "Travis Marcotte";
         Create.p.MainHand = Equipment.daggerList[3];

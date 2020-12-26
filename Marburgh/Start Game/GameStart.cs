@@ -47,6 +47,8 @@ namespace MedievalRPG
             if (choice == "c")
             {
                 Create.p = new Warrior(15, 15, 30, 15);
+                Create.p.Damage = 1000;
+                Create.p.Health = 3000;
                 Create.p.Name = "Travis Marcotte";
                 GameState.TestCombat();
             }

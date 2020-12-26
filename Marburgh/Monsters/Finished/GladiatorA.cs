@@ -21,7 +21,7 @@ public class GladiatorA : Monster
     {
         if (AttemptToHit(target, 0))
         {
-            int newDamage = damage * 2;
+            int newDamage = damage * 3/2;
             if (target.PersonalShield)
             {
                 target.Energy = (target.Energy - newDamage / 2 <= 0) ? 0 : target.Energy - newDamage / 2;

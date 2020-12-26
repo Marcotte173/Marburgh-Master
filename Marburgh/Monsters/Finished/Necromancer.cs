@@ -24,7 +24,7 @@ public class Necromancer : Monster
         crit = agility * 4;
         health = maxHealth = 5 * stamina;
         mitigation = level;
-        dropRate = 30;
+        dropRate = 100;
     }
 
     public override void Attack2(Player target)

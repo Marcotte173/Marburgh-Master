@@ -67,7 +67,7 @@ public class Protect : Job
         string choice = Return.Option();
         if (choice == "1")
         {
-            int gold = Return.RandomInt(30, 40) * Create.p.Level;
+            int gold = Return.RandomInt(30, 40) * Create.p.Level * (1 + Create.p.MainHand.gold);
             //SUMMON
             Combat.Menu();
             UI.Keypress(new List<int> { 1, 0, 1, 0, 1, 0, 3, 0, 2 }, new List<string>
@@ -87,7 +87,7 @@ public class Protect : Job
         }
         if (choice == "2")
         {
-            int gold = Return.RandomInt(125, 180) * Create.p.Level;
+            int gold = Return.RandomInt(125, 180) * Create.p.Level * (1 + Create.p.MainHand.gold);
             UI.Keypress(new List<int> { 0, 0, 2, 0, 1, 0, 0, 0, 2 }, new List<string>
             {
                 "You jump into the fray",

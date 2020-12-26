@@ -11,7 +11,7 @@ public class Dungeon
     public int howManyMonstersPerRoom;
     public int rewardMod;
     
-    public static List<Monster> balanceList = new List<Monster> {  new Slime(4) };
+    public static List<Monster> balanceList = new List<Monster> {  new Spider(6) };
     public static void Summon(Monster monster)
     {
         Monster m = monster.MonsterCopy();

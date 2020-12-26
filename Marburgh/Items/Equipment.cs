@@ -15,6 +15,8 @@ public class Equipment
     protected int mitigation;
     protected int price;
     protected int level;
+    public int gold;
+    public float xp;
     protected EquipmentType type;
     protected bool upgraded;
     protected string modifier;

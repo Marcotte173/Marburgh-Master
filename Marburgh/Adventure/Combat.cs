@@ -25,7 +25,38 @@ public class Combat
         while (Create.p.combatMonsters.Count > 0)
         {            
             Create.p.ItemCheck();
+            Create.p.mitBonus = 0;
+            Create.p.defBonus = 0;
+            Create.p.CanAct = true;
+            if (Create.p.Bleed > 0 && !Create.p.Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Create.p.Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
+            if (Create.p.Burning > 0 && !Create.p.Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Create.p.Status.Add(Color.BLOOD + "Burning" + Color.RESET);
+            if (Create.p.Stun > 0 && !Create.p.Status.Contains(Color.STUNNED + "Immobilized" + Color.RESET)) Create.p.Status.Add(Color.STUNNED + "Immobilized" + Color.RESET);
+            if (Create.p.Stun > 0)
+            {
+                Create.p.CanAct = false;
+                Create.p.Stun--;
+                if (Create.p.Stun <= 0 && Create.p.Status.Contains(Color.STUNNED + "Immobilized" + Color.RESET)) Create.p.Status.Remove(Color.STUNNED + "Immobilized" + Color.RESET);
+                Combat.AddCombatText(Color.NAME + "You " + Color.RESET + "are " + Color.STUNNED + "immobilized" + Color.RESET + "!");
+            }
             Create.p.AttackChoice();
+            if (Create.p.Bleed > 0)
+            {
+                Combat.AddCombatText(Color.NAME + "You " + Color.BLOOD + "bleed " + Color.RESET + "for " + Color.DAMAGE + Create.p.BleedDam + Color.RESET + " damage!");
+                Monster g = new Goblin(1);
+                g.Name = Color.BLOOD + "Blood Loss" + Color.RESET;
+                Create.p.TakeDamage(Create.p.BleedDam, g);
+                Create.p.Bleed--;
+                if (Create.p.Bleed <= 0 && Create.p.Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Create.p.Status.Remove(Color.BLOOD + "Bleeding" + Color.RESET);
+            }
+            if (Create.p.Burning > 0)
+            {
+                Combat.AddCombatText(Color.NAME + "You " + Color.BURNING + "burn " + Color.RESET + "for " + Color.DAMAGE + Create.p.BurnDam + Color.RESET + " damage!");
+                Monster g = new Goblin(1);
+                g.Name = Color.BURNING + "Third Degree Burns" + Color.RESET;
+                Create.p.TakeDamage(Create.p.BurnDam, g);
+                Create.p.Burning--;
+                if (Create.p.Burning <= 0 && Create.p.Status.Contains(Color.BLOOD + "Burning" + Color.RESET)) Create.p.Status.Remove(Color.BLOOD + "Burning" + Color.RESET);
+            }
             foreach (Monster m in Create.p.combatMonsters.ToList())
             {
                 if (m.Bleed > 0)
@@ -46,7 +77,7 @@ public class Combat
                 }
                 else
                 {
-                    if (m.Status.Contains("Burning")) m.Status.Remove("Stunned");
+                    if (m.Status.Contains("Burning")) m.Status.Remove("Burning");
                 }
                 if (m.Stun > 0)
                 {
@@ -111,8 +142,8 @@ public class Combat
         List<string> text = new List<string> { };
         int goldroll = Return.RandomInt(-2, 6);
         int xproll = Return.RandomInt(-1, 3);
-        int gold =  goldReward + goldroll;
-        int xp = (Create.p.tempXp > 0)?Convert.ToInt32((xpReward + xproll) * (1 + Create.p.tempXp)) :xpReward + xproll;
+        int gold = Convert.ToInt32(  (goldReward + goldroll) * (1 + Create.p.MainHand.gold) );
+        int xp = Convert.ToInt32((xpReward + xproll) * (1 + Create.p.tempXp + Create.p.MainHand.xp));
         colours.Add(0);
         text.Add("You have defeated your enemies");
         colours.Add(0);

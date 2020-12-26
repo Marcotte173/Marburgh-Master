@@ -42,7 +42,7 @@ public class Find:Job
 
     public override void Complete()
     {
-        int gold = Return.RandomInt(15, 25) * Create.p.Level;
+        int gold = Return.RandomInt(15, 25) * Create.p.Level * (1 + Create.p.MainHand.gold);
         UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 3, 0, 3,0,2 }, new List<string>
         {
             Color.SPEAK,"","'You found him! ","",

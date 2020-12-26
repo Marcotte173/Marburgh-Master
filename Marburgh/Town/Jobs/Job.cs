@@ -207,7 +207,7 @@ public class Job
         }
         else if (successCheck <= 5)
         {
-            int gold = Return.RandomInt(25, 35) * Create.p.Level;
+            int gold = Return.RandomInt(25, 35) * Create.p.Level * (1 + Create.p.MainHand.gold);
             UI.Keypress(new List<int> { 1,0,1,0,3,0,2 }, new List<string>
             {
                 Color.HEALTH,"You do a ","good Job","",
@@ -223,7 +223,7 @@ public class Job
         }
         else if (successCheck <= 20)
         {
-            int gold = Return.RandomInt(15, 25) * Create.p.Level;
+            int gold = Return.RandomInt(15, 25) * Create.p.Level * (1 + Create.p.MainHand.gold);
             UI.Keypress(new List<int> { 1, 0, 1, 0, 3, 0, 1 }, new List<string>
             {
                 Color.XP,"You do a ","pretty good Job","",
