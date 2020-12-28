@@ -312,10 +312,11 @@ public class Shop
         }
         else
         {
+            bool offhand = false;
             Console.Clear();
             List<Equipment> EquipmentList = new List<Equipment> { new Blunt("Fist",0,0,0,false,0) };
             if (Create.p.MainHand.Name != "Fist") { EquipmentList.Add(Create.p.MainHand); }
-            if (Create.p.OffHand.Name != "Fist" && Create.p.OffHand.Name != "Two Hand") { EquipmentList.Add(Create.p.OffHand); }
+            if (Create.p.OffHand.Name != "Fist" && Create.p.OffHand.Name != "Two Hand") { offhand = true;  EquipmentList.Add(Create.p.OffHand); }
             if (Create.p.Armor.Name != "None") { EquipmentList.Add(Create.p.Armor); }
             UI.StoreSell(new List<int> { 0, 0, 0 }, new List<string>
             {
@@ -335,13 +336,13 @@ public class Shop
                 {
                     Create.p.Gold += EquipmentList[sellChoice].Price / 2;
                     if (Create.p.Armor == EquipmentList[sellChoice]) Create.p.Armor = Equipment.armorList[0];
-                    if (Create.p.OffHand == EquipmentList[sellChoice]) Create.p.OffHand = Equipment.bluntList[0];
-                    else if (Create.p.MainHand == EquipmentList[sellChoice]) Create.p.MainHand = Equipment.bluntList[0];
+                    else if (Create.p.OffHand == EquipmentList[sellChoice] && offhand) Create.p.OffHand = Equipment.bluntList[0];
+                    else if (Create.p.MainHand == EquipmentList[sellChoice]&& !offhand) Create.p.MainHand = Equipment.bluntList[0];
                     UI.Keypress(new List<int> { 3 }, new List<string>
                     {
                         Color.NAME,Color.ITEM, Color.GOLD, "Great! ",$"{ shopKeep.name} ","takes your ",$"{EquipmentList[sellChoice].Name} ", "and gives you ",$"{EquipmentList[sellChoice].Price / 2} ", "gold",
                     });
-                    Create.p.UnequipItem(EquipmentList[sellChoice]);
+                    Create.p.UnequipItem(EquipmentList[sellChoice],offhand);
                 }                
             }
         }

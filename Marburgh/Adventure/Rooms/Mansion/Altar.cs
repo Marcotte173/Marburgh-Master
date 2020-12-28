@@ -123,6 +123,7 @@ public class Altar:Room
         }
         else if (choice == "b")
         {
+            Create.p.AddDrop(DropList.potionOfDeath);
             UI.Keypress(new List<int> { 1, 0, 0, 0, 1 }, new List<string>
             {
                 Color.DEATH,"You fill a bottle with the ","liquid","",

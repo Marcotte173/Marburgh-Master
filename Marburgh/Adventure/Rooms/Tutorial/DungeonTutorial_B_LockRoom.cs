@@ -17,7 +17,9 @@ public class DungeonTutorial_B_LockRoom:Room
 
     internal override void Explore()
     {
-        if (Create.p.Drops.Contains(DropList.tutorialKey))
+        bool key = false;
+        foreach (Drop d in Create.p.Drops) if (d.name == "Iron Key") key = true;
+        if (key)
         {
             UI.Keypress(new List<int> { 0, 0, 0, 0, 0 }, new List<string>
             {

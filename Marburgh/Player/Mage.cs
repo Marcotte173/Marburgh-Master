@@ -11,10 +11,10 @@ public class Mage : Player
         agility = 2;
         stamina = 3;
         intelligence = 3;
-        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 2,2,2 };
-        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 2,3,2 };
-        staminaLvl = new int[]      { 0, 0, 1, 2, 2, 3,2,3 };
-        intelligenceLvl = new int[] { 0, 0, 2, 2, 3, 4, 3, 3 };
+        strengthLvl = new int[]     { 0, 0, 1, 2, 2, 2, 2, 2, 2 };
+        agilityLvl = new int[]      { 0, 0, 2, 2, 2, 2, 3, 2, 2 };
+        staminaLvl = new int[]      { 0, 0, 2, 2, 2, 3, 3, 3, 3 };
+        intelligenceLvl = new int[] { 0, 0, 2, 2, 3, 4, 3, 3, 4 };
         Update();
         potionSize = maxPotionSize += 5;
         offHand = Equipment.magicList[0];
@@ -41,7 +41,7 @@ public class Mage : Player
 
     public override void Attack3(Creature target)
     {
-        int flameDamage = 2 + Spellpower;
+        int flameDamage = 2 + Spellpower*2;
         if (Return.HaveEnergy(2))
         {
             Combat.AddCombatText(Color.BURNING + "Flames " + Color.RESET + "burst out of your hands, burning "+Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + flameDamage + Color.RESET + " damage and " + Color.BURNING + "igniting " + Color.RESET + "him!");
@@ -60,7 +60,7 @@ public class Mage : Player
     public override void Attack4(Creature target)
     {
         int bolts = (level > 5) ? 5 : 3;
-        int missileDamage = (level + Spellpower)/2;
+        int missileDamage = intelligence + Spellpower;
         if (Return.HaveEnergy(3))
         {
             energy -= 3;

@@ -5,11 +5,16 @@ using System.Linq;
 public enum PlayerClass {Warrior,Rogue,Mage }
 
 public class Player : Creature
-{    
+{
     /// <summary>
     /// Variables
     /// </summary> 
-    
+
+    public int progress = 1;
+    public int savedProgress = 1;
+    public int campProgress = 3;
+    public int depth = 1;
+
     //Player Equipment
     protected Equipment mainHand;
     protected Equipment offHand;
@@ -261,10 +266,10 @@ public class Player : Creature
             Color.ITEM, "You equip the ",e.Name,""
         });
     }
-    internal void UnequipItem(Equipment item)
+    internal void UnequipItem(Equipment item, bool offHand)
     {
-        if(item.Name == mainHand.Name) mainHand = Equipment.bluntList[0];
-        else if (item.Name == offHand.Name) offHand = Equipment.bluntList[0];
+        if(item.Name == mainHand.Name&& !offHand) mainHand = Equipment.bluntList[0];
+        else if (item.Name == this.offHand.Name && offHand) this.offHand = Equipment.bluntList[0];
         else if (item.Name == armor.Name) armor = global::Equipment.armorList[0];
     }
     internal void UnequipBody(Equipment body)
@@ -331,7 +336,7 @@ public class Player : Creature
         else
         {
             alive = false;
-            Forest.progress = 0;
+            progress = 0;
             Family.dead.Add(Family.alive[0]);
             Family.cause.Add(hitMe.Name);
             Family.timeOfDeath[0, 0] = Time.day;
@@ -411,8 +416,14 @@ public class Player : Creature
                 if (AttemptToHit(target, 0) == false) Miss(target);
                 else
                 {
-                    Combat.AddCombatText($"You punch " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
-                    target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
+                    int dam = DamageMain;
+                    Combat.AddCombatText($"You punch " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(dam, target.Mitigation) + Color.RESET + " damage");
+                    if (Return.RandomInt(1, 101) < Crit)
+                    {
+                        Combat.AddCombatText($"You " + Color.CRIT + "critically strike " + Color.RESET + " dealing " + Color.DAMAGE + "double" + Color.RESET + " damage!");
+                        dam *= 2;
+                    }
+                    target.TakeDamage(Return.MitigatedDamage(dam, target.Mitigation));
                 }
             }            
             else
@@ -422,8 +433,14 @@ public class Player : Creature
                     if (AttemptToHit(target, 0) == false) Miss(target);
                     else
                     {
-                        Combat.AddCombatText($"Your " + Color.ITEM + MainHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageMain, target.Mitigation) + Color.RESET + " damage");
-                        target.TakeDamage(Return.MitigatedDamage(DamageMain, target.Mitigation));
+                        int dam = DamageMain;
+                        Combat.AddCombatText($"Your " + Color.ITEM + MainHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(dam, target.Mitigation) + Color.RESET + " damage");
+                        if (Return.RandomInt(1, 101) < Crit)
+                        {
+                            Combat.AddCombatText($"You " + Color.CRIT + "critically strike " + Color.RESET + " dealing " + Color.DAMAGE + "double" + Color.RESET + " damage!");
+                            dam *= 2;
+                        }
+                        target.TakeDamage(Return.MitigatedDamage(dam, target.Mitigation));
                     }
                 }
                 if (offHand.Name != "Fist"&& mainHand.Type != EquipmentType.Shield && offHand.Type != EquipmentType.TwoHand && target.Health>0)
@@ -431,8 +448,14 @@ public class Player : Creature
                     if (AttemptToHit(target, 0) == false) Miss(target);
                     else
                     {
-                        Combat.AddCombatText($"Your " + Color.ITEM + OffHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(DamageOff, target.Mitigation) + Color.RESET + " damage");
-                        target.TakeDamage(Return.MitigatedDamage(DamageOff, target.Mitigation));
+                        int dam = DamageOff;
+                        Combat.AddCombatText($"Your " + Color.ITEM + OffHand.Name + Color.RESET + " strikes " + Color.MONSTER + target.Name + Color.RESET + " for " + Color.DAMAGE + Return.MitigatedDamage(dam, target.Mitigation) + Color.RESET + " damage");
+                        if (Return.RandomInt(1, 101) < Crit)
+                        {
+                            Combat.AddCombatText($"You " + Color.CRIT + "critically strike " + Color.RESET + " dealing " + Color.DAMAGE + "double" + Color.RESET + " damage!");
+                            dam *= 2;
+                        }
+                        target.TakeDamage(Return.MitigatedDamage(dam, target.Mitigation));
                     }
                 }
             }            

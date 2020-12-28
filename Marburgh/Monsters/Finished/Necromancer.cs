@@ -74,8 +74,8 @@ public class Necromancer : Monster
         }
         Combat.AddCombatText(Color.DEATH + name + Color.RESET + Color.RESET + " whispers a word of "+Color.DEATH+"power "+Color.RESET);
         if(a==null) Combat.AddCombatText($"But nothing happens!");
-        if (a!=null)Combat.AddCombatText(Color.MONSTER + name + Color.RESET +$" is filled with a {aGlow} glow");
-        if(b != null)Combat.AddCombatText(Color.MONSTER + name + Color.RESET +$" is filled with a {bGlow} glow");
+        if (a!=null)Combat.AddCombatText(Color.MONSTER + a.Name + Color.RESET +$" is filled with a {aGlow} glow");
+        if(b != null)Combat.AddCombatText(Color.MONSTER + b.Name + Color.RESET +$" is filled with a {bGlow} glow");
 
     }
     public override void Attack4(Player target)
@@ -105,7 +105,7 @@ public class Necromancer : Monster
             Monster summon = (Return.RandomInt(0, 2) == 0) ? skeleton : zombie;
             Combat.AddCombatText(Color.DEATH + name + Color.RESET + "mumbles something you can't quite hear ");
             Combat.AddCombatText($"The ground in front of him moves ");
-            Combat.AddCombatText(Color.MONSTER + name + Color.RESET + " crawls out of the ground");
+            Combat.AddCombatText(Color.MONSTER + summon.Name + Color.RESET + " crawls out of the ground");
             Dungeon.Summon(summon);
         }        
     }

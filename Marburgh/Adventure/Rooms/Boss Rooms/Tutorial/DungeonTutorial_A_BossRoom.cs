@@ -39,7 +39,7 @@ public class DungeonTutorial_A_BossRoom : Room
                 "",
                 Color.ENHANCEMENT,"Searching the room you find a strange looking ","machine","",
                 "",
-                Color.GOLD,"And ","85","gold!",
+                Color.GOLD,"And ","85"," gold!",
                 "",
                 Color.ENHANCEMENT,"Curious, you bring the ","machine"," home with you"
             });
@@ -55,7 +55,7 @@ public class DungeonTutorial_A_BossRoom : Room
                 "",
                 Color.ENHANCEMENT,"Searching the room you find a strange looking ","machine","",
                 "",
-                Color.GOLD,"And ","85","gold!",
+                Color.GOLD,"And ","85"," gold!",
                 "",
                 Color.ENHANCEMENT,Color.NAME,"You make a note to bring the ","machine"," home when you are done finding the missing ","townspeople",""
             });

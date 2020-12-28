@@ -180,9 +180,15 @@ public class Dungeon
     public static List<List<Monster>> forestSummon = new List<List<Monster>> 
     { 
         null,
+        new List<Monster> {new Goblin(1),new Kobold(1),new Orc(1),new Slime(1),new Skeleton(1),new Ghoul(1),new Rat(1),new Bear(1),new Thug(1),new Bat(1) },
+        new List<Monster> {new Goblin(1),new Kobold(1),new Orc(1),new Slime(1),new Skeleton(1),new Ghoul(1),new Rat(1),new Bear(1),new Thug(1),new Bat(1) },
+        new List<Monster> {new Goblin(2),new Kobold(2),new Orc(2),new Slime(2),new Skeleton(2),new Ghoul(2),new Rat(2),new Bear(2),new Thug(2),new Bat(2) },
         new List<Monster> {new Goblin(3),new Kobold(3),new Orc(3),new Slime(3),new Skeleton(3),new Ghoul(3),new Rat(3),new Bear(3),new Thug(3),new Bat(3) }, 
         new List<Monster> {new Goblin(4),new Kobold(4),new Orc(4),new Slime(4),new Skeleton(4),new Ghoul(4),new Rat(4),new Bear(4),new Thug(4),new Bat(4) }, 
-        new List<Monster> {new Goblin(5),new Kobold(5),new Orc(5),new Slime(5),new Skeleton(5),new Ghoul(5),new Rat(5),new Bear(5),new Thug(5),new Bat(5) } 
+        new List<Monster> {new Goblin(5),new Kobold(5),new Orc(5),new Slime(5),new Skeleton(5),new Ghoul(5),new Rat(5),new Bear(5),new Thug(5),new Bat(5) } ,
+        new List<Monster> {new Goblin(6),new Kobold(6),new Orc(6),new Slime(6),new Skeleton(6),new Ghoul(6),new Rat(6),new Bear(6),new Thug(6),new Bat(6) },
+        new List<Monster> {new Goblin(7),new Kobold(7),new Orc(7),new Slime(7),new Skeleton(7),new Ghoul(7),new Rat(7),new Bear(7),new Thug(7),new Bat(7) },
+        new List<Monster> {new Goblin(8),new Kobold(8),new Orc(8),new Slime(8),new Skeleton(8),new Ghoul(8),new Rat(8),new Bear(8),new Thug(8),new Bat(8) }
     };
 
     

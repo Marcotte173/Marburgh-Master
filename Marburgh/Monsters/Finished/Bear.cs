@@ -47,7 +47,7 @@ public class Bear : Monster
             }
             else
             {
-                target.Stun = level;
+                target.Stun = 2;
                 target.TakeDamage(Return.MitigatedDamage(damage, target.Mitigation), this);
                 Combat.AddCombatText(Color.MONSTER + name + Color.RESET + $"smacks you with a giant paw, " + Color.STUNNED + "stunning" + Color.RESET + $" you and doing {Color.DAMAGE + Return.MitigatedDamage(damage, target.Mitigation) + Color.RESET} damage!");
             }
@@ -83,7 +83,11 @@ public class Bear : Monster
     public override Drop ChooseDrop()
     {
         if (Return.RandomInt(0, 4) == 0) return DropList.bearPaw;
-        else return DropList.monsterEye.Copy();
+        else
+        {
+            if (Return.RandomInt(0, 2) == 0) return DropList.monsterEye.Copy();
+            else return DropList.monsterTooth.Copy();
+        }
     }
 
     public override void Declare()
@@ -92,7 +96,7 @@ public class Bear : Monster
         if (burning > 0 && !Status.Contains(Color.BURNING + "Burning" + Color.RESET)) Status.Add(Color.BURNING + "Burning" + Color.RESET);
         if (bleed > 0 && !Status.Contains(Color.BLOOD + "Bleeding" + Color.RESET)) Status.Add(Color.BLOOD + "Bleeding" + Color.RESET);
         if (stun > 0 && !Status.Contains(Color.STUNNED + "Stunned" + Color.RESET)) Status.Add(Color.STUNNED + "Stunned" + Color.RESET);
-        if ((action == 0 || action == 1 )&& stunAttempts > 0)
+        if ((action == 0 || action == 1 )&& stunAttempts > 0 && Create.p.Stun < 1)
         {
             stunAttempts--;
             Declare2();

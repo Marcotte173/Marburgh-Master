@@ -53,6 +53,10 @@ public class Ghoul:Monster
     public override Drop ChooseDrop()
     {
         if (Return.RandomInt(0, 4) == 0) return DropList.ghoulFang;
-        else return DropList.monsterEye.Copy();
+        else
+        {
+            if (Return.RandomInt(0, 2) == 0) return DropList.monsterEye.Copy();
+            else return DropList.monsterTooth.Copy();
+        }
     }
 }

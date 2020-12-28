@@ -31,7 +31,7 @@ public class UI
         {
             Write.Line(51, 14, Color.GOLD, "", "Demo December 19, 2020 ", "");
         }
-        else Write.Line(46,14,Color.SPEAK,Color.HEALTH,Color.TIME, "","Release", ""," 1.0","", " December 26, 2020 ", "");
+        else Write.Line(46,14,Color.SPEAK,Color.HEALTH,Color.TIME, "","Release", ""," 1.01","", " December 27, 2020 ", "");
     }
 
     internal static void BankChoice(List<int> colourArray, List<string> descriptions, List<string> options, List<string> optionButton)

@@ -273,13 +273,13 @@ public class LocalGossip
             "",
             Color.NAME,"You start chatting with ",Name.list[Return.RandomInt(0,Name.list.Count)]," and see what you can learn"
         });
-        if(Create.p.Reputation > 80 && !caveTold)
-        {
-
-            caveTold = true;
-            Tavern.Menu();
-        }
-        else if(Create.p.Reputation >60)
+        //if(Create.p.Reputation > 80 && !caveTold)
+        //{
+        //
+        //    caveTold = true;
+        //    Tavern.Menu();
+        //}
+        if(Create.p.Reputation >60)
         {
             int gossip = Return.RandomInt(0, 4);
             if(gossip == 0 && !toldPotionDeath)
@@ -313,7 +313,7 @@ public class LocalGossip
                Color.NAME,Color.NAME,Color.MONSTER,Color.NAME,"You learn that ",Name.list[Return.RandomInt(0,Name.list.Count)]," and ",Name.list[Return.RandomInt(0,Name.list.Count)]," are having an ","affair"," and ",Name.list[Return.RandomInt(0,Name.list.Count)]," has no idea"
             });
         }
-        else if (gossip1 == 1)
+        else if (gossip1 == 1 && GameState.phase2b)
         {
             UI.Keypress(new List<int> { 2}, new List<string>
             {

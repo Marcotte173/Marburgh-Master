@@ -49,14 +49,14 @@ public class GameState
         Create.p.Name = "Travis Marcotte";
         Create.p.MainHand = Equipment.daggerList[2];
         Create.p.OffHand = Equipment.daggerList[2];
-        Create.p.Armor = Equipment.armorList[2];
-        Create.p.XP = 1500;
+        Create.p.Armor = Equipment.armorList[1];
+        Create.p.XP = 150;
         Level.Menu();
         Level.Menu();
-        Level.Menu();
-        Level.Menu();
+        Button.dungeon1aButton.active = true;
+        Button.itemShopButton.active = true;
+        Button.challengeOpponentButton.active = false;
         Phase1B();
-        Phase2B();
         Town.Menu();
         //Dungeon.Summon(Dungeon.dungeon1b.bestiary[Return.RandomInt(0, Dungeon.dungeon1b.bestiary.Count)].MonsterCopy());
         //Combat.Menu();
@@ -133,17 +133,28 @@ public class GameState
     public static void Phase2A()
     {
         Button.bossWeapons.active = true;
+        Button.itemShopButton.active = false;
+        Button.combatArenaButton.active = false;
+        Button.levelMasterButton.active = false;
+        Button.dungeon1aButton.active = false;
+        Button.dungeon1bButton.active = false;
         phase2a = true;
     }
 
     public static void Phase2B()
     {
+        Button.levelMasterButton.active = true;
+        Button.dungeon1aButton.active = true;
+        Button.dungeon1bButton.active = true;
         Button.dungeon2Button.active = true;
+        Button.itemShopButton.active = true;
         Button.dungeonForestButton.active = true;
         Button.weaponShopButton.active = true;
         Button.armorShopButton.active = true;
         Button.magicShopButton.active = true;
         Button.bankButton.active = true;
+        Button.robberyButton.active = true;
+        Button.thieveryButton.active = true;
         phase2b = true;
     }
 

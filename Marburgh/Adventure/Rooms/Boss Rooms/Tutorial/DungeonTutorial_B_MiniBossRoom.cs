@@ -32,6 +32,7 @@ public class DungeonTutorial_B_MiniBossRoom : Room
             "",
             "Could this be useful somewhere in the dungeon?"
         });
+        Create.ironKey = true;
         Create.p.AddDrop(DropList.tutorialKey);
         visited = true;
     }

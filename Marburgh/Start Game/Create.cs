@@ -10,6 +10,7 @@ public class Create
     internal static Mage m = new Mage();
     internal static Rogue r = new Rogue();
     internal static Player p;
+    internal static bool ironKey;
 
     public static void Story()
     {
@@ -160,20 +161,53 @@ public class Create
         Console.ReadKey(true);
         if (Family.dead.Count >0)
         {
-            int goldGet = (GameState.phase2b) ? 800 : (GameState.phase2b) ? 800 : (GameState.phase1b) ? 500 : (GameState.firstBossDead) ? 300 : 100;          
-            UI.KeypressNEW(new List<int> {0,0,0,0,0,0,0,0,1 }, new List<string>
-            {
-                "Seargeant Billiam approaches you as you enter town",
-                "",
-                "I'm glad I caught you. I'm so sorry to hear about you sibling. Were you close?",
-                "",
-                "Well, we're down a Hero and really hope you're able to step up",
-                "",
-                "We raised a little money to get you started. I know it's not much but but hopefully it'll help",
-                "",
-                Color.GOLD,"You receive " ,goldGet.ToString(), " gold"
-            }) ;
+            int goldGet = (GameState.phase2b) ? 800 : (GameState.phase2b) ? 800 : (GameState.phase1b) ? 500 : (GameState.firstBossDead) ? 300 : 100;
             Create.p.Gold += goldGet;
+            if (ironKey)
+            {
+                Create.p.AddDrop(DropList.tutorialKey);
+                UI.KeypressNEW(new List<int> 
+                { 
+                    0,0,
+                    3,0,
+                    3,0,
+                    3,0,
+                    3,0,
+                    1,0,
+                    1
+                
+                }, new List<string>
+                {
+                    "Seargeant Billiam approaches you as you enter town",
+                    "",
+                    Color.SPEAK,Color.NAME,Color.SPEAK,"","I'm glad I caught you. I'm so sorry to hear about you ","","sibling","",". Were you close?","",
+                    "",
+                    Color.SPEAK,Color.HEALTH,Color.SPEAK,"","Well, we're down a ","","Hero",""," and really hope you're able to step up","",
+                    "",
+                    Color.SPEAK,Color.GOLD,Color.SPEAK,"","We raised a little ","","money",""," to get you started. I know it's not much but but hopefully it'll help","",
+                    "",
+                    Color.SPEAK,Color.POTION,Color.SPEAK,"","We also found this ","","key",""," on their body, you might be able to use it","",
+                    "",
+                    Color.POTION,"You receive the ","Iron Key ","",
+                    "",
+                    Color.GOLD,"You receive " ,goldGet.ToString(), " gold"
+                });
+            }
+            else
+            {
+                UI.KeypressNEW(new List<int> { 0, 0, 3, 0, 3, 0, 3, 0, 1 }, new List<string>
+                {
+                    "Seargeant Billiam approaches you as you enter town",
+                    "",
+                    Color.SPEAK,Color.NAME,Color.SPEAK,"","I'm glad I caught you. I'm so sorry to hear about you ","","sibling","",". Were you close?","",
+                    "",
+                    Color.SPEAK,Color.HEALTH,Color.SPEAK,"","Well, we're down a ","","Hero",""," and really hope you're able to step up","",
+                    "",
+                    Color.SPEAK,Color.GOLD,Color.SPEAK,"","We raised a little ","","money",""," to get you started. I know it's not much but but hopefully it'll help","",
+                    "",
+                    Color.GOLD,"You receive " ,goldGet.ToString(), " gold"
+                });
+            }            
         }
         Utilities.ToTown();
     }

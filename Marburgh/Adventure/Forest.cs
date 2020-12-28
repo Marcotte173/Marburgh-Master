@@ -5,11 +5,7 @@ using System.Text;
 using System.Threading;
 
 public class Forest
-{
-    public static int progress = 1;
-    public static int savedProgress = 1;
-    public static int campProgress = 3;
-    public static int depth=1;
+{    
     public static bool oldManBlessed;
     public static bool faeriesFound;
     public static bool firstTime;
@@ -26,7 +22,7 @@ public class Forest
             {
                 Color.HEALTH, Color.HEALTH, "As you progress through the ","forest"," your ","depth"," counter increases",
                 "",
-                Color.HEALTH, Color.MONSTER,Color.MONSTER,Color.HEALTH,"When you reach ","progress"," level of ",(8 + depth*2).ToString()," you will reach a new ","depth layer"," of the ","forest","",
+                Color.HEALTH, Color.MONSTER,Color.MONSTER,Color.HEALTH,"When you reach ","progress"," level of ",(8 + Create.p.depth*2).ToString()," you will reach a new ","depth layer"," of the ","forest","",
                 "",
                 Color.MONSTER,Color.DAMAGE,Color.GOLD,"Each ","depth layer"," brings increased ","difficulty"," and ","reward",""
             });
@@ -42,14 +38,14 @@ public class Forest
             "",
             "Caution is is recommended"
         });
-        progress = savedProgress;
-        savedProgress = 1;
+        Create.p.progress = Create.p.savedProgress;
+        Create.p.savedProgress = 1;
         Clearing();        
     }
 
     private static void Clearing()
     {
-        if (Create.p.forestCamp && progress >= campProgress) Button.campButton.active = true;
+        if (Create.p.forestCamp && Create.p.progress >= Create.p.campProgress) Button.campButton.active = true;
         else Button.campButton.active = false;
         Utilities.Buttons(Button.listOfForestOptions);
         UI.Choice(new List<int> { 1,0,1,0,0,0,2,0,2 }, new List<string>
@@ -60,13 +56,13 @@ public class Forest
             "",
             "",
             "",
-            Color.HEALTH,Color.MONSTER,"","Forest Layer:","",depth.ToString(),"",
+            Color.HEALTH,Color.MONSTER,"","Forest Layer:","",Create.p.depth.ToString(),"",
             "",
-            Color.HEALTH,Color.MONSTER,"","Forest Progress:","",progress.ToString(),""
+            Color.HEALTH,Color.MONSTER,"","Forest Progress:","",Create.p.progress.ToString(),""
         }, Button.list1, Button.button1);
         string choice = Return.Option();
         if (choice == "g") Deeper();
-        else if (choice == "m" && Button.campButton.active && progress >= campProgress) Camp();
+        else if (choice == "m" && Button.campButton.active && Create.p.progress >= Create.p.campProgress) Camp();
         else if (choice == "9") CharacterSheet.Display();
         else if (choice == "h") Utilities.Heal();
         else if (choice == "i" && Button.potionButton.active) Utilities.Item();
@@ -94,8 +90,8 @@ public class Forest
 
     private static void Deeper()
     {
-        progress++;
-        if (progress >= 8 + depth*2) Reward();
+        Create.p.progress++;
+        if (Create.p.progress >= 8 + Create.p.depth *2) Reward();
         Console.Clear();
         Write.SetY(15);
         UIComponent.TopBar();
@@ -113,27 +109,27 @@ public class Forest
 
     private static void YouFind()
     {
-        if(GameState.findJob.status == JobStatus.Issued &&  depth > 1 && progress > 4 && Return.RandomInt(0, 3) == 0) Roderick();        
-        if (Return.RandomInt(1, 101) <= 30)
+        if(GameState.findJob.status == JobStatus.Issued && Create.p.depth > 1 && Create.p.progress > 4 && Return.RandomInt(0, 3) == 0) Roderick();        
+        if (Return.RandomInt(1, 101) <= 45)
         {
             int encounterChosen = Return.RandomInt(0, 101);
-            int faerieEncounter           = (depth == 1) ? 3  : (depth == 2) ? 6  : 9;
-            int oldManGuessEncounter      = (depth == 1) ? 10 : (depth == 2) ? 10 : 10;
-            int lostEncounter             = (depth == 1) ? 10 : (depth == 2) ? 10 : 10;
-            int findSuppliesEncounter     = (depth == 1) ? 10 : (depth == 2) ? 10 : 10;
-            int findPotionEncounter       = (depth == 1) ? 15 : (depth == 2) ? 15 : 15;
-            int findHealthEncounter       = (depth == 1) ? 15 : (depth == 2) ? 13 : 10;
-            int findBiggerHealthEncounter = (depth == 1) ? 7  : (depth == 2) ? 12 : 15;
-            int manNeedsHelpEncounter     = (depth == 1) ? 10 : (depth == 2) ? 10 : 10;
+            int faerieEncounter           = (Create.p.depth == 1) ? 3  : (Create.p.depth == 2) ? 6  : 9;
+            int oldManGuessEncounter      = (Create.p.depth == 1) ? 10 : (Create.p.depth == 2) ? 10 : 10;
+            int lostEncounter             = (Create.p.depth == 1) ? 10 : (Create.p.depth == 2) ? 10 : 10;
+            int findSuppliesEncounter     = (Create.p.depth == 1) ? 10 : (Create.p.depth == 2) ? 10 : 10;
+            int findPotionEncounter       = (Create.p.depth == 1) ? 15 : (Create.p.depth == 2) ? 15 : 15;
+            int findHealthEncounter       = (Create.p.depth == 1) ? 15 : (Create.p.depth == 2) ? 13 : 10;
+            int findBiggerHealthEncounter = (Create.p.depth == 1) ? 7  : (Create.p.depth == 2) ? 12 : 15;
+            int manNeedsHelpEncounter     = (Create.p.depth == 1) ? 10 : (Create.p.depth == 2) ? 10 : 10;
 
             encounterChosen -= faerieEncounter;
-            if (encounterChosen <= 0 && !faeriesFound && progress > 4 + depth) Faeries();
+            if (encounterChosen <= 0 && !faeriesFound && Create.p.progress > 4 + Create.p.depth) Faeries();
 
             encounterChosen -= oldManGuessEncounter;
             if (encounterChosen <= 0 && !oldManBlessed) OldManGuess();
 
             encounterChosen -= lostEncounter;
-            if (encounterChosen <= 0 && progress > 4 + depth) Lost();
+            if (encounterChosen <= 0 && Create.p.progress > 4 + Create.p.depth) Lost();
 
             encounterChosen -= findSuppliesEncounter;
             if (encounterChosen <= 0 && !Create.p.forestCamp) FindSupplies();
@@ -461,43 +457,39 @@ public class Forest
         Console.Clear();
         Write.SetY(15);
         UI.StandardBoxBlank();
-        int bless = Return.RandomInt(1, 101);
-        if (bless < 45)
+        int bless1 = Return.RandomInt(0, 6);
+        if (bless1 == 0)
         {
-            int bless1 = Return.RandomInt(0, 6);
-            if (bless1 == 0)
-            {
-                Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 10" + Color.RESET + " to hit");
-                Create.p.tempHit += 10;
-            }
-            else if (bless1 == 1)
-            {
-                Write.Line(44, 9, "You" + Color.HEALTH + " gain" + Color.CRIT + " 5" + Color.RESET + " to crit");
-                Create.p.tempCrit += 5;
-            }
-            else if (bless1 == 2)
-            {
-                Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 2" + Color.RESET + " to damage mitigation");
-                Create.p.tempMit += 2;
-            }
-            else if (bless1 == 3)
-            {
-                Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 10" + Color.RESET + " to defence");
-                Create.p.tempDefence += 10;
-            }
-            else if (bless1 == 4)
-            {
-                Write.Line(44, 9, "You" + Color.HEALTH + " gain" + Color.HIT + " 2" + Color.RESET + " to damage");
-                Create.p.tempDamage += 2;
-            }
-            else if (bless1 == 5)
-            {
-                Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 25%" + Color.RESET + " to experience");
-                Create.p.tempXp += 0.25f;
-            }
-            Write.Line(44, 11, "This will last until you " + Color.TIME + "sleep");
-            if (Family.cursed) Write.Line(44, 13, "Your Family is no longer " + Color.DAMAGE + "cursed!");
+            Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 10" + Color.RESET + " to hit");
+            Create.p.tempHit += 10;
         }
+        else if (bless1 == 1)
+        {
+            Write.Line(44, 9, "You" + Color.HEALTH + " gain" + Color.CRIT + " 5" + Color.RESET + " to crit");
+            Create.p.tempCrit += 5;
+        }
+        else if (bless1 == 2)
+        {
+            Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 2" + Color.RESET + " to damage mitigation");
+            Create.p.tempMit += 2;
+        }
+        else if (bless1 == 3)
+        {
+            Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 10" + Color.RESET + " to defence");
+            Create.p.tempDefence += 10;
+        }
+        else if (bless1 == 4)
+        {
+            Write.Line(44, 9, "You" + Color.HEALTH + " gain" + Color.HIT + " 2" + Color.RESET + " to damage");
+            Create.p.tempDamage += 2;
+        }
+        else if (bless1 == 5)
+        {
+            Write.Line(44, 9, "You " + Color.HEALTH + "gain" + Color.HIT + " 25%" + Color.RESET + " to experience");
+            Create.p.tempXp += 0.25f;
+        }
+        Write.Line(44, 11, "This will last until you " + Color.TIME + "sleep");
+        if (Family.cursed) Write.Line(44, 13, "Your Family is no longer " + Color.DAMAGE + "cursed!");
         Write.Line(46, 22, Color.SHIELD + "Press any key to continue");
         Console.ReadKey(true);
         oldManBlessed = true;
@@ -522,7 +514,7 @@ public class Forest
 
     public static void Lost()
     {
-        int progressLoss = Return.RandomInt(1+depth, 4+depth);
+        int progressLoss = Return.RandomInt(1+ Create.p.depth, 4+ Create.p.depth);
         UI.Keypress(new List<int> { 1,0,0,0,1 }, new List<string>
         {
             Color.DAMAGE,"Well, there's no doubt about it, you are ","LOST","",
@@ -531,7 +523,7 @@ public class Forest
             "",
             Color.MONSTER,"You lose ",progressLoss.ToString()," progress"
         });
-        progress -= progressLoss;
+        Create.p.progress -= progressLoss;
         Clearing();
     }
 
@@ -588,7 +580,7 @@ public class Forest
 
     public static void FindBiggerHealth()
     {
-        int potionGrow = Return.RandomInt(4+depth, 10+depth) ;
+        int potionGrow = Return.RandomInt(4+ Create.p.depth, 10+ Create.p.depth) ;
         UI.Keypress(new List<int> { 1, 0, 1, 0, 2,0,1 }, new List<string>
         {
             Color.MONSTER,"You stumble across an ","abandoned camp","",
@@ -684,15 +676,15 @@ public class Forest
                     Color.HEALTH,"The ","man"," is beside himself with relief",
                 });
                 int reward = Return.RandomInt(0, 3);
-                if (reward == 0) Return.RewardEquipment(6 + 7*depth, 17+7*depth, Return.RandomInt(6 + depth*2, 10 + depth * 2), Equipment.LISTS[Return.RandomInt(0, Equipment.LISTS.Count)], 4 +depth);
-                else if (reward == 1 && Return.RoomForPotions()) Return.RewardPotion(6 + 7 * depth, 17 + 7 * depth, Return.RandomInt(6 + depth * 2, 10 + depth * 2));
+                if (reward == 0) Return.RewardEquipment(6 + 7* Create.p.depth, 17+7* Create.p.depth, Return.RandomInt(6 + Create.p.depth *2, 10 + Create.p.depth * 2), Equipment.LISTS[Return.RandomInt(0, Equipment.LISTS.Count)], 4 + Create.p.depth);
+                else if (reward == 1 && Return.RoomForPotions()) Return.RewardPotion(6 + 7 * Create.p.depth, 17 + 7 * Create.p.depth, Return.RandomInt(6 + Create.p.depth * 2, 10 + Create.p.depth * 2));
                 else if(reward == 1 && !Return.RoomForPotions())
                 {
                     int reward1 = Return.RandomInt(0, 2);
-                    if(reward1 == 0 ) Return.RewardEquipment(6 + 7 * depth, 17 + 7 * depth, Return.RandomInt(6 + depth * 2, 10 + depth * 2), Equipment.LISTS[Return.RandomInt(0, Equipment.LISTS.Count)], 4 + depth);
-                    else Return.RewardGold(7 * depth, 17* depth, Return.RandomInt(6 + depth * 2, 10 + depth * 2));
+                    if(reward1 == 0 ) Return.RewardEquipment(6 + 7 * Create.p.depth, 17 + 7 * Create.p.depth, Return.RandomInt(6 + Create.p.depth * 2, 10 + Create.p.depth * 2), Equipment.LISTS[Return.RandomInt(0, Equipment.LISTS.Count)], 4 + Create.p.depth);
+                    else Return.RewardGold(7 * Create.p.depth, 17* Create.p.depth, Return.RandomInt(6 + Create.p.depth * 2, 10 + Create.p.depth * 2));
                 }
-                else if (reward == 2) Return.RewardGold(7 * depth, 17  * depth, Return.RandomInt(6 + depth * 2, 10 + depth * 2));
+                else if (reward == 2) Return.RewardGold(7 * Create.p.depth, 17  * Create.p.depth, Return.RandomInt(6 + Create.p.depth * 2, 10 + Create.p.depth * 2));
             }
             else
             {
@@ -763,7 +755,7 @@ public class Forest
             });
             GameState.findJob.status = JobStatus.Complete;
             GameState.findJob.ButtonCheck();
-            progress = 0;
+            Create.p.progress = 0;
             Utilities.ToTown();
         }
         else Roderick();
@@ -771,12 +763,18 @@ public class Forest
 
     private static void Combat()
     {
-        int amount = Return.RandomInt(depth, 3+depth);
+        int amount = 0;
+        if (Create.p.depth == 1) amount = Return.RandomInt(1, 3);
+        if (Create.p.depth == 2) amount = Return.RandomInt(1, 2);
+        if (Create.p.depth == 3) amount = Return.RandomInt(2, 4);
+        if (Create.p.depth == 4) amount = Return.RandomInt(2,4);
+        if (Create.p.depth == 5) amount = Return.RandomInt(2,4);
+        else amount = Return.RandomInt(2, 4);
         List<string> summonList = new List<string> { };
         List<int> colourArray = new List<int> { };
         for (int i = 0; i < amount; i++)
         {
-            List<Monster> monsters = Dungeon.forestSummon[depth];
+            List<Monster> monsters = Dungeon.forestSummon[Create.p.depth];
             Monster summon = monsters[Return.RandomInt(0, monsters.Count)];
             colourArray.Add(1);
             summonList.Add(Color.MONSTER);
@@ -794,7 +792,7 @@ public class Forest
 
     public static void Reward()
     {
-        int xpGain = Return.RandomInt(8 * depth, 20 * depth);
+        int xpGain = Return.RandomInt(8 * Create.p.depth, 20 * Create.p.depth);
         UI.Keypress(new List<int> {2,0,2,0,1 }, new List<string>
         {
             Color.MONSTER,Color.HEALTH,"You have reached a new ","Depth Layer"," of ","Forest","!",
@@ -804,8 +802,8 @@ public class Forest
             Color.XP,"You gain ",xpGain.ToString()," experience"
         });
         Create.p.XP += xpGain;
-        progress = 0;
-        depth++;
+        Create.p.progress = 0;
+        Create.p.depth++;
         firstTime = true;
         Utilities.ToTown();
     }

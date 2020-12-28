@@ -13,10 +13,10 @@ public class Warrior : Player
         stamina = 3;
         intelligence = 2;
 
-        strengthLvl = new int[]     { 0, 0, 2, 2, 2, 3,3,3 };
-        agilityLvl = new int[]      { 0, 0, 1, 2, 2, 2,3,3 };
-        staminaLvl = new int[]      { 0, 0, 2, 2, 2, 4,3,3 };
-        intelligenceLvl = new int[] { 0, 0, 1, 1, 2, 1,1,2 };
+        strengthLvl = new int[]     { 0, 0, 2, 2, 2, 3,3,3,3 };
+        agilityLvl = new int[]      { 0, 0, 1, 2, 2, 2,3,3,2 };
+        staminaLvl = new int[]      { 0, 0, 2, 2, 2, 4,3,3,4 };
+        intelligenceLvl = new int[] { 0, 0, 1, 1, 2, 1,1,2,2 };
         Update();
         offHand = Equipment.shieldList[0];
         mainHand = Equipment.bluntList[0];

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 public class Level
 {
-    public static int[] xpRequired = new int[] { 0, 30, 75, 125, 185, 255, 315, 385, 475, 575, 700, 830, 1000 };
+    public static int[] xpRequired = new int[] { 0, 30, 85, 130, 185, 255, 315, 385, 475, 575, 700, 830, 1000 };
     public static void Menu()
     {
         Console.Clear();
@@ -18,7 +18,7 @@ public class Level
                     Color.SPEAK, "",  "'Are you here to level up?'", ""
                 }))
             {
-                if(Create.p.Level == 5)
+                if(Create.p.Level == 8)
                 {
                     UI.Keypress(new List<int> { 1 }, new List<string>
                         {
@@ -127,6 +127,5 @@ public class Level
                 });
             }
         }
-        //Utilities.ToTown();
     }
 }

@@ -107,11 +107,11 @@ public class Tavern
                     "",
                     Color.SPEAK,Color.POTION,Color.SPEAK,"","If it's the end times, what are people going to do but ","","drink","","?",""
                  });
-                UI.Keypress(new List<int> {1,0,1,0,2,0,2 }, new List<string>
+                UI.Keypress(new List<int> {1,0,3,0,2,0,2 }, new List<string>
                 {
                     Color.SPEAK,"","One last thing","",
                     "",
-                    Color.SPEAK,"","My family had a necklace. It is an heirloom that was passed down through the years before it was stolen","",
+                    Color.SPEAK,Color.CRIT,Color.SPEAK,"","My family had an ","","amulet","",". It is an heirloom that was passed down through the years before it was stolen","",
                     "",
                     Color.SPEAK,Color.DEATH,"","It has mystical powers and is said to be able to absorb ","","death","",
                     "",

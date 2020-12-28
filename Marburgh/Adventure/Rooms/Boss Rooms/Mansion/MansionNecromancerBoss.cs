@@ -30,7 +30,7 @@ public class MansionNecromancerBoss : Room
         });
         Dungeon.Summon(new Necromancer(5), "The Necromancer");
         Combat.Menu();
-        UI.Keypress(new List<int> { 0,1,0,0,0,0,0,0,0,3,0,1 }, new List<string>
+        UI.Keypress(new List<int> { 0,1, 0,1,  0,1, 0,0, 0,3, 0,1 }, new List<string>
         {
             "",
             Color.DEATH,"The ","Necromancer ","lies dead in front of you",
@@ -46,7 +46,7 @@ public class MansionNecromancerBoss : Room
             Color.DEATH,"Now you will feel my true ","power ","",
 
         });
-        Dungeon.Summon(new Necromancer(5), "The Necromancer");
+        Dungeon.Summon(new Necromancer(6), "The Necromancer");
         Combat.Menu();
         UI.Keypress(new List<int> {1,0,1,0,2,0,1,0,1 }, new List<string>
         {
